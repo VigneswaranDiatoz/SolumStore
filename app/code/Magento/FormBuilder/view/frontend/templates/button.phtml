@@ -1,0 +1,816 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$form = $block->getRfqForm();
+$formFields = $block->getRfqFormFields($form);
+$firstStepName = $block->getFirstStepName($form);
+$dataForPage = $block->getDataForPage();
+$showSeller = 0;
+$i = 1;
+$totalSteps = count($formFields);
+$categoryData = [];
+$catIds = "";
+$isLoggedIn = $block->getCustomerSession()->isLoggedIn();
+$flag = $isLoggedIn;
+?>
+<button title="<?= ($isLoggedIn) ? $block->escapeHtmlAttr(__("Request Quote")) : $block->escapeHtmlAttr(__("Join Us"))?>" id="rfq-form-button" class="action primary">
+    <span><?= ($isLoggedIn) ? $block->escapeHtmlAttr(__("Request Quote")) : $block->escapeHtmlAttr(__("Join Us"))?></span>
+</button>
+
+<div id="wk-rfq-modal">
+    <div class="modal-body-content">
+        <?php if (!$isLoggedIn): ?>
+            <div class="wk-step customer-from current">
+                <div class="wk-step-title">
+                    <span><?= $form["step1_label"]?> </span>
+                    <div class="wk-step-subtitle">Only need 1 minute to complete this process</div>
+                </div>
+                <div class="wk-step-body">
+                    <?= $block->getChildHtml(); ?>
+                </div>
+            </div>
+            <script type="text/x-magento-init">
+                {
+                    "*": {
+                        "Webkul_FormBuilder/js/rfq/customer": {
+                            "step1Label": "<?= $form["step1_label"]?>",
+                            "loginLabel": "<?= $form["login_label"]?>",
+                            "createLabel": "<?= $form["create_label"]?>"
+                        }
+                    }
+                }
+            </script>
+        <?php endif; ?>
+
+        <form action="<?= /* @noEscape */  $block->getUrl('formbuilder/forms/save');  ?>"
+            enctype="multipart/form-data" class="form" id="wk-form-id" method="post" autocomplete="off">
+        <input type="hidden" name="formId" value="1">
+        <input type="hidden" name="recaptcha" value="<?= ($data['recaptcha']) ?? 0 ?>">
+        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+        <input type="hidden" name="res[source_page][value]" id="source-page" value="<?= $block->getLayout()->getBlock('page.main.title')->getPageTitle();?>">
+        <?php foreach ($formFields as $key => $fields):
+            $hasValue = false;
+            $addClass = "";
+            if ($flag) {
+                $addClass = " current";
+                $flag = false;
+            }
+            ?>
+            <div class="wk-step<?= $addClass?>">
+                <div class="wk-step-title">
+                    <span><?= $block->escapeHtml(__($fields["stepName"]));?> </span>
+                </div>
+                <div class="wk-step-body">
+                    <fieldset class="fieldset <?= ($key == 1 || $key ==2) ? 'has-border '  : '' ?>">
+                    <?php
+                    $fieldsData = $fields["data"];
+                    foreach ($fieldsData as $field) {
+                        $hasValue = (!empty($field->hasValue) && !$hasValue) ? $field->hasValue : $hasValue;
+                        ?>
+                        <?php if (!empty($field->type) && $field->type=="hidden-seller-step") {
+                            ?>
+                            <div class="field radio-box-group">
+                                <div class="control radio-group" id="seller-step-container">
+                                
+                                <?php foreach ($categoryData as $key => $value) { ?>
+
+                                    <div class="radio option-group">
+                                        <input name="<?= /* @noEscape */ $block->nameLabelValue("all-seller", 'value'); ?>"
+                                        id="all-category-seller-<?= $value->value?>"
+                                        value="<?=   /* @noEscape */ $value->value;?>"
+                                        type="radio">
+                                        <label for="all-category-seller-<?= $value->value?>">
+                                            All <?= $block->escapeHtml($value->label);?> Seller
+                                        </label>
+
+                                    </div>
+                                <?php }?>
+                                    <script id="all-seller-radio" type="text/x-magento-template">
+                                        <div class="radio option-group">
+                                            <input name="res[all-seller][value]" value="<%- data.categoryId %>" type="radio" id="res[seller][name][<%- data.categoryId %>]" checked>
+                                            <label for="res[seller][name][<%- data.categoryId %>]">
+                                                <%- data.name %>
+                                            </label>
+                                        </div>
+                                    </script>
+                                </div>
+                            </div>
+                            <?php if (!empty($field->showCategory) && $field->showCategory) {?>
+                            <div class="heading"><?= __("Choose option")?></div>
+                            <div class="field subcatgories">
+                                <div class="cat-tabs" id="child-cats-container">
+                                    <script id="child-cat-template" type="text/x-magento-template">
+                                        <div class="cat-tab" data-id="<%- data.id %>">
+                                            <%- data.name %>
+                                        </div>
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="field checkbox-group">
+                                <div class="control checkbox-group" id="seller-cats-container">
+                                    <script id="seller-cat-template" type="text/x-magento-template">
+                                        <div class="option-group">
+                                            <input name="sellers[<%- data.id %>]" 
+                                            id="sellers-<%- data.id %>"
+                                            value="<%- data.id %>" 
+                                            type="checkbox">
+                                            <label for="sellers-<%- data.id %>">
+                                                <%- data.name %>
+                                            </label>
+                                        </div>
+                                    </script>
+                                </div>
+                            </div>
+                        <?php }}?>
+                        <?php if (!empty($field->type) && $field->type=="category") {
+                            $showSeller = $field->seller;
+                            $categoryData = $field->values;
+                            $catIds = explode(",", $field->value);
+                            ?>
+                            <div class="field radio-box-group <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?><?= (!empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                                <div class="control radio-group">
+                                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                                    value="<?= (!empty($field->label))
+                                                ? /* @noEscape */ $field->label : "" ; ?>">
+
+                                    <?php if (isset($field->values) && !empty($field->values)) { ?>
+                                        <?php foreach ($field->values as $key => $value) { ?>
+
+                                        <div class="radio option-group">
+                                            <input name="<?=  /* @noEscape */ $block->nameLabelValue($field, 'value') ?>"
+
+                                            id="<?=  /* @noEscape */ $block->nameLabelValue($field, 'value').'-'.$key; ?>" 
+                                            <?= (isset($field->required) && !empty($field->required)) ?  /* @noEscape */ 'data-validate="{required:true}" ' : ''?>
+                                            value="<?=   /* @noEscape */ $value->value;?>" 
+                                            data-name="<?=  $block->escapeHtml($value->label);?>" 
+                                            type="radio" 
+                                            <?= (isset($value->selected) && $value->selected) ?  /* @noEscape */ 'checked="checked"' : ''?>
+                                            class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+                                            <label for="<?= /* @noEscape */  $block->nameLabelValue($field, 'value').'-'.$key; ?>">
+                                                <?=  $block->escapeHtml($value->label);?>
+                                            </label>
+
+                                        </div>
+                                    <?php }?>
+                                    <?php }
+                                    if (!empty($field->description)) {?>
+                                        <label>
+                                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                                        </label>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php }  ?>
+                        <?php if (!empty($field->type) && $field->type=="text") { ?>
+                            <div class="field <?=  $block->escapeHtml(!empty($field->name)); ?> <?= (!empty($field->required))
+                                        ? "required" : ''?>">
+                                        <?php if (!empty($field->label)):?>
+                            <label class="label" for="name">
+                                <span>
+                                            <?= $block->escapeHtml($field->label) ?>
+                                </span>
+                            </label>
+                            <?php endif;?>
+                                <div class="control">
+                                    <input 
+                                        type="hidden" 
+                                        name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                                        value="<?= (!empty($field->label))
+                                            ? /* @noEscape */ $field->label
+                                            : "" ; ?>
+                                        ">
+                                    <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                                        placeholder=" "
+                                        id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                                        placeholder=" " 
+                                        title="<?=  /* @noEscape */ (!empty($field->label)
+                                                        ? $field->label :  ""); ?>"
+                                        value="<?= /* @noEscape */  !empty($field->value) ? $field->value : ''?>"
+                                        maxlength="<?= /* @noEscape */!empty($field->maxlength) ? $field->maxlength : ''?>"
+                                        class="<?=/*@noEscape */ ($field->className ?? "");?>input-text form-control validate-no-html-tags
+                                            <?=/* @noEscape */($field->subtype=="tel" ? "validate-number" : ""); ?>"
+                                        type="<?=/* @noEscape */$field->subtype; ?>" <?= (!empty($field->required))
+                                                ? 'data-validate="{required:true}" aria-required="true"' : ''?>>
+                                        <span class="wk-material-label"><?= /* @noEscape */ isset($field->placeholder) ? $field->placeholder : ''?></span>
+
+                                            <?php if (!empty($field->description)) {?>
+                                    <label>
+                                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                                    </label>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php }  ?>
+                        <?php if (isset($field->subtype) && $field->subtype=="textarea") { ?>
+            <div class="field textarea-box <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                            <?= (!empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                <div class="control textarea">
+                    <input type="hidden" 
+                    name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                                    ? /* @noEscape */ $field->label : "" ; ?>">
+    <textarea class="<?= /* @noEscape */ ($field->className ?? "");?> wk-textarea input-text validate-no-html-tags"
+                        name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        placeholder=" "
+                        cols="<?= /* @noEscape */ isset($field->maxlength) ? $field->maxlength : ''?>"
+                        maxlength="<?= /* @noEscape */ isset($field->maxlength) ? $field->maxlength : ''?>"
+                        rows="<?= /* @noEscape */ isset($field->rows) ? $field->rows : ''?>"
+                        id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                        title="<?=  /* @noEscape */ (!empty($field->label)
+                            ? $field->label :  ""); ?>" <?= /* @noEscape */ (!empty($field->required))
+                            ? 'data-validate="{required:true}" aria-required="true"' : ''?>></textarea>
+                             <span class="wk-material-label"><?= /* @noEscape */ isset($field->placeholder) ? $field->placeholder : ''?></span>
+
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+                        <?php if (isset($field->subtype) && $field->subtype=="tinymce") {
+                            $tinyMiceFieldName = $field->name;
+                            $maxlength = isset($field->maxlength) ? $field->maxlength : '';
+                            $tinyMiceFieldRequired = (!empty($field->required)) ? true : false;?>
+            <div class="wk-tiny field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                            <?= (!empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                <div class="control wk-border-box-sizing">
+                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                                ? /* @noEscape */ $field->label : "" ; ?>">
+                    
+                <textarea class="<?= /* @noEscape */ ($field->className ?? "");?> required-entry  
+                form-control  input-text textarea"
+                        name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        placeholder="<?= /* @noEscape */ !empty($field->placeholder) ? $field->placeholder : ''?>"
+                        id="<?= /* @noEscape */ $field->name ?>" title="<?=  /* @noEscape */ (!empty($field->label)
+                                ? $field->label :  ""); ?>">
+                                <?= /* @noEscape */ isset($field->value) && !empty($field->value) ? $field->value : ''?>
+                    </textarea>
+                <script>
+                    require([
+                        "jquery",
+                        "mage/translate",
+                        "mage/adminhtml/events",
+                        "mage/adminhtml/wysiwyg/tiny_mce/setup"
+                    ], function (jQuery) {
+                        wysiwygcompany_description = new wysiwygSetup("<?= /* @noEscape */ $field->name ?>", {
+                            "width": "100%",
+                            "height": "200px",
+                            "plugins" : [{"name":"image"}],
+                            "tinymce4": {
+                                    "toolbar":"formatselect | bold italic underline | "+
+                                    "alignleft aligncenter alignright |" + 
+                                    "bullist numlist |"+
+                                    "link table charmap","plugins":"advlist "+
+                                    "autolink lists link charmap media noneditable table contextmenu paste code help table",
+                        },
+                            files_browser_window_url: "<?= /* @noEscape */  $block->getWysiwygUrl();?>"
+                        });
+                        wysiwygcompany_description.setup("exact");
+                    });
+
+                </script>
+
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+                        <?php if (isset($field->type) && $field->type=="number") { ?>
+            <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                            <?= (isset($field->required) && !empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                <div class="control">
+                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                                ? /* @noEscape */ $field->label : "" ; ?>">
+                    <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                                        placeholder=" " 
+                        title="<?=  /* @noEscape */ (!empty($field->label)
+                            ? $field->label :  ""); ?>"
+                        value="<?= /* @noEscape */ isset($field->value) ? $field->value : ''?>"
+                        min="<?= /* @noEscape */ isset($field->min) ? $field->min : ''?>"
+                        max="<?= /* @noEscape */ isset($field->max) ? $field->max : ''?>"
+                        step="<?= /* @noEscape */ isset($field->step) ? $field->step : ''?>" class="input-text"
+                        type="number" <?= /* @noEscape */ (!empty($field->required))
+                            ? /* @noEscape */ 'data-validate="{required:true}" aria-required="true'
+                            : ''?> class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+                    <span class="wk-material-label"><?= /* @noEscape */ isset($field->placeholder) ? $field->placeholder : ''?></span>
+
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+                        <?php if (isset($field->type) && $field->type=="date") { ?>
+            <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                            <?= (!empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                <div class="control">
+                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                                ? /* @noEscape */ $field->label : __(" Name") ; ?>">
+                    <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        placeholder="<?= /* @noEscape */ isset($field->placeholder) ? $field->placeholder : ''?>"
+                        id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                        title="<?= (!empty($field->label))
+                            ? /* @noEscape */  $field->label : "" ; ?>"
+                        value="<?= isset($field->value) ? /* @noEscape */  $field->value : ''?>"
+                        class="wk_dob form-control validate-no-html-tags" 
+                        type="text" <?= (isset($field->required) && !empty($field->required))
+                            ? /* @noEscape */  'data-validate="{required:true}" '
+                            : ''?> aria-required="true" class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+
+                        <?php if (isset($field->type) && $field->type=="select") { ?>
+            <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                            <?= (!empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                <div class="control">
+                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                                ? /* @noEscape */ $field->label : "" ; ?>">
+            <select class="form-control input-select" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                            <?= (!empty($field->required)) ? 'data-validate="{required:true}" ' : ''?>>
+                            <?php if (!empty($field->values)) { ?>
+                                <?php foreach ($field->values as $key => $value) { ?>
+                <option value="<?= /* @noEscape */ $value->value;?>" <?= (isset($value->selected) && $value->selected)
+                                        ? /* @noEscape */ 'selected="true"'
+                                        : ''?>
+                            id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value').'-'.$key; ?>">
+                                    <?= /* @noEscape */ $value->label;?>
+                        </option>
+                        <?php }?>
+                        <?php }?>
+                    </select>
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+                        <?php if (isset($field->type) && $field->type=="radio-group") {
+                            $isAccord = false;
+                            $classAccord = "";
+                            $isActive = false;
+                            if (!empty($field->renderType) && $field->renderType == 1) {
+                                $isAccord = true;
+                                $classAccord = "accord";
+                                $isActive = $field->openAccord ? "true" : "false";
+                            } ?>
+            <div class="field radio-box-group <?= /* @noEscape */ $classAccord." ".$block->nameLabelValue($field, 'label'); ?><?= (!empty($field->required)) ? "required" : ''?>" 
+                            <?php if ($isAccord) { ?> data-mage-init='{
+    "collapsible":{
+        "icons": {"header": "plus", "activeHeader": "minus"},
+        "animate":{ "duration" :1000, "easing":"easeOutCubic"},
+        "active":<?= $isActive?>
+    }}' <?php }?>>
+                <label data-role="title" class="label radio-label" for="name">
+                    <span class="radio-label-span">
+                            <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml("");
+                            ?>
+                    </span>
+                </label>
+                <div data-role="content" class="control radio-group">
+                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                                ? /* @noEscape */ $field->label : "" ; ?>">
+
+                            <?php if (isset($field->values) && !empty($field->values)) { ?>
+                                <?php foreach ($field->values as $key => $value) { ?>
+
+                    <div class="radio option-group">
+                    <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        id="<?=  /* @noEscape */ $block->nameLabelValue($field, 'value').'-'.$field->label.'-'.$key; ?>" 
+                                    <?= (isset($field->required) && !empty($field->required))
+                                            ?  /* @noEscape */ 'data-validate="{required:true}" ' : ''?>
+                        value="<?=   /* @noEscape */ $value->value;?>" 
+                        type="radio" <?= (isset($value->selected) && $value->selected)
+                                            ?  /* @noEscape */ 'checked="checked"' : ''?>
+                        class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+                    <label for="<?= /* @noEscape */  $block->nameLabelValue($field, 'value').'-'.$field->label.'-'.$key; ?>">
+                                    <?=  $block->escapeHtml($value->label);?>
+                    </label>
+
+                                </div>
+                    <?php }?>
+                    <?php }?>
+
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+                        <?php if (isset($field->type) && $field->type=="checkbox-group") {
+                            $isAccord = false;
+                            if (!empty($field->renderType) && $field->renderType == 1) {
+                                $isAccord = true;
+                            }
+                            ?>
+            <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?><?= (!empty($field->required)) ? "required" : ''?>" 
+                            <?php if ($isAccord) { ?> data-mage-init='{
+    "collapsible":{
+        "icons": {"header": "plus", "activeHeader": "minus"},
+        "animate":{ "duration" :1000, "easing":"easeOutCubic"}
+    }}' <?php }?>>
+                <label data-role="title" class="label checkbox-label" for="name">
+                    <span class="checkbox-label-span">
+                            <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml("");
+                            ?>
+                    </span>
+                </label>
+                <div  data-role="content" class="control checkbox-group">
+                    <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>"
+                        value="<?= (!empty($field->label)) ? /* @noEscape */ $field->label : ""; ?>">
+                            <?php if (isset($field->values) && !empty($field->values)) { ?>
+                                <?php foreach ($field->values as $key => $value) { ?>
+                                    <div class="option-group">
+                    <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                    id="<?= /** @escapeNotVerified */
+                                            $block->nameLabelValue($field, 'value').'-'./** @escapeNotVerified */ $key; ?>" 
+                                            <?= (isset($field->required) && !empty($field->required)) ?
+                                            /** @escapeNotVerified */ 'data-validate="{required:true}" ' : ''?>
+                        value="<?= $block->escapeHtml($value->value);?>" 
+                        type="checkbox" <?= (isset($value->selected) && $value->selected)
+                                            ? /** @escapeNotVerified */ 'checked="checked"'
+                                            : ''?>>
+                    <label for="<?= /** @escapeNotVerified */
+                                    $block->nameLabelValue($field, 'value').'-'. /** @escapeNotVerified */  $key; ?>">
+                                    <?= $block->escapeHtml($value->label);?>
+                    </label>
+                                </div>
+                    <?php }?>
+                    <?php }?>
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+                </div>
+            </div>
+            <?php } ?>
+
+                        <?php if (isset($field->type) && $field->type=="file") { ?>
+            <div class="field uploadfile <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                            <?= (!empty($field->required)) ? "required" : ''?>">
+                            <?php if (!empty($field->label)):?>
+                <label class="label" for="name">
+                    <span>
+                                <?= $block->escapeHtml($field->label) ?>
+                    </span>
+                </label>
+                <?php endif;?>
+                <div class="control">
+                    <input type="hidden" name="<?= 'res[sample_images][label]';  ?>"
+                        value="<?= (!empty($field->label)) ? /* @noEscape */ $field->label : "" ; ?>">
+                            <?php $imagesDescription = $block->saveImageDesc(); ?>
+                        <link rel='stylesheet' href='<?= /* @noEscape */  $block->getViewFileUrl("Webkul_FormBuilder::css/product.css") ?>' />
+                        <div id="wk_media_gallery_content"
+                            class='gallery'
+                            data-mage-init='{"descriptionGallary":{"template":"#wk_media_gallery_content-template"}}' 
+                            data-images="<?= $block->escapeHtml(json_encode($imagesDescription->getData())) ?>"
+                        >
+                        <div class="image image-placeholder">
+                            <div id="wk_media_gallery_content_Uploader" class="uploader">
+                                <div class="fileinput-button form-buttons">
+                                    <span><?= /* @noEscape */  __('Click to add file') ?></span>
+                                    <input 
+                                    id="wkfileupload" type="file" name="image"
+                                    data-url="<?= /* @noEscape */   $block->getUrl('formbuilder/wysiwyg_gallery/upload') ?>" 
+                                    multiple="multiple" />
+                                </div>
+                                <div class="clear"></div>
+                                <script id="wk_media_gallery_content_Uploader-template" type="text/x-magento-template">
+                                    <div id="<%- data.id %>" class="file-row">
+                                        <span class="file-info"><%- data.name %> (<%- data.size %>)</span>
+                                        <div class="progressbar-container">
+                                            <div class="progressbar upload-progress" style="width: 0%;"></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </script>
+                            </div>
+                            <script>
+                                var byteConvert = function (bytes) {
+                                    if (isNaN(bytes)) {
+                                        return '';
+                                    }
+                                    var symbols = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                                    var exp = Math.floor(Math.log(bytes) / Math.log(2));
+
+                                    if (exp < 1) {
+                                        exp = 0;
+                                    }
+                                    var i = Math.floor(exp / 10);
+
+                                    bytes /= Math.pow(2, 10 * i);
+
+                                    if (bytes.toString().length > bytes.toFixed(2).toString().length) {
+                                        bytes = bytes.toFixed(2);
+                                    }
+
+                                    return bytes + ' ' + symbols[i];
+                                };
+                                require([
+                                    "jquery",
+                                    'mage/template',
+                                    'Magento_Ui/js/modal/alert',
+                                    "mage/translate",
+                                    "jquery/file-uploader"
+                                ], function ($, mageTemplate, alert) {
+                                    window.imagesval =  "<?= $block->escapeHtml(json_encode($imagesDescription->getData())) ?>";
+                                    $('#wkfileupload').fileupload({
+                                        dataType: 'json',
+                                        dropZone: '[data-tab-panel=image-management]',
+                                        sequentialUploads: true,
+                                        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                                        maxFileSize: <?= /* @noEscape */  $block->getAttachmentFileSize(); ?> ,
+                                        add: function (e, data) {
+                                            var progressTmpl = mageTemplate('#wk_media_gallery_content_Uploader-template'),
+                                                fileSize,
+                                                tmpl;
+
+                                            $.each(data.files, function (index, file) {
+                                                fileSize = typeof file.size == "undefined" ?
+                                                    $.mage.__('We could not detect a size.') :
+                                                    byteConvert(file.size);
+
+                                                data.fileId = Math.random().toString(33).substr(2, 18);
+
+                                                tmpl = progressTmpl({
+                                                    data: {
+                                                        name: file.name,
+                                                        size: fileSize,
+                                                        id: data.fileId
+                                                    }
+                                                });
+
+                                                $(tmpl).appendTo('#wk_media_gallery_content_Uploader');
+                                            });
+
+                                            $(this).fileupload('process', data).done(function () {
+                                                data.submit();
+                                            });
+                                        },
+                                        done: function (e, data) {
+                                            if (data.result && !data.result.error) {
+                                                $('#wk_media_gallery_content').trigger('addItem', data.result);
+                                                $(".image.image-placeholder").addClass("width-30");
+                                            } else {
+                                                $('#' + data.fileId)
+                                                    .delay(2000)
+                                                    .hide('highlight');
+                                                alert({
+                                                    content: $.mage.__(data.result.error)
+                                                });
+                                            }
+                                            $('#' + data.fileId).remove();
+                                        },
+                                        progress: function (e, data) {
+                                            var progress = parseInt(data.loaded / data.total * 100, 10);
+                                            var progressSelector = '#' + data.fileId + ' .progressbar-container .progressbar';
+                                            $(progressSelector).css('width', progress + '%');
+                                        },
+                                        fail: function (e, data) {
+                                            var progressSelector = '#' + data.fileId;
+                                            $(progressSelector).removeClass('upload-progress').addClass('upload-failure')
+                                                .delay(2000)
+                                                .hide('highlight')
+                                                .remove();
+                                        }
+                                    });
+                                    $('#wkfileupload').fileupload('option', {
+                                        process: [{
+                                            action: 'load',
+                                            fileTypes: /^image\/(gif|jpeg|png)$/
+                                        }, {
+                                            action: 'resize',
+                                            maxWidth: <?= /* @noEscape */ \Magento\Framework\File\Uploader::MAX_IMAGE_WIDTH ?> ,
+                                            maxHeight: <?= /* @noEscape */ \Magento\Framework\File\Uploader::MAX_IMAGE_HEIGHT ?>
+                                        }, {
+                                            action: 'save'
+                                        }]
+                                    });
+                                });
+                            </script>
+                            <img class="spacer"
+                                    src="<?= /* @noEscape */ $block->getViewFileUrl('images/spacer.gif')?>"/>
+                            <p class="image-placeholder-text">
+                                    <?= /* @noEscape */  __('Click to add file');
+                                    ?>
+                            </p>
+                            <p class="image-placeholder-text-next">
+                                    <span><?= /* @noEscape */  __('Allowed file - JPEG, PNG, JPG, PDF, DOC, XLS');?></span><br/>
+                                    <span><?= /* @noEscape */  __('File Size - Max ');
+                                    echo $block->getAttachmentFileSizeinMb().' MB'; ?></span>
+                            </p>
+                        </div>
+                        <script id="wk_media_gallery_content-template" type="text/x-magento-template">
+                            <div class="image item <% if (data.disabled == 1) { %>hidden-for-front<% } %>"
+                                data-role="image">
+                                <input type="hidden"
+                                        name="wysiwyg[media_gallery][images][<%- data.file_id %>][position]"
+                                        value="<%- data.position %>"
+                                        class="position"/>
+                                <input type="hidden"
+                                        name="res[sample_images][value][]"
+                                        value="<%- data.file %>"
+                                        class="file"/>
+                                <img class="spacer"
+                                    src="<?= /* @noEscape */ $block->getViewFileUrl('images/spacer.gif')?>"/>
+                                <a href="<%- data.view_url %>" target="_blank">
+                                    <img class="product-image" src="<%- data.url %>" alt="<%- data.label %>"/>
+                                </a>
+                                <div class="actions" >
+                                    <button type="button"
+                                            class="action-delete"
+                                            data-role="delete-button"
+                                            title="<% if (data.media_type == 'external-video') {%>
+                                                <?= /* @noEscape */  __('Delete video') ?>
+                                            <%} else {%>
+                                                <?= /* @noEscape */ __('Delete image') ?>
+                                            <%}%>">
+                                        <span>
+                                            <% if (data.media_type == 'external-video') { %>
+                                                <?= /* @noEscape */  __('Delete video') ?>
+                                            <% } else {%>
+                                                <?= /* @noEscape */ __('Delete image') ?>
+                                            <%} %>
+                                        </span >
+                                    </button>
+                                    <div class="draggable-handle" ></div >
+                                </div >
+                                <div class="image-label"></div>
+                                <div class="image-fade"><span><?= /* @noEscape */ __('Hidden') ?></span></div>
+                            </div>
+                        </script>
+                        <script class="dialog-template" type="text/x-magento-template" data-title="Image Options">
+                            <div class="image-panel admin__scope-old ui-tabs-panel ui-widget-content ui-corner-bottom"
+                                    data-role="dialog"
+                                    style="display: block">
+                                <div class="image-panel-preview">
+                                    <img src="<%- data.url %>" alt="<%- data.label %>" />
+                                </div>
+                            </div>
+                        </script>
+                            <?php if (!empty($field->description)) {?>
+                    <label>
+                                <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                    </label>
+                    <?php } ?>
+
+                </div>
+            </div>
+            <?php } ?>
+
+            <?php } ?>
+        </fieldset>
+                    <div class="actions-toolbar wk-nav-from">
+                        <div class="wk-prev <?= ($i == 1) ? "step-1" : ""?>"><?= $block->escapeHtml(__("Prev"));?></div>
+                        <?php if ($i < $totalSteps):
+                            ?>
+                            <div class="right-nav">
+                                <span class="wk-skip"><?= $block->escapeHtml(__("Skip"));?></span>
+                                <button class="wk-next" type="button" <?= $hasValue ? "" : "disabled" ?>><?= $block->escapeHtml(__("Next"));?></button>
+                            </div>
+                        <?php elseif ($i == $totalSteps):?>
+                            <div class="right-nav">
+                                <button class="wk-next" type="submit"><?= $block->escapeHtml(__("Submit"));?></button>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <?php
+            $i++;
+        endforeach;?>
+        </form>
+
+        <div class="wk-step last-step">
+            <div class="wk-step-title">
+                <span><?= __("Thanks...!") ?> </span>
+            </div>
+            <div class="wk-step-body">
+                <div class="success-message">
+                    <span><?= $form["success_message"] ?></span>
+                </div>
+                <div class="solum-fixed-container row-title">
+                    <span><?=__("Others in your business area have interested in them") ?></span>
+                </div>
+                <div class="solum-fixed-container study-row wk-scrollbar">
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+
+$data = [
+    "buttonId" => "#rfq-form-button",
+    "totalSteps" => $isLoggedIn ? $totalSteps : $totalSteps+1,
+    "formFields" => $formFields,
+    "showSeller" => $showSeller,
+    "sellercategoriesUrl" => $block->getUrl("rest/V1/sellercategories"),
+    "catIds" => $catIds,
+    "formData" => $form,
+    "siteKey" => $block->getSiteKey(),
+    "recaptchaEnable" => (bool)$block->enableRecaptcha(),
+    "checkRecaptcha" => (bool)$block->checkRecaptcha($form['recaptcha']),
+    "maxlength" => isset($maxlength) ?  $maxlength : "",
+    "dataForPage" => $dataForPage
+];
+?>
+<script type="text/x-magento-init">
+{
+    "#wk-rfq-modal" : {
+        "Webkul_FormBuilder/js/rfq/modal": <?= json_encode($data)?>
+    },
+    "#wk-form-id" : {
+        "customFormRender": 
+            {
+                "siteKey": "<?=  /* @noEscape */ $block->getSiteKey();?>",
+                "recaptchaEnable":"<?= /* @noEscape */(bool)$block->enableRecaptcha();?>",
+                "checkRecaptcha":"<?= /* @noEscape */ (bool)$block->checkRecaptcha($form['recaptcha']);?>",
+                "maxlength":"<?= /* @noEscape */ isset($maxlength) ?  $maxlength : ""  ;?>"
+            }
+    }
+}
+</script>

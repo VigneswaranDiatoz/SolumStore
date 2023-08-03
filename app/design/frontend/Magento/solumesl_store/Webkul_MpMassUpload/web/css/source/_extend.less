@@ -1,0 +1,303 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        &.mpmassupload-dataflow_profile-edit {
+            form {
+                .legend {
+                    width: 100%;
+
+                    span {
+                        font-weight: 600;
+                        font-size  : 20px;
+                        line-height: 26px;
+                        color      : #000000;
+                    }
+
+                    .wk-mp-btn {
+                        .marketplaceProductPageButtonDisplay(#00203f, #FFFFFF);
+                    }
+                }
+
+                margin-top: 10px !important;
+
+                .fieldset {
+                    >.field {
+                        &:not(.choice) {
+                            >.label {
+                                float: unset !important;
+                            }
+
+                            >.control {
+                                width: 50% !important;
+                            }
+                        }
+
+                        #attribute_profile_id {
+                            width: 50% !important;
+                        }
+                    }
+                }
+            }
+
+            table {
+                tr {
+                    td {
+                        vertical-align: middle !important;
+                        border-bottom : 1px solid #D6D6D6;
+                        padding       : 10px !important;
+
+                        &.dataflow-profile-col {
+                            text-align: center;
+                        }
+
+                        .scalable {
+                            &.delete {
+                                &.wk-fieldmap-row-delete {
+                                    border    : unset;
+                                    color     : #ea053c !important;
+                                    background: unset;
+
+                                    span {
+                                        font-weight: 400;
+                                        font-size  : 14px;
+                                        line-height: 19px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .wk-fieldmap-row-add {
+                .marketplaceProductPageButtonDisplay(#FFFFFF, #00203f);
+            }
+        }
+        .wk-mp-btn-new-dataflow-profile {
+            .marketplaceProductPageButtonDisplay(#FFFFFF, #00203f);
+        }
+        &.mpmassupload-dataflow-profile {
+            form {
+                .legend {
+                    span {
+                        font-weight: 600;
+                        font-size  : 20px;
+                        line-height: 26px;
+                        color      : #000000;
+                    }
+
+                    .wk-mp-btn {
+                        .marketplaceProductPageButtonDisplay(#00203f, #FFFFFF);
+                    }
+                }
+
+                margin-top: 10px !important;
+
+                .fieldset {
+                    >.field {
+                        &:not(.choice) {
+                            >.label {
+                                float: unset !important;
+                            }
+
+                            >.control {
+                                width: 50% !important;
+                            }
+                        }
+
+                        #attribute_profile_id {
+                            width: 50% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.mpmassupload-product-view {
+            form {
+                .legend {
+                    display: flex;
+                    align-items: center;
+                    span {
+                        width      : 100%;
+                        font-weight: 600;
+                        font-size  : 20px;
+                        line-height: 26px;
+                        color      : #000000;
+                    }
+
+                    .wk-mp-btn {
+                        .marketplaceProductPageButtonDisplay(#00203f, #FFFFFF);
+                    }
+
+                    #dataflow-profile-add-profile {
+                        .marketplaceProductPageButtonDisplay(#FFFFFF, #00203f);
+                    }
+                }
+            }
+
+            .wk-massupload-container {
+                margin-top: 10px !important;
+
+                .fieldset {
+                    >.field {
+                        &:not(.choice) {
+                            >.label {
+                                float: unset !important;
+                            }
+
+                            >.control {
+                                width: 50% !important;
+                            }
+                        }
+
+                        #attribute_profile_id {
+                            width: 50% !important;
+                        }
+                    }
+                }
+
+                #run-profile {
+                    float: unset !important;
+                }
+
+                input[type="file"] {
+                    &:before {
+                        content              : "";
+                        background-image     : url(../fonts/ellipse.png) !important;
+                        background-repeat    : no-repeat !important;
+                        background-position-x: center !important;
+                        background-position-y: center !important;
+                        border-radius        : 4px;
+                        text-align           : center;
+                        vertical-align       : middle;
+                        font-size            : 400%;
+                        height               : 78px;
+                        width                : 30%;
+                        background           : #f2f2f2;
+                        color                : #00203f;
+                        line-height          : 1.5;
+                        display              : inline-block;
+                        vertical-align       : middle;
+                        margin-right         : 10px;
+                    }
+
+                    &::-webkit-file-upload-button {
+                        display: none;
+                    }
+                }
+            }
+
+            #form-dataflow-profile-delete {
+                width   : 100%;
+                table {
+                    border: unset !important;
+
+                    td {
+                        padding    : 10px !important;
+                        border-left: unset !important;
+
+                        .wk-action {
+                            .mp-dataflow-profile-edit {
+                                font-weight: 400 !important;
+                                font-size  : 14px !important;
+                                line-height: 19px !important;
+                                color      : #0053af !important;
+                            }
+
+                            .mp-dataflow-profile-delete {
+                                font-weight: 400 !important;
+                                font-size  : 14px !important;
+                                line-height: 19px !important;
+                                color      : #ea053c !important;
+                            }
+                        }
+
+                        .wk-mp-massuplaod-dataflow-mapping {
+                            font-weight: 400 !important;
+                            font-size  : 14px !important;
+                            line-height: 19px !important;
+                            color      : #0053af !important;
+                        }
+                    }
+
+                    th {
+                        padding    : 10px !important;
+                        border-left: unset !important;
+                    }
+                }
+                .data-grid-cell-content{
+                    .link{
+                        color:#0053af;
+                    }
+                    .link-edit{
+                        .link;
+                        padding:10px 10px 10px 0px;
+                    }
+                    .link-delete{
+                        padding:10px 10px 10px 0px;
+                        color: #EA053C;
+                    }
+                }
+            }
+
+            #wk_massupload_form {
+                width   : 100%;
+                overflow: auto;
+
+                h3 {
+                    font-weight: 400;
+                    font-size  : 14px;
+                    line-height: 19px;
+                    color      : #8d8d8d !important;
+                    margin     : unset;
+                    padding    : unset;
+                }
+            }
+
+            .wk-mp-new-prod-fields {
+                &._show {
+                    width   : 100%;
+                    overflow: auto;
+
+                    a {
+                        font-weight: 400;
+                        font-size  : 16px;
+                        line-height: 22px;
+                        color      : #0053af !important;
+                    }
+                }
+            }
+
+            .container-hide-show {
+                .label {
+                    font-weight: 600;
+                    font-size  : 20px;
+                    color      : #2e2e2e;
+                    line-height: 26px;
+                }
+            }
+
+            #downloadable {
+                vertical-align: unset !important;
+            }
+        }
+
+        &.mpmassupload-dataflow-profile {
+            legend {
+                width: 100% !important;
+            }
+        }
+    }
+}

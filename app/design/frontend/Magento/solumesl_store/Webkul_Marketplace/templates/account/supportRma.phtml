@@ -1,0 +1,84 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$captchaEnableStatus = $helper->getCaptchaEnable();
+$getDateDetail = $block->getDateDetail();
+$totalSaleColl = $block->getTotalSaleColl();
+$totalSale = 0;
+$totalRemainSale = 0;
+?>
+<div class="wk-mp-recent-support-rma-container">
+    <div class="wk-mp-recent-support-container">
+        <div class="wk-mp-recent-support-heading">
+            <span><?=/* @noEscape */ __("Recent Support")?></span>
+            <span>
+                <a href="<?=$block->escapeUrl($block
+                ->getUrl('helpdesk/seller/index'));?>">
+                    <?=/* @noEscape */__("View All")?>
+                </a>
+            </span>
+        </div>
+        <div class="wk-mp-recent-support-listing">
+            <table class="data table table-recent-support-listing-items" 
+            summary="<?= $escaper->escapeHtml(__('Recent Support Listing')) ?>">  
+                <tbody>
+                    <?php foreach ($block->getHelpdeskLastFiveCollections() as $key => $value) { ?>
+                    <tr>
+                        <td class="col">
+                            <h3><?= /* @noEscape */__("#").$value["order_id"]?></h3>
+                            <span><?= /* @noEscape */ __("Order"); ?></span>
+                        </td>
+                        <td class="col">
+                            <h3><?= /* @noEscape */$block->getQuoteConversation($value["entity_id"])?></h3>
+                            <span><?= /* @noEscape */ __("Customer : ").$block
+                            ->getCustomerName($value["customer_id"]); ?></span>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="wk-mp-recent-rma-container">
+        <div class="wk-mp-recent-rma-heading">
+            <span><?=/* @noEscape */ __("Recent RMA")?></span>
+            <span>
+                <a href="#"><?=/* @noEscape */__("View All")?></a>
+            </span>            
+        </div>
+        <div class="wk-mp-recent-rma-listing">
+            <table class="data table table-recent-rma-listing-items" 
+            summary="<?= $escaper->escapeHtml(__('Recent RMA Listing')) ?>">  
+                <tbody>
+                    <?php foreach ($block->getRmaData() as $key => $value) { ?>
+                        <tr>
+                            <td class="col">
+                                <h3><?= /* @noEscape */ __("#").$value["entity_id"]?></h3>
+                                <span><?= /* @noEscape */ $block->getDateFormatted($value["created_at"]); ?></span>
+                            </td>
+                            <td class="col">
+                                <h3><?= /* @noEscape */ $value["product_name"]." ".(($value["count"] > 1)
+                                ? "+ ".($value["count"]-1) : "")?></h3>
+                                <span><?= /* @noEscape */ __("Qty : ").$value["qty"]; ?></span>
+                            </td>
+                            <td class="col">
+                                <h3><?= /* @noEscape */$block->getCustomerName($value["customer_id"])?></h3>
+                                <span><?= /* @noEscape */ $block->toOptionArray($value["status"]); ?></span>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

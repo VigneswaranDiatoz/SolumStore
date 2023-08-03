@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- To add favicon icons of other sizes -->
+        <link src="Magento_Theme::images/favicon-32x32.png" rel="icon" sizes="32x32" />
+        <css src="css/static/owl.carousel.min.css" />
+        <css src="css/static/owl.theme.default.min.css" />
+		<script src="Magento_Theme::js/solum-script.js"/>
+    </head>
+</page>

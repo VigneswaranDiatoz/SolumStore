@@ -1,0 +1,16 @@
+<?php
+/**
+ * @category  Webkul
+ * @package   Webkul_SolumeslAcl
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+$magentoCurrentUrl = $block->getCurrentUrl();
+$viewModel = $block->getViewModel();
+$isModuleEnabled = $viewModel->isModuleEnable();
+?>
+<?php if ($isModuleEnabled && $viewModel->checkPermission("Webkul_Solumesl::vendor_acl") > -1) : ?>
+<?php endif; ?>

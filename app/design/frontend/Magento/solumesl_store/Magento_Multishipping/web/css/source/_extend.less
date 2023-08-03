@@ -1,0 +1,449 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+@color-text-blue: #0053AF;
+@color-text-heading: #2E2E2E;
+@color-text: #00203f;
+//
+//  Common
+// 
+//  _____________________________________________
+& when (@media-common = true) {
+    .multicheckout{
+        &.address{
+            &.form{
+                .title{
+                    h1{
+                        .headingOneTitle;
+                    }
+                    strong {
+                        font-weight: normal;
+                        font-size: 14px;
+                        line-height: 19px;
+                        color: #6F6E73;
+                    }
+                }              
+            }
+        }
+        .table-wrapper{
+            .action{
+                &.delete {
+                    font-weight: normal;
+                    font-size: 14px !important;
+                    line-height: 19px !important;
+                    color: #867b7e !important;
+                }
+            }
+        }
+        .action {
+            &.primary {
+                &.continue {
+                    width: 280px;
+                    background: #00203F;
+                    border-radius: 100px;
+                    span {
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+                }
+            }           
+        }
+        .secondary{
+            .action{
+                &.back{
+                    span {
+                        font-weight: 600;
+                        font-size: 16px;
+                        line-height: 22px;
+                        color: #0053AF;
+                    }
+                }
+            }
+            button {
+                width: 170px !important;
+                height: 48px !important;
+                background: #FFFFFF;
+                border: 2px solid #00203F;
+                border-radius: 100px;
+                span {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 20px;
+                    color: #00203F;
+                }
+                &.update{
+                    margin-right: 30px;
+                }
+            }
+        }
+        .field {
+            &.qty{
+                input {
+                    text-align: left !important;
+                    width: 120px !important;
+                    .fieldsInputCartForm;
+                }
+            }
+            &.address{
+                select {
+                    .fieldsInputCartForm;
+                }
+            }
+        }
+        .solumesl_multishipping_action{
+            text-align: center !important;
+            padding-top: 3rem !important;
+            a{
+                span{
+                    color: #EA053C;
+                }
+            }
+        }
+        table {
+            &  > thead {
+               & > tr {
+                   & > th{
+                        padding: 20px !important;
+                    }
+                }
+            }
+            & > tbody{
+                & > tr {
+                    & > td{
+                         padding: 20px !important;
+                     }
+                 }
+            }
+        } 
+        .box {
+            &.box-items {
+                &:not(#review-order-form .box.box-items){
+                    width: 30%;
+                }
+                &:not(#shipping_method_form .box.box-items){
+                    width: 60% !important;
+                }
+                .box-title {
+                    width: 100% !important;
+                }
+            }
+            &.box-shipping-method{
+                width: 40% !important;
+                &:not(#shipping_method_form .box.box-shipping-method){
+                    .box-content {
+                        .textNormalDisplayMixin;
+                        span{
+                            .textNormalDisplayMixin;
+                        }
+                    }
+                }
+            }
+            &.box-shipping-address{
+                width: 30% !important;
+            }
+            .box-title {
+                span {
+                    .colorTextHeadingMixin;
+                    color: #2E2E2E;
+                }
+            }
+            .box-content {
+                address {
+                    .textNormalDisplayMixin;
+                }
+                .item-title{
+                    .colorTextHeadingMixin;
+                    color: #2E2E2E;
+                }
+                table {
+                    &  > thead {
+                       & > tr {
+                           & > th{
+                            .colorTextHeadingMixin;
+                            color: #2E2E2E;
+                            }
+                        }
+                    }
+                    & > tbody{
+                        & > tr {
+                            & > td{
+                                .textNormalDisplayMixin;
+                             }
+                         }
+                    }
+                }
+                // multishipping checkout overview page
+                .product-item-name{
+                    a{
+                        .textAddressDisplayMixin;
+                        font-size: 16px !important;
+                    }
+                } 
+                .price-excluding-tax{
+                    .cart-price{
+                        .price{
+                            .textAddressDisplayMixin;
+                            font-size: 16px !important;
+                        }
+                    }
+                }
+                table.table-order-review {
+                    &  > thead {
+                        & > tr {
+                            & > th{
+                                .textNormalDisplayMixin;
+                             }
+                         }
+                     }
+                    & > tbody{
+                        & > tr {
+                            & > td{
+                                font-size: 14px !important;
+                                line-height: 19px !important;
+                                dt {
+                                    font-weight: normal !important;
+                                    dd {
+                                        font-weight: normal !important;
+                                    }
+                                }
+                             }
+                         }
+                    }
+                    &  > tfoot {
+                        & > tr {
+                            & > th{
+                                padding-right: 30px;
+                                .textNormalDisplayMixin;
+                                strong {
+                                    font-weight: normal !important;
+                                }
+                            }
+                            & > td{
+                                font-size: 14px !important;
+                                line-height: 19px !important;
+                                dt {
+                                    font-weight: normal !important;
+                                    dd {
+                                        font-weight: normal !important;
+                                    }
+                                }
+                                .price {
+                                    .textNormalDisplayMixin;
+                                }                                
+                            }
+                            &.grand {                                    
+                                &.totals{
+                                    .amount{
+                                        .price{
+                                            font-weight: 600 !important;
+                                        }
+                                    }
+                                    .mark{
+                                        strong{
+                                            font-weight: 600 !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                     }
+                }               
+            }
+        }
+        a{
+            &.action{
+                &.edit {
+                    &:not(.solumesl_edit_items){
+                        position: relative;
+                        left: 50%;
+                    }
+                    &.solumesl_edit_items{
+                        float: right;
+                    }                 
+                    span {
+                        font-weight: normal !important;
+                        color: #0053AF;
+                    }                    
+                }
+            }
+        }
+        .block{
+            .methods-shipping {
+                .item-content {
+                    .fieldset {
+                       & > .field {
+                           &.choice{
+                                .control {
+                                    display: flex !important;
+                                }
+                                label {
+                                    display: flex;
+                                    flex-direction: column;
+                                    padding-left: 30px;
+                                    & .price {
+                                        font-weight: normal !important;
+                                    }
+                                }
+                           }                       
+                       }
+                    }
+                }
+            }
+        } 
+        .actions-toolbar {
+            &:not(.solumesl-actions-toolbar){
+                border-top: 1px solid #d1d1d1;
+            }
+            padding-top: 30px;
+        }
+      
+        //Multishiping checkout billing less 
+        &#multishipping-billing-form {
+            margin-top: 30px;
+        }
+        .block-billing{
+            .block-content{
+                .box-billing-address{
+                    &:not(#review-order-form .box-billing-address) {
+                        width: 50% !important;
+                        position: relative;
+                    }                    
+                    .box-title{
+                        span {
+                            font-size: 20px !important;
+                        }
+                        a{
+                            
+                            &.action {
+                                &:not(#review-order-form .box-title a.action) {
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: -50px;
+                                }                                
+                            }
+                            span {
+                                font-weight: normal !important;
+                                font-size: 16px !important;
+                                color: #0053AF;
+                            }   
+                        }
+                    }
+                    .box-content{
+                        &:not(#review-order-form .box-billing-address .box-content) {
+                            border-top: 1px solid #d1d1d1;
+                            margin-top: 10px;
+                            padding-top: 30px;
+                        }
+                    }
+                }
+                .box-billing-method{
+                    width: 50% !important;
+                    .fieldset {
+                        & > .legend {
+                            border-bottom: 1px solid #c5c5c5 !important;
+                            width: 100% !important;
+                            margin-bottom: 30px;
+                            padding-bottom: 18px;
+                            span {
+                                font-size: 20px !important;
+                            }
+                        }
+                        #payment-methods{
+                            dt {
+                                margin-bottom: 15px !important;
+                                display: flex !important;
+                                label {
+                                    .textNormalDisplayMixin;
+                                }
+                            }
+                        }
+                    }
+                    .payment-method{
+                        dt {
+                            .textNormalDisplayMixin;
+                        }
+                    }
+                }
+            }
+        }
+        .solumesl-actions-toolbar{
+            padding-top: 50px !important;
+        }
+        // multishipping checkout overview page
+        #checkout-review-submit{
+            .grand {
+                &.totals{
+                    .mark{
+                        .headingOneTitle;
+                        color: #6F6E73 !important;
+                    }
+                    .amount{
+                        .price{
+                            .headingOneTitle;
+                        }
+                    }
+                }
+            }
+        }   
+    }
+    h1 {
+        .headingOneTitle;
+    }
+    .block-shipping {
+        .block-title, .title{
+            strong{
+                .textAddressDisplayMixin;
+                span {
+                    .textAddressDisplayMixin;
+                }
+            }
+        }
+    }    
+    select {
+        padding: 4px 35px 5px 10px;
+        background-repeat: no-repeat !important;
+        background-position-x: 98% !important;
+        background-position-y: 15px !important;
+        &:not(select[multiple="multiple"]){
+            background-image: url("../fonts/Vector.svg") !important;
+        }
+    }
+    .control{
+        select{
+            width:99%;
+        }
+    }
+    .product-item-name {
+        color: #2E2E2E;
+    }
+}
+@media only screen and (max-width: 768px)  {
+    .multicheckout{
+        a{
+            &.action{
+                &.edit {
+                    &:not(.solumesl_edit_items){
+                        position: unset !important;
+                    }                   
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 970px)  {
+    .multicheckout{
+        &#shipping_method_form{
+            .box-items{
+                float: unset !important;
+                width: unset !important;
+            }
+        }        
+    }
+}

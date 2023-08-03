@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget id="formbuilder" class="Webkul\FormBuilder\Block\Widget\FormWidget">
+		<label translate="true">Webkul Form Builder</label>
+		<description>Form Builder</description>
+		<parameters>
+			<parameter name="title" xsi:type="text" required="false" visible="true">
+                <label translate="true">Form Title</label>
+            </parameter>
+            <parameter name="form_id" xsi:type="select" visible="true"
+                       source_model="Webkul\FormBuilder\Model\Form\Source\Formlist">
+                <label translate="true">Form list</label>
+            </parameter>
+		</parameters>
+	</widget>
+</widgets>

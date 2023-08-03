@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="seller-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="seller.content">
+            <block class="Webkul\MarketplaceOrders\Block\Account\Dashboard" name="marketplace_account_dashboard_new" template="Webkul_Marketplace::layout2/account/dashboard.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\Marketplace\ViewModel\HelperViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <referenceContainer name="marketplace_account_dashboard_new">
+            <block class="Webkul\MarketplaceOrders\Block\Account\Dashboard" name="count_heading_section" template="Webkul_Marketplace::account/countHeadings.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\Marketplace\ViewModel\HelperViewModel</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\MarketplaceOrders\Block\Account\Dashboard" name="wk_mp_recent_quotation_section" template="Webkul_Marketplace::account/recentQuotation.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\Marketplace\ViewModel\HelperViewModel</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\MarketplaceOrders\Block\Account\Dashboard" name="wk_mp_order_inquiry_section" template="Webkul_Marketplace::account/orderInquiry.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\Marketplace\ViewModel\HelperViewModel</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\MarketplaceOrders\Block\Account\Dashboard" name="wk_mp_support_rma_section" template="Webkul_Marketplace::account/supportRma.phtml" cacheable="false">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\Marketplace\ViewModel\HelperViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="marketplace_account_dashboard" remove="true" />
+    </body>
+</page>

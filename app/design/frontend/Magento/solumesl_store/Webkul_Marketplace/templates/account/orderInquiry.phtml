@@ -1,0 +1,96 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+?>
+<div class="wk-mp-recent-order-inquiry-container">
+    <div class="wk-mp-recent-inquiry-container">
+        <div class="wk-mp-recent-inquiry-heading">
+            <span><?=/* @noEscape */ __("Recent Inquiry")?></span>
+            <span>
+                <a href="<?=$block
+                    ->escapeUrl($block->getUrl('marketplace/message/inquiry').'#marketplace_messages_inquiry');?>">
+                    <?=/* @noEscape */__("View All")?>
+                </a>
+            </span>            
+        </div>
+        <div class="wk-mp-recent-inquiry-listing">
+            <table class="data table table-recent-inquiry-listing-items" 
+            summary="<?= $escaper->escapeHtml(__('Recent Inquiry Listing')) ?>">  
+                <tbody>
+                    <?php foreach ($block->getLastselectedList(5) as $key => $value) { ?>
+                    <tr>
+                        <td class="col">
+                            <h3 class="overflow-ellipsis"><?= /* @noEscape */ $block->escapeHtml($value['message']);?></h3>
+                            <span><?= /* @noEscape */$block->escapeHtml($block->getDateFormatted($value["created_at"])); ?></span>
+                        </td>
+                        <td class="col">
+                            <h3><?= /* @noEscape */ $block->escapeHtml(ucfirst($value["user_name"]));?></h3>
+                            <span><?= /* @noEscape */ $block->escapeHtml($value["user_email"]); ?></span>
+                        </td>
+                    </tr>
+                    <?php }
+                    if ($block->getInquiryCount() == 0) {
+                        ?>
+                    <td class="col">
+                        <h3><?= /* @noEscape */ __("No Inquiry!")?></h3>
+                    </td>
+                    <td class="col">
+                    </td>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="wk-mp-recent-order-container">
+        <div class="wk-mp-recent-order-heading">
+            <span><?=/* @noEscape */ __("Recent Orders")?></span>
+            <span>
+                <a href="<?=$block
+                    ->escapeUrl($block->getUrl('marketplace/order/history'));?>">
+                    <?=/* @noEscape */__("View All")?>
+                </a>
+            </span>
+        </div>
+        <div class="wk-mp-recent-order-listing">
+            <table class="data table table-recent-order-listing-items" 
+            summary="<?= $escaper->escapeHtml(__('Recent Order Listing')) ?>">  
+                <tbody>
+                    <?php foreach ($block->getOrdersList() as $key) {
+                        $orderId = $key->getOrderId();
+                        $categoryName = $block->getProductCategories($orderId);
+                        ?>
+                        <tr>
+                            <td class="col">
+                                <h3><?= $block->escapeHtml(__("#").$block
+                                ->getOrderInformation($orderId)->getIncrementId())?></h3>
+                                <span><?= /* @noEscape */ implode(",", $categoryName) ?></span>
+                            </td>
+                            <td class="col">
+                                <h3><?= $block->escapeHtml($block
+                                ->getOrderInformation($orderId)->getCustomerName())?></h3>
+                                <span><?=$block->escapeHtml($block->getDateFormatted($block
+                                ->getOrderInformation($orderId)->getCreatedAt())); ?></span>
+                            </td>
+                            <td class="col">
+                                <h3><?= /* @noEscape */$block->getCurrencyWithFormat($block
+                                ->convertToCurrentCurrency($block
+                                ->getOrderInformation($orderId)->getBaseGrandTotal()));?></h3>
+                                <span><?=$block->escapeHtml($key->getOrderStatus()); ?></span>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

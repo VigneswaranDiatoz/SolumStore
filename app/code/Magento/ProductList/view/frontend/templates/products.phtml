@@ -1,0 +1,99 @@
+
+       <?php
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $productCollection = $objectManager->create('\Magento\Catalog\Model\ResourceModel\Product\Collection');
+        $productCollection->addAttributeToSelect('*'); // You can specify the attributes you want to load
+        // $productCollection->addFieldToFilter('created_by','28');
+        $params = $this->getRequest()->getParams();
+        
+        if (isset($params['id'])) {
+
+            if ($productCollection->getSize()) :
+                ?>
+                <div class="product-list-container">
+                    <ul class="products-grid">
+                        <?php foreach ($productCollection as $product) : 
+                            if($product->getCreatedBy() ==  $params['id']){
+
+                            ?>
+                            
+                                <li class="item product-item">
+                                    <a href="<?php echo $product->getProductUrl(); ?>">
+                                        <div class="product-image-container">
+                                            <img src="<?php echo  $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_large')->getUrl(); ?>">
+                                        </div>
+                                        <div class="product-info">
+                                            <span class="product-name" style="height: 1.2em;"><?php echo $block->escapeHtml($product->getName()); ?></span><br>
+                                            <span class="product-price" style="height: 1.2em;"><?php echo $block->escapeHtml($product->getPrice()); ?></span>
+                                            <!-- Add more product information or customizations here -->
+                                        </div>
+                                    </a>
+                                </li>
+                        <?php } endforeach; ?>
+                    </ul>
+                </div>
+            <?php else : ?>
+                <p class="message info">No products found.</p>
+            <?php endif; 
+        } else { ?>
+            <div class="product-list-container">
+            <ul class="products-grid">
+                <?php foreach ($productCollection as $product) :?>
+                    
+                        <li class="item product-item">
+                            <a href="<?php echo $product->getProductUrl(); ?>">
+                                <div class="product-image-container">
+                                    <img src="<?php echo  $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_large')->getUrl(); ?>">
+                                </div>
+                                <div class="product-info">
+                                    <span class="product-name"><?php echo $block->escapeHtml($product->getName()); ?></span>
+                                    <span class="product-price"><?php echo $block->escapeHtml($product->getPrice()); ?></span>
+                                    <!-- Add more product information or customizations here -->
+                                </div>
+                            </a>
+                        </li>
+                <?php  endforeach; ?>
+            </ul>
+        </div>
+
+        <?php } ?>
+<style>
+
+/* Product list container */
+.product-list-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Product grid - Remove default list styles */
+.products-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Individual product item */
+.product-item {
+    width: 25%; /* Adjust the width as per your layout */
+    padding: 10px;
+}
+
+/* Product image */
+.product-image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Product name */
+.product-name {
+    font-weight: bold;
+}
+
+/* Product price */
+.product-price {
+    color: #ff0000;
+}
+
+</style>

@@ -1,0 +1,141 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+@small: ~"(max-width: 768px)";
+
+& when (@media-common = true) {
+  .solumeslrfq-page-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid @color-seperator;
+    padding-bottom: 10px;
+    .solumeslrfq-page-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 26px;
+      color: @color-dark;
+      margin-bottom: unset;
+    }
+    @media @small { 
+        .actions-toolbar .primary{
+            display:flex;
+            gap:5px;
+            align-items: center;
+        }
+        .action.secondary-btn.rounded{
+            padding:5px;
+            margin-bottom: 0px;
+            font-size: 10px;
+        }
+    }
+  }
+  .toolbar.wishlist-toolbar {
+    &.remove-amount {
+      .toolbar-amount {
+        display: none;
+      }
+    }
+    &.remove-limiter {
+      .limiter {
+        display: none;
+      }
+    }
+    &.remove-pages {
+      .pages {
+        display: none;
+      }
+    }
+    .pages .items {
+      font-size: 0;
+      letter-spacing: -1px;
+      line-height: 0;
+      white-space: nowrap;
+      margin: 0;
+      padding: 0;
+      list-style: none none;
+      display: inline-block;
+      font-weight: 700;
+    }
+
+    .pages .item {
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      text-align: center;
+      margin-right: 20px;
+      &.current {
+        background-color: #00203f;
+        border-radius: 4px;
+        .page {
+          background-color: #00203f;
+          color: #ffffff;
+        }
+      }
+      .action.previous {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        background: none !important;
+        &::before {
+          color: @color-darkblue !important;
+          content: "\e906" !important;
+          font-size: 20px !important;
+        }
+      }
+      .action.next {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        background: none;
+        margin-left: 8px;
+        &::before {
+          color: #00203f;
+          font-size: 20px;
+        }
+      }
+      .page {
+        padding: 6px 12px;
+        background-color: #f2f2f2;
+        border-radius: 4px;
+        color: #0053af;
+        line-height: unset;
+      }
+    }
+  }
+  .wishlist {
+    .product-reviews-summary.short {
+      margin-bottom: 2px !important;
+      display: flex;
+      align-items: center;
+      .rating-summary .rating-result {
+        width: unset;
+        &:before {
+          letter-spacing: 0px;
+          content: "\e93d""\e93d""\e93d""\e93d""\e93d";
+          font-family: "solum-icon";
+          color: #8bbee7;
+          font-size: 20px;
+        }
+        & > span:before {
+          letter-spacing: 0px;
+          content: "\e93d""\e93d""\e93d""\e93d""\e93d";
+          font-family: "solum-icon";
+          color: #00203f;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

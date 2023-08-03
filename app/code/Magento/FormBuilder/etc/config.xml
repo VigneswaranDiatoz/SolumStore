@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <formbuilder>
+            <general_settings>
+                <enable>1</enable>
+                <emailEnable>0</emailEnable>
+                <enableRecaptcha>0</enableRecaptcha>
+                <siteKey>0</siteKey>
+            </general_settings>
+        </formbuilder>
+    </default>
+</config>

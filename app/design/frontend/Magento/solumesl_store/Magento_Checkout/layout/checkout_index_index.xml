@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>        
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="popUpForm" xsi:type="array">
+                                                            <item name="options" xsi:type="array">
+                                                                <item name="title" xsi:type="string" translate="true">Add Shipping Address</item>
+                                                                <item name="buttons" xsi:type="array">
+                                                                    <item name="save" xsi:type="array">
+                                                                        <item name="text" xsi:type="string" translate="true">Add Address</item>
+                                                                        <item name="class" xsi:type="string">action primary-btn rounded action-save-address</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="itemsAfter" xsi:type="array">
+                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="move-button" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/move-button</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">Magento_Checkout/summary/move-button</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">checkout</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="label" xsi:type="string">Checkout</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <move element="breadcrumbs" destination="main.content" before="-"/>
+    </body>
+</page>

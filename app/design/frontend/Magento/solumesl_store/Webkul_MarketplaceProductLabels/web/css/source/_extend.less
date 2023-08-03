@@ -1,0 +1,118 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        &.mplabels-label-labellist {
+            .wk_mp_heading_container {
+                display        : flex;
+                justify-content: space-between;
+                margin-bottom  : 30px;
+                padding-bottom : 20px;
+                border-bottom  : 1px solid #F2F2F2;
+
+                span {
+                    font-weight: 600;
+                    font-size  : 20px;
+                    line-height: 26px;
+                    color      : #000000;
+                }
+
+                button {
+                    .marketplaceProductPageButtonDisplay(#00203F, #FFFFFF);
+                }
+            }
+
+            [data-bind="scope: 'marketplace_label_listing.marketplace_label_listing'"] {
+                .data-grid-multicheck-cell {
+                    text-align: start !important;
+                }
+
+                .data-grid-th {
+                    &._draggable {
+                        width     : 25%;
+                        text-align: start !important;
+                    }
+                }
+
+                .data-grid-checkbox-cell-inner {
+                    text-align: start !important;
+                }
+
+                td {
+                    text-align: start !important;
+                }
+            }
+        }
+
+        &.mplabels-label-editlabel,
+        &.mplabels-label-newlabel {
+            .wk-mp-page-wrapper {
+                &.close {
+                    .wk-mp-page-title {
+                        &.legend {
+                            &.wk-mp-fixed {
+                                width: ~"calc(100% - 12rem)" !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .wk-mp-page-title {
+                &.legend {
+                    &.wk-mp-fixed {
+                        width: ~"calc(100% - 22rem)" !important;
+                    }
+                }
+            }
+
+            .wk-mp-product-container {
+                margin-bottom: 20px;
+
+                .wk-mp-new-prod-fields {
+                    .wk-mp-product-label-grid {
+                        max-width: 100%;
+                        overflow : auto;
+                    }
+                }
+            }
+
+            #edit-product {
+                .wk-mp-page-title {
+                    &.legend {
+                        display        : flex;
+                        align-items    : center;
+                        justify-content: space-between;
+                    }
+
+                    span {
+                        font-weight: 600;
+                        // font-size  : 20px;
+                        // line-height: 26px;
+                        color      : #000000;
+                    }
+
+                    #save-btn {
+                        span {
+                            color: #FFFFFF !important;
+                        }
+                    }
+                }
+
+                #wk-bodymain {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,126 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpAttributeMapping
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Product\Create */
+$editProfileUrl = $block->getUrl('marketplace/account/editprofile');
+$viewModelObj = $block->getViewModel();
+$helper = $viewModelObj->getMpHelper();
+$mappingHelper = $viewModelObj->getModuleHelper();
+$firstLevelCategory = $mappingHelper->getRootCategoriesOfStore();
+$partner = $helper->getSeller();
+if (($partner['twitter_id']=='') || ($partner['facebook_id']=='') || ($partner['banner_pic']=='') ||
+($partner['logo_pic']=='') || ($partner['company_locality']=='') || ($partner['country_pic']=='') ||
+($partner['company_description']=='')) {?>
+        <div class="wk-profile-alert">
+            <strong><?= $block->escapeHtml(__('Warning'))?>! </strong>
+            <?= $block->escapeHtml(__('Please Complete'))?>
+            <a href="<?= /* @noEscape */ $editProfileUrl; ?>" style="color: inherit;">
+             <?=$block->escapeHtml(__('Your Profile'))?></a>
+             <span class="wk-close"> X </span>
+        </div>
+    <?php
+} ?>
+<style>
+.hidden{display:none !important;}
+</style>
+<form action="<?= $block->escapeUrl($block->getUrl(
+    'marketplace/product/create',
+    ['_secure' => $block->getRequest()->isSecure()]
+)) ?>" enctype="multipart/form-data" method="post" 
+ id="form-customer-product-new" data-mage-init='{"validation":{}}'>
+    <div class="wk-mp-design">
+        <fieldset class="fieldset info wk-mp-new-product-fieldset">
+            <legend class="legend wk-mp-new-product-legend">
+                <span><?= $block->escapeHtml(__('Add New Product')) ?></span>    
+            </legend>
+            <?= $block->getBlockHtml('formkey')?>
+            <?= $block->getBlockHtml('seller.formkey')?>
+            <?php if ($mappingHelper->getModuleEnabled()):
+                if ($firstLevelCategory->getSize()>0):
+                    ?>
+                <form action="<?= $block->escapeUrl($block->getUrl(
+                    'multiselect/manage/save',
+                    ['_secure' => $block->getRequest()->isSecure()]
+                )) ?>" enctype="multipart/form-data"
+                 method="post"  data-mage-init='{"validation":{}}'>
+                    <fieldset class="fieldset wk_mapping-fieldset">
+                        <div class="field required">
+                            <label class="label"><?= $block->escapeHtml(__('Select Category')) ?>:</label>
+                            <div data-bind="scope: 'customCategory'">
+                                <!-- ko template: getTemplate() --><!-- /ko -->
+                            </div>
+                            <script type="text/x-magento-init">
+                                {
+                                    "*": {
+                                        "Magento_Ui/js/core/app": {
+                                            "components": {
+                                                "customCategory": {
+                                                    "component": "Magento_Ui/js/form/element/ui-select",
+                                                    "template" : "Webkul_MpAttributeMapping/ui-select",
+                                                    "filterOptions": true,
+                                                    "levelsVisibility": "1",
+                                                    "multiple": false,
+                                                    "showCheckbox": true,
+                                                    "options": <?= /* @noEscape */ $block->getCategoriesTree()?>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            </script>
+                        </div>
+                    </fieldset>
+                </form>
+                <?php endif;
+                endif; ?>
+            
+            <?php if (count($helper->getAllowedProductTypes()) > 1) { ?>
+                
+                <div class="field required">
+                    <label class="label"><?= $block->escapeHtml(__('Product Type')) ?>:</label>
+                    <div class="control">
+                        <select name="type" class="required-entry">
+                            <option value="" disabled selected><?=/* @noEscape */  __("Select product type")?></option>
+                        <?php
+                        foreach ($helper->getAllowedProductTypes() as $type) {?>
+                            <option value="<?= $block->escapeHtml($type['value']); ?>">
+                            <?= $block->escapeHtml($type['label']);?></option>
+                        <?php } ?>
+                        </select>
+                    </div>
+                </div>
+                <?php
+            } else {
+                $allowedProducts = $helper->getAllowedProductTypes();
+                ?>
+                <input type="hidden" name="type" value="<?= $block->escapeHtml($allowedProducts[0]['value']); ?>" />
+                <?php
+            } ?>
+            <?=  $block->getChildHtml(); ?>
+        </fieldset>
+        <button class="button wk-mp-btn button wk-mp-btn primary-btn rounded line-height-15" title="Continue" type="submit">
+            <span><span><?= $block->escapeHtml(__('Continue')); ?></span></span>
+        </button> 
+    </div>                     
+</form>
+<br>
+<div class="buttons-set">       
+    <p class="back-link">
+        <a href="javascript:;" onclick="javascript: window.history.back();" class="left">&laquo; 
+        <?= $block->escapeHtml(__('Back')) ?></a>
+    </p>
+</div>
+<script type='text/javascript'>
+    require(['jquery'], function($) {
+      $('.wk-close').click(function(e) {
+        $('.wk-profile-alert').hide();
+      });
+    })
+</script>

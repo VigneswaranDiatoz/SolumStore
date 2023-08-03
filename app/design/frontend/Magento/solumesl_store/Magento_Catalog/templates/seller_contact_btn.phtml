@@ -1,0 +1,15 @@
+<button type="button"
+    title="<?= $block->escapeHtml(__('Contact Seller'));?>"
+    class="secondary-btn line-height-30"
+    id="product-contact-seller-button"
+    name="contact_seller_btn line-height-30">
+    <span><?= $block->escapeHtml(__('Contact Seller'));?></span>
+</button>
+
+<script>
+    require(['jquery'], function($) {
+      $("#product-contact-seller-button").on("click", function (event) {
+        $('#rfq-form-button').trigger('click');
+      });
+    })
+</script>

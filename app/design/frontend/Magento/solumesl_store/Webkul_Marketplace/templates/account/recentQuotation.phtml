@@ -1,0 +1,83 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$captchaEnableStatus = $helper->getCaptchaEnable();
+$getDateDetail = $block->getDateDetail();
+$totalSaleColl = $block->getTotalSaleColl();
+$recentLeads = $block->getRecentLeads();
+$leadBlock = $block->getLayout()->createBlock(\Webkul\LeadToQuote\Block\Seller\View::class);
+$totalSale = 0;
+$totalRemainSale = 0;
+if ($recentLeads->getSize() > 0):
+?>
+<div class="wk-mp-recent-quotation-container">
+    <div class="wk-mp-recent-quotation-heading">
+        <span><?=/* @noEscape */ __("Recent Quotation")?></span>
+        <span>
+            <a href="<?= $block->getUrl("quotation/seller/")?>"><?=/* @noEscape */__("View All")?></a>
+        </span>
+    </div>
+    <div class="wk-mp-recent-quotation-listing-container">
+        <table class="data table table-recent-quotation-listing-items" 
+        summary="<?= $escaper->escapeHtml(__('Recent Quotation Listing')) ?>">
+            <thead>
+                <tr>
+                    <th class="col subject" ><?= $escaper->escapeHtml(__('Subject')) ?></th>
+                    <th class="col type" ><?= $escaper->escapeHtml(__('Type')) ?></th>
+                    <th class="col qty" ><?= $escaper->escapeHtml(__('Requested QTY')) ?></th>
+                    <th class="col valid-till" ><?= $escaper->escapeHtml(__('Valid Till')) ?></th>
+                    <th class="col stores" ><?= $escaper->escapeHtml(__('No of Stores')) ?></th>
+                    <th class="col customer" ><?= $escaper->escapeHtml(__('Customer')) ?></th>
+                    <th class="col created-at" ><?= $escaper->escapeHtml(__('Created at')) ?></th>
+                    <th class="col action" ><?= $escaper->escapeHtml(__('Action')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach($recentLeads as $lead) {
+                    # code...?>
+                <tr>
+                    <td class="col subject" data-th="<?= $escaper->escapeHtml(__('Subject')) ?>">
+                        <?= $lead->getSubject()?>
+                    </td>
+                    <td class="col type" data-th="<?= $escaper->escapeHtml(__('Type')) ?>">
+                        <?= $leadBlock->getCategoryName($lead->getType())?>
+                    </td>
+                    <td class="col qty" data-th="<?= $escaper->escapeHtml(__('Quantity per Store')) ?>">
+                        <?= $lead->getQty()?>
+                    </td>
+                    <td class="col valid-till" data-th="<?= $escaper->escapeHtml(__('Valid Till')) ?>">
+                        <?= $lead->getValidTill()?>
+                    </td>
+                    <td class="col stores" data-th="<?= $escaper->escapeHtml(__('No of Stores')) ?>">
+                        <?= $lead->getNoOfStores()?>
+                    </td>
+                    <td class="col customer" data-th="<?= $escaper->escapeHtml(__('Customer')) ?>">
+                        <?= $leadBlock->getCustomerName($lead->getCustomerId())?>
+                    </td>
+                    <td class="col created-at" data-th="<?= $escaper->escapeHtml(__('Created at')) ?>">
+                        <?= date('m/d/Y',strtotime($lead->getCreatedAt()))?>
+                    </td>
+                    <td class="col action" data-th="<?= $escaper->escapeHtml(__('Action')) ?>">
+                        <a href="<?= $block->getUrl("quotation/seller/view",["id" => $lead->getId()])?>">
+                            <?= __("View")?>
+                        </a>
+                    </td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php endif; ?>

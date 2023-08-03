@@ -1,0 +1,166 @@
+"Sign Up for Newsletter","Sign Up for Newsletter"
+Email,Email
+Password,Password
+"Confirm Password","Confirm Password"
+"Select seller to contact for the solution","Select seller to contact for the solution"
+"Something went wrong.","Something went wrong."
+"Confirm Email Address","Confirm Email Address"
+"You must confirm your account. Please check your email for the confirmation link or <a href=""%1"">click here</a> for a new link.","You must confirm your account. Please check your email for the confirmation link or <a href=""%1"">click here</a> for a new link."
+"Registered Successfully","Registered Successfully"
+"Already Have Account with Us","Already Have Account with Us"
+"There is already an account with this email address. If you are sure that it is your email address, <a href=""%1"">click here</a> to get your password and access your account.","There is already an account with this email address. If you are sure that it is your email address, <a href=""%1"">click here</a> to get your password and access your account."
+"We can't save the customer.","We can't save the customer."
+"Thank you for registering with %1.","Thank you for registering with %1."
+"This Data no longer exists.","This Data no longer exists."
+"Update Form #%1","Update Form #%1"
+"Add Form","Add Form"
+Forms,Forms
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"Something went wrong while updating the Form Builder(s) status.","Something went wrong while updating the Form Builder(s) status."
+"Create New Form","Create New Form"
+"Form saved successfully.","Form saved successfully."
+"Something Went Wrong!!","Something Went Wrong!!"
+"Invalid Form Key","Invalid Form Key"
+"Update Data %1","Update Data %1"
+"Add Data","Add Data"
+"All Responses","All Responses"
+"Response of %1","Response of %1"
+"Response of %1 #%2","Response of %1 #%2"
+"Invalid Form","Invalid Form"
+"Successfully created.","Successfully created."
+"File has been successfully uploaded","File has been successfully uploaded"
+" ""%1"" File Type Not Allowed or image size exceeds ."," ""%1"" File Type Not Allowed or image size exceeds ."
+"No Data","No Data"
+Enabled,Enabled
+Disabled,Disabled
+"Added new form=>","Added new form=>"
+"Unknown template type","Unknown template type"
+"Join to Solum Store","Join to Solum Store"
+"Sign In to Solum Store","Sign In to Solum Store"
+"Join Solum Store","Join Solum Store"
+"Edit ","Edit "
+"View ","View "
+Guest,Guest
+"View (%1)","View (%1)"
+Back,Back
+"Save & Continue edit","Save & Continue edit"
+"Save Form","Save Form"
+"Clear Fields","Clear Fields"
+"Form Creator","Form Creator"
+"Form Information","Form Information"
+Title,Title
+"Url Key","Url Key"
+"Success Url","Success Url"
+"Step 1 Label","Step 1 Label"
+"Login Label","Login Label"
+"Create Label","Create Label"
+"Success Message","Success Message"
+"Thank you for submitting!","Thank you for submitting!"
+Recaptcha,Recaptcha
+Enable,Enable
+Disable,Disable
+Delete,Delete
+Information,Information
+"Submitted At","Submitted At"
+"IP Address","IP Address"
+Customer,Customer
+Store,Store
+Data,Data
+View,View
+" No Data"," No Data"
+"Request Quote","Request Quote"
+"Join Us","Join Us"
+stepName,stepName
+"Choose option","Choose option"
+" Name"," Name"
+"Click to add file","Click to add file"
+"Delete video","Delete video"
+"Delete image","Delete image"
+Hidden,Hidden
+Prev,Prev
+Skip,Skip
+Next,Next
+Submit,Submit
+Thanks...!,Thanks...!
+"Others in your business area have interested in them","Others in your business area have interested in them"
+Country,Country
+"* Required Fields","* Required Fields"
+"Remember Me","Remember Me"
+"Forgot Your Password?","Forgot Your Password?"
+Continue,Continue
+"New to Solum?","New to Solum?"
+"Sign Up","Sign Up"
+"Already registered?","Already registered?"
+"Sign in","Sign in"
+"Address Information","Address Information"
+Address,Address
+"Street Address %1","Street Address %1"
+"Please select a region, state or province.","Please select a region, state or province."
+Easy,Easy
+"A upper case must in password","A upper case must in password"
+"A lower case must in password","A lower case must in password"
+"A number must in password","A number must in password"
+"Minimum 8 Character","Minimum 8 Character"
+"A character ! @ # $ % & * . , must in password","A character ! @ # $ % & * . , must in password"
+Company,Company
+Fax,Fax
+"Phone Number","Phone Number"
+Facebook,Facebook
+"Continue with Facebook","Continue with Facebook"
+Twitter,Twitter
+"Continue with Twitter","Continue with Twitter"
+Google,Google
+"Continue with Google","Continue with Google"
+Linkedin,Linkedin
+"Continue with Linkedin","Continue with Linkedin"
+Instagram,Instagram
+"Continue with Instagram","Continue with Instagram"
+OR,OR
+"Text Field","Text Field"
+"Default Field Name","Default Field Name"
+textarea,textarea
+"Default Textarea","Default Textarea"
+"Default Tinymce","Default Tinymce"
+"Default Number","Default Number"
+"Default Date","Default Date"
+"Default date Name","Default date Name"
+"Default date","Default date"
+"Default Select","Default Select"
+"Default Radio","Default Radio"
+"Default CheckBox","Default CheckBox"
+"Default Checkbox","Default Checkbox"
+"Default File","Default File"
+"Supported File:- jpg, jpeg, pdf, doc, png","Supported File:- jpg, jpeg, pdf, doc, png"
+"Form does not have any fields.","Form does not have any fields."
+"Form does not exist or can be disabled.","Form does not exist or can be disabled."
+"Browse Files...","Browse Files..."
+"Click here to browse images.","Click here to browse images."
+"Click to select image!","Click to select image!"
+"Select Image","Select Image"
+"Add Step","Add Step"
+"Response From Customer","Response From Customer"
+"Please Enter the Form Name","Please Enter the Form Name"
+"You haven't selected any items!","You haven't selected any items!"
+"We could not detect a size.","We could not detect a size."
+"We don't recognize or support this file extension type.","We don't recognize or support this file extension type."
+"Image Detail","Image Detail"
+Normal,Normal
+Hard,Hard
+"Something went wrong, please try again later","Something went wrong, please try again later"
+"Change Status","Change Status"
+"Are you sure?","Are you sure?"
+"Webkul Form Builder","Webkul Form Builder"
+"Form Title","Form Title"
+"Form list","Form list"
+ID,ID
+Name,Name
+"Created at","Created at"
+"Updated at","Updated at"
+"Delete items","Delete items"
+"Are you sure you want to delete selected Row(s)?","Are you sure you want to delete selected Row(s)?"
+"Form ID","Form ID"
+"Form Name","Form Name"
+"Message Point","Message Point"
+"Submitted Date","Submitted Date"
+"User Name","User Name"

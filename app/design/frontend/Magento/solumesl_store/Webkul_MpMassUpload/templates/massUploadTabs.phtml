@@ -1,0 +1,64 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_MpMassUpload
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+?>
+<?php if ($detailedInfoGroup = $block->getGroupSortedChildNames('customer_tab_info', 'getChildHtml')) :
+    $valueCount = (100 / count($detailedInfoGroup))."%";
+    ?>
+<div class="wk-mp-design">
+    <div class="fieldset wk-mp-customer-tabs-fieldset">
+        <div class="page-title-wrapper-heading">
+            <legend class="legend wk-mp-top-heading-legend">
+                <span><?= __("Mass Upload")?></span>    
+            </legend>
+            <?php $layout = $block->getLayout(); ?>
+            <div class="product info detailed">
+                <?php $layout = $block->getLayout(); ?>
+                <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+                    <?php foreach ($detailedInfoGroup as $key => $name) :?>
+                        <?php
+                        $html = $layout->renderElement($name);
+                        $alias = $layout->getElementAlias($name);
+                        $vendorAcl = $block->getChildData($alias, 'vendor_acl');
+                        $viewModel = $block->getViewModel();
+                        if (!($viewModel->checkPermission($vendorAcl) > -1)) {
+                            continue;
+                        }
+                        $isWriteOnly = $block->getChildData($alias, 'is_write_only');
+                        if ($isWriteOnly && $viewModel->checkPermission($vendorAcl) != 1) {
+                            continue;
+                        }
+                        if (!trim($html)) {
+                            continue;
+                        }
+                        $label = $block->getChildData($alias, 'title');
+                        ?>
+                        <div class="data item title customer_tab_heading_container"
+                             data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>"
+                             style="width:<?=/* @noEscape */$valueCount?>">
+                            <a class="data switch customer_tab_hash_links"
+                               tabindex="-1"
+                               data-toggle="trigger"
+                               href="#<?= $block->escapeUrl($alias) ?>"
+                               id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title">
+                                <?= /* @noEscape */ $label ?>
+                            </a>
+                        </div>
+                        <div class="data item content customer_tab_container <?= "index_".$key; ?>"
+                             aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
+                            <?= /* @noEscape */ $html ?>
+                        </div>
+                    <?php endforeach;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

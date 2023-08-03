@@ -1,0 +1,136 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+<?php if ($block->canShowBlock()):
+    $state = $block->getChildBlock('state');
+    $_filters = $state->getActiveFilters();
+?>
+    <div class="block filter" id="layered-filter-block">
+        <div class="block-title filter-title" id="shop_by">
+            <strong><?= $block->escapeHtml(__('Shop By')) ?></strong>
+        </div>
+
+        <div class="block-content filter-content">
+            <?php $wrapOptions = false; ?>
+            <?php if ($block->getLayer()->getState()->getFilters() && !empty($_filters)): ?>
+                <div class="filter-subtitle-block block-actions filter-actions">
+                    <strong role="heading" aria-level="2" class="filter-actions-name">
+                        <?= $block->escapeHtml(__('Shop by')) ?>
+                    </strong>
+                    <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action clear filter-clear">
+                        <span>
+                            <?= $block->escapeHtml(__('Clear All')) ?>
+                        </span>
+                    </a>
+                    <br/>
+                    <div class="filter-current-box">
+                        <?= $block->getChildHtml('state') ?>
+                    </div>                    
+                </div>
+            <?php endif; ?>
+            <?php $id=1; foreach ($block->getFilters() as $filter): ?>
+                <?php if (!$wrapOptions): ?>               
+                    <dl class="filter-options" id="narrow-by-list">
+                    <?php $wrapOptions = true;
+                endif; ?>
+                    <?php if ($filter->getItemsCount()): ?>
+                        <div class="page-wk-block">
+                            <dt role="heading" aria-level="3" data-position="<?=/**@noEscape */ $id;?>" class="filter-options-title">
+                                <?= $block->escapeHtml(__($filter->getName())) ?>
+                            </dt>
+                            <dd class="filter-options-content" data-content="<?=/**@noEscape */ $id;?>">
+                                <?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?>
+                            </dd>
+                        </div>
+                        <?php endif; ?>
+                        <?php 
+                            $id++;
+                            endforeach;
+                        ?>
+                        <?php if ($wrapOptions): ?>
+                        </dl>
+                        <?php endif; ?>
+                        <div class="wk-loader" id="load"> 
+                            <p> 
+                                <?=$block->escapeHtml(__("View More")); ?> 
+                            </p>
+                        </div>    
+            </div>
+    </div>
+<?php endif; ?>
+<script>
+    require([
+        'jquery'
+    ], function($){
+        $(document).ready(function(){
+            
+            // load view feature
+            if ($(".page-wk-block").length == 0 || $(".page-wk-block").length < 5) {
+                $("#load").hide();
+            }
+            let mainListingHeight = $(".main-listing, .products-grid, .products-list").height();           
+            let count = mainListingHeight/80;
+            
+            $(".page-wk-block").slice(0, Math.floor(count)).show();
+            if ($(".page-wk-block:hidden").length != 0) {
+                $("#load").show();
+            }
+            $("#load").on("click", function (e) {
+                e.preventDefault();
+                
+                $(".page-wk-block:hidden").slice().slideDown();
+                if ($(".page-wk-block:hidden").length == 0) {
+                    $("#load").text("No More to view").fadeOut("slow");
+                }
+            });
+
+            $('.filter-checkbox').on('change',function(){
+                if($(this).is(":checked")){
+                    var url = $(this).closest('li').find('a').prop('href');
+                    window.location.href = url;
+                }
+            });
+
+            $('#shop_by').on('click',function(){
+                if($(this).hasClass('open')){
+                    $('body').removeClass('filter-active');
+                    $('#layered-filter-block').removeClass('active');
+                    $(this).removeClass('open');
+                }else{
+                    $(this).addClass('open');
+                    $('body').addClass('filter-active');
+                    $('#layered-filter-block').addClass('active');
+                }                                
+            });
+
+            $('.filter-options-title').on('click',function(){
+                var positionid = $(this).data('position'); 
+                if($(this).hasClass('hide_filter')){
+                    $('.filter-options-content').each(function(){
+                        if($(this).data('content') == positionid){
+                            $(this).show();
+                        }
+                    })
+                    $(this).removeClass('hide_filter');
+                }else{
+                    $(this).addClass('hide_filter');                     
+                    $('.filter-options-content').each(function(){
+                        if($(this).data('content') == positionid){
+                            $(this).hide();
+                        }
+                    })
+                }                               
+            });
+        })
+    })
+</script>

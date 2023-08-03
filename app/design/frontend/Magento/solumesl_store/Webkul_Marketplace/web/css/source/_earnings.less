@@ -1,0 +1,73 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        &.marketplace-account-earning {
+            .wk-mp-page-main {
+                padding    : 2rem;
+                padding-top: unset;
+            }
+
+            // #wk-mp-earning-form {
+            //     span {
+            //         font-weight: 600;
+            //         font-size  : 20px;
+            //         line-height: 26px;
+   
+            //     }
+
+            //     button {
+            //         .marketplaceProductPageButtonDisplay(#ffffff, #00203f);
+            //     }
+            // }
+
+            .wk-mp-earning-fields {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap:16px;
+                .field {
+                    display: inline-block;
+                    width  : 20rem !important;
+
+                    &.wk-mp-time-duraion {
+                        display    : flex;
+                        align-items: center;
+                        width      : 20rem !important;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+//
+//  Desktop (style-l.css)
+//  _____________________________________________
+@media only screen and (max-width: 628px) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-earning-fields {
+            .field {
+                display: unset !important;
+                width  : unset !important;
+
+                &.wk-mp-time-duraion {
+                    float  : unset !important;
+                    display: unset !important;
+                    width  : unset !important;
+                }
+            }
+        }
+    }
+}

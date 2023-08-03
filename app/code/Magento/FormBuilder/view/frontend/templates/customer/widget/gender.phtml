@@ -1,0 +1,24 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/** @var \Webkul\FormBuilder\Block\Customer\Widget\Gender $block */
+?>
+<div class="field gender<?= $block->isRequired() ? ' required' : ''?>">
+    <div class="control">
+        <select id="<?= $block->escapeHtmlAttr($block->getFieldId('gender')) ?>" name="<?= $block->escapeHtmlAttr($block->getFieldName('gender')) ?>" title="<?= $block->escapeHtmlAttr($block->getStoreLabel('gender')) ?>"<?php if ($block->isRequired()): ?> class="validate-select" data-validate="{required:true}"<?php endif; ?>>
+            <?php $options = $block->getGenderOptions(); ?>
+            <?php $value = $block->getGender(); ?>
+            <?php foreach ($options as $option): ?>
+                <option value="<?= $block->escapeHtmlAttr($option->getValue()) ?>"<?= ($option->getValue() == $value) ? ' selected="selected"' : '' ?>><?= $block->escapeHtml(__($option->getLabel())) ?></option>
+            <?php endforeach;?>
+        </select>
+    </div>
+</div>

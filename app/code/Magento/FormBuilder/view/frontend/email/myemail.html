@@ -1,0 +1,31 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!--@subject {{trans "Response From Customer"}} @-->
+<!--@styles
+  #respones {border-collapse: collapse;width: 50%;}
+  #respones td, #respones th {border: 1px solid #ddd;padding: 8px;}
+  #respones tr:nth-child(even){background-color: #f2f2f2;}
+  #respones tr:hover {background-color: #ddd;}
+  #respones th {padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #4CAF50;color: white;}
+@-->
+<!--@vars {
+"var data|raw":"Default"
+} @-->
+
+
+
+{{template config_path="design/email/header_template"}}
+
+  <h3>{{trans "Response From Customer"}}</h3>
+  {{var data|raw}}
+
+{{template config_path="design/email/footer_template"}}

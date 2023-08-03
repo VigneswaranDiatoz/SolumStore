@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpGDPR
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_MpGDPR::css/cookienotice.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+                <block class="Webkul\MpGDPR\Block\CookieBlockContainer" name="mpgdpr.notice" template="Webkul_MpGDPR::cookie_block.phtml" />
+        </referenceContainer>
+        <referenceContainer name="layout2_seller_account_before_review">
+            <block class="Webkul\Marketplace\Block\Account\Navigation" name="layout2_mpgdpr_account_navigation" after="massupload_seller_link_layout2" template="Webkul_MpGDPR::seller/layout2_nav.phtml"  ifconfig="mpgdpr/settings/active" >
+				<arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslAcl\ViewModel\VendorAcl</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

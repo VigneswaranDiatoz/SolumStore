@@ -1,0 +1,34 @@
+<?php
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$language = $viewModel->getSwitcherBlockObject();
+$languageViewModel = $viewModel->getSwitcherViewModel();
+
+// Become Seller Section in Footer Head
+$bS_Permission = $helper->getModuleConfig('solumesl_theme/footer_header/becomeseller');
+$bS_Text = $helper->getModuleConfig('solumesl_theme/footer_header/becomeseller_text');
+$bS_ButtonText = $helper->getModuleConfig('solumesl_theme/footer_header/becomeseller_btn_text');
+$bS_ButtonUrl = $helper->getModuleConfig('solumesl_theme/footer_header/becomeseller_url');
+$bS_ButtonTarget = $helper->getModuleConfig('solumesl_theme/footer_header/becomeseller_url_target');
+$bS_Icon = $viewModel->getBecomeSellerIcon();
+$bs_ActualIcon = $helper->getModuleConfig('solumesl_theme/footer_header/becomeseller_icon');
+?>
+<div class="footer-header-wrapper">    
+    <div class="footer-header">
+        <div class="left-panel">    
+            <?php if($bS_Permission):?>        
+            <div class="seller-box">
+                <div class="sellerbox-img" style="--becomeseller-icon: <?php if($bs_ActualIcon){ echo 'url('.$block->escapeUrl($bS_Icon).')'; }else{ echo'none';}?>"></div>
+                <p class="text"><?= $block->escapeHtml($bS_Text); ?></p>
+                <a href="<?= $block->escapeUrl($block->getUrl("$bS_ButtonUrl")); ?>" <?php if($bS_ButtonTarget){?> target="_blank" <?php } ?>>
+                    <button type="button" class="primary"><?= $block->escapeHtml($bS_ButtonText); ?></button>
+                </a>
+            </div>
+            <?php endif; ?>
+        </div>        
+        <div class="right-panel">
+          <?= $this->getLayout()->createBlock("Webkul\SolumeslSocialLinks\Block\Widget\SocialLinks")->setSeparatorAfterSelect('1')->setAlignmentSelect("right")->toHtml(); ?>               
+        </div>    
+    </div>
+</div>
+

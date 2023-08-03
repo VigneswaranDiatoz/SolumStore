@@ -1,0 +1,37 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpMassUpload
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$helper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+$isPartner= $helper->isSeller();
+$magentoCurrentUrl = $block->getCurrentUrl();
+$allow_pro_type=$helper->getAllowedProductType();
+$isSellerGroup = $helper->isSellerGroupModuleInstalled();
+$viewModel = $block->getViewModel();
+if ($isPartner && $viewModel->checkPermission("Webkul_MpMassUpload::menu") > -1) :?>
+
+    <?php if (($isSellerGroup && ($helper->isAllowedAction('mpmassupload/product/view') ||
+            $helper->isAllowedAction('mpmassupload/product/export') ||
+            $helper->isAllowedAction('mpmassupload/dataflow/profile'))) ||
+            !$isSellerGroup) { ?>
+        <?php
+        if (strpos($magentoCurrentUrl, 'mpmassupload/product/view') === false) {
+            $currentClass = "";
+        } else {
+            $currentClass = "current active";
+        } ?>
+        <li class="wk-mp-item-massupload level-0 <?= $block->escapeHtml($currentClass)?>" id="wk-mp-menu-massupload">
+            <a href="<?= $block->escapeHtml($block
+            ->getUrl('mpmassupload/product/view', ['_secure' => $block->getRequest()->isSecure()]));?>"  class="<?= $currentClass?>">
+                <span><?= $block->escapeHtml(__('Mass Upload'))?></span>
+            </a>
+        </li>
+    <?php } ?>
+<?php endif; ?>

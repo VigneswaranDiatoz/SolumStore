@@ -1,0 +1,423 @@
+@color-black: #000000;
+@color-faded: #6f6e73;
+@color-fadeblue: #eef1f5;
+@color-fadedarkblue: #00203fcf;
+@logo-height: 60px;
+
+// Primary Colors //
+
+@color-darkblue: #00203f;
+@color-dark: #2e2e2e;
+@color-hover: #eef1f5;
+@color-base: #f2f2f2;
+@color-seperator: #dedede;
+@color-background: #fafafa;
+
+// // Text Color //
+
+@color-darkfade: #6f6e73;
+@color-white: #ffffff;
+@color-link: #0053af;
+
+// Status Indicator //
+@color-error: #ea053c;
+@color-success: #30ae04;
+@color-warning: #ffb61a;
+
+// Message
+@color-m-error: rgba(234, 5, 60, 0.102);
+@color-m-text-error: #ea053c;
+@color-m-success: rgba(48, 174, 4, 0.102);
+@color-m-text-success: #2e2e2e;
+@color-m-warning: rgba(255, 182, 26, 0.102);
+@color-m-text-warning: #ff881a;
+
+// Label //
+@color-label-white: #efefef;
+@color-lable-black: #2e2e2e;
+@color-label-red: #d63b0a;
+
+// Icons
+@icon-cart: "\e903";
+@icon-down: "\e905";
+@icon-search: "\e927";
+@icon-next: "\e907";
+@link__color: @color-link;
+@icon-grid: "\e920";
+@icon-list: "\e920";
+@icon-arrow-down: "\e905";
+@icon-arrow-up: "\e909";
+@icon-checkmark: "";
+
+/* override parent styles(variables etc.) here... */
+@copyright__background-color: @color-darkblue;
+//  Fonts
+@icons__font-path: "@{baseDir}fonts/solumn";
+@icons__font-name: "solum-icon";
+
+// Mixin
+.lib-font-face(@family-name: "solum-icon",
+    @font-path: "@{baseDir}fonts/Luma-Icons/Luma-Icons",
+    @font-weight: normal,
+    @font-style: normal);
+
+.fieldsInputCartForm() {
+  background: @color-white;
+  border: 1px solid #797979;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 38px !important;
+}
+
+.notDisplayDom() {
+  display: none !important;
+}
+
+.colorTextHeadingMixin() {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+}
+
+.commonProperties() {
+  position: unset !important;
+  margin: unset !important;
+}
+
+.solumeslIconsDisplay() {
+  color: @color-text;
+  font-family: "solum-icon";
+  font-size: 20px;
+}
+
+.smallButtonTextMixin() {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.headingOneTitle() {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 74px;
+  color: #2e2e2e;
+}
+
+.textAddressDisplayMixin() {
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  line-height: 26px !important;
+  color: #2e2e2e !important;
+}
+
+.textNormalDisplayMixin() {
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: #303030;
+}
+
+input[type="radio"] {
+  height: unset !important;
+  accent-color: black !important;
+}
+
+input[type="checkbox"] {
+  accent-color: #2e2e2e !important;
+}
+
+.headingLabelMixin() {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.displayInlineBlockMixin() {
+  width: 49%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.paddingShippingInformationSummaryMixin() {
+  padding: 22px 30px;
+  border-top: 1px solid #dedede;
+}
+
+.collapsibleIconDisplayMixin() {
+  content: "\e905" !important;
+  font-size: 30px !important;
+  font-family: "solum-icon";
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
+.discountCodeCouponInputMixin() {
+  background: #ffffff;
+  background-clip: padding-box;
+  border: 1px solid #00203f !important;
+  border-right: none !important;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: unset !important;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.discountCouponApplyButtonMixin() {
+  background: @color-white !important;
+  border: 1px solid @color-text !important;
+  color: @color-text !important;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+// mixin end
+//marketplace grid mixins
+.gridBackgroudColor() {
+  background-color: #ffffff !important;
+  border-top: 1px solid #d6d6d6 !important;
+  border-bottom: 1px solid #d6d6d6 !important;
+}
+
+.buttonDropDownDisplayGridHeader() {
+  background: #ffff none repeat scroll 0 0 !important;
+  color: #333 !important;
+}
+
+.lightenColorMixin() {
+  & > .wk-mp-submenu {
+    background: lighten(#f2f2f2, 1%) !important;
+  }
+}
+
+.sliderIconFunctionConfig() {
+  background-repeat: no-repeat !important;
+  padding: 0px 17px 0px 4px;
+  z-index: 800;
+  position: relative;
+  bottom: 60px;
+}
+
+.buttonBackgroundTextColor() {
+  background: #00203f !important;
+  color: #ffffff !important;
+}
+
+.headingContentProductPage() {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  color: #000000;
+}
+
+.marketplaceProductPageButtonDisplay(@color, @colortext) {
+  background: @color;
+  border-radius: 100px !important;
+
+  span {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: @colortext;
+  }
+
+  &:hover {
+    background: @color !important;
+  }
+
+  &:focus {
+    background: @color !important;
+  }
+}
+
+.imageDesignContent() {
+  &.gallery {
+    border: unset !important;
+    background: unset !important;
+  }
+
+  .image {
+    background: #f2f2f2 !important;
+    border-radius: 4px;
+
+    &.image-placeholder {
+      &:before {
+        content: "\e910" !important;
+        font-family: "solum-icon";
+        transform: rotateY(0deg) rotate(45deg);
+        z-index: 1;
+        color: #00203f;
+        font-size: 500%;
+      }
+    }
+  }
+
+  .image-placeholder-text {
+    display: none;
+  }
+}
+
+.mainContainerPaddingMargin() {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.containerHeadingSection() {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    color: #00203f;
+
+    a {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      color: @color-link !important;
+    }
+  }
+}
+
+.containerListingTable() {
+  table {
+    tr {
+      &:first-child {
+        > td {
+          border-top: unset !important;
+        }
+
+        > th {
+          border-bottom: 1px solid #d1d1d1;
+        }
+      }
+
+      th {
+        padding: 20px;
+      }
+
+      td {
+        padding: 20px;
+      }
+    }
+  }
+}
+
+.containerListingOverflowDisplay() {
+  border: 1px solid #dedede;
+  border-radius: 8px;
+  margin-top: 10px;
+  width: 100%;
+  overflow: auto;
+}
+
+.fieldsdesign() {
+  background: #ffffff;
+  border: 1px solid #797979;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.displayPageTitleWrapper() {
+  display: unset !important;
+}
+
+.useBorderPaddingFromDiv() {
+  border: none;
+  padding: unset;
+}
+
+.wrapperHeaderButtonsForOrders() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .order-status {
+    color: #00203f;
+    border-radius: 2px;
+    border: 1px solid #00203f;
+    margin-top: unset !important;
+  }
+
+  .status-holder-class {
+    padding-right: 20px !important;
+    margin-right: 20px !important;
+    border-right: 1px solid;
+  }
+
+  .order-date {
+    width: 50%;
+    margin-bottom: 40px;
+    h3.page-title-visible {
+      font-size: 25px;
+    }
+  }
+
+  a {
+    &.wk-mp-btn {
+      span {
+        vertical-align: -webkit-baseline-middle;
+        vertical-align: -moz-middle-with-baseline;
+      }
+    }
+  }
+}
+
+//////////////////////////////////Custom Mixins///////////////////////////////////////
+
+.fontSizeWeight(@fontSize: 15px,@fontWeight:400,@lineHeight:19px) {
+  font-size: @fontSize;
+  font-weight: @fontWeight;
+  // font-family: "Open Sans";
+  line-height: @lineHeight;
+}
+
+.padding(@padTop:0px,@padBottom:0px,@padLeft:0px,@padRight:0px) {
+  padding-top: @padTop;
+  padding-bottom: @padBottom;
+  padding-left: @padLeft;
+  padding-right: @padRight;
+}
+
+.margin(@marTop:0px,@marBottom:0px,@marLeft:0px,@marRight:0px) {
+  margin-top: @marTop;
+  margin-bottom: @marBottom;
+  margin-left: @marLeft;
+  margin-right: @marRight;
+}
+// .min-search-length .modal-popup .modal-inner-wrap{
+//   width:40%;
+// }
+.mce-widget button {
+  background: none !important;
+  border: none !important;
+}
+.searchBox-clearWrapper {
+  display: table-cell;
+  vertical-align: middle;
+  position: absolute;
+  top: 25%;
+  left: 95%;
+}
+.searchBox-clear {
+  color: #ccc;
+  padding: 0;
+  cursor: pointer;
+  font-size: inherit;
+  cursor: pointer;
+  line-height: 1.5;
+  -webkit-transition: all 3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.searchBox-clearInput:hover {
+  color: #aaa;
+}

@@ -1,0 +1,79 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+// phpcs:disable Generic.Files.LineLength.TooLong
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+$persistentBlock = $block->getLayout()->createBlock(\Magento\Persistent\Block\Form\Remember::class)
+?>
+<div class="block block-customer-login">
+    <div class="field social-signup">
+    <?= $block->getChildHtml('rfq_login_form_additional_info') ?>
+    </div>
+    <div class="block-content" aria-labelledby="block-customer-login-heading">
+        <form class="form form-login"
+              action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+              method="post"
+              id="login-form"
+              data-mage-init='{"validation":{}}'>
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset class="fieldset login" data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>">
+                <div class="field email required">
+                    <div class="control">
+                        <input name="username" value="<?= $block->escapeHtmlAttr($block->getUsername()) ?>"
+                            <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?>
+                               id="email" type="email" class="input-text"
+                                placeholder=" " 
+                               title="<?= $block->escapeHtmlAttr(__('Email')) ?>"
+                               data-mage-init='{"mage/trim-input":{}}'
+                               data-validate="{required:true, 'validate-email':true}">
+                        <span class="wk-material-label"><?= $block->escapeHtml(__('Email')) ?></span>
+                    </div>
+                </div>
+                <div class="field password required">
+                    <div class="control">
+                        <input name="password" type="password"
+                            <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?>
+                               class="input-text" id="pass"
+                                placeholder=" " 
+                               title="<?= $block->escapeHtmlAttr(__('Password')) ?>"
+                               data-validate="{required:true}">
+                        <span class="wk-material-label"><?= $block->escapeHtml(__('Password')) ?></span>
+                    </div>
+                </div>
+                <?= $block->getChildHtml('rfq_login_form_additional_info_after') ?>
+                <div class="wk-error-box">
+                    <span class="err-msg"></span>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="wk-additional-login-section">
+                        <div id="remember-me-box" class="wk-action choice persistent">
+                            <?php $rememberMeId = 'remember_me' . $persistentBlock->getRandomString(10); ?>
+                            <input type="checkbox" name="persistent_remember_me" class="checkbox" id="<?= $block->escapeHtmlAttr($rememberMeId) ?>" <?php if ($persistentBlock->isRememberMeChecked()): ?> checked="checked" <?php endif; ?> value="1" title="<?= $block->escapeHtmlAttr(__('Remember Me')) ?>" />
+                            <label for="<?= $block->escapeHtmlAttr($rememberMeId) ?>" class="label"><span><?= $block->escapeHtml(__('Remember Me')) ?></span></label>
+                        </div>
+                        <div class="wk-action secondary"><a class="action remind" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"><span><?= $block->escapeHtml(__('Forgot Your Password?')) ?></span></a></div>
+                    </div>
+                    <div class="wk-action primary">
+                        <button type="submit" class="action login primary" name="send" id="send2"><span><?= $block->escapeHtml(__('Continue')) ?></span></button>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="sign-up-actions-toolbar" style="display:none">
+                <span><?= $block->escapeHtml(__("New to Solum?"))?></span>
+                <a class="signup-btn"><?= $block->escapeHtml(__("Sign Up"))?></a>
+            </div>
+            <div class="sign-in-actions-toolbar">
+                <span><?= $block->escapeHtml(__("Already registered?"))?></span>
+                <a class="signin-btn"><?= $block->escapeHtml(__("Sign in"))?></a>
+            </div>
+        </form>
+    </div>
+</div>

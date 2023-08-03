@@ -1,0 +1,125 @@
+<!--
+/**
+ * @category   Webkul
+ * @package    Webkul_FormBuilder
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */ 
+-->
+<?php
+    $helper = $block->getHelper();
+?>
+<div class="wk_socialsignup_rfq_container">
+    <!-- Social Login Links -->
+    <div id="fb-root"></div><div class="fixblocksocial">
+        <?php if (!$helper->customerSession()):?>
+        <!-- Facebook login -->
+            <?php if ((int)$helper->getFbStatus() == 1) { ?>
+
+        <div  id="fblogin" class="fblogin wksocialsignup fb_button_ps">
+            <div class="img-container">
+                <img src="<?= $escaper->escapeUrl($helper->getLoginImg())?>" 
+                alt="<?= $escaper->escapeHtml(__('Facebook'))?>" 
+                title="<?= $escaper->escapeHtml(__('Continue with Facebook'))?>"/>
+            </div>
+            <div class="title"><?= $escaper->escapeHtml(__('Continue with Facebook'))?></div>
+        </div>
+        <?php } ?>
+        <!-- End Facebook login -->
+
+        <!-- twitter login -->
+            <?php if ((int)$helper->getTwitterStatus() == 1) { ?>
+        <div  id="twitterlogin" class="twitterlogin wksocialsignup">
+            <div class="img-container">
+                <img src="<?= $escaper->escapeUrl($helper->getTwitterLoginImg())?>"
+                alt="<?= $escaper->escapeHtml(__('Twitter'))?>" 
+                title="<?= $escaper->escapeHtml(__('Continue with Twitter'))?>" />
+            </div>
+            <div class="title"><?= $escaper->escapeHtml(__('Continue with Twitter'))?></div>
+        </div>
+        <?php } ?>
+        <!-- ENd twitter login -->
+        <!-- google login -->
+            <?php if ((int)$helper->getGoogleStatus() == 1) { ?>
+        <div id="googlelogin" class="googlelogin wksocialsignup">
+            <div class="img-container">
+            <img src="<?= $escaper->escapeUrl($helper->getGoogleLoginImg())?>" 
+            alt="<?= $escaper->escapeHtml(__('Google')) ?>" 
+            title="<?= $escaper->escapeHtml(__('Continue with Google')) ?>">
+            </div>
+            <div class="title"><?= $escaper->escapeHtml(__('Continue with Google'))?></div>
+        </div>
+        <?php } ?>
+        <!-- ENd google login -->
+
+        <!-- Linkedin login -->
+            <?php if ((int)$helper->getLinkedInStatus() == 1) { ?>
+        <div  id="linkedinlogin" class="linkedinlogin wksocialsignup">
+            <img src="<?= $escaper->escapeUrl($helper->getLinkedinLoginImg())?>" 
+            alt="<?= $escaper->escapeHtml(__('Linkedin'))?>" 
+            title="<?= $escaper->escapeHtml(__('Continue with Linkedin'))?>" />
+            </div>
+            <div class="title"><?= $escaper->escapeHtml(__('Continue with Google'))?></div>
+        </div>
+        <?php } ?>
+        <!-- ENd Linkedin login -->
+        <!-- Instagram login -->
+            <?php if ((int)$helper->getInstaStatus() == 1) { ?>
+                <div  id="instagramlogin" class="instagramlogin wksocialsignup">
+        <div  id="linkedinlogin" class="linkedinlogin wksocialsignup">
+                    <img src="<?= $escaper->escapeUrl($helper->getInstaLoginImg())?>" 
+                    alt="<?= $escaper->escapeHtml(__('Instagram'))?>" 
+                    title="<?= $escaper->escapeHtml(__('Continue with Instagram'))?>" />
+            </div>
+            <div class="title"><?= $escaper->escapeHtml(__('Continue with Instagram'))?></div>
+                </div>
+        <?php } ?>
+        <!-- End Instagram login -->
+
+
+        <?php endif?>
+    </div>
+    <!-- End Social Login Links -->
+    <?php
+    if ($helper->getFbStatus() == 1 || $helper->getTwitterStatus() == 1 ||
+        $helper->getGoogleStatus() == 1 || $helper->getLinkedInStatus() == 1 ||
+        $helper->getInstaStatus() == 1) { ?>
+            <input type="hidden" name="is_social" value="0" />
+    <div class="wk_social_choice">
+        <h3>
+            <?= $escaper->escapeHtml(__("OR")) ?>
+        </h3>
+    </div>
+    <?php }
+    ?>
+</div>
+
+<?php
+$data = [
+    "fbAppId"=>$block->getAppId(),
+    "uId"=>$block->checkFbUser(),
+    "customerSession" => $block->customerSession(),
+    "localeCode" => $block->getLocaleCode(),
+    "fbLoginUrl" => $block->getUrl('socialsignup/facebook/login')
+];
+$popupData = [
+    "width"=>'700',
+    "height" => '300',
+    "twitterUrl" => $block->getRequestUrl('socialsignup/twitter/request', ['mainw_protocol'=>'http']),
+    "linkedinUrl" => $block->getRequestUrl('socialsignup/linkedin/request', ['mainw_protocol'=>'http']),
+    "googleUrl" => $block->getRequestUrl('socialsignup/google/request', ['mainw_protocol'=>'http']),
+    "instagramUrl" => $block->getRequestUrl('socialsignup/instagram/request', ['mainw_protocol'=>'http'])
+];
+$serializedData = $block->jsonEncode($data);
+$serializedPopupData = $block->jsonEncode($popupData);
+?>
+
+<script type="text/x-magento-init">
+    {
+        "*":{
+            "Webkul_FormBuilder/js/socialsignup/fb-block-plugin":<?= /* @noEscape */ $serializedData; ?>,
+            "popupPlugin":<?= /* @noEscape */ $serializedPopupData; ?>
+        }
+    }
+</script>

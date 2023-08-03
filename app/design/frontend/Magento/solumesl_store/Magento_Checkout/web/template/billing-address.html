@@ -1,0 +1,57 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="checkout-billing-address">
+    <div class="billing-address-same-as-shipping-block field choice" data-bind="visible: canUseShippingAddress()">
+        <input type="checkbox" name="billing-address-same-as-shipping"
+               data-bind="checked: isAddressSameAsShipping, click: useShippingAddress, attr: {id: 'billing-address-same-as-shipping-' + getCode($parent)}"/>
+        <label data-bind="attr: {for: 'billing-address-same-as-shipping-' + getCode($parent)}"><span
+                data-bind="i18n: 'My billing and shipping address are the same'"></span></label>
+    </div>
+    <render args="detailsTemplate"></render>
+    <fieldset class="fieldset" data-bind="visible: !isAddressDetailsVisible()">
+        <each args="getRegion('billing-address-list')" render=""></each>
+        <div data-bind="fadeVisible: isAddressFormVisible">
+            <button type="button" class="action billing-address-button-click" data-trigger="trigger-billing" style="display:none">
+            </button>
+            <div data-bind="mageInit: {
+                'Magento_Ui/js/modal/modal':{
+                    'type': 'popup',
+                    'title': jQuery.mage.__('Add Billing Address'),
+                    'trigger': '[data-trigger=trigger-billing]',
+                    'modalClass' : 'billing-address-form-modal-popup',
+                    'responsive': true,
+                    'buttons': [{
+                        text: jQuery.mage.__('Cancel'),
+                        class: 'billing-cancel-action action secondary action-hide-popup',
+                        click: function () {
+                            var $ = jQuery;
+                            $('.billing-form-action-buttons .action-cancel').trigger('click');
+                            this.closeModal();
+                        }
+                    }, {
+                        text: jQuery.mage.__('Add Address'),
+                        class: 'billing-update-action action primary-btn rounded action-save-address',
+                        click: function () {
+                            var $ = jQuery;
+                            $('.billing-form-action-buttons .action-update').trigger('click');
+                            this.closeModal();
+                        }
+                    }]
+                }}">
+                <div class="modal-content-billing">
+                    <render args="formTemplate"></render>
+                    <div class="billing-form-action-buttons" style="display:none">
+                        <render args="actionsTemplate"></render>
+                    </div>
+                </div>
+            </div>          
+        </div>
+        <!-- ko ifnot: isAddressFormVisible -->
+            <render args="actionsTemplate"></render>
+        <!-- /ko -->
+    </fieldset>
+</div>

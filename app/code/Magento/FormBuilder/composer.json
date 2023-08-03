@@ -1,0 +1,20 @@
+{
+    "name": "webkul/form-builder",
+    "description": "Form Builder For Magento2",
+    "require": {
+        "magento/module-config": "101.2.*"
+    },
+    "type": "magento2-module",
+    "version": "4.0.2",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\FormBuilder\\": ""
+        }
+    }
+}

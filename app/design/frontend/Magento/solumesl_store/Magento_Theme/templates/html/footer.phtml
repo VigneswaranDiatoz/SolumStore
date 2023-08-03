@@ -1,0 +1,102 @@
+<?php 
+    $viewModel = $block->getViewModel();
+    $helper = $viewModel->getHelper();
+
+    $column1Title = $helper->getFooterTitle('column1');
+    $column1Links = $helper->jsonDecode($helper->getFooterLinks('column1'),true);
+
+    $column2Title = $helper->getFooterTitle('column2');
+    $column2Links = $helper->jsonDecode($helper->getFooterLinks('column2'),true);
+
+    $column3Title = $helper->getFooterTitle('column3');
+    $column3Links = $helper->jsonDecode($helper->getFooterLinks('column3'),true);
+
+    $column4Title = $helper->getFooterTitle('column4');
+    $column4Links = $helper->jsonDecode($helper->getFooterLinks('column4'),true);
+
+    $column5Title = $helper->getFooterTitle('column5');
+    $column5Links = $helper->jsonDecode($helper->getFooterLinks('column5'),true);
+?>
+
+<div class="widget block block-static-block">
+    <div id="footer-wrapper" data-content-type="html" data-appearance="default" data-element="main" data-decoded="true">
+        <div class="footer links" data-role="collapsible">
+            <h3 data-role="trigger"><?= __($column1Title);?></h3>
+            <ul data-role="content">
+                <?php if($column1Links):
+                        foreach($column1Links as $links):?>
+                            <li class="nav item">
+                                <a href="<?= $block->escapeUrl($links['link']) ?>" <?php if($links['target']){?> target="_blank" <?php }?>>
+                                    <span><?= $block->escapeHtml($links['label']) ?></span>
+                                </a>
+                            </li>
+                <?php endforeach; endif; ?>                
+            </ul>
+        </div>
+        <div class="footer links" data-role="collapsible">
+            <h3 data-role="trigger"><?= __($column2Title);?></h3>
+            <ul data-role="content">
+                <?php if($column2Links):
+                        foreach($column2Links as $links):?>
+                            <li class="nav item">
+                                <a href="<?= $block->escapeUrl($links['link']) ?>" <?php if($links['target']){?> target="_blank" <?php }?>>
+                                    <span><?= $block->escapeHtml($links['label']) ?></span>
+                                </a>
+                            </li>
+                <?php endforeach; endif; ?>                
+            </ul>
+        </div>
+        <div class="footer links" data-role="collapsible">
+            <h3 data-role="trigger"><?= __($column3Title);?></h3>
+            <ul data-role="content">
+                <?php if($column3Links):
+                        foreach($column3Links as $links):?>
+                            <li class="nav item">
+                                <a href="<?= $block->escapeUrl($links['link']) ?>" <?php if($links['target']){?> target="_blank" <?php }?>>
+                                    <span><?= $block->escapeHtml($links['label']) ?></span>
+                                </a>
+                            </li>
+                <?php endforeach; endif; ?>                
+            </ul>
+        </div>
+        <div class="footer links" data-role="collapsible">
+            <h3 data-role="trigger"><?= __($column4Title);?></h3>
+            <ul data-role="content">
+                <?php if($column4Links):
+                        foreach($column4Links as $links):?>
+                            <li class="nav item">
+                                <a href="<?= $block->escapeUrl($links['link']) ?>" <?php if($links['target']){?> target="_blank" <?php }?>>
+                                    <span><?= $block->escapeHtml($links['label']) ?></span>
+                                </a>
+                            </li>
+                <?php endforeach; endif; ?>                
+            </ul>
+        </div>
+        <div class="footer links" data-role="collapsible">
+            <h3 data-role="trigger"><?= __($column5Title);?></h3>
+            <ul data-role="content">
+                <?php if($column5Links):
+                        foreach($column5Links as $links):?>
+                            <li class="nav item">
+                                <a href="<?= $block->escapeUrl($links['link']) ?>" <?php if($links['target']){?> target="_blank" <?php }?>>
+                                    <span><?= $block->escapeHtml($links['label']) ?></span>
+                                </a>
+                            </li>
+                <?php endforeach; endif; ?>                
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" xml="space">
+    require([
+        'jquery',
+        'accordion'
+    ], function ($) {
+        $("#footer-wrapper").accordion({
+            "openedState": "active",
+            "collapsible": true,
+            "active": false,
+            "multipleCollapsible": false
+        });
+    });
+</script>

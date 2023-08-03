@@ -1,0 +1,99 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpRecurringPayment
+ * @author    Webkul Software Private Limited
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$currentSetId = $block->getRequest()->getParam('set');
+
+$viewModel = $block->getleadtoquoteViewModel();
+$helper = $viewModel->getHelperObject();
+$subscriptionSetId = $helper->getSubscriptionSetId();
+
+$product_id = $block->getRequest()->getParam('id');
+$product = $block->getProductCollection($product_id);
+if (!$currentSetId) {
+    $currentSetId = $product->getAttributeSetId();
+}
+$mpHelper = $block->getMpHelper();
+$blockData = $block->getPlansData();
+$storeId = 0;
+$currencySymbol = $block->getCurrencySymbol();
+?>
+<style>
+    button#planButton{
+        float: unset !important;
+        position: absolute;
+        right: 0;
+        top: 0px;
+    }
+</style>
+<?php if($currentSetId == $subscriptionSetId):?>
+<div class="wk-mp-product-container">
+    <br>    
+    <i class="container-hide-show close">
+        <label class="label"><?= /* @noEscape */ __('Subscription Configurations') ?></label>
+    </i>
+    <hr>
+    <div class="wk-mp-new-prod-fields _hide">
+        <input type="hidden" name="subscriptionData" value=''/>
+        <div class="field required">
+            <label class="label"><?= $block->escapeHtml(__('Subscription')) ?>:</label>
+            <div class="control">
+                <select id="" class="select" name="product[subscription]">
+                    <option value="1" <?php if ($product['subscription'] == 1) {echo "selected='selected'";}?>>
+                    <?= $block->escapeHtml(__("Yes")); ?></option>
+                    <option value="0" <?php if ($product['subscription'] == 0) {echo "selected='selected'";}?> >
+                    <?= $block->escapeHtml(__("No")); ?></option>
+                </select>
+            </div>
+        </div>
+        <script>
+            window.plansData  = <?= /* @noEscape */  \Zend_Json::encode($blockData); ?>;
+            window.storeId    = <?= /* @noEscape */  $storeId?>;
+            window.currencySymbol = "<?= /* @noEscape*/ $currencySymbol ?>";
+        </script>
+        <button type="button" id="planButton" class="primary-btn rounded" style="display: none;">
+            <span>
+                <?php
+                if ($product['subscription'] == "") {
+                    echo $block->escapeHtml(__("Create Configuration"));
+                } else {
+                    echo $block->escapeHtml(__("Edit Configuration"));
+                } ?>
+            </span>
+        </button>
+        <div id="plans_tabs_plans_content" style="display: none;"
+            data-ui-id="adminhtml-plans-edit-tabs-0-tab-content-plan"
+            aria-labelledby="plans_tabs_plans"
+            class="ui-tabs-panel ui-widget-content ui-corner-bottom"
+            role="tabpanel" aria-expanded="true" aria-hidden="false">
+            <div class="entry-edit form-inline">
+                        
+                    <div id="planlist-component" data-bind="scope:'planlist-content'" class="field">
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+                    </div>
+            </div>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "#planlist-component": {
+                    "Magento_Ui/js/core/app": {
+                    "components": {
+                            "planlist-content": {
+                                "component": "Webkul_MpRecurringPayment/js/plan-list",
+                                "template": "Webkul_MpRecurringPayment/plan-list"
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+        <?= /* @noEscape */ $block->getChildHtml('subscription_group_add');?>
+    </div>
+</div>
+<?php endif; ?>

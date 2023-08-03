@@ -1,0 +1,52 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/*New css start here*/
+#wk-form-id input[type="text"],
+#wk-form-id input[type="password"],
+#wk-form-id input[type="url"],
+#wk-form-id input[type="tel"],
+#wk-form-id input[type="search"],
+#wk-form-id input[type="number"],
+#wk-form-id input[type="datetime"],
+#wk-form-id input[type="email"] {
+    width: 50%;
+}
+
+.catalog-product-view .wk-title{
+width: 100%;
+}
+
+.fieldset {
+    width: 100%;
+}
+.input-select{
+    width: 50%;
+}
+.wk-tiny{
+    width: 50%;
+}
+.wk-textarea{
+    width: 50%;
+}
+
+.form{
+    margin:20px
+}
+
+.wk-title{
+    margin-top: 0px;
+    float: left;
+    margin-left: 20px;
+}
+.mage-error-formbuilder{
+    color: #e02b27;
+    font-size: 1.2rem;
+    margin-top: 7px;
+}

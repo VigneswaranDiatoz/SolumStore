@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+   <menu>
+       <add id="Magento_SIPartnerGrid::menu"
+           title="SI Partner" translate="title" module="Magento_SIPartnerGrid"
+           sortOrder="10"
+           resource="Magento_SIPartnerGrid::menu"
+           />
+       <!-- START: new node -->  
+       <add id="Magento_SIPartnerGrid::submenu_mymodule"
+           title="All SI Partners" translate="title" module="Magento_SIPartnerGrid"
+           sortOrder="20" parent="Magento_SIPartnerGrid::menu"
+           action="sipartnergrid/grid/index"
+           resource="Magento_SIPartnerGrid::submenu_mymodule"
+           />
+       <!-- END:   new node -->
+   </menu>
+</config>

@@ -1,0 +1,76 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var Magento\Wishlist\Block\Catalog\Product\ProductList\Item\AddTo\Wishlist $block */
+?>
+<?php 
+$viewModel = $block->getSolumViewModel();
+$WishListData = $viewModel->getWishListProduct($block->getProduct()->getId());
+?>
+    
+<?php if ($block->getWishlistHelper()->isAllow()) : ?>
+    <div id="wishlist_popup"  syle="display:none;" class="wishlist_popup"></div>
+    <a href="#"
+         id="product-addtowishlist-button-<?= $block->getProduct()->getId() ?>"
+       class="action towishlist <?= $WishListData->getSize()? 'present_in_wishlist':'';?>"
+       title="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>"
+       aria-label="<?= $block->escapeHtmlAttr(__('Add to Wish List')) ?>"
+        >
+        <span><?= $block->escapeHtml(__('Add to Wish List')) ?></span>
+    </a>
+    <?php endif; ?>
+<script type="text/javascript">
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ], function($,modal){
+
+        $(document).ready(function(){
+            
+            var options = {
+                title: $.mage.__('Note'),
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: [{
+                    text: $.mage.__('Keep Shoping'),
+                    class: 'primary action submit btn btn-default',
+                    click: function () {
+                        this.closeModal();
+                    }
+                },
+                {
+                    text: $.mage.__('Go To Wishlist'),
+                    class: 'primary action submit btn btn-default',
+                    click: function () {
+                        window.open('<?= $this->getUrl('wishlist/index/index') ?>', '_blank');
+                    }
+                }]
+            };
+
+            $('#product-addtowishlist-button-<?= $block->getProduct()->getId() ?>').click(function(){
+
+                $.ajax({
+
+                    url: '<?= $this->getUrl('solumesltheme/wishlist/addtowishlist') ?>',
+                    data: { productId: <?= $block->getProduct()->getId(); ?>},
+                    beforeSend: function(xhr, options) {
+                        $('body').trigger('processStart');
+                    },
+                    success: function(response){
+                        $('body').trigger('processStop');
+                        if(response.status == 200){
+                            $("#wishlist_popup").html(response.message).modal(options).modal('openModal');
+                        }
+                
+                    }
+                });
+
+                return false;
+            });
+        })
+    })
+</script>

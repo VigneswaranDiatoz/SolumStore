@@ -1,0 +1,36 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$formData = $block->getFormData();
+?>
+<?php $_company = $block->getLayout()->createBlock(\Webkul\FormBuilder\Block\Customer\Widget\Company::class) ?>
+<?php if ($_company->isEnabled()): ?>
+    <?= $_company->setCompany($formData->getCompany())->toHtml() ?>
+<?php endif ?>
+
+<div class="field country">
+    <div class="control">
+        <?= $block->getCountryHtmlSelect() ?>
+        <span class="wk-material-label"><?= __("Country") ?></span>
+    </div>
+</div>
+<?php $_telephone = $block->getLayout()->createBlock(\Webkul\FormBuilder\Block\Customer\Widget\Telephone::class) ?>
+<?php if ($_telephone->isEnabled()): ?>
+    <?= $_telephone->setTelephone($formData->getTelephone())->toHtml() ?>
+<?php endif ?>
+<script type="text/x-magento-init">
+    {
+        ".country": {
+            "Webkul_FormBuilder/js/phone-code": {
+                "phoneCodeUrl": "<?= $block->getUrl("rest/V1/phone-code")?>"
+            }
+        }
+    }
+</script>

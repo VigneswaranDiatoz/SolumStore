@@ -1,0 +1,28 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceProductLabels
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$viewModel = $block->getViewModel();
+
+if ($viewModel->checkPermission("Webkul_MarketplaceProductLabels::seller_label_manage") == 1): ?>
+<div class="wk_mp_heading_container">
+    <span><?=/* @noEscape */ __("Custom Product Label")?></span>
+    <button id="wk-mp-product-label-form-page" class="primary-btn rounded line-height-15" data-link="<?=$block->escapeUrl($block
+    ->getUrl('mplabels/label/newlabel')); ?>"><?=/* @noEscape */ __("Add New Label")?></button>
+</div>
+<script>
+    require(["jquery"],function($){
+        $("#wk-mp-product-label-form-page").on("click", function(){
+            var url = $(this).attr("data-link");
+            window.location.href= url;
+        });
+    })
+</script>
+<?php endif; ?>

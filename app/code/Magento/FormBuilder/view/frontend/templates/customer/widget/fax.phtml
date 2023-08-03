@@ -1,0 +1,32 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/** @var \Webkul\FormBuilder\Block\Customer\Widget\Fax $block */
+?>
+
+<div class="field fax <?= $block->isRequired() ? 'required' : '' ?>">
+    <div class="control">
+            <?php
+            $_validationClass = $block->escapeHtmlAttr(
+                $this->helper(\Magento\Customer\Helper\Address::class)
+                     ->getAttributeValidationClass('fax')
+            );
+            ?>
+        <input type="text"
+               name="fax"
+               id="fax"
+               value="<?= $block->escapeHtmlAttr($block->getFax()) ?>"
+               title="<?= $block->escapeHtmlAttr(__('Fax')) ?>"
+               placeholder="<?= $block->escapeHtmlAttr(__('Fax')) ?>"
+               class="input-text <?= $_validationClass ?: '' ?>"
+        >
+    </div>
+</div>

@@ -1,0 +1,44 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_SellerMessages
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+$helperBlock = $block->getData('currHelper');
+$_helper = $helperBlock->getMarketplaceHelper();
+$isPartner= $_helper->isSeller();
+$magentoCurrentUrl = $block->getCurrentUrl();
+$isSellerGroup = $_helper->isSellerGroupModuleInstalled();
+$viewModelAcl = $block->getViewModelAcl()
+?>
+<!-- <nav data-mage-init='{"Webkul_Marketplace/js/sellerNavigation": {}}' class="wk-mp-menu wk-mp-main">
+    <ul id="wk-mp-nav"> -->
+        <?php
+        if ($isPartner) { ?>
+            <?php if (($isSellerGroup && $_helper->isAllowedAction(
+                'marketplace/message/inquiry'
+            )) || !$isSellerGroup) { 
+            if ($viewModelAcl->checkPermission("Webkul_SellerMessages::manage") > -1) {?>
+                <li class="wk-mp-item-messages level-0 
+                    <?= strpos(
+                        $magentoCurrentUrl,
+                        'marketplace/message'
+                    )? "current active":"";?>" id="wk-mp-menu-dashboard" >
+                    <a href="<?= $escaper->escapeUrl($block->getUrl(
+                        'marketplace/message/inquiry',
+                        ['_secure' => $block->getRequest()->isSecure()]
+                    )); ?>" class="<?= $escaper->escapeHtml(strpos(
+                        $magentoCurrentUrl,
+                        'marketplace/message'
+                    ))? "active":"";?>">
+                        <span><?= $escaper->escapeHtml(__('Seller Communication')) ?></span>
+                    </a>
+                </li>
+            <?php } ?>
+        <?php }} ?>
+    <!-- </ul>
+</nav> -->

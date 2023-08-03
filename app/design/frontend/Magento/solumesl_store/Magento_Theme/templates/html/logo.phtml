@@ -1,0 +1,62 @@
+<?php 
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+$viewModel = $block->getViewModel();
+/**
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+$storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();
+/**
+ * @var \Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolverInterface|null $logoSizeResolver
+ */
+$logoSizeResolver = $block->getLogoSizeResolver();
+$logoWidth = $logoSizeResolver !== null && $logoSizeResolver->getWidth()
+    ? $logoSizeResolver->getWidth()
+    : $block->getLogoWidth();
+$logoHeight = $logoSizeResolver !== null && $logoSizeResolver->getHeight()
+    ? $logoSizeResolver->getHeight()
+    : $block->getLogoHeight();
+?>
+<div class="logo-inmenu-wrapper">
+    <a
+        class="logo"
+        href="<?= $block->escapeUrl($block->getUrl('')) ?>"
+        title="<?= $block->escapeHtmlAttr($storeName) ?>"
+        aria-label="store logo">
+        <img src="<?= $block->escapeUrl($block->getLogoSrc()) ?>"
+            title="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+            alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+                <?= $logoWidth ? 'width="' . $block->escapeHtmlAttr($logoWidth) . '"' : '' ?>
+                <?= $logoHeight ? 'height="' . $block->escapeHtmlAttr($logoHeight) . '"' : '' ?>
+        />
+    </a>
+    <button class="action-close" data-role="closeBtn" type="button" id="nav-close-button">
+        <span>Close</span>
+    </button>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function($){
+        $(document).ready(function(){            
+            $('#nav-close-button').on('click',function(){
+                var html = $('html');
+
+                if (html.hasClass('nav-open')) {
+                    html.removeClass('nav-open');
+                    setTimeout(function () {
+                        html.removeClass('nav-before-open');
+                    }, 300);
+                } else {
+                    html.addClass('nav-before-open');
+                    setTimeout(function () {
+                        html.addClass('nav-open');
+                    }, 42);
+                }
+            });
+        })
+    })
+</script>

@@ -1,0 +1,94 @@
+//
+//  Common (style-m.css)
+
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .wk-ui-component-container {
+            .page-main-actions-sub-account {
+                display        : flex;
+                align-items    : center;
+                justify-content: space-between;
+                padding        : 10px;
+
+                &:not(._hidden) {
+                    background   : unset !important;
+                    border-bottom: 1px solid #e3e3e3;
+                    border-top   : unset !important;
+                    position     : relative;
+                    bottom       : 20px;
+
+                    &._form-heading {
+                        bottom: 50px !important;
+                    }
+                }
+
+                .page-actions {
+                    .page-actions-inner {
+                        .page-actions-buttons {
+                            button {
+                                .marketplaceProductPageButtonDisplay(#00203f, #FFFFFF);
+                                border-color: unset !important;
+
+                                &:hover {
+                                    box-shadow: unset !important;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .page-actions-placeholder {
+                    font-weight: 600;
+                    font-size  : 20px;
+                    line-height: 26px;
+                }
+            }
+        }
+
+        #form-sub-account {
+            .page-main-actions {
+                .page-actions-placeholder {
+                    font-weight: 600;
+                    font-size  : 20px;
+                    line-height: 26px;
+                }
+            }
+
+            #permission_type {
+                // height          : unset !important;
+                border          : 1px solid #797979;
+                // box-sizing      : border-box;
+                border-radius   : 4px;
+                // background-image: unset !important;
+            }
+
+            .sub-account-fields-container {
+                width: 50%;
+
+                .field {
+                    margin:15px 0px;
+                }
+
+                label {
+                    span {
+                        font-weight: 600;
+                        font-size  : 16px;
+                        line-height: 22px;
+                    }
+                }
+
+                .required {
+                    label {
+                        span {
+                            &:after {
+                                content: "*";
+                                color  : red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

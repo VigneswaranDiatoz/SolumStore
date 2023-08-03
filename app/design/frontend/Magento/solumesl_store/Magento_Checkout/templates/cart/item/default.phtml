@@ -1,0 +1,274 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+// phpcs:disable Magento2.Files.LineLength.MaxExceeded
+
+/** @var $block \Magento\Checkout\Block\Cart\Item\Renderer */
+
+$_item = $block->getItem();
+$product = $_item->getProduct();
+$isVisibleProduct = $product->isVisibleInSiteVisibility();
+/** @var \Magento\Msrp\Helper\Data $helper */
+$helper = $this->helper(Magento\Msrp\Helper\Data::class);
+$canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinimalPriceLessMsrp($product);
+?>
+<tbody class="cart item solumesl_cart_items_grid">
+    <tr class="item-info">
+       
+        <td data-th="<?= $block->escapeHtml(__('Item')) ?>" class="col item"> 
+            <?php if ($block->hasProductUrl()) :?>
+                <a href="<?= $block->escapeUrl($block->getProductUrl()) ?>"
+                   title="<?= $block->escapeHtml($block->getProductName()) ?>"
+                   tabindex="-1"
+                   class="product-item-photo">
+            <?php else :?>
+                <span class="product-item-photo">
+            <?php endif;?>
+            <?= $block->getImage($block->getProductForThumbnail(), 'cart_page_product_thumbnail')->toHtml() ?>
+            <?php if ($block->hasProductUrl()) :?>
+                </a>
+            <?php else :?>
+                </span>
+            <?php endif; ?>
+            <div class="product-item-details">
+                <strong class="product-item-name">
+                    <?php if ($block->hasProductUrl()) :?>
+                        <a href="<?= $block->escapeUrl($block->getProductUrl()) ?>"><?= $block->escapeHtml($block->getProductName()) ?></a>
+                    <?php else :?>
+                        <?= $block->escapeHtml($block->getProductName()) ?>
+                    <?php endif; ?>
+                </strong>
+                <?php if ($canApplyMsrp) :?>
+                    <!-- <td class="col msrp" data-th="<= $block->escapeHtml(__('Price')) ?>"> -->
+                        <span class="pricing msrp">
+                            <span class="msrp notice"><?= $block->escapeHtml(__('See price before order confirmation.')) ?></span>
+                            <?php $helpLinkId = 'cart-msrp-help-' . $_item->getId(); ?>
+                            <a href="#" class="action help map"
+                            id="<?= ($block->escapeHtmlAttr($helpLinkId)) ?>"
+                            data-mage-init='{"addToCart":{
+                                                    "helpLinkId": "#<?= $block->escapeJs($block->escapeHtml($helpLinkId)) ?>",
+                                                    "productName": "<?= $block->escapeJs($block->escapeHtml($product->getName())) ?>",
+                                                    "showAddToCart": false
+                                                    }
+                                                }'
+                            >
+                                <span><?= $block->escapeHtml(__("What's this?")) ?></span>
+                            </a>
+                        </span>
+                    <!-- </td> -->
+                <?php else :?>
+                    <div class="container-price"> 
+                     
+                    <span><?= __("Price") ?></span>
+                    <!-- <td class="col price" data-th="<= $block->escapeHtml(__('Price')) ?>"> -->
+                        <?= $block->getUnitPriceHtml($_item) ?>
+                        <span><?= __("each") ?></span>
+
+                    </div>
+                       
+                    <!-- </td> -->
+                <?php endif; ?>
+                <?php if ($_options = $block->getOptionList()) :?>
+                    <dl class="item-options">
+                        <?php foreach ($_options as $_option) :?>
+                            <?php $_formatedOptionValue = $block->getFormatedOptionValue($_option) ?>
+                            <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                            <dd>
+                                <?php if (isset($_formatedOptionValue['full_view'])) :?>
+                                        <?= $block->escapeHtml($_formatedOptionValue['full_view']) ?>
+                                    <?php else :?>
+                                    <?= $block->escapeHtml($_formatedOptionValue['value'], ['span', 'a']) ?>
+                                <?php endif; ?>
+                            </dd>
+                        <?php endforeach; ?>
+                    </dl>
+                <?php endif;?>
+                <?php if ($messages = $block->getMessages()) :?>
+                    <?php foreach ($messages as $message) :?>
+                        <div class= "cart item message <?= $block->escapeHtmlAttr($message['type']) ?>">
+                            <div><?= $block->escapeHtml($message['text']) ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+                <?php if ($addInfoBlock) :?>
+                    <?= $addInfoBlock->setItem($_item)->toHtml() ?>
+                <?php endif;?>
+            </div>
+        </td>
+
+        <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')) ?>">
+            <div class="field qty">
+                <div class="control qty">
+                    <label for="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty" class="solumesl_qty_label">
+                        <span class="label"><?= $block->escapeHtml(__('Qty')) ?></span>
+                        <div class="cart-qty-section">
+                            <?php if(!$_item->getLeadId()):?>
+                                <input id="cart-<?= $block->escapeHtmlAttr($_item->getId()) ?>-qty"
+                                    name="cart[<?= $block->escapeHtmlAttr($_item->getId()) ?>][qty]"
+                                    data-cart-item-id="<?= $block->escapeHtmlAttr($_item->getSku()) ?>"
+                                    value="<?= $block->escapeHtmlAttr($block->getQty()) ?>"
+                                    type="number"
+                                    size="4"
+                                    step="any"
+                                    title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                                    class="input-text qty"
+                                    data-productprice='<?= $_item->getData('base_price') ?>'
+                                    data-validate="{required:true,'validate-greater-than-zero':true}"
+                                    data-role="cart-item-qty"/>                      
+                                <span class="solumesl_qty_buttons_pairs">
+                                    <button type="button" class="solumesl_product_qty_button solumesl_product_qty_inc increaseQty" 
+                                        data-item_id="<?= $block->escapeHtmlAttr($_item->getId()); ?>"></button>
+                                    <button type="button" class="solumesl_product_qty_button solumesl_product_qty_dec decreaseQty" 
+                                        data-item_id="<?= $block->escapeHtmlAttr($_item->getId()); ?>"></button>
+                                </span>
+                            <?php else: ?>
+                                <input type="hidden" name="cart[<?= $block->escapeHtmlAttr($_item->getId()) ?>][qty]" value="<?= $block->escapeHtmlAttr($block->getQty()) ?>"/>
+                                <span class="input-text qty cart-qty"><?= $block->escapeHtmlAttr($block->getQty()) ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </label>
+                </div>
+
+            </div>
+        </td>
+
+        <!-- <td class="col solumesl_delete_column_cart"> -->
+        <td class="col solumesl_delete_column_cart_item">
+            <div class="actions-toolbar">
+                <?= /* @noEscape */ $block->getActions($_item) ?>
+            </div>
+        </td>
+
+        <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
+            <div class="cart_item_subtotal_container">
+                <?php if ($canApplyMsrp) :?>
+                    <span class="cart msrp subtotal">--</span>
+                <?php else :?>
+                    <?= $block->getRowTotalHtml($_item) ?>
+                <?php endif; ?>
+            </div>
+           
+        </td>
+    </tr>
+    <!-- <tr class="item-actions solumesl_cart_items_actions_row">
+        <td colspan="5">
+            <div class="actions-toolbar solum_edit_wishlist_content">
+                <= /* @noEscape */ $block->getActions($_item) ?>
+            </div>
+        </td>
+    </tr> -->
+</tbody>
+<script>
+    require([
+            'jquery',
+            'Magento_Checkout/js/model/quote',
+            'Magento_Catalog/js/price-utils',
+            'uiRegistry'
+            ], function($, quote, priceUtils, uiRegistry){
+                $(document).ready(function(){
+                    // $(".solumesl_delete_column_cart .action.action-edit").remove();
+                    // $(".solumesl_delete_column_cart .action.towishlist.action-towishlist").remove();
+                    // $(".solumesl_delete_column_cart .gift-options-cart-item").remove();
+
+                    $(".solumesl_delete_column_cart_item .action.action-edit").remove();
+                    $(".solumesl_delete_column_cart_item .action.towishlist.action-towishlist").remove();
+                    $(".solumesl_delete_column_cart_item .gift-options-cart-item").remove();
+                    $(".solum_edit_wishlist_content .action.action-delete").remove();
+                    $('.solumesl_product_qty_button').click(function(event){
+                        event.stopPropagation();
+                        event.stopImmediatePropagation();
+                        let qty = $(this).closest(".cart-qty-section").find('.qty');
+                        if($(this).hasClass("increaseQty")){
+                            let new_qty = parseInt(qty.val())+1;
+                            qty.val(new_qty);
+                        }else{
+                            let new_qty = parseInt(qty.val())-1;
+                            if(new_qty>0){
+                                qty.val(new_qty);
+                            }
+                        }
+
+                        // send ajax request to update the quantity in quote
+                        var form = $(this).parents('.form-cart');
+                        var url = form.attr('action');
+                        var formkey = form.find('input[name="form_key"]').val();
+                        var params = {'form_key':formkey,'update_cart_action':'update_qty','ajax':true};                        
+                        form.find('.qty').each((i,e)=>{
+                            if($(e).attr('name')){
+                                params[$(e).attr('name')] = $(e).val();
+                            }
+                        })
+                        var currentProductPrice = qty.attr('data-productprice');
+                        var currentProductQty = qty.val();
+                        var currentProductPrice = priceUtils.formatPrice((currentProductPrice*currentProductQty), quote.getPriceFormat());
+
+                        
+                        $(this).closest('.item-info').find('.cart-price .price').text(currentProductPrice);
+                        var currentQuote = $(this).closest('.cart-container').find('.address-section select[name="country_id"]').attr("data-quoteid")
+                        
+                        // update the quote quantity
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: params,
+                            beforeSend: function() {
+                                $('body').trigger("processStart");
+                            },
+                            success: function (response) {
+                                $('body').trigger("processStop");
+                                location.reload(true);
+                            },
+                            error: function (response) {
+                                $('body').trigger("processStop");
+                                console.log(response);
+                            }
+                        })
+                    });
+
+                    $('.input-text.qty').on("change", function() {
+                        let qty = $(this).closest(".cart-qty-section").find('.qty');
+                        // send ajax request to update the quantity in quote
+                        var form = $(this).parents('.form-cart');
+                        var url = form.attr('action');
+                        var formkey = form.find('input[name="form_key"]').val();
+                        var params = {'form_key':formkey,'update_cart_action':'update_qty','ajax':true};                        
+                        form.find('.qty').each((i,e)=>{
+                            if($(e).attr('name')){
+                                params[$(e).attr('name')] = $(e).val();
+                            }
+                        })
+                        var currentProductPrice = qty.attr('data-productprice');
+                        var currentProductQty = qty.val();
+                        var currentProductPrice = priceUtils.formatPrice((currentProductPrice*currentProductQty), quote.getPriceFormat());
+
+                        
+                        $(this).closest('.item-info').find('.cart-price .price').text(currentProductPrice);
+                        var currentQuote = $(this).closest('.cart-container').find('.address-section select[name="country_id"]').attr("data-quoteid")
+                        
+                        // update the quote quantity
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: params,
+                            beforeSend: function() {
+                                $('body').trigger("processStart");
+                            },
+                            success: function (response) {
+                                $('body').trigger("processStop");
+                                location.reload(true);
+                            },
+                            error: function (response) {
+                                $('body').trigger("processStop");
+                                console.log(response);
+                            }
+                        })
+                    });
+                   
+                })
+            })
+</script>

@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <attribute name="class" value="mp-newtheme-wrapper"/>
+
+        <!-- logo settings -->
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/solum-logo.svg</argument>
+                <argument name="logo_alt" xsi:type="string">Solumesl</argument>
+                <argument name="logo_img_width" xsi:type="number">106</argument> 
+                <argument name="logo_width" xsi:type="number">110</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="header.panel.wrapper" remove="true"/>
+        <referenceContainer name="form.subscribe" remove="true"/>
+        <referenceContainer name="footer_links" remove="true"/>
+        <referenceContainer name="compare-link-wrapper" remove="true"/>                
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" name="theme.themeslider" template="Magento_Theme::slider.phtml" />
+        </referenceContainer>
+        <referenceContainer name="header-wrapper">
+            <container name="header-section-wrapper" label="Right Section Wrapper" as="header-section-wrapper" after="top.search" htmlTag="div" htmlClass="header-rightsection-wrapper">
+            </container>
+        </referenceContainer>
+        <move element="top.search" destination="header-wrapper" after="logo"/>       
+        <move element="minicart" destination="header-section-wrapper" before="-"/>
+        <move element="top.links" destination="header-section-wrapper" after="minicart"/>
+        <move element="rfq.button" destination="header-section-wrapper" after="top.links" />
+        
+        <!-- REFERENCE BLOCK -->
+        <referenceBlock name="top.search">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="header.button">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="copyright">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="footer">
+            <block class="Magento\Framework\View\Element\Template" name="theme.footerheaderlink" template="Magento_Theme::html/footerheader.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="theme.footerlinks" template="Magento_Theme::html/footer.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="catalog.topnav">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+                <argument name="id_modifier" xsi:type="string">nav</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="top.links">
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" cacheable="false" name="my-profile-header-link" before="-">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Profile</argument>
+                    <argument name="path" xsi:type="string">customer/account</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" name="my-product-header-link" after="my-profile-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Products</argument>
+                    <argument name="path" xsi:type="string">customer/product</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" name="order-header-link" after="my-product-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Orders</argument>
+                    <argument name="path" xsi:type="string">sales/order/history</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" name="whishlist-header-link" after="order-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Wishlist</argument>
+                    <argument name="path" xsi:type="string">wishlist</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" name="marketplace-account-switch-link-custom" after="whishlist-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Seller Dashboard</argument>
+                    <argument name="path" xsi:type="string">marketplace/account/dashboard</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" name="rma-requests-header-link" after="marketplace-account-switch-link-custom">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">RMA Requests</argument>
+                    <argument name="path" xsi:type="string">solumeslrma</argument>
+                </arguments>
+            </block>
+            <block class="Webkul\SolumeslStoreTheme\Block\Customer\Link" name="logout-header-link" after="rma-requests-header-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Logout</argument>
+                    <argument name="path" xsi:type="string">customer/account/logout</argument>
+                </arguments>
+            </block>
+            <referenceBlock name="register-link" remove="true" />
+            <referenceBlock name="wish-list-link" remove="true" />
+            <referenceBlock name="my-account-link" remove="true" />
+            <referenceBlock name="marketplace-top-link" remove="true" />
+            <referenceBlock name="marketplace-account-switch-link" remove="true" />
+        </referenceBlock>
+        <referenceBlock name="store.menu">
+            <block class="Magento\Theme\Block\Html\Header\Logo" name="logo.inmenu" before="-" template="Magento_Theme::html/logo.phtml">                
+                <arguments>
+                    <argument name="logoPathResolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoPathResolver</argument>
+                    <argument name="logo_size_resolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolver</argument>
+                    <argument name="logo_file" xsi:type="string">images/solum-logo.svg</argument>
+                    <argument name="logo_alt" xsi:type="string">Solumesl</argument>
+                    <argument name="logo_img_width" xsi:type="number">106</argument> 
+                    <argument name="logo_width" xsi:type="number">110</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="store.menu.before" before="catalog.topnav" template="Magento_Theme::html/before_topmenu.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="store.menu.after" after="catalog.topnav" template="Magento_Theme::html/after_topmenu.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <!-- <referenceBlock name="page.top">
+            
+        </referenceBlock> -->
+        <referenceContainer name="before.body.end">
+            <block name="solum.gototop" template="Magento_Theme::gototop.phtml" />
+        </referenceContainer>
+    </body>
+</page>

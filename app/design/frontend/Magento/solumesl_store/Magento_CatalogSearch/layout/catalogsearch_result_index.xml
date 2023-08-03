@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product_list_toolbar">
+            <arguments>
+                <argument name="solum_view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <referenceBlock name="search.result">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">Webkul_SolumeslStoreTheme::catalogsearch/result.phtml</argument>
+                </action>
+                <arguments>
+                    <argument name="case_study_block" xsi:type="object">Webkul\SolumeslTabs\Block\Widget\Casestudy\Listing</argument>
+                </arguments>
+                <block name="catalog.search.case.studies" class="Webkul\SolumeslTabs\Block\Widget\Casestudy\Listing"/>
+            </referenceBlock>
+            <referenceBlock name="catalogsearch.product.addto.wishlist">
+                <arguments>
+                    <argument name="solum_view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+                </arguments>
+            </referenceBlock> 
+        </referenceContainer>
+        <move element="catalogsearch.leftnav" destination="search.result" before="-"/>
+    </body>
+</page>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Webkul Software.
+ *
+ * @category   Webkul
+ * @package    Webkul_SellerMessages
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */
+ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="layout2_seller_account_before_review">
+            <block class="Webkul\Marketplace\Block\Account\Navigation" name="layout2_sellermessages_account_navigation" after="layout2_solumesl_tabs_navigation" template="Webkul_SellerMessages::seller/layout2_nav.phtml">
+                <arguments>
+                    <argument name="currHelper" xsi:type="object">Webkul\SellerMessages\Helper\Data</argument>
+                    <argument name="view_model_acl" xsi:type="object">Webkul\SolumeslAcl\ViewModel\VendorAcl</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

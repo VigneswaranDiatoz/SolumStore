@@ -1,0 +1,545 @@
+"We can't find products matching the selection.","We can't find products matching the selection."
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Learn More","Learn More"
+"Related Products","Related Products"
+Component,Component
+"We found other products you might like!","We found other products you might like!"
+"Up Sell","Up Sell"
+"More Choices:","More Choices:"
+"Cross Sell","Cross Sell"
+"New Products","New Products"
+"Check items to add to the cart or","Check items to add to the cart or"
+"select all","select all"
+"%1 Search result found for ""%2""","%1 Search result found for ""%2"""
+"More Information","More Information"
+"* Required Fields","* Required Fields"
+"Contact Seller","Contact Seller"
+"Add to Wish List","Add to Wish List"
+"Add to Compare","Add to Compare"
+"Apply Coupon","Apply Coupon"
+"Enter coupon code","Enter coupon code"
+"Apply Code","Apply Code"
+"Cancel Coupon","Cancel Coupon"
+"%1 Items in shopping cart","%1 Items in shopping cart"
+"Shopping Cart Items","Shopping Cart Items"
+"Continue Shopping","Continue Shopping"
+"Clear Shopping Cart","Clear Shopping Cart"
+"Update Shopping Cart","Update Shopping Cart"
+Item,Item
+"See price before order confirmation.","See price before order confirmation."
+"What's this?","What's this?"
+Qty,Qty
+Subtotal,Subtotal
+"Estimate Tax","Estimate Tax"
+"Estimate Shipping and Tax","Estimate Shipping and Tax"
+"Thanks for your order. We sent you the confirmation email along with order details and tracking info.","Thanks for your order. We sent you the confirmation email along with order details and tracking info."
+"Your Order Id is","Your Order Id is"
+" #%1."," #%1."
+"Your order # is: <span>%1</span>.","Your order # is: <span>%1</span>."
+Proceed,Proceed
+"Buy Now","Buy Now"
+"Required Quantity","Required Quantity"
+Change,Change
+"Contact Information","Contact Information"
+Address,Address
+"Street Address: Line %1","Street Address: Line %1"
+"Street Address %1","Street Address %1"
+City,City
+"It's a default billing address.","It's a default billing address."
+"Use as my default billing address","Use as my default billing address"
+"It's a default shipping address.","It's a default shipping address."
+"Use as my default shipping address","Use as my default shipping address"
+"Save Address","Save Address"
+"Go back","Go back"
+Currency,Currency
+"Your order is confirmed!","Your order is confirmed!"
+"Thanks for your order. We sent you the confirmation email along with order and and pick-up confirmation with details.","Thanks for your order. We sent you the confirmation email along with order and and pick-up confirmation with details."
+" %1."," %1."
+item,item
+Previous,Previous
+Remove,Remove
+"Remove This Item","Remove This Item"
+"Shop By","Shop By"
+"Shop by","Shop by"
+"Clear All","Clear All"
+"Ship to Multiple Address","Ship to Multiple Address"
+"Please select a shipping address for applicable items.","Please select a shipping address for applicable items."
+Product,Product
+Quantity,Quantity
+"Deliver to","Deliver to"
+"Send To","Send To"
+"A shipping selection is not applicable.","A shipping selection is not applicable."
+Actions,Actions
+"Remove Item","Remove Item"
+"Remove item","Remove item"
+"Go to Shipping Information","Go to Shipping Information"
+"Proceed to Shipping Information","Proceed to Shipping Information"
+Update,Update
+"Add New Address","Add New Address"
+"Back to Cart","Back to Cart"
+"Billing Information","Billing Information"
+Loading...,Loading...
+"Billing Address","Billing Address"
+"Change Address","Change Address"
+"Payment Method","Payment Method"
+"Go to Review Your Order","Go to Review Your Order"
+"Back to Shipping Information","Back to Shipping Information"
+"Please see","Please see"
+"details below","details below"
+"Shipping Information","Shipping Information"
+of,of
+"Shipping To","Shipping To"
+"Shipping Method","Shipping Method"
+"Incl. Tax","Incl. Tax"
+"Excl. Tax","Excl. Tax"
+"Order Review","Order Review"
+"Product Name","Product Name"
+Edit,Edit
+Price,Price
+"Other items in your order","Other items in your order"
+Items,Items
+"Edit Items","Edit Items"
+"Grand Total:","Grand Total:"
+"Place Order","Place Order"
+"Back to Billing Information","Back to Billing Information"
+"Submitting order information...","Submitting order information..."
+"Select Shipping Address","Select Shipping Address"
+"Address %1 <span>of %2</span>","Address %1 <span>of %2</span>"
+"Sorry, no quotes are available for this order right now.","Sorry, no quotes are available for this order right now."
+"Continue to Billing Information","Continue to Billing Information"
+"Back to Select Addresses","Back to Select Addresses"
+"Write Your Own Review","Write Your Own Review"
+"You're reviewing:","You're reviewing:"
+"Your Rating","Your Rating"
+"%1 %2","%1 %2"
+Nickname,Nickname
+Summary,Summary
+Review,Review
+"Submit Review","Submit Review"
+"Only registered users can write reviews. Please <a href=""%1"">Sign in</a> or <a href=""%2"">create an account</a>","Only registered users can write reviews. Please <a href=""%1"">Sign in</a> or <a href=""%2"">create an account</a>"
+"Customer Reviews","Customer Reviews"
+"Posted on","Posted on"
+Search,Search
+"Search for products and categories.","Search for products and categories."
+Language,Language
+"Start your business with us","Start your business with us"
+"Becomer Seller","Becomer Seller"
+Support,Support
+"Contact Sales","Contact Sales"
+"Move to Wishlist","Move to Wishlist"
+Inquiry,Inquiry
+5,5
+Quote,Quote
+Order,Order
+Ticket,Ticket
+2,2
+RMA,RMA
+Earnings,Earnings
+"Show Report","Show Report"
+To,To
+From,From
+"Recent Inquiry","Recent Inquiry"
+"View All","View All"
+"Recent Inquiry Listing","Recent Inquiry Listing"
+", ",", "
+"No active inquiry!","No active inquiry!"
+--,--
+"Recent Orders","Recent Orders"
+"Recent Order Listing","Recent Order Listing"
+#,#
+ESL,ESL
+"Recent Quotation","Recent Quotation"
+"Recent Quotation Listing","Recent Quotation Listing"
+Subject,Subject
+Type,Type
+"Requested QTY","Requested QTY"
+"Valid Till","Valid Till"
+"No of Stores","No of Stores"
+Customer,Customer
+"Created at","Created at"
+Action,Action
+"Newton Touch Specs Sheet","Newton Touch Specs Sheet"
+10000,10000
+12/11/2021,12/11/2021
+10,10
+"Jone Doe","Jone Doe"
+View,View
+"Recent Support","Recent Support"
+"Recent Support Listing","Recent Support Listing"
+"Customer : ","Customer : "
+"Recent RMA","Recent RMA"
+"Recent RMA Listing","Recent RMA Listing"
+"Qty : ","Qty : "
+Customers,Customers
+Dashboard,Dashboard
+5000,5000
+"Total Lead","Total Lead"
+500,500
+"Total Quote","Total Quote"
+"Total Revenue","Total Revenue"
+"Total Customer","Total Customer"
+Orders,Orders
+Products,Products
+Menu,Menu
+"Add Products","Add Products"
+"My Products List","My Products List"
+"Configurable Attribute","Configurable Attribute"
+Transactions,Transactions
+"Print PDF Header","Print PDF Header"
+"Become Seller","Become Seller"
+"Seller Panel","Seller Panel"
+"My Account","My Account"
+"Account Setting","Account Setting"
+"Buyer Dashboard","Buyer Dashboard"
+Logout,Logout
+"Add New Product","Add New Product"
+Save,Save
+"Save & Duplicate","Save & Duplicate"
+"Attribute Set","Attribute Set"
+"Product Category","Product Category"
+CATEGORIES,CATEGORIES
+SKU,SKU
+"SKU Available","SKU Available"
+"SKU Already Exist","SKU Already Exist"
+"Special Price","Special Price"
+"Special Price From","Special Price From"
+"Special Price To","Special Price To"
+Stock,Stock
+"Tax Class","Tax Class"
+None,None
+"Product Visibility","Product Visibility"
+"Please Select","Please Select"
+"Stock Availability","Stock Availability"
+"In Stock","In Stock"
+"Out of Stock","Out of Stock"
+Weight,Weight
+"Does this have a weight?","Does this have a weight?"
+Yes,Yes
+No,No
+"Allowed Product Qty on Product Purchase for Customer","Allowed Product Qty on Product Purchase for Customer"
+"By default %1 qty will be allowed for customer to add in cart.","By default %1 qty will be allowed for customer to add in cart."
+Content,Content
+"Short Description","Short Description"
+"Product Description","Product Description"
+"Search Engine Optimization","Search Engine Optimization"
+"Url Key","Url Key"
+"Product in Websites","Product in Websites"
+"Meta Title","Meta Title"
+"Meta Keywords","Meta Keywords"
+"Meta Description","Meta Description"
+Warning,Warning
+"Please Complete","Please Complete"
+"Your Profile","Your Profile"
+"Product Type","Product Type"
+Continue,Continue
+Back,Back
+"Cross-Sell Products","Cross-Sell Products"
+"These ""impulse-buy"" products appear next to the 
+    shopping cart as cross-sells to the items already in the shopping cart.","These ""impulse-buy"" products appear next to the 
+    shopping cart as cross-sells to the items already in the shopping cart."
+"Edit Product","Edit Product"
+Status,Status
+Enable,Enable
+Disable,Disable
+"Step 4: Summary","Step 4: Summary"
+"Downloadable Information","Downloadable Information"
+"Is this downloadable Product?","Is this downloadable Product?"
+Configuration,Configuration
+"Buying Flow","Buying Flow"
+"Attribute Label","Attribute Label"
+Image,Image
+Title,Title
+Description,Description
+"Enable MultiSelect","Enable MultiSelect"
+"Browse Files...","Browse Files..."
+"Click here or drag and drop to add images.","Click here or drag and drop to add images."
+"Delete image","Delete image"
+"Configuration Product","Configuration Product"
+Name,Name
+"Upload Image","Upload Image"
+"Upload image","Upload image"
+Select,Select
+"No Image","No Image"
+"Remove Product","Remove Product"
+"Create Product Configurations","Create Product Configurations"
+"Related Products, Up-Sells, and Cross-Sells","Related Products, Up-Sells, and Cross-Sells"
+"Images & Videos","Images & Videos"
+"Please attach images of your business enviroment, label & fixtues for the labels that you’re using.","Please attach images of your business enviroment, label & fixtues for the labels that you’re using."
+"Add Video","Add Video"
+"Add video","Add video"
+"Delete video","Delete video"
+"Make Base","Make Base"
+Hidden,Hidden
+"Alt Text","Alt Text"
+Role,Role
+"Hide from Product Page","Hide from Product Page"
+"Related products are shown to customers in 
+    addition to the item the customer is looking at.","Related products are shown to customers in 
+    addition to the item the customer is looking at."
+"Up-Sell Products","Up-Sell Products"
+"An up-sell item is offered to the customer 
+    as a pricier or higher-quality alternative to the product the customer is looking at.","An up-sell item is offered to the customer 
+    as a pricier or higher-quality alternative to the product the customer is looking at."
+Cancel,Cancel
+Prev,Prev
+Next,Next
+"Transaction Details","Transaction Details"
+"Transaction Information","Transaction Information"
+"Transaction Id","Transaction Id"
+Date,Date
+Amount,Amount
+Method,Method
+Message,Message
+"Transaction Order Information","Transaction Order Information"
+"Order List Per Product","Order List Per Product"
+"Order ID","Order ID"
+QTY,QTY
+"Total Price","Total Price"
+Tax,Tax
+Discount,Discount
+Shipping,Shipping
+Commission,Commission
+"Make Withdrawal","Make Withdrawal"
+"Total Earning","Total Earning"
+"Total Sale","Total Sale"
+"Total Payout","Total Payout"
+Withdrawal,Withdrawal
+Top-Left,Top-Left
+Top-Right,Top-Right
+Bottom-Left,Bottom-Left
+Bottom-Right,Bottom-Right
+"Add New Label","Add New Label"
+"Label Title","Label Title"
+Enabled,Enabled
+Disabled,Disabled
+Position,Position
+"Label Width For Product Page","Label Width For Product Page"
+"Value is calculated in percentage, 
+                            input integer value. For eg: 30","Value is calculated in percentage, 
+                            input integer value. For eg: 30"
+"Label Height For Product Page","Label Height For Product Page"
+"Label Width For Category Page","Label Width For Category Page"
+"Value is calculated in percentage, 
+                                input integer value. For eg: 30","Value is calculated in percentage, 
+                                input integer value. For eg: 30"
+"Label Height For Category Page","Label Height For Category Page"
+"Image should be ","Image should be "
+"Custom Product Label","Custom Product Label"
+"Value is calculated in percentage, 
+                        input integer value. For eg: 30","Value is calculated in percentage, 
+                        input integer value. For eg: 30"
+"Product Label","Product Label"
+"Select Product Label Image","Select Product Label Image"
+"Select Label","Select Label"
+Thumbnail,Thumbnail
+"No Selection","No Selection"
+"Mapping Attributes","Mapping Attributes"
+Website,Website
+Country/State,Country/State
+Add,Add
+Delete,Delete
+Websites,Websites
+"Customer Group","Customer Group"
+"ALL GROUPS","ALL GROUPS"
+"Select Category","Select Category"
+"Select product type","Select product type"
+"Data Request","Data Request"
+"Download PDF","Download PDF"
+"Download HTML","Download HTML"
+"Request Data Update","Request Data Update"
+"Enter description for the updated data.","Enter description for the updated data."
+"Submit Update Request","Submit Update Request"
+"Request Data Delete","Request Data Delete"
+"Delete Reason","Delete Reason"
+"Kindly specify the reason for deleting your data.","Kindly specify the reason for deleting your data."
+"Submit Delete Request","Submit Delete Request"
+"Request List","Request List"
+"Profile Information","Profile Information"
+"Add New Profile","Add New Profile"
+"To Become Seller Please Contact to Admin.","To Become Seller Please Contact to Admin."
+"Dataflow Profile","Dataflow Profile"
+"Save Profile","Save Profile"
+"Profile Name","Profile Name"
+"Select Attribute Set","Select Attribute Set"
+"Edit Profile","Edit Profile"
+"In Database","In Database"
+"Choose an attribute","Choose an attribute"
+"In File","In File"
+"Remove ","Remove "
+"Add Field","Add Field"
+"Export Products","Export Products"
+Export,Export
+"Select Product Type","Select Product Type"
+"Please select","Please select"
+"Export Simple Products","Export Simple Products"
+"Export Configurable Products","Export Configurable Products"
+"Export Virtual Products","Export Virtual Products"
+"Export Downloadable Products","Export Downloadable Products"
+"Select Custom Attributes to export in file","Select Custom Attributes to export in file"
+"Attribute Code","Attribute Code"
+"Mass Upload","Mass Upload"
+"Select Profile","Select Profile"
+"Run Profile","Run Profile"
+"Select Dataflow Profile","Select Dataflow Profile"
+"No matching Profile Found","No matching Profile Found"
+"Upload Link Files zip","Upload Link Files zip"
+"Is Links have samples","Is Links have samples"
+"Is Samples Available","Is Samples Available"
+"Upload Link Sample Files zip","Upload Link Sample Files zip"
+"Upload Sample Files zip","Upload Sample Files zip"
+"Sample Files","Sample Files"
+"Sample Simple Type Csv File","Sample Simple Type Csv File"
+"Sample Downloadable Type Csv File","Sample Downloadable Type Csv File"
+"Sample Configurable Type Csv File","Sample Configurable Type Csv File"
+"Sample Virtual Type Csv File","Sample Virtual Type Csv File"
+"Sample Simple Type XML File","Sample Simple Type XML File"
+"Sample Downloadable Type XML File","Sample Downloadable Type XML File"
+"Sample Configurable Type XML File","Sample Configurable Type XML File"
+"Sample Virtual Type XML File","Sample Virtual Type XML File"
+"Sample Simple Type XLS File","Sample Simple Type XLS File"
+"Sample Downloadable Type XLS File","Sample Downloadable Type XLS File"
+"Sample Configurable Type XLS File","Sample Configurable Type XLS File"
+"Sample Virtual Type XLS File","Sample Virtual Type XLS File"
+"Is Downloadable","Is Downloadable"
+"Upload File","Upload File"
+"CSV / XML / XLS file allowed","CSV / XML / XLS file allowed"
+CSV/XML/XLS,CSV/XML/XLS
+"Upload Images","Upload Images"
+"Upload the associated images","Upload the associated images"
+"Images Zip","Images Zip"
+"Upload Profile","Upload Profile"
+"Configurable Super Attributes","Configurable Super Attributes"
+"Configurable Super Attribute Options","Configurable Super Attribute Options"
+"Attribute Info","Attribute Info"
+"Select Attribute","Select Attribute"
+Options,Options
+"No attribute is selected.","No attribute is selected."
+"CSV column name for custom attribute","CSV column name for custom attribute"
+"Multiselect attribute value example","Multiselect attribute value example"
+"Multiselect attribute options for custom attribute","Multiselect attribute options for custom attribute"
+"Tier price attribute value example","Tier price attribute value example"
+"Tier Price options for custom attribute","Tier Price options for custom attribute"
+"Customer Groups","Customer Groups"
+"GROUP NAME","GROUP NAME"
+"GROUP CODE","GROUP CODE"
+"All Groups","All Groups"
+all,all
+"WEBSITE NAME","WEBSITE NAME"
+"WEBSITE CODE","WEBSITE CODE"
+"All Websites","All Websites"
+"Product 360","Product 360"
+"View Status","View Status"
+Preview,Preview
+"Seller Communication","Seller Communication"
+"New Sub Account","New Sub Account"
+"Save Sub Account","Save Sub Account"
+"Create Account","Create Account"
+"Date Of Birth","Date Of Birth"
+"Address Information","Address Information"
+"Please select a region, state or province.","Please select a region, state or province."
+Email,Email
+"Allowed Permissions","Allowed Permissions"
+"Admin didn't select any
+                    permission to seller sub account","Admin didn't select any
+                    permission to seller sub account"
+Active,Active
+"Manage Sub Accounts","Manage Sub Accounts"
+"Manage Sub Account","Manage Sub Account"
+"Add New Sub Account","Add New Sub Account"
+"Create New Sub-account","Create New Sub-account"
+Materials,Materials
+Tutorials,Tutorials
+FAQs,FAQs
+"Select Billing Address","Select Billing Address"
+"Enter your billing address to get a tax estimate.","Enter your billing address to get a tax estimate."
+"Enter your destination to get a shipping estimate.","Enter your destination to get a shipping estimate."
+"My Cart","My Cart"
+Close,Close
+"Items in Cart","Items in Cart"
+"Item in Cart","Item in Cart"
+"View & Edit Cart","View & Edit Cart"
+"You have no items in your shopping cart.","You have no items in your shopping cart."
+"Recently added item(s)","Recently added item(s)"
+"Proceed to Checkout","Proceed to Checkout"
+"See Details","See Details"
+"Options Details","Options Details"
+"Edit item","Edit item"
+"Cart Subtotal","Cart Subtotal"
+"Payment Information","Payment Information"
+"No Payment method available.","No Payment method available."
+"Shipment Address:","Shipment Address:"
+edit,edit
+"Shipment Method:","Shipment Method:"
+"Shipping Address","Shipping Address"
+"Shipping Methods","Shipping Methods"
+"Sorry, no quotes are available for this order at this time","Sorry, no quotes are available for this order at this time"
+"Order Summary","Order Summary"
+"View Details","View Details"
+"Shipment Address","Shipment Address"
+"Shipment Method","Shipment Method"
+"Enter discount code","Enter discount code"
+CANCEL,CANCEL
+"Apply Discount","Apply Discount"
+"per page","per page"
+"Previous Page","Previous Page"
+"Next Page","Next Page"
+"+ New Address","+ New Address"
+"The shipping method is missing. Select the shipping method and try again.","The shipping method is missing. Select the shipping method and try again."
+"Please specify a regionId in shipping address.","Please specify a regionId in shipping address."
+"Add Selected Products","Add Selected Products"
+"New Product Review","New Product Review"
+"Here are the products you're about to create.","Here are the products you're about to create."
+"Associated Products","Associated Products"
+"You created these products for this configuration.","You created these products for this configuration."
+"Disassociated Products","Disassociated Products"
+"These products are not associated.","These products are not associated."
+"Disable Product","Disable Product"
+"Enable Product","Enable Product"
+"We could not detect a size.","We could not detect a size."
+"We don't recognize or support this file extension type.","We don't recognize or support this file extension type."
+" Are you sure you want to edit selected dataflow profile? "," Are you sure you want to edit selected dataflow profile? "
+" No Checkbox is checked "," No Checkbox is checked "
+" Are you sure you want to delete selected dataflow profile(s)? "," Are you sure you want to delete selected dataflow profile(s)? "
+" Are you sure you want to delete selected dataflow profile? "," Are you sure you want to delete selected dataflow profile? "
+"We don't support this file extension type or file size execceds 2MB","We don't support this file extension type or file size execceds 2MB"
+"Go Today","Go Today"
+Specification,Specification
+Overview,Overview
+Reviews,Reviews
+"Add Shipping Address","Add Shipping Address"
+"Add Address","Add Address"
+"Search Terms","Search Terms"
+"My Profile","My Profile"
+customer/account,customer/account
+"My Products","My Products"
+customer/product,customer/product
+sales/order/history,sales/order/history
+Wishlist,Wishlist
+wishlist,wishlist
+"Seller Dashboard","Seller Dashboard"
+marketplace/account/dashboard,marketplace/account/dashboard
+"RMA Requests","RMA Requests"
+solumeslrma,solumeslrma
+customer/account/logout,customer/account/logout
+Marketplace,Marketplace
+"Marketplace Add New Product","Marketplace Add New Product"
+"Marketplace Edit Product","Marketplace Edit Product"
+Interval,Interval
+"Total Amount","Total Amount"
+"Total Discount Amount","Total Discount Amount"
+"Admin Commission","Admin Commission"
+"Purchased On","Purchased On"
+"Transaction Amount","Transaction Amount"
+"Product Label List","Product Label List"
+"Add New Product Label","Add New Product Label"
+"Do you want to delete selected Product Label?","Do you want to delete selected Product Label?"
+"Mass Upload Dataflow Profile","Mass Upload Dataflow Profile"
+"Marketplace Mass Upload","Marketplace Mass Upload"
+"Profile Upload","Profile Upload"
+"Profile Listing","Profile Listing"
+"Update Sub-account","Update Sub-account"
+"Create New","Create New"
+"Manage Sub-Accounts","Manage Sub-Accounts"
+"No Of Orders","No Of Orders"

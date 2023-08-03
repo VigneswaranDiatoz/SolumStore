@@ -1,0 +1,69 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+/** @var \Webkul\FormBuilder\Block\Customer\Widget\Dob $block */
+
+/*
+<?= $block->getLayout()->createBlock('Webkul\FormBuilder\Block\Customer\Widget\Dob')
+   ->setDate($block->getCustomer()->getDob())
+   ->toHtml() ?>
+
+For checkout/onepage/billing.phtml:
+
+<?= $block->getLayout()->createBlock('Webkul\FormBuilder\Block\Customer\Widget\Dob')
+   ->setDate($block->getCustomer()->getDob())
+   ->setFieldIdFormat('billing:%s')
+   ->setFieldNameFormat('billing[%s]')
+   ->toHtml() ?>
+
+NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css. Alternatively we could calculate widths
+automatically using block input parameters.
+*/
+
+$translatedCalendarConfigJson = $block->getTranslatedCalendarConfigJson();
+$fieldCssClass = 'field date field-' . $block->getHtmlId();
+$fieldCssClass .= $block->isRequired() ? ' required' : '';
+?>
+<div class="<?= $block->escapeHtmlAttr($fieldCssClass) ?>">
+    <div class="control customer-dob">
+        <?= $block->getFieldHtml() ?>
+        <?php if ($_message = $block->getAdditionalDescription()): ?>
+            <div class="note"><?= $block->escapeHtml($_message) ?></div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+       "*": {
+           "Magento_Customer/js/validation": {}
+       }
+    }
+</script>
+
+<?php $scriptString = <<<code
+
+require([
+    'jquery',
+    'jquery-ui-modules/datepicker'
+], function($){
+
+//<![CDATA[
+    $.extend(true, $, {
+        calendarConfig: {$translatedCalendarConfigJson}
+    });
+//]]>
+
+});
+code;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

@@ -1,0 +1,502 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .action-select {
+            &.admin__action-multiselect {
+                background-image     : url(../fonts/Vector.svg);
+                background-repeat    : no-repeat !important;
+                background-position-x: 98% !important;
+                background-position-y: 15px !important;
+                border-radius        : 4px;
+                &:after{
+                    content : unset;
+                }                
+            }
+        }
+
+        .wk-mp-new-prod-fields {
+            &._show {
+                max-height: 100%;
+                transform : none;
+                visibility: visible;
+
+                &.description {
+                    width : 50%;
+                    margin: auto;
+                }
+            }
+
+            &._hide {
+                max-height      : 0;
+                transform       : scaleY(0);
+                transform-origin: 0 0;
+                transition      : transform 100ms ease-in-out,
+                    max-height 100ms ease-in-out, visibility 100ms ease-in-out;
+                visibility: hidden;
+
+                &.description {
+                    width : 50%;
+                    margin: auto;
+                }
+            }
+        }
+
+        .wk-mp-page-wrapper {
+            position: relative;
+
+            #form-customer-product-new {
+                .wk-mp-design {
+                    .wk-mp-new-product-fieldset {
+                        width: 50%;
+
+                        .wk-mp-new-product-legend {
+                            position     : absolute;
+                            top          : 20px;
+                            width        : 40% !important;
+                            border-bottom: unset !important;
+
+                            span {
+                                .headingContentProductPage();
+                            }
+                        }
+                    }
+
+                    .wk-mp-btn {
+                        float: unset !important;
+                        .marketplaceProductPageButtonDisplay(#00203f, #ffffff);
+                    }
+                }
+            }
+
+            .wk-mp-new-product-fieldset {
+                .wk_mapping-fieldset {
+                    .action-select {
+                        &.admin__action-multiselect {
+                            height    : 38px !important;
+                            background: #FFFFFF;
+                            border    : 1px solid #797979 !important;
+                            box-sizing: border-box;
+                        }
+                    }
+
+                    .action-select-wrap {
+                        .action-select:before {
+                            display: none;
+                        }
+
+                        .action-select:after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            #edit-product {
+                #wk-bodymain {
+                    .wk-mp-fieldset {
+                        width: 100% !important;
+
+                        .action-select {
+                            &.admin__action-multiselect {
+                                height    : 38px !important;
+                                background: #FFFFFF;
+                                border    : 1px solid #797979 !important;
+                                box-sizing: border-box;
+                            }
+                        }
+
+                        .action-select-wrap {
+                            .action-select:before {
+                                display: none;
+                            }
+
+                            .action-select:after {
+                                display: none;
+                            }
+                        }
+
+                        .wk-mp-page-title {
+                            span {
+                                .headingContentProductPage();
+                            }
+
+                            .wk-mp-btn {
+                                .marketplaceProductPageButtonDisplay(#00203f, #ffffff);
+                                // padding:9px 30px;
+
+                                &#wk-mp-save-duplicate-btn {
+                                    .marketplaceProductPageButtonDisplay(#ffffff, #00203f);
+                                    // border: 2px solid #00203f;
+                                    // margin-right:15px;
+                                }
+                            }
+                        }
+
+                        .wk-mp-product-container {
+                            .field {
+                                width        : 50%;
+                                display      : block !important;
+                                margin-bottom: 20px;
+
+                                label {
+                                    font-weight   : 600;
+                                    font-size     : 16px;
+                                    line-height   : 22px;
+                                    vertical-align: middle;
+                                    color:#2e2e2e;
+                                }
+
+                                .control {
+                                    font-weight: 600;
+                                    font-size  : 16px;
+                                    line-height: 22px;
+                                }
+
+                                [data-role="weight-switcher"] {
+                                    .control {
+                                        &:not(:first-child){
+                                            margin-bottom: 10px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .required {
+                                .label {
+                                    &:first-of-type {
+                                        &:after {
+                                            content: "*";
+                                            color  : red;
+                                        }
+                                    }
+                                }
+                            }
+
+                            label {
+                                font-weight: 600;
+                                font-size  : 20px;
+                                line-height: 26px;
+                                margin-right: 5px;
+                            }
+
+                            textarea {
+                                border       : 1px solid #797979 !important;
+                                box-sizing   : border-box !important;
+                                border-radius: 4px !important;
+                                width        : 99%;
+                                background   : #fafafa
+                            }
+
+                            input[type="radio"] {
+                                vertical-align: middle;
+                            }
+
+                            .description {
+                                button {
+                                    color: #2e2e2e !important;
+
+                                    &:hover {
+                                        background-color: unset !important;
+                                    }
+                                }
+
+                                div.required {
+                                    margin-top: 25px;
+                                }
+                            }
+
+                            .wk-mp-new-prod-fields._show{
+                                .downloadable-field{
+                                    .field{
+                                        width: 100%;
+                                    }
+
+                                    .fieldset-wrapper-content{
+                                        padding: unset;
+                                    }
+
+                                    .field-control-group{
+                                        .field.field-option{
+                                            margin-bottom: 5px; 
+                                            input[type="radio"]{
+                                                    zoom: 1.3;
+                                            } 
+                                        }
+                                    }
+
+                                    .field.field-wide{
+                                        .field-note{
+                                            margin: 15px 0px;
+                                        }
+                                    }
+
+                                    .control-table-wrapper {
+
+                                        .control-table {
+                                            td {
+                                                border: 1px solid #ddd;
+                                                padding: 8px;
+                                                background-color: #efefef;
+                                            }
+                                            th {
+                                                border: 1px solid #ddd;
+                                                padding: 12px;
+                                                text-align: left;
+                                                background-color: #efefef;
+                                                color: #000000;
+                                                font-weight: 600;
+                                            }
+                                            tr {
+                                                &:nth-child(even) {
+                                                    background-color: #f2f2f2;
+                                                }
+                                                &:hover {
+                                                    background-color: #ddd;
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+
+                        .product-create-configuration-action {
+                            button {
+                                .marketplaceProductPageButtonDisplay(#ffffff, #00203f);
+                                border: 2px solid #00203f;
+                            }
+                        }
+
+                        #media_gallery_content {
+                            .imageDesignContent();
+                        }
+
+                        #wk_media_gallery_content {
+                            .imageDesignContent();
+                        }
+
+                        .draggable-handle {
+                            &:before {
+                                content: "" !important;
+                            }
+
+                            width      : 8px;
+                            height     : 14px;
+                            line-height: 14px;
+                            background : url(../fonts/draggable-handle-vertical.png) no-repeat 0 0;
+                            cursor     : ns-resize;
+                            color      : #b2b0ad;
+                        }
+                    }
+                }
+            }
+
+            .container-hide-show {
+                font-style: initial;
+                display   : block;
+                cursor    : pointer;
+                label {
+                    cursor: pointer;
+                }
+
+                &.open {
+                    &:before {
+                        font-family  : "solum-icon";
+                        content      : "\e942";
+                        float        : right;
+                        font-size    : 20px;
+                        padding-right: 10px;
+                        color        : #6F6E73;
+                    }
+                }
+
+                &.close {
+                    &:before {
+                        font-family  : "solum-icon";
+                        content      : "\e905";
+                        float        : right;
+                        font-size    : 20px;
+                        padding-right: 10px;
+                        color        : #6F6E73;
+                    }
+                }
+
+                clear: both;
+            }
+
+            .wk-mp-new-prod-fields {
+                position: relative;
+
+                // &._show {
+                //     max-height: 100%;
+                //     transform : none;
+                //     visibility: visible;
+
+                //     &.description {
+                //         width : 50%;
+                //         margin: auto;
+                //     }
+                // }
+
+                // &._hide {
+                //     max-height      : 0;
+                //     transform       : scaleY(0);
+                //     transform-origin: 0 0;
+                //     transition      : transform 100ms ease-in-out,
+                //         max-height 100ms ease-in-out, visibility 100ms ease-in-out;
+                //     visibility: hidden;
+
+                //     &.description {
+                //         width : 50%;
+                //         margin: auto;
+                //     }
+                // }
+
+                #super_config {
+                    #product-variations-matrix {
+                        .field {
+                            width: 100% !important;
+                        }
+
+                        .action-select-wrap {
+                            .action-select {
+                                padding   : 10px !important;
+                                background: #00203F !important;
+                                border    : 1px solid #00203f !important;
+                                color     : #ffffff !important;
+                                text-align: center !important;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .wk-mp-extra-product-display-supplier-prod-form {
+                .marketplaceProductPageButtonDisplay(#ffffff, #00203f);
+                border  : 2px solid #00203f;
+                position: absolute;
+                right   : 20px;
+            }
+
+            #related-product-block {
+                margin-bottom: 50px;
+            }
+
+            #upsell-product-block {
+                margin-bottom: 50px;
+            }
+
+            #crosssell-product-block {
+                margin-bottom: 50px;
+            }
+        }
+    }
+
+    .configurable-product-modal.modal-slide {
+        .action-close {
+            position: relative;
+            float   : right;
+        }
+
+        .steps-wizard .solum-nav {
+            list-style: none;
+
+            li {
+                display     : inline;
+                margin-right: 10px;
+                color:#2e2e2e !important;
+                a{
+                    color:#2e2e2e !important;
+                }
+            }
+        }
+
+        .steps-wizard-navigation .solum-nav li.active,
+        .steps-wizard-navigation .solum-nav li.active a {
+            color: #0053AF !important;
+        }
+
+        .active .li-number {
+            background: #0053AF;
+            color     : #fff;
+        }
+
+        .li-number {
+            background   : #F2F2F2;
+            border-radius: 27px;
+            padding      : 2px 6px;
+            font-weight  : 700;
+            font-size    : 12px;
+            line-height  : 16px;
+        }
+
+        .steps-wizard .steps-wizard-navigation {
+            background   : none !important;
+            border-bottom: 1px solid #e3e3e3;
+            border-top   : 1px solid #e3e3e3;
+            margin       : 0 0 2rem;
+            padding      : 1.5rem;
+            position     : relative;
+        }
+
+        .steps-wizard .solum-nav {
+            padding: 0;
+            display: inline-block;
+        }
+
+        .nav-bar-outer-actions {
+            display: flex;
+        }
+
+        .steps-wizard .nav-bar-outer-actions .action-wrap {
+            float: unset;
+        }
+
+        .steps-wizard .attribute-entity {
+            max-width: 90%;
+        }
+
+        .admin__collapsible-block-wrapper {
+            border-bottom: none;
+        }
+
+        .data-grid {
+            max-width: 90%;
+        }
+
+        .fieldset-wrapper-title {
+            display: none;
+        }
+    }
+}
+
+//
+//  Desktop (style-l.css)
+//  _____________________________________________
+@media only screen and (max-width: 710px) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-extra-product-display-supplier-prod-form {
+            position: unset !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .page-layout-seller-2columns-left {
+        .wk-image360-preview {
+            position: unset !important;
+        }
+    }
+}

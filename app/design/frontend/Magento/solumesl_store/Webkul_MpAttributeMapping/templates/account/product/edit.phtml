@@ -1,0 +1,476 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpAttributeMapping
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+
+/** @var $block \Webkul\MpAttributeMapping\Block\Product\Create */
+$helper = $block->getMpHelper();
+$attributeIdArray=[];
+$isPartner = $block->isSeller();
+$currency_symbol = $helper->getCurrencySymbol();
+$data=["itemsData"=>[]];
+if ($isPartner == 1) {
+    $productId=$block->getRequest()->getParam('id');
+    $product = $block->getProductCollection($productId);
+    $mappingId = $block->getEditProductMappingId($productId);
+    if (!empty($mappingId)) {
+        $attributeSetId = $block->getAttributeSetFromMapping($mappingId);
+    }
+    if (empty($attributeSetId)) {
+        $attributeSetId = $block->getDefaultConfigAttributeSet();
+        $mappingId = $block->getMappingIdFromAttributeSet($attributeSetId);
+    }
+   
+    if ($block->checkAllowedAttributes($attributeSetId)) {
+        $attributeSetId = $block->getDefaultConfigAttributeSet();
+        $mappingId = $block->getMappingIdFromAttributeSet($attributeSetId);
+    }
+    $productType = $product->getTypeId();
+    if ($block->validateEditMapping($attributeSetId, $mappingId)) {
+        return;
+    }
+    $attributeIds = $block->getMappedAttributes($mappingId);
+    foreach ($attributeIds as $attributeId) {
+        array_push($attributeIdArray, $attributeId->getAttributeId());
+    }
+    if (!empty($attributeIdArray)) {
+        ?>
+    <div class="wk-mp-product-container">
+        <br>        
+        <i class="container-hide-show close">
+            <label class="label"><?= $escaper->escapeHtml(__('Mapping Attributes')) ?></label>
+        </i>
+        <hr>
+        <div class="wk-mp-new-prod-fields _hide">
+        <?php  foreach ($attributeIdArray as $attributeInfo) {
+             $attributeId = $block->getCatalogResourceEavAttribute($attributeInfo);
+            if ($attributeId->getFrontendInput()  == 'media_image') {
+                continue;
+            }
+            $attributeCode = $attributeId->getAttributeCode();
+            ?>
+            <?php
+                $defaultvalues = $attributeId->getDefaultValue();
+            if ($attributeId->getIsUserDefined()  == 1) {
+                $isRequired = '';
+                if ($attributeId->getIsRequired()) {
+                    $isRequired = 'required-entry';
+                }
+                ?>
+                <div class="field <?php if ($attributeId->getIsRequired()) { echo 'required'; } ?>">
+                    <label class="label" for="<?= $block->escapeHtml($attributeId->getAttributeCode())?>">
+                        <?= $block->escapeHtml($attributeId->getFrontendLabel()) ; ?>
+                    </label>
+                
+                    <div class="control">
+                        <?php if ($attributeId->getFrontendInput() == 'weee') { ?>
+                            <?php
+                                    $data = ['fptAttribute' => [
+                                        'region' => $block->getJsonHelper()->jsonDecode(
+                                            $block->getDirectoryHelper()->getRegionJson()
+                                        ),
+                                        'itemsData' =>($product[$attributeCode]=='') ?
+                                        [] : $product[$attributeCode],
+                                        'bundlePriceType' => '#price_type',
+                                    ]];
+                                    ?>
+                                <table class="data-table wkFpt">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-website" <?php if (!$block->isMultiWebsites()): ?>
+                                    style="display: none"<?php endif; ?>><?= $escaper->escapeHtml(__('Website')) ?></th>
+                                            <th class="col-country required">
+                                            <?= $escaper->escapeHtml(__('Country/State')) ?></th>
+                                            <th class="col-tax required"><?= $escaper->escapeHtml(__('Tax')) ?></th>
+                                            <th class="col-action"><?= $escaper->escapeHtml(__('Action')) ?></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="4" class="col-actions-add">
+                                            <button  data-role= 'add-fpt-item' 
+                                            class = "add-fpt-item" type ="button">
+                                            <?= /* @noEscape */ __('Add')?></button></td>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody data-role="fpt-item-container" class="fpt-item-container">
+                                    </tbody>
+                                </table>
+                                
+                                <script id="tax-row-template" type="text/x-magento-template">
+                                    <?php
+                                        $elementName = "product[$attributeCode]";
+                                        $elementClass = "product[$attributeCode]";
+                                    ?>
+                                    <tr id="<?= /* @noEscape */ "product[$attributeCode]"?>
+                                    _weee_tax_row_<%- data.index %>" data-role="fpt-item-row">
+                                    
+                                    <td class="col-website" <?php if (!$block->isMultiWebsites()): ?>
+                                    style="display: none"<?php endif; ?>>
+                                            <select id="<?= /* @noEscape */
+                                            $elementName ?>_weee_tax_row_<%- data.index %>_website"
+                                            name="<?= /* @noEscape */ $elementName ?>[<%- data.index %>][website_id]"
+                                                    class="<?= /* @noEscape */ $elementClass ?> website required-entry" 
+                                                    data-role="select-website">
+                                                <?php foreach ($block->getWebsites() as $_websiteId => $_info): ?>
+                                                <option value="<?= /* @noEscape */ $_websiteId ?>">
+                                                    <?= $escaper->escapeHtml($_info['name']) ?>
+                                                    <?php if (!empty($_info['currency'])): ?>
+                                                    [<?= /* @noEscape */ $_info['currency'] ?>]
+                                                <?php endif; ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </td>
+                                        <td class="col-country">
+                                            <select id="<?= /* @noEscape */
+                                            $elementName ?>_weee_tax_row_<%- data.index %>_country"
+                                            name="<?= /* @noEscape */ $elementName ?>[<%- data.index %>][country]"
+                                                    class="<?= /* @noEscape */ $elementClass ?> country 
+                                                    select-country required-entry" data-role="select-country">
+                                                <?php foreach ($block->getCountries() as $_country): ?>
+                                                <option value="<?= $escaper->escapeHtmlAttr($_country['value']) ?>">
+                                                    <?= $escaper->escapeHtml($_country['label']) ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <select id="<?= /* @noEscape */
+                                            $elementName ?>_weee_tax_row_<%- data.index %>_state"
+                                                    name="<?= /* @noEscape */ $elementName ?>[<%- data.index %>][state]"
+                                                    class="<?= /* @noEscape */ $elementClass ?> state" 
+                                                    disabled="" data-role="select-state">
+                                                <option value="0">*</option>
+                                            </select>
+                                        </td>
+                                        <td class="col-tax">
+                                            <input name="<?= /* @noEscape */ $elementName ?>[<%- data.index %>][price]"
+                                                class="<?= /* @noEscape */ $elementClass ?> 
+                                                required-entry validate-greater-than-zero"
+                                                type="text" value="<%- data.value %>"/>
+                                        </td>
+                                        <td class="col-action">
+                                        <input name="<?= /* @noEscape */ $elementName ?>[<%- data.index %>][delete]" 
+                                        class="delete" type="hidden"
+                                        value="" 
+                                        id="delete-fpt-item"
+                                        data-role="delete-fpt-item"/>
+                                            <button class="delete-fpt-item-row" 
+                                            data-role = "delete-fpt-item-row" 
+                                            type="button">
+                                            <?= /* @noEscape */ __('Delete')?></button>
+                                        </td>
+                                    </tr>
+                                </script>
+                        <?php } ?>
+                        <?php if ($attributeId->getFrontendInput() == 'text') {  ?>
+                                <?php  $attributeCodeValue = $product[$attributeCode] == '' ? $defaultvalues :
+                                $product[$attributeCode]; ?>
+                            <input class="<?= $block->escapeHtml($isRequired.' '.$attributeId->getFrontendClass()); ?> 
+                            input-text"
+                            type="text" name="<?= /* @noEscape */ "product[$attributeCode]";?>" 
+                            value="<?= $block->escapeHtml($attributeCodeValue) ?>"  />
+                        <?php } ?>
+                        <?php if ($attributeId->getFrontendInput() == 'price') {
+                                $product[$attributeCode] = $product[$attributeCode] == '' ?
+                                $defaultvalues:$product[$attributeCode];
+                            ?>
+                                <input class="<?php /* @noEscape */if ($attributeId->getIsRequired()) {
+                                    echo 'required-entry'; } ?> input-text 
+                                <?=/* @noEscape */ $attributeId->getFrontendClass(); ?>" type="number" 
+                                name="<?= /* @noEscape */ "product[$attributeCode]";?>" value="<?= /* @noEscape */
+                                    $block->mappingCurrencyUpdate($product[$attributeCode], false, false);
+                                ?>" />
+                        <?php } ?>
+                        <?php if ($attributeId->getFrontendInput() == 'textarea') { ?>
+                        <textarea class="<?= $block->escapeHtml($isRequired.' '.$attributeId->getFrontendClass()); ?> 
+                            input-text" rows="5"  id="<?= /* @noEscape */ $attributeCode ?>"  name="<?= /* @noEscape */
+                                "product[$attributeCode]";?>" > <?= /* @noEscape */$product[$attributeCode]=='' ?
+                            $defaultvalues:$product[$attributeCode]; ?> </textarea>
+                            <?php if ($helper->isWysiwygEnabled() && $attributeId->getIsWysiwygEnabled() ==1): ?>
+                                        <script>
+                                            require([
+                                            "jquery", 
+                                            "mage/translate", 
+                                            "mage/adminhtml/events", 
+                                            "mage/adminhtml/wysiwyg/tiny_mce/setup"
+                                            ], function(jQuery){
+                                                wysiwygcompany_description = new wysiwygSetup(
+                                                    "<?= /* @noEscape */ $attributeCode ?>", {
+                                                    "width":"99%",  // defined width of editor
+                                                    "height":"200px", // height of editor
+                                                    "plugins":[{"name":"image"}], // for image
+                                            "tinymce4":{"toolbar":"formatselect | bold italic underline | alignleft "+
+                                            "aligncenter alignright | bullist numlist | link table charmap",
+                                            "plugins":"advlist autolink lists image link charmap media noneditable"+
+                                            " table contextmenu paste code help table",
+                                            },
+                                            files_browser_window_url: "<?= /* @noEscape */$block->getWysiwygUrl();?>"
+                                                });
+                                                wysiwygcompany_description.setup("exact");
+                                            });
+                                        </script>
+                                    <?php endif; ?>
+
+                        <?php } ?>
+                        <?php if ($attributeId->getFrontendInput() == 'datetime') {
+                            $product[$attributeCode] = $product[$attributeCode] == ''
+                            ? $defaultvalues:$product[$attributeCode];
+                            ?>
+                            <input  class="<?= /* @noEscape */
+                            $block->escapeHtml($isRequired.' '.$attributeId->getFrontendClass()); ?> 
+                            input-text wk-mapping-datetime datetimetype" type="text"
+                            name="<?= /* @noEscape */ "product[$attributeCode]";?>"
+                            value="<?= /* @noEscape */$block->getFormattedDate($product[$attributeCode]); ?>" />
+                            <?php } ?>
+                        <?php if ($attributeId->getFrontendInput() == 'date') {
+                                $product[$attributeCode] = $product[$attributeCode] == ''
+                                ? $defaultvalues:$product[$attributeCode];
+                                $setDate = '';
+                            ?>
+                                <input id="<?= $block->escapeHtml($attributeCode); ?>" 
+                                class="<?= $block->escapeHtml($isRequired.' '.$attributeId->getFrontendClass()); ?> 
+                                input-text wk-mapping-date datetype" type="text" name="<?= /* @noEscape */
+                                "product[$attributeCode]";?>"
+                                value="<?= /* @noEscape */$block->formatDate($product[$attributeCode]); ?>" />
+                            <?php  } ?>
+                        
+                        <?php if ($attributeId->getFrontendInput() == 'select' ||
+                            $attributeId->getFrontendInput()=='multiselect' ||
+                            $attributeId->getFrontendInput()=='boolean') {
+                                $fix="";
+                                $multiselect="";
+                        if ($attributeId->getFrontendInput() == 'multiselect') {
+                                                    $fix = "[]";
+                                                    $multiselect = "multiple=multiple";
+                        } ?>
+                            <select class="<?php /* @noEscape */ if ($attributeId->getIsRequired()) {
+                                    echo 'required-entry'; } ?> input-text" name="<?= /* @noEscape */
+                                "product[$attributeCode]".$fix;?>" 
+                                <?= $block->escapeHtml($multiselect);?>>
+                                <?php
+                                $attributeOptions = $attributeId->getSource()->getAllOptions();
+                                foreach ($attributeOptions as $each) {
+                                    $values = explode(',', $product[$attributeCode]);
+                                    if ($values[0] === 0) {
+                                        $values = explode(',', $defaultvalues);
+                                    }
+                                    $selected = "";
+                                    if (in_array($each["value"], $values)) {
+                                        $selected = "selected='selected'";
+                                    } ?>
+                                <option <?= $block->escapeHtml($selected); ?> 
+                                value="<?= $block->escapeHtml($each["value"]); ?>">
+                                    <?= $block->escapeHtml($each["label"]); ?>
+                                </option>
+                                    <?php
+                                } ?>
+                                </select>
+
+                        <?php } ?>
+                    </div>
+                </div>
+                <?php
+            } else {
+                if ($productType != 'configurable') {
+                    if ($attributeId->getAttributeCode() =='tier_price') {
+                        $tierCount = count($product['tier_price']);
+                        ?>
+                    <div class="field tierprice">
+                        <?php $attributeLabel = $attributeId->getFrontendLabel(); ?>
+                        <?php if ($attributeId->getStoreLabel() != '') { ?>
+                            <?php $attributeLabel = $attributeId->getStoreLabel(); ?>
+                        <?php } ?>
+                        <label class="label"><?= /* @noEscape */ $attributeLabel; ?>:</label>
+                        <div class="wk_mp_option-box">
+                            <table id="tiers_table">
+                                <thead>
+                                    <tr class="wk_mp_headcus ul_first headings">
+                                        <th><span><?= $escaper->escapeHtml(__('Websites')) ?></span></th>
+                                        <th><span><?= $escaper->escapeHtml(__('Customer Group')) ?></span></th>
+                                        <th><span><?= $escaper->escapeHtml(__('Qty')) ?></span></th>
+                                        <th><span><?= $escaper->escapeHtml(__('Price')) ?>
+                                            <b>
+                                                <?= $escaper->escapeHtml('('.$currency_symbol.')') ?>
+                                            </b>
+                                            </span>
+                                        </th>
+                                        <th><span><?= $escaper->escapeHtml(__('Action')) ?></span></th>
+                                        <th><span>
+                                                <button class="button addtierprice" 
+                                                        title="<?= $escaper->escapeHtml(__('Add')) ?>" 
+                                                        type="button">
+                                                        <span><span><?= $escaper->escapeHtml(__('Add')) ?></span></span>
+                                                </button>
+                                            </span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <?php if (count($product['tier_price']) > 0): ?>
+                                    <?php $index = 0; ?>
+                                    <?php foreach ($product['tier_price'] as $value): ?>
+                                        <tbody class="wk_mp_headcus wk-mp-body">
+                                            <tr>
+                                                <td>
+                                        <select name="product[tier_price][<?= /* @noEscape */ $index ?>][website_id]" >
+                                                    <?php $websites = $block->getWebsites(); ?>
+                                                    <?php foreach ($websites as $id => $website) {
+                                                        $webLabel = $website['name'].'('.$website['currency'].')';
+                                                        ?>
+                                        <option <?= /* @noEscape */ ($value['website_id'] == $id) ?'selected' : ''; ?>
+                                                        value="<?= /* @noEscape */ $id; ?>">
+                                                        <?= /* @noEscape */ $webLabel; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                        <select name="product[tier_price][<?= /* @noEscape */ $index ?>][cust_group]">
+                                                        <option value="32000"> 
+                                                        <?= $escaper->escapeHtml(__('ALL GROUPS')) ?></option>
+                                                        <?php $customer_group = $block->getCustomerGroupCollection(); ?>
+                                                        <?php foreach ($customer_group as $group) { ?>
+                                                            <option <?= /* @noEscape */
+                                                            ($value['cust_group'] == $group->getCustomerGroupId()) ?
+                                                                'selected' : ''; ?>
+                                                            value="<?= /* @noEscape */ $group->getCustomerGroupId(); ?>"
+                                                            >
+                                                                <?= /* @noEscape */ $group->getCustomerGroupCode(); ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <div class="control">
+                                                        <input class="input-text required-entry validate-number" 
+                                                            type="text" 
+                                                name="product[tier_price][<?= /* @noEscape */ $index ?>][price_qty]" 
+                                                            value="<?= /* @noEscape */ $value['price_qty'];?>">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="control">
+                                                        <input type="text" 
+                                                            class="input-text required-entry validate-zero-or-greater" 
+                                                    name="product[tier_price][<?= /* @noEscape */ $index ?>][price]" 
+                                                            value="<?= /* @noEscape */ $value['price'];?>" >
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button class="button delete" title="Delete" type="button">
+                                                        <span>
+                                                            <span><?= $escaper->escapeHtml(__('Delete')) ?></span>
+                                                        </span>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <?php
+                                        $index++;
+                                    endforeach; ?>
+                                        <?php
+                                endif;
+                                ?>
+                            </table>
+                        </div>
+                    </div>
+                    <script id="tierprice-template" type="text/x-magento-template">
+                        <tbody class="wk_mp_headcus wk-mp-body">
+                            <tr>
+                            <td>
+                                <select name="product[tier_price][<%- data.index %>][website_id]" >
+                                    <?php $websites = $block->getWebsites(); ?>
+                                    <?php foreach ($websites as $id => $website) { ?>
+                                            <option value="<?= /* @noEscape */ $id; ?>">
+                                                <?= /* @noEscape */ $website['name'].'('.$website['currency'].')'; ?>
+                                            </option>
+                                        <?php } ?>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="product[tier_price][<%- data.index %>][cust_group]" >
+                                        <option value="32000">ALL GROUPS</option>
+                                    <?php $customer_group = $block->getCustomerGroupCollection(); ?>
+                                    <?php foreach ($customer_group as $group) { ?>
+                                            <option value="<?= /* @noEscape */ $group->getCustomerGroupId(); ?>">
+                                                <?= /* @noEscape */ $group->getCustomerGroupCode(); ?>
+                                            </option>
+                                    <?php } ?>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="control">
+                                    <input class="input-text required-entry validate-number" 
+                                        type="text" 
+                                        name="product[tier_price][<%- data.index %>][price_qty]"
+                                    >
+                                </div>
+                            </td>
+                            <td>
+                                <div class="control">
+                                    <input type="text" 
+                                        class="input-text required-entry validate-zero-or-greater" 
+                                        name="product[tier_price][<%- data.index %>][price]" 
+                                    >
+                                </div>
+                            </td>
+                            <td>
+                                <button class="button delete" title="Delete" type="button">
+                                    <span>
+                                        <span><%- data.button %></span>
+                                    </span>
+                                </button>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </script>
+                        <?php
+                    }
+                }
+            }
+        }
+    ?>
+    </div>
+    </div>
+    <?php
+    }
+}
+?>  
+    <input type="hidden" name="set" value="<?= $block->escapeHtml($attributeSetId);?>"/> 
+    <input type="hidden" name="mapping_id" value="<?= $block->escapeHtml($mappingId);?>"/>
+    <?php
+            $product['tier_price'] = $product['tier_price'] ?? [];
+            $optionData = [
+            'dateTypeSelector'        => '.datetype',
+            'dateTimeTypeSelector'        => '.datetimetype',
+            'attributeSetId'          => $attributeSetId,
+            'tierPriceSelector'     => '.tierprice',
+            'addTierPrice'          => '.addtierprice',
+            'tierTemplate'          => '#tierprice-template',
+            'deleteOptionSelector'  => '.delete-product-option',
+            'deleteButton'          => '.delete',
+            'attSetidSelector'      => '#attribute-set-id',
+            'count'                 => (count($product['tier_price'])),
+            'currentUrl'            => $block->getUrl(
+                'marketplace/product/add/',
+                ["_secure" => $block->getRequest()->isSecure()]
+            ),
+            'productId'             => '',
+            'productType'           => $block->getRequest()->getParam('type')
+            ];
+            $serializedData = $block->mappingJsonEncode($optionData);
+            ?>
+
+  <script type="text/x-magento-init">
+    {
+        "*": {
+            "WkMappingJs": <?= /* @noEscape */  $serializedData; ?>,
+            "fptAttribute" : <?= /* @noEscape */ $block->getJsonHelper()->jsonEncode($data) ?>
+        }
+
+    }
+</script>

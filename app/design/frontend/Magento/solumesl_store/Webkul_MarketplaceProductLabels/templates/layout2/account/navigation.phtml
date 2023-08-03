@@ -1,0 +1,39 @@
+<?php
+/**
+ * Webkul_MpAuction Navigation.
+ * @category  Webkul
+ * @package   Webkul_MarketplaceProductLabels
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$mpLabelBlock = $block->getLayout()->createBlock(\Webkul\MarketplaceProductLabels\Block\Label\Labellist::class);
+$_helper = $mpLabelBlock->getHelperObject('marketplaceHelper');
+$magentoCurrentUrl = $block->getCurrentUrl();
+$val = strpos($magentoCurrentUrl, 'mplabels/label/')? "current active":"";
+$isPartner = $_helper->isSeller();
+$viewModel = $block->getViewModel();
+if ($isPartner && $viewModel->checkPermission("Webkul_MarketplaceProductLabels::label") > -1) { ?>
+    <style type="text/css">
+        @media only screen and (max-width: 767px){
+
+            .block-collapsible-nav.wk-mp-main{
+                top: 20px;
+            }
+        }
+    </style>
+    <li class="wk-mp-custom-prod-label level-0 <?= /* @noEscape */
+        strpos($magentoCurrentUrl, 'mplabels/label/')? "current active":"";?>">
+        <?php if($val == "") {?>
+        <a href="<?= /* @noEscape */$block->getUrl('mplabels/label/labellist', ['_secure' => $block
+            ->getRequest()->isSecure()])?>">
+            <span><?= /* @noEscape */ __('Custom Product Label')?></span>
+        </a>
+        <?php } else {?>
+            <a href="#" onclick="return false;">
+            <span><?= /* @noEscape */ __('Custom Product Label')?></span>
+        </a>
+        <?php } ?>
+    </li>
+<?php } ?>

@@ -1,0 +1,257 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-page-wrapper {
+            .wk-mp-dashboard-container {
+                table{
+                    tr{
+                        th {
+                            .smallButtonTextMixin();
+                        }
+                        td{
+                             h3{
+                                color: #2E2E2E !important;
+                            }
+                            span{
+                                font-weight: 400;
+                                font-size: 14px;
+                                line-height: 19px;
+                                color: #2E2E2E !important;
+                            }
+                            &.action{                                        
+                                color: #0053AF !important;
+                            }
+                        }
+                    }
+                }
+                .wk-mp-total-display-box {
+                    display        : flex;
+                    justify-content: space-between;
+                    overflow       : auto;
+
+                    .wk-mp-total-display-box-sec {
+                        border       : 1px solid #dedede;
+                        border-radius: 8px;
+                        width        : ~"calc(25% - 3vw)";
+                        padding      : 20px;
+                        min-width    : fit-content;
+                        height       : fit-content;
+                        margin: 5px;
+
+                        h3 {
+                            font-weight: 600;
+                            font-size: 32px;
+                            line-height: 44px;
+                            color      : #00203f;
+                            margin     : unset;
+                        }
+
+                        span {
+                            &:not(.price){
+                                .colorTextHeadingMixin();
+                            }
+                            line-height: unset !important;
+                            color      : #00203f;
+                        }
+                    }
+                }
+
+                .wk-mp-count-display-box {
+                    display        : flex;
+                    justify-content: space-between;
+                    margin-top     : 20px;
+                    margin-bottom  : 20px;
+                    overflow       : auto;
+
+                    .wk-mp-count-display-box-sec {
+                        border       : 1px solid #dedede;
+                        border-radius: 8px;
+                        width        : ~"calc(20% - 3vw)";
+                        padding      : 20px;
+                        position     : relative;
+                        min-width    : fit-content;
+                        height       : fit-content;
+                        cursor       : pointer;
+                        margin: 5px;
+
+                        h3 {
+                            font-weight: 600;
+                            font-size: 32px;
+                            line-height: 44px;
+                            color      : #00203f;
+                            margin     : unset;
+                        }
+
+                        span {
+                            &:not(.price){
+                                .colorTextHeadingMixin();
+                            }
+                            line-height: unset !important;
+                            color      : #00203f;
+                        }
+
+                        &:hover {
+                            background: #f4f9ff;
+                            border    : 1px solid #e7f1fd;
+
+                            &:after {
+                                font-family: "solum-icon";
+                                content    : "\e907";
+                                position   : absolute;
+                                right      : 0;
+                                top        : 25px;
+                                color      : #0053af;
+                                font-size  : 36.66px;
+                            }
+
+                            h3 {
+                                color: #0053af !important;
+                            }
+
+                            span {
+                                color: #0053af;
+                            }
+                        }
+                    }
+                }
+
+                .wk-mp-recent-quotation-container {
+                    .mainContainerPaddingMargin();
+
+                    .wk-mp-recent-quotation-heading {
+                        .containerHeadingSection();
+                    }
+
+                    .wk-mp-recent-quotation-listing-container {
+                        .containerListingOverflowDisplay();
+                        .containerListingTable();
+                    }
+                }
+
+                .wk-mp-recent-order-inquiry-container {
+                    display        : flex;
+                    justify-content: space-between;
+                    .mainContainerPaddingMargin();
+
+                    .wk-mp-recent-inquiry-container {
+                        width: 49%;
+
+                        .wk-mp-recent-inquiry-heading {
+                            .containerHeadingSection();
+                        }
+
+                        .wk-mp-recent-inquiry-listing {
+                            .containerListingOverflowDisplay();
+                            .containerListingTable();
+                        }
+                        .table-recent-inquiry-listing-items tbody tr td{
+                            max-width:400px;
+                        }
+                    }
+
+                    .wk-mp-recent-order-container {
+                        width: 49%;
+
+                        .wk-mp-recent-order-heading {
+                            .containerHeadingSection();
+                        }
+
+                        .wk-mp-recent-order-listing {
+                            .containerListingOverflowDisplay();
+                            .containerListingTable();
+                        }
+                    }
+                }
+
+                .wk-mp-recent-support-rma-container {
+                    display        : flex;
+                    justify-content: space-between;
+                    .mainContainerPaddingMargin();
+
+                    .wk-mp-recent-rma-container {
+                        width: 49%;
+
+                        .wk-mp-recent-rma-heading {
+                            .containerHeadingSection();
+                        }
+
+                        .wk-mp-recent-rma-listing {
+                            .containerListingOverflowDisplay();
+                            .containerListingTable();
+                        }
+                    }
+
+                    .wk-mp-recent-support-container {
+                        width: 49%;
+
+                        .wk-mp-recent-support-heading {
+                            .containerHeadingSection();
+                        }
+
+                        .wk-mp-recent-support-listing {
+                            .containerListingOverflowDisplay();
+                            .containerListingTable();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-page-wrapper {
+            .wk-mp-dashboard-container {
+                .wk-mp-count-display-box {
+                    .wk-mp-count-display-box-sec {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-page-wrapper {
+            .wk-mp-dashboard-container {
+                .wk-mp-recent-order-inquiry-container {
+                    display: unset !important;
+
+                    .wk-mp-recent-inquiry-container {
+                        width: unset !important;
+                    }
+
+                    .wk-mp-recent-order-container {
+                        width: unset !important;
+                    }
+                }
+
+                .wk-mp-recent-support-rma-container {
+                    display: unset !important;
+
+                    .wk-mp-recent-rma-container {
+                        width: unset !important;
+                    }
+
+                    .wk-mp-recent-support-container {
+                        width: unset !important;
+                    }
+                }
+            }
+        }
+    }
+}

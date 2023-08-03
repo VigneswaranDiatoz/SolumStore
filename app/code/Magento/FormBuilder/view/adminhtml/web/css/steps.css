@@ -1,0 +1,67 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+.wk-formbuilder .tab-content .steps {
+    width: 14%;
+    display: inline-block;
+    vertical-align: top;
+}
+.wk-formbuilder .tab-content .fb-editors {
+    width: 85%;
+    display: inline-block;
+    background-color: white;
+}
+.wk-formbuilder .steps .wk-step .action-remove:after {
+    content: '\e630';
+    font-family: 'Admin Icons';
+    font-weight: normal;
+}
+.wk-formbuilder .steps .wk-step .admin__control-text {
+    width: 60%;
+}
+.wk-formbuilder .steps .wk-step .action-remove {
+    background-color: transparent;
+    border-color: transparent;
+}
+.wk-formbuilder .tab-content .fb-editors .wk-fb-editor {
+    display: none;
+}
+.wk-formbuilder .tab-content .fb-editors .wk-fb-editor.current {
+    display: block;
+}
+.wk-formbuilder .steps{
+	text-align: center;
+}
+.wk-formbuilder .steps .wk-step {
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 0;
+    text-decoration: none;
+    font-size: 1.6rem;
+    letter-spacing: .025em;
+    padding-bottom: 0.6875em;
+    padding-top: 0.6875em;
+}
+.wk-formbuilder .steps .wk-step.current{
+    background-color: white;
+}
+.wk-formbuilder .steps .wk-step:active {
+	position:relative;
+	top:1px;
+}
+.wk-formbuilder .steps .actions{
+    margin-top: 10%;
+}
+.wk-fb-editor .form-wrap.form-builder .category-field.form-field .frm-holder .form-elements .form-group.description-wrap,
+.wk-fb-editor .form-wrap.form-builder .category-field.form-field .frm-holder .form-elements .form-group.placeholder-wrap,
+.wk-fb-editor .form-wrap.form-builder .category-field.form-field .frm-holder .form-elements .form-group.className-wrap{
+    display: none !important;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webkul_FormBuilder::form" title="Form Builder" module="Webkul_FormBuilder" sortOrder="54" resource="Webkul_FormBuilder::formbuilder"/>
+        <add id="Webkul_FormBuilder::list" title="Form List" module="Webkul_FormBuilder" sortOrder="0" parent="Webkul_FormBuilder::form"
+                action="formbuilder/forms" resource="Webkul_FormBuilder::form"/>
+        <add id="Webkul_FormBuilder::response" title="Form Responses" module="Webkul_FormBuilder" sortOrder="0" parent="Webkul_FormBuilder::form"
+                action="formbuilder/response/" resource="Webkul_FormBuilder::response"/>
+    </menu>
+</config>

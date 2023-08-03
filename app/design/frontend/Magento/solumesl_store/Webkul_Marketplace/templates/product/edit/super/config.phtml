@@ -1,0 +1,460 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+/** @var $block \Webkul\Marketplace\Block\Product\Edit\Tab\Variations\Config */
+$buyingBlock = $block->getLayout()
+          ->createBlock(\Webkul\SolumeslBuying\Block\Product\Edit\Variations\Config::class);
+
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$productType = $block->getRequest()->getParam('type');
+if ($block->getSellerProduct()->getId()) {
+    $productType = $block->getSellerProduct()->getTypeId();
+}
+$type = 'configurable';
+$isConfigurableProduct = $block->getSellerProduct()->getTypeId() === $type ||
+ $block->getRequest()->has('attributes');
+$allowedtypes=explode(',', $helper->getAllowedProductType());
+if (in_array($type, $allowedtypes) && ($productType == 'simple'
+    || $productType == 'virtual' || $productType == 'configurable')) { ?>
+    <script>
+        var BASE_URL = '';
+        var FORM_KEY = "";
+    </script>
+<div class="wk-mp-product-container">
+    <br>    
+    <i class="container-hide-show close">
+        <label class="label"><?= $escaper->escapeHtml(__('Configuration')) ?></label>
+    </i>
+    <hr>
+
+
+    <div class="wk-mp-new-prod-fields _hide">
+
+        <div class="product-create-buying-flow">
+            <!--  -->
+            <div id="product-variations-matrix" data-role="product-variations-matrix">
+                <div data-bind="scope: 'buying-flow-variation'">
+                    <button type="button" 
+                    title="Create Buying Flow" class="action-secondary secondary-btn rounded" id="trigger_buying_flow" data-bind="css: {hidden: !showBuyingVariations() }">
+                        <span data-role="button-label" data-edit-label="<?=  /* @noEscape */ __('Buying Flow') ?>">
+                            <?= $escaper->escapeHtml(__('Buying Flow')) ?>
+                        </span>
+                    </button>
+                    <h3 class="hidden" data-bind="css: {hidden: !showBuyingVariations() }" class="title">
+                        <?= $escaper->escapeHtml(__('Buying Flow')); ?>
+                    </h3>
+                    <!-- ko if: showBuyingVariations() -->
+                    <div class="admin__data-grid-wrap admin__data-grid-wrap-static">
+                        <div class="field hidden" data-bind="css: {hidden: !showBuyingVariations() }">
+                            
+                            <div data-bind="foreach: buyingAttributes()">
+                                <div class="buying-flow-multipleoptions">
+                                    <div class="attribute-label">
+                                        <?= /* @noEscape */ __('Attribute Label'); ?> : <span data-bind="text: attribute_label"></span>
+                                        <input type="hidden" data-bind="value: code, attr:{'name': 'buying_matrix['+code+'][attribute_code]'}"></input>
+                                        <input type="hidden" data-bind="value: attribute_label, attr:{'name': 'buying_matrix['+code+'][attribute_label]'}"></input>
+                                        <!-- <span data-bind="text: options"></span> -->
+                                        <input type="hidden" data-bind="value: options, attr:{'name': 'buying_matrix['+code+'][options]'}"></input>
+                                    </div>
+                                    <div class="attribute-multiselect">
+                                        <?= /* @noEscape */ __('Enable MultiSelect'); ?> :
+                                        <!-- ko if: (code != 'final_step') -->
+                                            <span data-bind="text: multiselect_label"></span>
+                                            <input type="hidden" data-bind="value: multiselect, attr:{'name': 'buying_matrix['+code+'][multiselect]'}"></input>
+                                        <!-- /ko -->
+                                        <!-- ko if: (code == 'final_step') -->
+                                            <span><?= __('N/A') ?></span>
+                                            <input type="hidden" data-bind="value: multiselect, attr:{'name': 'buying_matrix['+code+'][multiselect]'}"></input>
+                                        <!-- /ko -->
+                                    </div>
+                                    <table class="data-grid">
+                                        <thead>
+                                            <tr>
+                                                <th class="data-grid-th data-grid-thumbnail-cell col-image" data-column="image">
+                                                    <?= /* @noEscape */ __('Image'); ?>
+                                                </th>
+                                                <th class="data-grid-th col-title" data-column="title">
+                                                    <?= /* @noEscape */ __('Title'); ?>
+                                                </th>
+                                                <th class="data-grid-th col-description" data-column="description">
+                                                    <?= /* @noEscape */ __('Description'); ?>
+                                                </th>
+                                                <th class="data-grid-th col-title-align" data-column="title-align">
+                                                    <?= /* @noEscape */ __('Title Align'); ?>
+                                                </th>
+                                                <th class="data-grid-th col-title-color" data-column="title-color">
+                                                    <?= /* @noEscape */ __('Title Color'); ?>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: image_data">
+                                            <tr data-role="row">
+                                                <td class="col-image" data-column="image">
+                                                    <!-- ko if: jQuery.type(images) == "string" -->
+                                                        <img data-bind="attr:{'src': JSON.parse(images).url}"/>
+                                                        <input type="hidden" data-bind="value: images, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][images]', 'data-image-code': $parent.code}"></input>
+                                                        <!-- ko if: $data.heading_align != undefined -->
+                                                            <input type="hidden" data-bind="value: heading_align, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][heading_align]', 'data-image-code': $parent.code}"></input>
+                                                            <input type="hidden" data-bind="value: heading_color, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][heading_color]', 'data-image-code': $parent.code}"></input>
+                                                        <!-- /ko -->
+                                                    <!-- /ko -->
+                                                    <!-- ko if: jQuery.type(images) == "object" -->
+                                                        <img data-bind="attr:{'src': images.url}"/>
+                                                        <input type="hidden" data-bind="value: JSON.stringify(images), attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][images]', 'data-image-code': $parent.code}"></input>
+                                                        <!-- ko if: $data.heading_align != undefined -->
+                                                            <input type="hidden" data-bind="value: heading_align, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][heading_align]', 'data-image-code': $parent.code}"></input>
+                                                            <input type="hidden" data-bind="value: heading_color, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][heading_color]', 'data-image-code': $parent.code}"></input>
+                                                        <!-- /ko -->
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td class="col-title" data-column="title">
+                                                    <div data-bind="text: title"></div>
+                                                    <input type="hidden" data-bind="value: title, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][title]'}"></input>
+                                                </td>
+                                                <td class="col-description" data-column="description">
+                                                    <div data-bind="text: description"></div>
+                                                    <input type="hidden" data-bind="value: description, attr:{'name': 'buying_matrix['+$parent.code+'][image_data]['+$index()+'][description]'}"></input>
+                                                </td>
+                                                <td>
+                                                    <!-- ko if: $data.heading_align != undefined && $data.heading_align != "" -->
+                                                        <div data-bind="text: heading_align"></div>
+                                                    <!-- /ko  -->
+                                                    <!-- ko if: $data.heading_align == undefined || $data.heading_align == "" -->
+                                                        <div data-bind="text:'-'"></div>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td>
+                                                    <!-- ko if: $data.heading_color != undefined && $data.heading_color != "" -->
+                                                        <div data-bind="text: heading_color"></div>
+                                                    <!-- /ko -->
+                                                    <!-- ko if: $data.heading_color == undefined || $data.heading_color == "" -->
+                                                        <div data-bind="text:'-'"></div>
+                                                    <!-- /ko -->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+
+                    <div id="buying-flow-block-wrapper" style="display:none" class="buying-flow-popup">
+                    
+                    </div>
+
+                    <script id="buying-flow-attribute-template" type="text/x-magento-template">
+                        <form data-mage-init='{"validation":{}}'>
+                        <% for (var i=0; i< data.options.length; i++) { %>
+                            <div class="attribute-entity ">
+                                <div class="attribute-entity-top">
+                                    <div class="attribute-entity-title-block">
+                                        <span class="draggable-handle" data-role="draggable" title="Sort Variations">
+                                        </span>
+                                        <div class="attribute-entity-title">
+                                            <%- data.options[i].attribute_label %> <% if (data.options[i].code != "final_step") { %>(<%- data.options[i].options %>)<% } %>
+
+                                            <% if (data.options[i].code != "final_step") { %>
+                                                <input class="wk-elements" id="<%- data.options[i].code %>-multiselect" 
+                                                    type="checkbox" name="buying_matrix[<%- data.options[i].code %>][multiselect]" value="<%- data.options[i].multiselect %>"
+                                                    <% if (parseInt(data.options[i].multiselect)){ %>checked<% } %>>
+                                                <label class="label"><?= $escaper->escapeHtml(__('Enable Multiselect'))?></label>
+                                            <% } %>
+                                        </div>
+                                        <input type="hidden" class="required-entry input-text" name="buying_matrix[<%- data.options[i].code %>][code]" 
+                                                value="<%- data.options[i].code %>">
+                                    </div>
+
+                                    <button title="Add Slide" type="button" class="action-default scalable action-add slide-item-add" 
+                                    data-attribute-index="<%- i %>" 
+                                    data-attribute-code="<%- data.options[i].code %>" 
+                                    data-image-index="<%- data.options[i].image_data.length-1 %>">
+                                        <img src="<?= $block->escapeUrl($block->getViewFileUrl('Webkul_SolumeslCustomProduct::images/button-plus.png')) ?>" alt="">
+                                    </button>
+                                </div>
+                                <i class="container-hide-show open">
+                                    <label class="label"></label>
+                                </i>
+                                <div class="wk-mp-new-prod-fields-<%- data.options[i].code %>">
+                                    <% for (var j=0; j< data.options[i].image_data.length; j++) { %>
+                                        <div class="attribute-entity-bottom">
+                                            <fieldset class="admin__fieldset admin__fieldset-options">
+                                                <div class="field">
+                                                    <label class="label"><?= $escaper->escapeHtml(__('Heading Alignment'))?></label>
+                                                    <div class="control">
+                                                        <select name="buying_matrix[<%- data.options[i].code %>][heading_align][<%- j %>]">
+                                                            <option value="" >Select Alignment</option>
+                                                            <option value="top" <% if(data.options[i].image_data[j].heading_align == "top"){%> selected <%} %>>Top</option>
+                                                            <option value="topleft" <% if(data.options[i].image_data[j].heading_align == "topleft"){%> selected <%} %>>Top-Left</option>
+                                                            <option value="topright" <% if(data.options[i].image_data[j].heading_align == "topright"){%> selected <%} %>>Top-Right</option>
+                                                            <option value="bottom" <% if(data.options[i].image_data[j].heading_align == "bottom"){%> selected <%} %>>Bottom</option>
+                                                            <option value="bottomleft" <% if(data.options[i].image_data[j].heading_align == "bottomleft"){%> selected <%} %>>Bottom-Left</option>
+                                                            <option value="bottomright" <% if(data.options[i].image_data[j].heading_align == "bottomright"){%> selected <%} %>>Bottom-Right</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label class="label"><?= $escaper->escapeHtml(__('Heading Color Text'))?></label>
+                                                    <div class="control">
+                                                        <div class="colorpicker-section">
+                                                            <input type="text"  name="buying_matrix[<%- data.options[i].code %>][heading_color][<%- j %>]"
+                                                            id="colorpicker<%- i %>" 
+                                                            value="<%- data.options[i].image_data[j].heading_color %>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="field required">
+                                                    <label class="label"><?= $escaper->escapeHtml(__('Label'))?></label>
+                                                    <div class="control">
+                                                        <input type="text" class="required-entry input-text" name="buying_matrix[<%- data.options[i].code %>][label][<%- j %>]"
+                                                        value="<%- data.options[i].image_data[j].title %>">
+                                                    </div>
+                                                </div>
+                                                <div class="field">
+                                                    <label class="label"><?= $escaper->escapeHtml(__('Description'))?></label>
+                                                    <div class="control">
+                                                        <textarea name="buying_matrix[<%- data.options[i].code %>][description][<%- j %>]" class="input-text" id="description" rows="5" cols="75"><%- data.options[i].image_data[j].description %></textarea>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="admin__fieldset admin__fieldset-options">
+                                                <label class="label"><?= $escaper->escapeHtml(__('Add Image'))?></label>
+                                                <div id="media_gallery_content<%- data.options[i].code %><%- j %>"
+                                                    class="gallery">
+                                                    <div class="image image-placeholder">
+                                                        <div id="media_gallery_content_Uploader<%- data.options[i].code %><%- j %>" class="uploader">
+                                                            <div class="fileinput-button form-buttons">
+                                                                <span><?= /* @escapeNotVerified */ $escaper->escapeHtml(__('Browse Files...')) ?></span>
+                                                                <input id="fileupload<%- data.options[i].code %><%- j %>" type="file" name="image"
+                                                                    data-url="<?= /* @noEscape */ $block
+                                                                    ->getUrl('imageuploader/image_gallery/upload', ['_secure' => $block
+                                                                    ->getRequest()->isSecure()]) ?>"
+                                                                    data-image-index=<%- j %> />
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                        <img class="spacer"
+                                                            src="<?= /* @noEscape */$block->getViewFileUrl('images/spacer.gif')?>"/>
+                                                        <p class="image-placeholder-text">
+                                                                <?= $escaper->escapeHtml(__('Click here or drag and drop to add images.'));
+                                                                ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <% if (j > 0) { %>
+                                                <button title="Remove" type="button"
+                                                    class="action-default scalable action-delete remove-slide-option" data-attribute-code="<%- data.options[i].code %>">
+                                                    <img src="<?= $block->escapeUrl($block->getViewFileUrl('Webkul_SolumeslCustomProduct::images/button-delete.png')) ?>" alt="">
+                                                </button>
+                                            <% } %>
+                                        </div>
+                                    <% } %>
+                                </div>
+                            </div>
+                        <% } %>
+                        </form>
+                    </script>
+
+                    <script id="buying-flow-attribute-slides-template" type="text/x-magento-template">
+                        <div class="attribute-entity-bottom">
+                            <fieldset class="admin__fieldset admin__fieldset-options">
+                                <div class="field required">
+                                    <label class="label">
+                                        <?= $escaper->escapeHtml(__('Label'))?>
+                                        <span class="required-icon">*</span>
+                                    </label>
+                                    <div class="control">
+                                        <input type="text" class="required-entry input-text" name="buying_matrix[<%- data.attributeCode %>][label][<%- data.imageIndex %>]"
+                                        value="">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label"><?= $escaper->escapeHtml(__('Description'))?></label>
+                                    <div class="control">
+                                        <textarea name="buying_matrix[<%- data.attributeCode %>][description][<%- data.imageIndex %>]" class="input-text" id="description" rows="5" cols="75"></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="admin__fieldset admin__fieldset-options">
+                                <label class="label"><?= $escaper->escapeHtml(__('Add Image'))?></label>
+                                <div id="media_gallery_content<%- data.attributeCode %><%- data.imageIndex %>"
+                                    class="gallery">
+                                    <div class="image image-placeholder">
+                                        <div id="media_gallery_content_Uploader<%- data.attributeCode %><%- data.imageIndex %>" class="uploader">
+                                            <div class="fileinput-button form-buttons">
+                                                <span><?= /* @escapeNotVerified */ $escaper->escapeHtml(__('Browse Files...')) ?></span>
+                                                <input id="fileupload<%- data.attributeCode %><%- data.imageIndex %>" type="file" name="image"
+                                                    data-url="<?= /* @noEscape */ $block
+                                                    ->getUrl('imageuploader/image_gallery/upload', ['_secure' => $block
+                                                    ->getRequest()->isSecure()]) ?>" 
+                                                    data-image-index=<%- data.imageIndex %> />
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <img class="spacer"
+                                            src="<?= /* @noEscape */$block->getViewFileUrl('images/spacer.gif')?>"/>
+                                        <p class="image-placeholder-text">
+                                                <?= $escaper->escapeHtml(__('Click here or drag and drop to add images.'));
+                                                ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <button title="Remove" type="button"
+                                class="action-default scalable action-delete remove-slide-option" data-attribute-code="<%- data.attributeCode %>">
+                                <img src="<?= $block->escapeUrl($block->getViewFileUrl('Webkul_SolumeslCustomProduct::images/button-delete.png')) ?>" alt="">
+                            </button>
+                        </div>
+                    </script>
+                    <script id="media_gallery_content_Uploader-template" type="text/x-magento-template">
+                        <div id="<%- data.id %>" class="file-row">
+                            <span class="file-info"><%- data.name %> (<%- data.size %>)</span>
+                            <div class="progressbar-container">
+                                <div class="progressbar upload-progress" style="width: 0%;"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </script>
+                    <script id="media_gallery_content-template-buyingflow" type="text/x-magento-template">
+                        <% if (data.id != 'default' ) { %>
+                            <div class="image item <% if (data.disabled == 1) { %>hidden-for-front<% } %>" 
+                            id="wk_mp_uploader_image<%- data.index %>" data-role="image">
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][file]"
+                                            value="<%- data.file %>"/>
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][name]"
+                                            value="<%- data.name %>"/>
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][size]"
+                                            value="<%- data.size %>"/>
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][type]"
+                                            value="<%- data.type %>"/>
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][url]"
+                                            value="<%- data.url %>"/>
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][attribute_code]"
+                                            value="<%- data.attribute_code %>"/>
+                                    <input type="hidden"
+                                            name="buying_matrix[<%- data.attribute_code %>][image_data][<%- data.imageIndex %>][imageIndex]"
+                                            value="<%- data.imageIndex %>"/>
+                                    <img class="spacer"
+                                        src="<?= /* @noEscape */ $block->getViewFileUrl('images/spacer.gif')?>"/>
+                                    <img class="product-image" src="<%- data.url %>" alt="<%- data.name %>"/>
+                                    <div class="actions" >
+                                        <button type="button"
+                                                class="action-delete"
+                                                data-role="delete-button"
+                                                title="<?= $escaper->escapeHtml(__('Delete image')) ?>">
+                                            <span>
+                                                <?= $escaper->escapeHtml(__('Delete image')) ?>
+                                            </span >
+                                        </button>
+                                    <!-- <div class="draggable-handle" ></div > -->
+                                </div>
+                            </div>
+                        <% } %>
+                    </script>
+                </div>
+                <script type="text/x-magento-init">
+                    {
+                        "*": {
+                            "Magento_Ui/js/core/app": {
+                                "components": {
+                                    "buying-flow-variation": {
+                                        "component": "Webkul_SolumeslBuying/js/buying-flow",
+                                        "actionUrl": "<?= $block->getUrl('solumeslbuying/index/build') ?>",
+                                        "buyingAttributesData": <?= json_encode($buyingBlock->getBuyingAttributes()) ?>,
+                                        "defaultImage": "<?= $buyingBlock->getDefaultImage() ?>"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+        
+        <div class="entry-edit form-inline" id="super_config" data-panel="product-variations">
+            <div data-bind="scope: 'variation-steps-wizard'" class="product-create-configuration">
+                <div class="product-create-configurations" data-action="product-create-configuration-buttons">
+                    <div class="product-create-configuration">
+                        <button type="button" data-action="open-steps-wizard" 
+                        title="Create Product Configurations" class="action-secondary secondary-btn rounded" data-bind="click: open">
+                        <span data-role="button-label" data-edit-label="<?=  /* @noEscape */ __('Configuration Product') ?>">
+                            <?= /* @escapeNotVerified */ $block->getSellerProduct()->getId() && $isConfigurableProduct
+                                ? $escaper->escapeHtml(__('Configuration Product'))
+                                : $escaper->escapeHtml(__('Configuration Product'))
+                            ?>
+                        </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="fieldset">
+                <?= $block->getChildHtml('sellermatrix'); ?>
+
+                <!-- Select Associated Product popup -->
+                <div data-grid-id="associated-products-container">
+                    <div class="admin__data-grid-outer-wrap" 
+                    data-bind="scope: 'configurable_associated_product_listing.configurable_associated_product_listing'">
+                        <div data-role="spinner" 
+                        data-component=
+                        "configurable_associated_product_listing.configurable_associated_product_listing.product_columns" 
+                        class="admin__data-grid-loading-mask">
+                            <div class="spinner">
+                                <span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <!-- ko template: getTemplate() --><!-- /ko -->
+
+                    </div>
+                </div>
+
+                <input type="hidden" name="affect_configurable_product_attributes" value="1" />
+            </div>
+        </div>
+
+    </div>
+</div>    
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Magento_Ui/js/core/app": {
+                    "components": {
+                        "configurableProductGrid": {
+                            "component": "Webkul_Marketplace/js/variations/product-grid",
+                            "productsFilter": "configurable_associated_product_listing.configurable_associated_product_listing.listing_top.listing_filters",
+                            "productsProvider": "configurable_associated_product_listing.data_source",
+                            "productsMassAction": "configurable_associated_product_listing.configurable_associated_product_listing.product_columns.ids",
+                            "productsColumns": "configurable_associated_product_listing.configurable_associated_product_listing.product_columns",
+                            "productsGridUrl": "<?= $escaper->escapeUrl($block->getUrl('marketplace/product/associated_grid', ['componentJson' => true,'_secure' => $block->getRequest()->isSecure()]))?>",
+                            "configurableVariations": "configurableVariations"
+                        }
+                    }
+                },
+                "Webkul_Marketplace/js/configurable-type-handler": {
+                    "blockId": "#super_config",
+                    "tabId": "super_config",
+                    "hasVariations": "<?= $isConfigurableProduct ? 'true' : 'false' ?>"
+                }
+            }
+        }
+    </script>
+    <?php
+} ?>

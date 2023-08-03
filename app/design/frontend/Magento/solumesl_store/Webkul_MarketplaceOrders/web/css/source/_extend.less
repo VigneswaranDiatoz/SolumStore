@@ -1,0 +1,631 @@
+//
+//  Common (style-m.css)
+
+//  _____________________________________________
+
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .block-order-details-view {
+            .block-content {
+                .wk-box {
+                    .wk-order-info-title {
+                        a {
+                            font-weight: 600;
+                            font-size  : 16px;
+                            line-height: 22px;
+                            color      : #0053AF !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .marketplace-order_invoice-viewlist {
+            .displayPageTitleWrapper();
+        }
+
+        &.marketplace-order-view {
+            .wk-mp-design {
+                .wk-mp-fieldset {
+                    .page-title-wrapper {
+                        .displayPageTitleWrapper();
+                    }
+
+                    .order-details-items {
+                        &.ordered {
+                            .table-wrapper {
+                                &.order-items {
+                                    border: unset !important;
+                                }
+                            }
+                        }
+                    }
+
+                    .block-order-details-view {
+                        .block-title {
+                            border-bottom: 1px solid #c6c6c6 !important;
+                            margin-bottom: 10px !important;
+
+                            strong {
+                                font-weight: 600 !important;
+                                font-size  : 20px;
+                                line-height: 26px;
+                                color      : #2E2E2E;
+                            }
+                        }
+
+                        .block-content {
+                            display              : grid !important;
+                            grid-template-columns: auto auto;
+
+                            &:not(.widget) {
+                                .box {
+                                    width: 100%;
+                                }
+                            }
+
+                            .box {
+                                .wk-row {
+                                    background-color: #ffff;
+                                    padding         : unset;
+
+                                    span {
+                                        vertical-align: text-top;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .page-title-wrappers {
+                .wrapperHeaderButtonsForOrders();
+
+                .order-actions-toolbar {
+                    .actions {
+                        a {
+                            span {
+                                color: #0053AF;
+                            }
+                        }
+
+                        .print {
+                            span {
+                                vertical-align: -webkit-baseline-middle;
+                            }
+
+                            &:before {
+                                vertical-align: bottom !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.marketplace-order_creditmemo-view {
+            .page-title-wrapper {
+                .displayPageTitleWrapper();
+            }
+            .page-title-wrappers {
+                .wrapperHeaderButtonsForOrders();
+
+                .order-actions-toolbar {
+                    a {
+                        span {
+                            font-weight: 400;
+                            font-size  : 14px;
+                            line-height: 19px;
+                            color      : #0053AF !important;
+                        }
+                    }
+                }
+                .order-date {
+                    width: unset !important;
+                }
+            }
+        }
+
+        &.marketplace-order_shipment-view {
+            .page-title-wrapper {
+                .displayPageTitleWrapper();
+            }
+
+            .fieldset {
+                &.wk-mp-fieldset {
+                    width  : 100% !important;
+                    display: unset !important;
+                }
+            }
+
+            .page-title-wrappers {
+                .wrapperHeaderButtonsForOrders();
+
+                .order-actions-toolbar {
+                    a {
+                        span {
+                            font-weight: 400;
+                            font-size  : 14px;
+                            line-height: 19px;
+                            color      : #0053AF !important;
+                        }
+                    }
+                }
+            }
+
+            .block-order-details-view {
+                .wk-order-info-title {
+                    a {
+                        font-weight: 600;
+                        font-size  : 16px;
+                        line-height: 22px;
+                        color      : #0053AF !important;
+                    }
+                }
+
+                .block-content {
+                    .box-order-shipping-method {
+                        .box-content {
+                            .admin__control-table-wrapper {
+                                .admin__control-table {
+                                    border: none;
+
+                                    th {
+                                        border-top      : 1px solid #c6c6c6;
+                                        border-bottom   : 1px solid #c6c6c6;
+                                        background-color: #ffff;
+                                        padding         : 20px;
+                                    }
+
+                                    td {
+                                        border-bottom   : 1px solid #c6c6c6;
+                                        background-color: #ffff;
+                                        padding         : 20px !important;
+
+                                        #wk-mp-tracking-add {
+                                            background: unset !important;
+                                            border    : unset !important;
+
+                                            span {
+                                                font-weight: 400;
+                                                font-size  : 14px;
+                                                line-height: 19px;
+                                                color      : #0053AF;
+                                            }
+                                        }
+                                    }
+
+                                    #wk-mp-shipment-tracking-info-tbody {
+                                        td {
+                                            .wk-mp-tracking-action-delete {
+                                                &:before {
+                                                    content    : "Delete";
+                                                    font-weight: 400;
+                                                    font-size  : 14px;
+                                                    line-height: 19px;
+                                                    color      : #EA053C;
+                                                }
+                                            }
+
+                                            .wk-mp-shipment-tracking-info-tbody-td {
+                                                vertical-align: -webkit-baseline-middle;
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.marketplace-order_invoice-view {
+            .page-title-wrapper {
+                .displayPageTitleWrapper();
+            }
+
+            .page-title-wrappers {
+                .wrapperHeaderButtonsForOrders();
+
+                .order-actions-toolbar {
+                    .actions {
+                        a {
+                            span {
+                                color: #0053AF;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .table-wrapper {
+                border-bottom: unset;
+            }
+        }
+
+        &.marketplace-order_shipment-create {
+            .wk-mp-design {
+                .wk-mp-fieldset {
+                    #wk_shipment_item_container {
+                        .wk-mp-order-shipment-comment {
+                            .wk-mp-order-info-box {
+                                border : unset;
+                                padding: unset;
+
+                                .entry-edit-head {
+                                    display: none;
+                                }
+
+                                #history_form {
+                                    border : unset;
+                                    padding: unset;
+
+                                    #shipment_comment_text {
+                                        width: 30% !important;
+                                    }
+                                }
+                            }
+                        }
+
+                        .wk-mp-order-shipment-total {
+                            border : unset;
+                            padding: unset;
+
+                            .box {
+                                .box-right {
+                                    &.entry-edit {
+                                        .order-totals {
+                                            .data-table {
+                                                width: 40%;
+
+                                                td {
+                                                    padding       : 10px !important;
+                                                    vertical-align: middle;
+
+                                                    &.wk-refundtotal-td1 {
+                                                        width: unset !important;
+                                                    }
+
+                                                    &.wk-refundtotal-td2 {
+                                                        width     : unset !important;
+                                                        text-align: unset !important;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .order-totals-bottom {
+                                            text-align: unset !important;
+
+                                            p {
+                                                display        : flex;
+                                                align-items    : baseline;
+                                                flex-direction : row-reverse;
+                                                justify-content: flex-end;
+                                            }
+                                        }
+
+                                        .wk-order-shipment-button {
+                                            #wk_mp_submit_shipment {
+                                                float: unset !important;
+                                                .marketplaceProductPageButtonDisplay("#00203F", "#FFFFFF");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &.marketplace-order_invoice-create {
+            .wk-mp-design {
+                .wk-mp-fieldset {
+                    #invoice_item_container {
+                        .wk-mp-order-invoice-comment {
+                            .wk-mp-order-info-box {
+                                border : unset;
+                                padding: unset;
+
+                                #history_form {
+                                    border : unset;
+                                    padding: unset;
+
+                                    #invoice_comment_text {
+                                        width: 30%;
+                                    }
+                                }
+                            }
+                        }
+
+                        .wk-mp-order-invoice-total {
+                            border : unset;
+                            padding: unset;
+
+                            .box {
+                                .box-right {
+                                    &.entry-edit {
+                                        .order-totals {
+                                            .data-table {
+                                                width: 40%;
+
+                                                td {
+                                                    padding       : 10px !important;
+                                                    vertical-align: middle;
+
+                                                    &.wk-refundtotal-td1 {
+                                                        width: unset !important;
+                                                    }
+
+                                                    &.wk-refundtotal-td2 {
+                                                        width     : unset !important;
+                                                        text-align: unset !important;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        .order-totals-bottom {
+                                            text-align: unset !important;
+
+                                            p {
+                                                display        : flex;
+                                                align-items    : baseline;
+                                                flex-direction : row-reverse;
+                                                justify-content: flex-end;
+                                            }
+                                        }
+
+                                        .wk-order-creditmemo-button {
+                                            #submit_creditMemo_offline {
+                                                float: unset !important;
+                                                .marketplaceProductPageButtonDisplay("#00203F", "#FFFFFF");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.marketplace-order_creditmemo-create {
+        .page-title-wrapper {
+            .displayPageTitleWrapper();
+        }
+
+        .page-title-wrappers {
+            display        : flex;
+            justify-content: space-between;
+            align-items    : center;
+            margin-bottom  : 20px;
+
+            .order-status {
+                color        : #00203F;
+                border-radius: 2px;
+                border       : 1px solid #00203F;
+            }
+        }
+
+        .block-order-details-view {
+            .block-content {
+                display              : grid !important;
+                grid-template-columns: auto auto;
+
+                .box {
+                    width: 100% !important;
+                }
+            }
+        }
+
+        .wk-mp-fieldset {
+            width  : unset !important;
+            display: unset !important;
+        }
+
+        .wk-mp-design {
+            #marketplace-creditmemo-form {                
+                .order-details-items {
+                    &.ordered {
+                        padding-bottom: unset;
+                        margin-bottom : unset;
+                    }
+
+                    &:nth-child(1) {
+                        border-bottom: unset !important;
+
+                        ~.order-details-items {
+                            &:nth-child(2) {
+                                border-top: unset !important;
+                                padding   : 20px !important;
+
+                                .order-items {
+                                    border    : unset;
+                                    background: #F9F9F9;
+                                }
+
+                                th {
+                                    display      : block;
+                                    border-bottom: unset !important;
+                                }
+
+                                td {
+                                    display       : block;
+                                    padding-bottom: unset !important;
+                                    padding-top   : unset !important;
+                                    border-top    : unset !important;
+                                    padding       : 8px 10px !important;
+                                }
+
+                                tbody {
+                                    display       : inline-block;
+                                    vertical-align: top;
+                                }
+
+                                thead {
+                                    display       : inline-block;
+                                    vertical-align: top;
+                                }
+
+                                table {
+                                    text-align: end;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .wk-mp-order-info-box {
+                    .useBorderPaddingFromDiv();
+                    .entry-edit-head {
+                        display: none;
+                    }
+                    #history_form {
+                        .useBorderPaddingFromDiv();
+                        width: 30%;
+                    }
+
+                    .box {
+                        .box-right {
+                            &.entry-edit {
+                                .order-totals {
+                                    .data-table {
+                                        width: 40%;
+
+                                        td {
+                                            padding       : 10px !important;
+                                            vertical-align: middle;
+
+                                            &.wk-refundtotal-td1 {
+                                                width: unset !important;
+                                            }
+
+                                            &.wk-refundtotal-td2 {
+                                                width     : unset !important;
+                                                text-align: unset !important;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .order-totals-bottom {
+                                    text-align: unset !important;
+
+                                    p {
+                                        display        : flex;
+                                        align-items    : baseline;
+                                        flex-direction : row-reverse;
+                                        justify-content: flex-end;
+                                    }
+                                }
+
+                                .wk-order-creditmemo-button {
+                                    #submit_creditMemo_offline {
+                                        float: unset !important;
+                                        .marketplaceProductPageButtonDisplay("#00203F", "#FFFFFF");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 464px) {
+    .marketplace-order_creditmemo-create {
+        .page-title-wrappers {
+            flex-direction: column;
+        }
+    }
+
+    .marketplace-order_invoice-view {
+        .page-title-wrappers {
+            flex-direction: column;
+
+            .order-date {
+                width: unset !important;
+            }
+        }
+
+        .wk-mp-fieldset {
+            width: 100% !important;
+        }
+    }
+
+    .marketplace-order-view {
+        .wk-mp-fieldset {
+            width: 100% !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .marketplace-order-view {
+        .page-title-wrappers {
+            flex-direction: column;
+
+            .order-date {
+                width: unset !important;
+            }
+        }
+    }
+
+    .marketplace-order_shipment-view {
+        .page-title-wrappers {
+            flex-direction: column;
+
+            .order-date {
+                width: unset !important;
+            }
+        }
+
+        .wk-mp-fieldset {
+            width: 100% !important;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .page-layout-seller-2columns-left {
+        &.marketplace-order_creditmemo-create {
+            .block-order-details-view {
+                .block-content {
+                    display: inline-block !important;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .page-layout-seller-2columns-left {
+        &.marketplace-order_creditmemo-create {
+            .wk-mp-design {
+                #marketplace-creditmemo-form {
+                    .order-details-items {
+                        .table-order-items{
+                            thead{
+                                tr{
+                                    th{
+                                        display: none !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

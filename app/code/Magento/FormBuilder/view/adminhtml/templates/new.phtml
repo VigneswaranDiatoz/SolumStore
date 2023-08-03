@@ -1,0 +1,272 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+// Webkul\FormBuilder\Block\Adminhtml\NewForm; Block File
+
+$data   = $block->getFormInfoById();
+$locale = $block->getLocale();
+$industryBusinessData = $block->getIndustryBusinessData();
+?>
+
+<div class="page-main-actions">
+    <div class="page-actions-placeholder"></div>
+    <div class="page-actions">
+        <div class="page-actions-inner" data-title="">
+            <div class="page-actions-buttons">
+                <button id="back" title="Back" type="button" class="action- scalable back" data-ui-id="back-button"
+                    onclick="location.href = '<?=  /**  @escapeNotVerified  **/
+                    $block->getUrl('formbuilder/forms/index'); ?>'">
+                    <span><?= $block->escapeHtml(__('Back')) ?></span>
+                </button>
+                <button id="save-and-continue-edit" title="Save & Continue edit" type="submit"
+                    class="action- scalable save primary ui-button ui-widget
+                    ui-state-default ui-corner-all ui-button-text-only"
+                    data-form-role="save" 
+                    data-ui-id="Save & Continue edit" r
+                    ole="button" aria-disabled="false"><span
+                        class="ui-button-text">
+                        <span><?= $block->escapeHtml(__('Save & Continue edit')) ?></span>
+                    </span>
+                </button>
+                <button id="savedata" title="Save Form" type="submit"
+                    class="action- scalable save primary ui-button ui-widget
+                    ui-state-default ui-corner-all ui-button-text-only"
+                    data-form-role="save" data-ui-id="save-button" role="button" aria-disabled="false"><span
+                        class="ui-button-text">
+                        <span><?= $block->escapeHtml(__('Save Form')) ?></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="clear-all-fields" title="Clear Form" class="clear-all-fields">
+        <span><?= $block->escapeHtml(__('Clear Fields')) ?></span>
+        </span>
+    </div>
+</div>
+<div class="container wk-formbuilder">
+    <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">
+            <h3><?= $block->escapeHtml(__('Form Creator')) ?></h3>
+        </li>
+        <li class="tab-link" data-tab="tab-2">
+            <h3><?= $block->escapeHtml(__('Form Information')) ?></h3>
+        </li>
+    </ul>
+
+    <div id="tab-1" class="tab-content current" data-bind="scope:'tab-1'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <script type="text/x-magento-init">
+            {
+                "#tab-1": {
+                    "Magento_Ui/js/core/app":  {
+                        "components": {
+                            "tab-1": {
+                                "component": "Webkul_FormBuilder/js/steps",
+                                "data": <?= (isset($data) && !empty($data['forms_fields']))
+                                        ? /* @noEscape */ $data['forms_fields']  : "[]" ?>,
+                                "industryBusinessData": <?= json_encode($industryBusinessData) ?>,
+                                "locale" :"<?=  /**  @escapeNotVerified  **/ $locale; ?>"
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    </div>
+    <div id="tab-2" class="tab-content">
+        <form id="custom-form" action="<?=  /**  @escapeNotVerified  **/ $block->getUrl('formbuilder/forms/save'); ?>"
+    method="post" novalidate>
+            <div id="form_tabs_main_section_content" style="" aria-labelledby="form_tabs_main_section"
+                class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true"
+                aria-hidden="false">
+                <div class="entry-edit form-inline">
+
+                    <fieldset class="fieldset admin__fieldset" id="form_base_fieldset">
+                        <div class="messages">
+                        </div>
+                        <input type="hidden" name="form_key"
+                            value="<?=  /**  @escapeNotVerified  **/ $block->getFormKey() ?>" />
+                        <input type="hidden" name="entity_id"
+                            value="<?= /** @escapeNotVerified **/
+                                    isset($data['entity_id'])
+                                    ?  /**  @escapeNotVerified  **/ $data['entity_id']
+                                    : ''; ?>" />
+                        <input type="textarea" id="forms_fields" name="forms_fields" value="" style="display:none;">
+                        <div class="admin__field field field-title  required _required">
+                            <label class="label admin__field-label"
+                                for="form_title">
+                                <span><?=   /**  @escapeNotVerified  **/ __('Title'); ?>
+                                </span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <input id="form_title" data-validate="{required:true}" name="title"
+                                    value="<?=  /**  @escapeNotVerified  **/
+                                    isset($data['name'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['name'])
+                                    : ''; ?>"
+                                    title="Title" type="text" class="input-text admin__control-text required"> 
+                            </div>
+                        </div>
+
+                        <div class="admin__field field field-url_key">
+                            <label class="label admin__field-label"
+                                for="url_key"><span><?=  /**  @escapeNotVerified  **/  __('Url Key'); ?></span></label>
+                            <div class="admin__field-control control">
+                                <input id="url_key" name="url_key"
+                                    value="<?= /** @escapeNotVerified **/
+                                    isset($data['url_key'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['url_key'])
+                                    : ''; ?>"
+                                    title="Url key" type="text" class="input-text admin__control-text"
+                                    disabled="disabled">
+                            </div>
+                        </div>
+
+                        <div class="admin__field field field-success_url  with-note">
+                            <label class="label admin__field-label"
+                                for="form_success_url">
+                                <span>
+                                    <?=  /**  @escapeNotVerified  **/  __('Success Url'); ?>
+                                </span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <input id="form_success_url" name="success_url"
+                                    value="<?= /** @escapeNotVerified **/
+                                    isset($data['success_url'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['success_url'])
+                                    : ''; ?>"
+                                    title="Success Url" type="text" class="input-text admin__control-text">
+                                <div class="note admin__field-note" id="success_url-note"></div>
+                            </div>
+                        </div>
+                        <div class="admin__field field field-submit_button  with-note">
+                            <label class="label admin__field-label"
+                                for="form_step1_label">
+                                <span>
+                                    <?=  /**  @escapeNotVerified  **/ __('Step 1 Label'); ?>
+                                </span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <input id="form_step1_label" name="step1_label"
+                                    value="<?=   /**  @escapeNotVerified  **/
+                                    isset($data['step1_label'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['step1_label'])
+                                    : ''; ?>"
+                                    title="Step 1 Label" type="text" class="input-text admin__control-text">
+                                <div class="note admin__field-note" id="step1_label"></div>
+                            </div>
+                        </div>
+                        <div class="admin__field field field-submit_button  with-note">
+                            <label class="label admin__field-label"
+                                for="form_login_label">
+                                <span>
+                                    <?=  /**  @escapeNotVerified  **/ __('Login Label'); ?>
+                                </span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <input id="form_login_label" name="login_label"
+                                    value="<?=   /**  @escapeNotVerified  **/
+                                    isset($data['login_label'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['login_label'])
+                                    : ''; ?>"
+                                    title="Login Label" type="text" class="input-text admin__control-text">
+                                <div class="note admin__field-note" id="login_label"></div>
+                            </div>
+                        </div>
+                        <div class="admin__field field field-submit_button  with-note">
+                            <label class="label admin__field-label"
+                                for="form_create_label">
+                                <span>
+                                    <?=  /**  @escapeNotVerified  **/ __('Create Label'); ?>
+                                </span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <input id="form_create_label" name="create_label"
+                                    value="<?=   /**  @escapeNotVerified  **/
+                                    isset($data['create_label'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['create_label'])
+                                    : ''; ?>"
+                                    title="Create Label" type="text" class="input-text admin__control-text">
+                                <div class="note admin__field-note" id="create_label"></div>
+                            </div>
+                        </div>
+                        <div class="admin__field field field-success-message  with-note">
+                            <label class="label admin__field-label"
+                                for="success_message">
+                                <span>
+                                <?=  /**  @escapeNotVerified  **/ __('Success Message'); ?></span></label>
+                            <div class="admin__field-control control">
+                                <input id="success_message" name="success_message"
+                                    value="<?=  /**  @escapeNotVerified  **/
+                                    isset($data['success_message'])
+                                    ? /**  @escapeNotVerified  **/ $block->escapeHtml($data['success_message'])
+                                    : /**  @escapeNotVerified  **/ __('Thank you for submitting!'); ?>"
+                                    title="Submit Button Text" type="text" class="input-text admin__control-text">
+                                <div class="note admin__field-note" id="success_message"></div>
+                            </div>
+                        </div>
+
+                        <div class="admin__field field field-recaptcha"
+                            data-ui-id="wk-customform-form-edit-tab-embedding-fieldset-element-form-field-status">
+                            <label class="label admin__field-label" for="form_recaptcha"
+                                data-ui-id="wk-customform-form-edit-tab-embedding-fieldset-element-
+                                select-status-label">
+                                <span>
+                                    <?= /**  @escapeNotVerified  **/  __("Recaptcha"); ?>
+                                </span>
+                            </label>
+                            <div class="admin__field-control control">
+                                <select id="form_recaptcha" name="recaptcha" title="Recaptcha"
+                                    class=" select admin__control-select"
+                                    data-ui-id="wk-customform-form-edit-tab-embedding-
+                                    fieldset-element-select-recaptcha">
+                                    <option value="1"
+                                        <?= isset($data['recaptcha']) && $data['recaptcha'] == 1
+                                        ? 'selected="selected"' : ''; ?>>
+                                        <?=  /**  @escapeNotVerified  **/ __("Enable"); ?>
+                                    </option>
+                                    <option value="0"
+                                        <?= isset($data['recaptcha']) && $data['recaptcha'] == 0
+                                        ? 'selected="selected"' : ''; ?>>
+                                        <?=   /**  @escapeNotVerified  **/ __("Disable"); ?>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- container -->
+<script type="text/x-magento-init">
+    {
+        "body" : {
+             "formbuilderCustom": 
+                    {
+                        "data": <?= (isset($data) && !empty($data['forms_fields']))
+                                ? /* @noEscape */ $data['forms_fields']  : "[]" ?>,
+                        "locale" :"<?=  /**  @escapeNotVerified  **/ $locale; ?>"
+                    }
+        }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "#custom-form": {
+            "validation": {}
+        }
+    }
+</script>

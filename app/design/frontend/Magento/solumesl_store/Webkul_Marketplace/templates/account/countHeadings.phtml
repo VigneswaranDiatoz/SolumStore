@@ -1,0 +1,49 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+?>
+<div class="wk-mp-count-display-box">
+    <div class="wk-mp-count-display-box-sec" data-link="<?= $block
+    ->escapeUrl($block->getUrl('marketplace/message/inquiry'))."#marketplace_messages_inquiry";?>">
+        <h3><?=/* @noEscape */$block->getInquiryCount() ?></h3>
+        <span><?=/* @noEscape */__("Inquiry") ?></span>
+    </div>
+    <div class="wk-mp-count-display-box-sec" data-link="<?= $block
+    ->escapeUrl($block->getUrl('quotation/seller'))."#quoted_products";?>">
+        <h3><?=/* @noEscape */$block->getAllSentQuotesCount() ?></h3>
+        <span><?=/* @noEscape */__("Quote") ?></span>
+    </div>
+    <div class="wk-mp-count-display-box-sec" data-link="<?= $block
+    ->escapeUrl($block->getUrl('marketplace/order/history'));?>">
+        <h3><?=/* @noEscape */$block->escapeHtml($block->getSellerOrdersCount()) ?></h3>
+        <span><?=/* @noEscape */__("Order") ?></span>
+    </div>
+    <div class="wk-mp-count-display-box-sec" data-link="<?= $block
+    ->escapeUrl($block->getUrl('helpdesk/seller/index'));?>">
+        <h3><?=/* @noEscape */ $block->getHelpdeskCount()?></h3>
+        <span><?=/* @noEscape */__("Ticket") ?></span>
+    </div>
+    <div class="wk-mp-count-display-box-sec" data-link="#">
+        <h3><?=/* @noEscape */$block->getRmaCount() ?></h3>
+        <span><?=/* @noEscape */__("RMA") ?></span>
+    </div>
+</div>
+<script>
+    require(["jquery"],function($){
+        $(".wk-mp-count-display-box-sec").on("click", function(){
+            var url = $(this).attr("data-link");
+            window.location.href= url;
+        });
+    })
+</script>

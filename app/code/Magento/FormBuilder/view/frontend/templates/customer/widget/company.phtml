@@ -1,0 +1,32 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/** @var \Webkul\FormBuilder\Block\Customer\Widget\Company $block */
+?>
+<div class="field company">
+    <div class="control">
+            <?php
+            $_validationClass = $block->escapeHtmlAttr(
+                $this->helper(\Magento\Customer\Helper\Address::class)
+                     ->getAttributeValidationClass('company')
+            );
+            ?>
+        <input type="text"
+               name="company"
+               id="company"
+               placeholder=" " 
+               value="<?= $block->escapeHtmlAttr($block->getCompany()) ?>"
+               title="<?= $block->escapeHtmlAttr(__('Company')) ?>"
+               class="input-text <?= $_validationClass ?: '' ?>"
+         >
+        <span class="wk-material-label"><?= $block->escapeHtml(__('Company')) ?></span>
+    </div>
+</div>

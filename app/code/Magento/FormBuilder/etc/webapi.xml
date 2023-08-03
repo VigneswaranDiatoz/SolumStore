@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+
+    <route url="/V1/formbuilder/forms" method="GET">
+        <service class="Webkul\FormBuilder\Api\FormBuilderInterface" method="forms"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/formbuilder/form/:id" method="GET">
+        <service class="Webkul\FormBuilder\Api\FormBuilderInterface" method="formById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/formbuilder/response" method="GET">
+        <service class="Webkul\FormBuilder\Api\FormBuilderInterface" method="response"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/formbuilder/response/:id" method="GET">
+        <service class="Webkul\FormBuilder\Api\FormBuilderInterface" method="responseById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/formbuilder/form/newform" method="POST">
+        <service class="Webkul\FormBuilder\Api\FormBuilderInterface" method="newForm"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/sellercategories" method="GET">
+        <service class="Webkul\FormBuilder\Api\SellerManagementInterface" method="getSellerSubCategory" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/phone-code" method="GET">
+        <service class="Webkul\FormBuilder\Api\SellerManagementInterface" method="getPhoneCode" />
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+</routes>

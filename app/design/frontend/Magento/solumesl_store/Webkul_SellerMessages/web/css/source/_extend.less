@@ -1,0 +1,172 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-design {
+            .wk-mp-customer-tabs-fieldset {
+                .page-title-wrapper-heading {
+                    .product {
+                        &.data {
+                            &.items {
+                                width    : 100% !important;
+                                max-width: 100%;
+                                margin   : 0;
+                            }
+                        }
+                    }
+
+                    .customer_tab_heading_container {
+                        padding-bottom : 4px;
+                        margin         : unset !important;
+                        display        : flex;
+                        justify-content: center;
+                        overflow       : hidden;
+
+                        .customer_tab_hash_links {
+                            font-weight   : 400 !important;
+                            font-size     : 16px !important;
+                            line-height   : 22px !important;
+                            color         : #6f6e73;
+                            padding-bottom: unset !important;
+                            border        : unset !important;
+                            background    : unset !important;
+                            width         : fit-content;
+                        }
+
+                        &.active {
+                            .customer_tab_hash_links {
+                                font-weight: 600 !important;
+                                font-size  : 16px !important;
+                                line-height: 22px !important;
+                            }
+
+                            border-bottom: 4px solid #00203f;
+                        }
+                    }
+
+                    .customer_tab_container {
+                        border    : unset !important;
+                        margin-top: 33px !important;
+                        border-top: 1px solid #dedede !important;
+                    }
+
+                    .wk-mp-top-heading-legend {
+                        position     : absolute;
+                        top          : 20px;
+                        width        : 40% !important;
+                        border-bottom: unset !important;
+
+                        span {
+                            &:not(.box-content,.mp-back-content){
+                                font-weight: 600;
+                                font-size  : 20px;
+                                line-height: 26px;
+                                color      : #000000;
+                            }
+                            &.mp-back-content{
+                                font-weight: 600 !important;
+                                font-size: 12px !important;
+                                position: relative;
+                                bottom: 5px;
+                            }
+                            &.box-content{
+                                font-weight: 600 !important;
+                                font-size: 12px !important;
+                                position: relative;
+                                bottom: 5px;
+                            }
+                        }
+                        b{
+                            &.mp-back-arrow{
+                                &:after {
+                                    font-family: 'solum-icon';
+                                    content: "\e906";
+                                    font-size: 20px;
+                                }
+                            }
+                            &.mp-forward-arrow{
+                                &:after {
+                                    font-family: 'solum-icon';
+                                    content: "\e907";
+                                    position: relative;
+                                    bottom: 2px;
+                                }
+                            }
+                        }
+                    }
+
+                    .block-dashboard-addresses {
+                        .block-content {
+                            display        : flex;
+                            align-content  : stretch;
+                            justify-content: space-between;
+
+                            .box-billing-address {
+                                width: 50%;
+                            }
+
+                            .box-shipping-address {
+                                width: 50%;
+                            }
+                        }
+                    }
+
+                    .orders-history {
+                        overflow: unset !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .page-layout-seller-2columns-left {
+        .wk-mp-design {
+            .wk-mp-customer-tabs-fieldset {
+                .page-title-wrapper-heading {
+                    .customer_tab_container {
+                        margin-top: unset !important;
+                    }
+
+                    .customer_tab_heading_container {
+                        display      : block !important;
+                        width        : 100% !important;
+                        position     : relative;
+                        border-bottom: 1px solid #eae9e9;
+
+                        &.active {
+                            .customer_tab_hash_links {
+                                &:after {
+                                    content : '\e942' !important;
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        .customer_tab_hash_links {
+                            display: unset !important;
+
+                            &:after {
+                                top        : unset !important;
+                                right      : unset !important;
+                                margin-left: 10px;
+                                position   : absolute;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,81 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpMassUpload
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$isPartner = $block->isSeller();
+$attributeSetCollection = $block->getAttributeSetCollection();
+$profiles = $block->getDataFlowProfiles();
+?>
+<div class="wk-mp-design">
+    <div class="fieldset wk-mp-customer-tabs-fieldset">
+        <div class="page-title-wrapper-heading">
+            <legend class="legend wk-mp-top-heading-legend">
+                <a href="<?= $block->escapeUrl($block
+                ->getUrl('mpmassupload/product/view')."#mpmassupload_dataflow_profile");?>"><b 
+                class="mp-back-arrow"></b></a>&nbsp&nbsp
+                <a href="<?= $block->escapeUrl($block
+                ->getUrl('mpmassupload/product/view')."#mpmassupload_dataflow_profile");?>"><span 
+                class="mp-back-content"><?= /* @noEscape */__("Dataflow Profile")?></span></a>&nbsp
+                <b class="mp-forward-arrow"></b>&nbsp&nbsp    
+                <span class="box-content"><?= /* @noEscape */__("Add New Profile")?></span>&nbsp
+            </legend>
+        </div>
+    </div>
+</div>
+<?php if ($isPartner == 1) { ?>
+    <form action="<?= $block->escapeHtml($block->getUrl('mpmassupload/dataflow_profile/save'))?>"
+        enctype="multipart/form-data"
+        method="post"
+        id="form-dataflow-profile"
+        data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <?= $block->getBlockHtml('formkey') ?>
+            <?= $block->getBlockHtml('seller.formkey')?>
+            <legend class="legend">
+                <span><?= $block->escapeHtml(__("Add New Profile")); ?></span>
+                <button class="button wk-mp-btn primary-btn rounded line-height-15" type="submit">
+                    <span><span><?= $block->escapeHtml(__("Save Profile")); ?></span></span>
+                </button>
+            </legend>
+            <div class="field required">
+                <label for="profile_name" class="label">
+                    <span><?= $block->escapeHtml(__("Profile Name")); ?></span>
+                </label>
+                <div class="control">
+                    <input type="text"
+                        class="profilename required-entry"
+                        name="profile_name"
+                        data-validate="{required:true}"
+                        title="<?= $block->escapeHtml(__("Profile Name")); ?>"
+                        id="profile_name"/>
+                </div>
+            </div>
+            <div class="field required">
+                <label for="attribute_set" class="label">
+                    <span><?= $block->escapeHtml(__("Attribute Set")); ?></span>
+                </label>
+                <div class="control">
+                    <select data-validate="{'validate-select':true}"
+                        title="<?= $block->escapeHtml(__("Attribute Set")); ?>"
+                        class="required-entry"
+                        id="attribute_set"
+                        name="attribute_set_id"
+                        aria-required="true">
+                        <option value=""><?= $block->escapeHtml(__("Select Attribute Set")); ?></option>
+                        <?php foreach ($attributeSetCollection as $attribute): ?>
+                            <option value="<?= $block->escapeHtml($attribute->getAttributeSetId()); ?>">
+                                <?= $block->escapeHtml($attribute->getAttributeSetName()); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+<?php } ?>

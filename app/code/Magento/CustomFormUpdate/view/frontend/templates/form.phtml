@@ -1,0 +1,186 @@
+<?php
+// $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+
+// $customerData = $customerSession->getCustomer();
+
+
+$blockObj= $block->getLayout()->createBlock('Magento\CustomFormUpdate\Block\Article');
+var_dump($blockObj->getArticles());
+// var_dump($customer);
+die();
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            
+        </div>
+        <div class="col-md-6">
+            <div class="create_acc">
+                <div class="create_acc2">
+                    <h2><strong>Update Account Details</strong></h2>
+                    <!-- <input type="radio" name="demo" value="One" checked onclick="showPersonal()"/> Personal Account Form
+                    <input type="radio" name="demo" value="Two" onclick="showPartner()"/> Partner Login Form -->
+                </div>
+                <!-- <div class="myDiv" id="personal_account" >
+                    <h3>Personal Account</h3>
+                    <form id="MyForm" action="<?= $block->getBaseUrl() ?>customformupdate/index/save" method="post">
+                        <input type="text" name="firstname" value="<?= $block->escapeHtml($customer->getFirstname()) ?>" placeholder="First Name" required>
+                        <input type="text" name="lastname" placeholder="<?= $block->escapeHtml($customer->getFirstname()) ?>" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <input type="text" name="company" placeholder="Company">
+                        <label class="create_acc4">Country</label>
+                        <select name="country_id" id="country" class="" title="Country" data-validate="{'validate-select':true}">
+                            <option value="" > </option>
+                            <option value="AF" >Afghanistan</option>
+                            <option value="AX" >Åland Islands</option>
+                            <option value="AL" >Albania</option>
+                            <option value="DZ" >Algeria</option>
+                            <option value="AS" >American Samoa</option>
+                            <option value="AD" >Andorra</option>
+                            <option value="AO" >Angola</option>
+                            <option value="AI" >Anguilla</option>
+                            <option value="AQ" >Antarctica</option>
+                            <option value="IN" >India</option>
+                            <option value="US" selected="selected" >United States</option>
+                        </select> 
+                        <input type="tel" name="phone"  placeholder="Contact Number" required>
+                        <br>
+                        <div>
+                            <input type="checkbox" id="terms" required>
+                            <span data-bind="html: checkboxText" class="create_acc3">By joining, you agree to Solum <a href="https://stage.solumstore.com/privacy-notice" target="_blank">Terms &amp; Condition</a>, as well as to receive occasional emails from us.</span>
+                        </div>
+                        <br/>
+                        <button type="submit" class="create_acc_btn">Create Account</button>
+                    </form>
+                </div> -->
+                <div class="myDiv" id="partner_account" >
+                    <!--<h3>Partner Account</h3>-->
+                    <form id="MyForm" action="<?= $block->getBaseUrl() ?>customformupdate/index/savePartner" method="post">
+                        <input type="text" name="company" placeholder="Business Name" required>
+                        <input type="email" name="email" placeholder="Business Email" required>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <label class="create_acc4">Business Location</label>
+                        <select name="country_id" id="country" class="" title="Country" data-validate="{'validate-select':true}">
+                            <option value="" > </option>
+                            <option value="AF" >Afghanistan</option>
+                            <option value="AX" >Åland Islands</option>
+                            <option value="AL" >Albania</option>
+                            <option value="DZ" >Algeria</option>
+                            <option value="AS" >American Samoa</option>
+                            <option value="AD" >Andorra</option>
+                            <option value="AO" >Angola</option>
+                            <option value="AI" >Anguilla</option>
+                            <option value="AQ" >Antarctica</option>
+                            <option value="IN" >India</option>
+                            <option value="US" selected="selected" >United States</option>
+                        </select> 
+                        <span class="create_acc3">If you don't have legal business, enter country of your residence</span>
+                        <br><br>
+                        <div>
+                            <input type="checkbox" id="terms" required>
+                                <span data-bind="html: checkboxText" class="create_acc3">By joining, you agree to Solum <a href="https://stage.solumstore.com/privacy-notice" target="_blank">Terms &amp; Condition</a>, as well as to receive occasional emails from us.</span>
+                        </div>
+                       <br/>
+                        <button type="submit" class="create_acc_btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+           
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+input[type="text"], input[type="password"], input[type="tel"],input[type="number"], input[type="email"]{
+    padding: 22px 8px;
+    margin: 6px 0px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+}
+::placeholder 
+{
+    color:#8f8a8a !important;
+}
+::-webkit-input-placeholder
+{
+    color:#8f8a8a !important;
+}
+.create_acc {
+    border: 2px solid #ccc;
+    padding: 0px 10px 18px 10px;
+}
+.create_acc2
+{
+    text-align:center;
+}
+.create_acc2 > h2
+{
+    font-weight: 700;
+}
+span.create_acc3 {
+    font-size: 12px;
+    color: #686868;
+}
+.create_acc_btn
+{
+    padding: 13px 15px;
+    background: #00203f;
+    border-radius: 30px;
+    min-width: 96px;
+    color:#fff;
+    width:100%;
+}
+.create_acc_btn:hover
+{
+    background: #1979c3;
+    color:#fff;
+}
+select#country {
+    height: 44px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+}
+label
+{
+    font-size: 12px;
+    margin: 0px;
+    color: #686869;
+}
+.myDiv{
+	display:none;
+}  
+#showOne{
+     ;
+    padding:10px;
+}
+#showTwo{
+   
+    padding:10px;
+}
+</style>
+
+    <script>
+        // $(document).ready(function(){
+        //     $("#showOne").show();
+        //     $('input[type="radio"]').click(function(){
+        //         var demovalue = $(this).val(); 
+        //         $("div.myDiv").hide();
+        //         $("#show"+demovalue).show();
+        //     });
+        // });
+        showPersonal();
+        function showPersonal(){
+            document.getElementById('partner_account').style.display ='none';
+            document.getElementById('personal_account').style.display ='block';
+        }
+        function showPartner(){
+            document.getElementById('partner_account').style.display ='block';
+            document.getElementById('personal_account').style.display ='none';
+        }
+</script>

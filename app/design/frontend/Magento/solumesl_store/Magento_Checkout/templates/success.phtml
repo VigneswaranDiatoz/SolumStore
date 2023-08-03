@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<div class="checkout-success solumesl-checkout-success-order">
+    <?php if ($block->getOrderId()) :?>
+            <h1><?= $block->escapeHtml(____("Your order is confirmed!"))?></h1>
+            <p><?= $block->escapeHtml(__('Thanks for your order. We sent you the confirmation email along with order details and tracking info.')) ?></p>
+            <?php if ($block->getCanViewOrder()) :?>
+            <span class="solumesl-success-order-id"><?= $block->escapeHtml(__("Your Order Id is"))?></span>
+            <p><?= $block->escapeHtml(__(' #%1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a', 'strong']) ?></p>
+            <?php  else :?>
+                <p><?= $block->escapeHtml(__('Your order # is: <span>%1</span>.', $block->getOrderId()), ['span']) ?></p>
+            <?php endif;?>
+    <?php endif;?>
+
+    <?= $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar solumesl-success-order-actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue solumesl-success-continue-button" href="<?= $block->escapeUrl($block->getContinueUrl()) ?>"><span><?= $block->escapeHtml(__('Continue Shopping')) ?></span></a>
+        </div>
+    </div>
+</div>

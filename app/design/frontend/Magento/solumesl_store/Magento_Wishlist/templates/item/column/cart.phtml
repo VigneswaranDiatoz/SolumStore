@@ -1,0 +1,88 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart $block */
+
+/** @var \Magento\Wishlist\Model\Item $item */
+$item = $block->getItem();
+$product = $item->getProduct();
+$_index = $item->getProductId();
+/** @var \Magento\Wishlist\ViewModel\AllowedQuantity $viewModel */
+$viewModel = $block->getData('allowedQuantityViewModel');
+$allowedQty = $viewModel->setItem($item)->getMinMaxQty();
+?>
+<?php foreach ($block->getChildNames() as $childName) : ?>
+    <?= /* @noEscape */ $block->getLayout()->renderElement($childName, false) ?>
+<?php endforeach;?>
+<div class="box-tocart">
+    <fieldset class="fieldset">
+    <?php if ($item->canHaveQty() && $product->isVisibleInSiteVisibility()) : ?>
+        <div class="field qty">
+            <label class="label" for="qty[<?= $block->escapeHtmlAttr($item->getId()) ?>]"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control">
+            <input type="number" value="1" id="qty-<?=/* @noEscape */$_index?>"
+                             class="qty" name="qty"
+                             >
+               <span class="solumesl_qty_buttons_pairs">
+                    <button type="button"  
+                    class="solumesl_product_qty_button solumesl_product_qty_inc increaseQty" 
+                        id="<?= /* @noEscape */$_index ?>-upt">
+                    </button>
+                    <button type="button"  
+                    class="solumesl_product_qty_button solumesl_product_qty_dec decreaseQty"  
+                        id="<?= /* @noEscape */$_index ?>-dec" 
+                        > 
+                    </button>
+                </span>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($product->isSaleable()) : ?>
+    <div class="product-item-actions">
+        <div class="actions-primary">
+            <button type="button" data-role="tocart" data-post='<?= /* @noEscape */ $block->getItemAddToCartParams($item) ?>' title="<?= $block->escapeHtmlAttr(__('Add to Cart')) ?>" data-item-id="<?= $block->escapeHtmlAttr($item->getId()) ?>" class="action tocart primary">
+                <span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+            </button>
+        </div>
+    </div>
+    <?php else : ?>
+        <?php if ($product->getIsSalable()) : ?>
+            <p class="available stock" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+                <span><?= $block->escapeHtml(__('In stock')) ?></span>
+            </p>
+        <?php else : ?>
+            <p class="unavailable stock" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+                <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+            </p>
+        <?php endif; ?>
+    <?php endif; ?>
+    </fieldset>
+</div>
+
+
+<script>
+    require([
+                'jquery', 'mage/url'
+            ], function($, urlBuilder){
+                $(document).ready(function(){
+                    $("body").find('.solumesl_product_qty_button').on("click",function(){ 
+                        var $this = $(this);
+                        var id = $(this).attr('id');
+                        var ctrl = ($(this).attr('id').replace('-upt','')).replace('-dec','');       
+                        var currentQty = $("#qty-"+ctrl).val();  
+                        if($this.hasClass('increaseQty')){
+                            var newAdd = parseInt(currentQty)+parseInt(1);
+                             $("#qty-"+ctrl).val(newAdd);
+                        }else{
+                             if(currentQty>=1){
+                                var newAdd = parseInt(currentQty)-parseInt(1);
+                                $("#qty-"+ctrl).val(newAdd); 
+                            }
+                        }
+                    });
+                });
+            })
+</script>

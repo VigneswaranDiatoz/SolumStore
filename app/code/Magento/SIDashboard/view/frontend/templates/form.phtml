@@ -1,0 +1,185 @@
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
+    $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+    $connection = $resource->getConnection();
+    $select = $connection->select()
+        ->from('customer_entity')
+        ->where('entity_id = ?', $block->getCustomerId());
+
+$result = $connection->fetchAll($select)[0];
+?>
+<div class="block block-dashboard-info">
+    <div class="myDiv" id="partner_account" >
+                        <!--<h3>Partner Account</h3>-->
+        <form id="MyForm" action="<?= $block->getBaseUrl() ?>customformupdate/index/savePartner" method="post">
+            <div style="width:48%; float:left">
+                <label class="create_acc4">Business Name</label>
+                <input type="text" name="businessName" value="<?php echo $result["business_name"]; ?>" placeholder="Business Name" >
+            </div>
+            <div style="width:48%;float:left;margin-left:4%">
+                <label class="create_acc4">Contact Info</label>
+                <input type="text" name="contactInfo" value="<?php echo $result["contact_info"]; ?>" placeholder="Contact Info" >
+            </div>
+            <div style="width:100%;float:left">
+                <label style="width:85%" class="create_acc4">Address</label><br>
+                <input style="width:98%" type="textarea" name="address" value="<?php echo $result["address"]; ?>" placeholder="Addres" >
+            </div>
+            <div style="width:48%;float:left;">
+                <label class="create_acc4">Email</label>
+                <input type="email" name="email" value="<?php echo $result["email"]; ?>" placeholder="Business Email" >
+            </div>
+            <div style="width:48%;float:left;margin-left:4%">
+                <label class="create_acc4">Phone</label>
+                <input type="text" name="phoneNumber" value="<?php echo $result["phone_number"]; ?>" placeholder="Phone Number" >
+            </div>
+            <div style="width:100%;float:left">
+                <label style="width:85%" class="create_acc4">Credit Card Info</label><br>
+                <input style="width:98%" type="textarea" name="creditCardInfo" value="<?php echo $result["credit_card_info"]; ?>" placeholder="Credit Card or Bank Info" >
+            </div>
+            <div style="width:48%;float:left">
+                <label class="create_acc4">Tax ID</label>
+                <input type="text" name="taxId" value="<?php echo $result["tax_id"]; ?>" placeholder="Tax ID" >
+            </div>
+            <div style="width:48%;float:left;margin-left:4%">
+                <label class="create_acc4">State Tax ID</label>
+                <input type="text" name="stateTaxId" value="<?php echo $result["state_tax_id"]; ?>" placeholder="State Tax ID" >
+            </div>
+            <div style="width:48%;float:left">
+                <label class="create_acc4">ESL</label>
+                <input type="text" name="esl" value="<?php echo $result["esl"]; ?>" placeholder="ESL" >
+            </div>
+            <div style="width:48%;float:left;margin-left:4%">
+                <label class="create_acc4">Current Solum Partner</label>
+                <!-- <input type="text" name="solumPartner" value="" placeholder="State Tax ID" >
+                <input type="radio" id="html" name="solumPartner" value="yes">
+                <label for="html">YES</label><br>
+                <input type="radio" id="css" name="solumPartner" value="no">
+                <label for="css">NO</label><br> -->
+                <div style="width:100%;padding: 14px 8px;margin: 6px 0px;">
+                    <label class="radio-inline" style="font-size: 15px;">
+                        <input type="radio" style="margin-right: 6px;" name="solumPartner" value="yes" <?php if($result['solum_partner']=="yes") {echo "checked";}?>>YES
+                    </label>
+                    <label class="radio-inline" style="font-size: 15px;margin-left:10px;">
+                        <input type="radio" name="solumPartner" style="margin-right:6px;" value="no" <?php if($result['solum_partner']=="no") {echo "checked";}?>>NO
+                    </label>
+                </div>
+            </div>
+            <div style="width:48%;float:left">
+                <label class="create_acc4">Sales Size</label>
+                <input type="text" name="salsSize" value="<?php echo $result["sales_size"]; ?>" placeholder="Size of Sales" >
+            </div>
+            <div style="width:48%;float:left;margin-left:4%">
+                <label class="create_acc4">Credit Ratings</label>
+                <input type="text" name="creditRatings" value="<?php echo $result["credit_ratings"]; ?>" placeholder="Credit Ratings">
+            </div>
+            <div style="width:48%;float:left">
+                <label class="create_acc4">Business Area</label>
+                <input type="text" name="businessArea" value="<?php echo $result["business_area"]; ?>" placeholder="Business Area">
+            </div>
+            <div style="width:48%;float:left;margin-left:4%">
+                <label class="create_acc4">POS</label>
+                <input type="text" name="pos" value="<?php echo $result["pos"]; ?>" placeholder="POS">
+            </div>
+            <div style="width:48%;float:left;margin-bottom:2%">
+                <label class="create_acc4">Relevant Documents(Pdf,Word,Image)</label>
+                <input type="file" name="docs" value="<?php echo $result["docs"]; ?>">
+            </div>
+            <!-- <input type="password" name="password" value="******" placeholder="Password" required>
+            <input type="text" name="email" value="" placeholder="UAN" required> -->
+            <!-- <label class="create_acc4">Business Location</label> -->
+            <!-- <select name="country_id" id="country" class="" title="Country" data-validate="{'validate-select':true}">
+                <option value="" > </option>
+                <option value="AF" >Afghanistan</option>
+                <option value="AX" >Åland Islands</option>
+                <option value="AL" >Albania</option>
+                <option value="DZ" >Algeria</option>
+                <option value="AS" >American Samoa</option>
+                <option value="AD" >Andorra</option>
+                <option value="AO" >Angola</option>
+                <option value="AI" >Anguilla</option>
+                <option value="AQ" >Antarctica</option>
+                <option value="IN" >India</option>
+                <option value="US" selected="selected" >United States</option>
+            </select>  -->
+            <!-- <span class="create_acc3">If you don't have legal business, enter country of your residence</span> -->
+            <br><br>
+            <!-- <div>
+                <input type="checkbox" id="terms" required>
+                    <span data-bind="html: checkboxText" class="create_acc3">By joining, you agree to Solum <a href="https://stage.solumstore.com/privacy-notice" target="_blank">Terms &amp; Condition</a>, as well as to receive occasional emails from us.</span>
+            </div>
+            <br/> -->
+            <button type="submit" class="create_acc_btn">Update Account</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .floatLeft{
+        float:left;
+    }
+input[type="text"],input[type="radio"], input[type="password"], input[type="tel"],input[type="number"], input[type="email"],input[type="textarea"]{
+    padding: 22px 8px;
+    margin: 6px 0px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+}
+::placeholder 
+{
+    color:#8f8a8a !important;
+}
+::-webkit-input-placeholder
+{
+    color:#8f8a8a !important;
+}
+.create_acc {
+    border: 2px solid #ccc;
+    padding: 0px 10px 18px 10px;
+}
+.create_acc2
+{
+    text-align:center;
+}
+.create_acc2 > h2
+{
+    font-weight: 700;
+}
+span.create_acc3 {
+    font-size: 12px;
+    color: #686868;
+}
+.create_acc_btn
+{
+    padding: 13px 15px;
+    background: #00203f;
+    border-radius: 30px;
+    min-width: 96px;
+    color:#fff;
+    width:100%;
+}
+.create_acc_btn:hover
+{
+    background: #1979c3;
+    color:#fff;
+}
+select#country {
+    height: 44px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+}
+label
+{
+    font-size: 12px;
+    margin: 0px;
+    color: #686869;
+}
+ 
+#showOne{
+     ;
+    padding:10px;
+}
+#showTwo{
+   
+    padding:10px;
+}
+</style>
+

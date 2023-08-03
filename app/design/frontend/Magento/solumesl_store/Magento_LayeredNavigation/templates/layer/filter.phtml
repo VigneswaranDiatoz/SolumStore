@@ -1,0 +1,38 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php
+/** @var \Magento\LayeredNavigation\Block\Navigation\FilterRenderer $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\LayeredNavigation\ViewModel\Layer\Filter $viewModel */
+$viewModel = $block->getData('product_layer_view_model');
+$id = 0;
+?>
+
+<ol class="items">
+    <?php foreach ($filterItems as $filterItem): $id++;?>
+        <li class="item">
+            <?php if ($filterItem->getCount() > 0): ?>               
+                <input type="checkbox" class="filter-checkbox filter-<?= $id;?>" id="filter-<?= $id;?>"/>
+                <label for="filter-<?= $id; ?>">
+                    <?= /* @noEscape */ $filterItem->getLabel() ?>           
+                    <span class="filter-count-label">
+                        <?php
+                            if ($filterItem->getCount() == 1): ?>
+                                <?= $escaper->escapeHtml(__('item')) ?><?php
+                            else:
+                                ?><?= $escaper->escapeHtml(__('item')) ?><?php
+                            endif;?>
+                    </span>                    
+                </label>
+                <a href="<?= $escaper->escapeUrl($filterItem->getUrl()) ?>"
+                   rel="nofollow" class="filter-link" id="filter-link-<?= $id;?>"
+                ></a>
+            <?php endif; ?>
+        </li>
+    <?php endforeach ?>
+</ol>

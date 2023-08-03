@@ -1,0 +1,107 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_MpRewardSystem
+ * @author    Webkul
+ * @copyright Copyright (c)  Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$viewModel = $block->getViewModel();
+?>
+<script>
+    window.mpgdprDownload = '<?= $block->escapeUrl($block->getUrl("mpgdpr/seller/accessrequest")); ?>';
+</script>
+<legend class="legend wk-mp-legend">
+    <span><?= __("Data Request")?></span>
+</legend>
+<div class="mp-gdpr-design">
+    <?php if ($viewModel->checkPermission("Webkul_MpGDPR::download_requests") > -1) : ?>
+    <div class="mpgdpr_anchor_hyper_links">
+        <a target="_blank" href="<?= $block->escapeUrl($block->getDownloadUrl()); ?>" class="button action primary download-pdf-mpgdpr">        
+            <?= /* @noEscape */ __("Download PDF"); ?>
+        </a>
+        <a target="_blank" href="<?= $block->escapeUrl($block->getUrl("mpgdpr/seller/accessrequest",
+                        ["mode" => "html","wk_key"=>rand()]
+                    )); ?>" class="button action primary html-downloadf-mpgdpr">
+            <?= /* @noEscape */ __("Download HTML"); ?>
+        </a>
+    </div>
+    <?php
+    endif;
+    if ($viewModel->checkPermission("Webkul_MpGDPR::manage") == 1) : ?>
+        <form data-mage-init='{"validation":{}}' method="post" action="<?= $block->escapeUrl(
+            $block->getUrl("mpgdpr/seller/updaterequest")
+        ); ?>" class="mpgdpr_data_request_form">
+                <div class="page-title">
+                    <?= /* @noEscape */ __("Request Data Update"); ?>
+                </div>
+                <hr>
+                <div class="field required">
+                    <label class="required label"><?= /* @noEscape */ __("Description") ?></label>
+                    <div class="control">
+                        <textarea name="message" 
+                        placeholder="<?=/* @noEscape */  __("Enter description for the updated data.");?>" 
+                        class="required-entry input-text validate-no-html-tags" cols="100"></textarea>
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button class="button action primary" type="submit">
+                            <?= /* @noEscape */ __("Submit Update Request") ?>
+                        </button>
+                    </div>
+                </div>
+        </form>
+        <form data-mage-init='{"validation":{}}' method="post" action="<?= $block->escapeUrl(
+            $block->getUrl("mpgdpr/seller/deleterequest")
+        ); ?>">
+                <div class="page-title">
+                    <?= /* @noEscape */ __("Request Data Delete"); ?>
+                </div>
+                <hr>
+                <div class="field required">
+                    <label class="required label"><?= /* @noEscape */ __("Delete Reason") ?></label>
+                    <div class="control">
+                        <textarea name="message" 
+                        placeholder="<?=/* @noEscape */  __("Kindly specify the reason for deleting your data.");?>" 
+                        class="required-entry input-text validate-no-html-tags" cols="100"></textarea>
+                    </div>
+                </div>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button class="button action primary" type="submit">
+                            <?= /* @noEscape */ __("Submit Delete Request") ?>
+                        </button>
+                    </div>
+                </div>
+        </form>
+    <?php endif;?>
+
+    <?php if ($viewModel->checkPermission("Webkul_MpGDPR::view_requests") > -1) : ?>
+    <div class="wk-mp-design">
+        <div class="page-title">
+            <?= /* @noEscape */ __("Request List"); ?>
+        </div>            
+    </div>
+    <hr>
+    <?= $block->getChildHtml()?>
+    <?php endif;?>
+</div>
+<style>
+    .admin__data-grid-header-row + .admin__data-grid-header-row{
+        margin:0px !important;
+    }
+    .admin__data-grid-wrap{
+        padding-top: 2px !important;
+    }
+</style>
+
+<script type="text/x-magento-init">
+    {
+        ".download-pdf": {
+            "Webkul_MpGDPR/js/downloadurl": {}
+        }
+    }
+</script>

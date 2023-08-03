@@ -1,0 +1,160 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .wk-custom-product-slider-pop-up {
+            left: 50% !important;
+
+            .action-close {
+                content    : '\d7' !important;
+                font-family: "";
+                font-size  : 27px !important;
+            }
+        }
+
+        #solumesl_custom_product {
+            #solumesl_custom_product_page-limit {
+                position: relative;
+            }
+
+            #solumesl_custom_product_table {
+                td {
+                    vertical-align: middle !important;
+
+                    .admin__control-checkbox:checked {
+                        &+label {
+                            &:before {
+                                background: #00203F;
+                                color     : #ffffff !important;
+                            }
+                        }
+                    }
+
+                    .data-grid {
+                        .admin__control-checkbox {
+                            &+label {
+                                &:before {
+                                    border       : 1px solid #797979;
+                                    box-sizing   : border-box;
+                                    border-radius: 2px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal-inner-wrap {
+            .modal-header {
+                .page-main-actions {
+                    .page-actions {
+                        .page-actions-buttons {
+                            .action-secondary {
+                                .marketplaceProductPageButtonDisplay(white, #00203F);
+                            }
+                        }
+                    }
+                }
+            }
+
+            #solumesl_custom_product {
+
+                .admin__filter-actions-container{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .admin__filter-actions-wrap{
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .wk-selectmenu{
+                        position: relative;
+
+                        .selectmenu-toggle:before{
+                            width: unset;
+                            border-left:unset;
+                        }
+
+                        .selectmenu-toggle:focus, .selectmenu-toggle:active, .selectmenu-toggle:hover{
+                            border: none;
+                        }
+
+                        select:not(select[multiple="multiple"]){
+                            background-image: unset !important;
+                        }
+
+                        .selectmenu-toggle{
+                            padding-right: unset;
+                            height: unset;
+                        }
+                    }
+                }
+                .admin__filter-actions {
+                    .action-default {
+                        // float  : unset !important;
+                        display: none;
+                    }
+
+                    background-image : url(../fonts/groupgrid.png);
+                    background-repeat: no-repeat !important;
+                    padding          : 4px 29px 35px 10px;
+                    background-color : unset !important;
+                    border           : none !important;
+                    text-indent      : -9999px;
+                }
+
+                .admin__control-support-text {
+                    margin-left: unset;
+                }
+
+                .admin__data-grid-pager-wrap {
+                    #solumesl_custom_product_page-limit {
+                        height: 40px !important;
+                        border-radius: 4px;
+                        padding: 2px 15px;
+                        background-color: #ffffff;
+                        border: 1px solid #797979;
+                        width: auto;
+                        min-width: 6.5rem;
+                    }
+                }
+
+                #solumesl_custom_product_table {
+                    .data-grid-filters {
+                        display: none;
+                    }
+
+                    tr {
+                        th {
+                            padding: 20px 10px !important;
+
+                            .admin__control-checkbox {
+                                &:checked {
+                                    &+label {
+                                        &:before {
+                                            background: #00203F;
+                                            color     : #ffffff !important;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

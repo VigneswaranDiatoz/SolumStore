@@ -1,0 +1,283 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+/** @var $block \Magento\ConfigurableProduct\Block\Product\View\Type\Configurable*/
+$_product    = $block->getProduct();
+$_attributes = $block->decorateArray($block->getAllowAttributes());
+$attributesData = json_decode($block->getJsonConfig(), true);
+
+$viewModel = $block->getViewModel();
+$buyingAttributes = $viewModel->getBuyingAttributeData();
+
+$ltqViewModel = $block->getLeadtoquoteViewModel();
+$attributeLabelArray = $ltqViewModel->getAttributeLabelArray();
+
+$ltqHelper = $ltqViewModel->getHelperObject();
+$conditionattributeId = $ltqHelper->getConditionAttributeId();
+
+$buyingAttrMultiselect = [];
+?>
+<?php if ($_product->isSaleable() && count($_attributes)) :?>
+    
+    <div class="configurable-left-wrapper">
+        <?php foreach ($buyingAttributes as $buyingAttr) : 
+            $imageData = json_decode($buyingAttr->getImageData(), true);
+            ?>
+            <div class="configurable-left-panel slider">
+                <div class="container-box">
+                    <?php if ($imageData && count($imageData)) { ?>
+                    <?php foreach ($imageData as $image) {
+                        ?>
+                        <div class="box-<?= $buyingAttr->getAttributeCode() ?>">
+                            <?php
+                                $images = json_decode($image['images'], true);
+                                if (isset($images['url'])) {
+                                ?>
+                                    <img src="<?= $images['url'] ?>" class="panel-image">
+                                <?php } else {
+                                    ?>
+                                    <img src="<?= $viewModel->getDefaultImage() ?>" class="panel-image">
+                                    <?php
+                                } ?>
+                            <div class="panel-content <?= $image['heading_align']?? '';?>" style="--content-color: <?= $image['heading_color'] ?? "#00000" ?>">
+                                <div class="panel-heading">
+                                    <?= $image['title']?$image['title']:$buyingAttr->getAttributeLabel() ?>
+                                </div>
+                                <div class="panel-description">
+                                    <?= $image['description'] ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    } 
+                } else { ?>
+                    <div class="box-<?= $buyingAttr->getAttributeCode() ?>">
+                        <img src="<?= $viewModel->getDefaultImage() ?>" class="panel-image">
+                            <div class="panel-content">
+                                <div class="panel-heading">
+                                    <?= $buyingAttr->getAttributeLabel() ?>
+                                </div>
+                                <div class="panel-description">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                <?php } ?>
+                </div>
+                <?php if ($imageData && count($imageData) > 1) { ?>
+                    <a class="prev prev-<?= $buyingAttr->getAttributeCode() ?>"></a>
+                    <a class="next next-<?= $buyingAttr->getAttributeCode() ?>"></a>
+                <?php } ?>
+            </div>
+            <script>
+                require(['jquery'], function($) {
+
+                    let slideIndex=1;
+                    showSlides(slideIndex);
+    
+                    $(document).on('click', '.prev-<?= $buyingAttr->getAttributeCode() ?>', function() {
+                        showSlides(slideIndex-=1);
+                    })
+                    $(document).on('click', '.next-<?= $buyingAttr->getAttributeCode() ?>', function() {
+                        showSlides(slideIndex-=1);
+                    })
+    
+                    function currentSlide(n) {
+                        showSlides(slideIndex=n);
+                    }
+    
+                    function showSlides(n) {
+                        let i;
+                        let slides = $(".box-<?= $buyingAttr->getAttributeCode() ?>");
+    
+                        if (n>slides.length) {
+                            slideIndex=1
+                        }
+                        if (n<1) {
+                            slideIndex=slides.length
+                        }
+    
+                        for (let slide of slides) {
+                            $(slides).css('display', "none")
+                        }
+                        $(slides[slideIndex-1]).css('display', "block")
+                    }
+                })
+            </script>
+        <?php 
+        $buyingAttrMultiselect[$buyingAttr->getAttributeId()] = $buyingAttr->getMultiselect();
+        endforeach; ?>
+    </div>
+
+    <div class="configurable-wrapper">
+        <div class="configurable-dots" style="display:none">
+            <?php foreach ($_attributes as $_attribute) : ?>
+                <button role="button" class="configurable-dot"><span></span></button>
+            <?php endforeach; ?>
+            <!-- final step dot -->
+            <button role="button" class="configurable-dot"><span></span></button>
+        </div>
+        <div class="configurable-right-wrapper">
+            <?php foreach ($_attributes as $_attribute) : ?>
+                <div class="configurable-right-panel serialize-data final-panel-step" data-multiselect="<?= $buyingAttrMultiselect[$_attribute->getAttributeId()] ?>">
+                    <div class="field configurable required">
+                        <label class="label" for="attribute<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>">
+                            <span><?= $block->escapeHtml($_attribute->getProductAttribute()->getStoreLabel()) ?></span>
+                        </label>
+                        <div class="control">
+                            <?php
+                            $attributeData = $attributesData['attributes'][$_attribute->getAttributeId()];
+                            
+                            foreach ($attributeData['options'] as $attributeOption) {
+                                if(count($attributeOption['products'])){
+                                ?>
+                                <label class="labl <?= $buyingAttrMultiselect[$_attribute->getAttributeId()]?'checkbox':'' ?>">
+                                    <input type="<?= $buyingAttrMultiselect[$_attribute->getAttributeId()]?'checkbox':'radio' ?>" 
+                                    class="super-attribute-select" data-validate="{required:true}" 
+                                    name="super_attribute[<?= $block->escapeHtmlAttr($_attribute->getAttributeId()) ?>][]" 
+                                    value="<?= $attributeOption['id'] ?>"/>
+                                    <div><?= $attributeOption['label'] ?></div>
+                                </label>
+                                <?php
+                                }
+                            }
+                            ?>
+                        </div>
+                        <button class="primary-btn proceed-btn">
+                            <?= __("Proceed") ?>
+                        </button>
+                    </div>
+                    <input type="hidden" name="product_id" value="<?= $_product->getId() ?>">
+                    <input type="hidden" name="product_type" value="<?= $_product->getTypeId() ?>">
+
+                </div>
+            <?php endforeach; ?>
+            <!-- final step panel -->
+            <div class="configurable-right-panel final-panel-step config-product" id="final-panel-step"></div>
+        </div>
+    </div>
+    <div class="configurable-buy-button config-product">
+            <div class="buy-button-container">
+
+                <button class="buy-button btn-disabled">
+                    <span class="price-box"><?= $viewModel->getZeroPrice() ?></span>
+                    <span class="buy-now"><?= __('Buy Now') ?></span>
+                </button>
+            </div>
+        </div>
+    <script id="buying-flow-final-step" type="text/x-magento-template">
+        <div class="field configurable required">
+            <label class="label" for="attributefinal-step">
+                <span><?= __('Required Quantity') ?></span>
+            </label>
+            <div class="control">
+                <input type="hidden" name="product_id" value="<%- data.product_id %>">
+
+                <% for(var i=0; i < data.products.length; i++) { %>
+                    <label class="labl">
+                            <% let deleteof = []; 
+                                for (var j=0; j < data.super_attribute[i].length; j++) { 
+                                deleteof.push(data.super_attribute[i][j].value);
+                            %>
+                                <input type="hidden" name="productData[<%- i %>][super_attribute][<%- data.super_attribute[i][j].super_attribute %>]" value="<%- data.super_attribute[i][j].value %>">
+                            <% } %>
+                            <div class="product_name">
+                                <%- data.products[i].name %>
+                            </div>
+                            <div class="details-container">
+                                <div class="details-qty qty">
+                                    <% if(data.subscription_productStatus){ %>
+                                        <div class="product-price-container">
+                                            <?= __('Price') ?> <%- data.sub_duration[i].formattedTotalPrice %><?= __('/');?>
+                                            <span class="set_duration_label"><%- data.sub_duration[i].name %></span>
+                                        </div>                                
+                                    <% }else{ %>
+                                        <div class="product-price-container"><?= __('Price') ?> <%- data.products[i].formatted_price %> <?= __('/ Stock') ?></div>
+                                    <% } %> 
+                                    <span class="update-input-field-container-solum">
+                                        <span><?= __('Qty') ?></span>
+                                        <input type="number" size="4" class="item-qty cart-item-qty buying-qty" name="productData[<%- i %>][qty]" min="1" 
+                                        oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                                        data-product_price="<%- data.products[i].price %>" value="1">
+                                    </span>
+                                </div>
+                                <div class="product-price-box">
+                                <% if(data.subscription_productStatus){ %>
+                                    <div class="price-container"><%- data.sub_duration[i].formattedTotalPrice %></div>
+                                <% } else { %>
+                                    <div class="price-container"><%- data.products[i].formatted_price %></div>
+                                <% } %>
+                                        <div class="delete-action" data-deleteof="<%- deleteof %>" 
+                                        <% if (data.products.length <= 1) { %>
+                                            style="display:none"    
+                                        <% } %>>
+                                        <?= __('Delete') ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <% if(data.subscription_productStatus){ %>
+                            <input type="hidden" name="productDuration[<%- i %>][duration]" class="hidden_product_duration" value="<%- data.sub_duration[i].planId %>" />
+                            <input type="hidden" name="productData[<%- i %>][product_id]" class="hidden_product_id" value="<%- data.products[i].entity_id %>">
+                            <input type="hidden" name="productData[<%- i %>][plan_id]" class="hidden_plan_id" value="<%- data.sub_duration[i].planId %>">
+                            <input type="hidden" name="productData[<%- i %>][term_id]" class="hidden_term_id" value="<%- data.sub_duration[i].planId %>">
+                            <input type="hidden" name="productData[<%- i %>][subscription_charge]" class="hidden_subscription_charge" value="<%- data.sub_duration[i].subscriptionCharge %>">
+                            <input type="hidden" name="productData[<%- i %>][start_date]" class="hidden_start_date" value="<%- data.sub_duration[i].startDate %>">
+                            <% if(data.sub_duration[i].conditionValue){%>
+                                <input type="hidden" name="productData[<%- i %>][condition_unit_value]" class="hidden_condition_unit_value" value="<%- data.sub_duration[i].conditionValue %>">
+                            <% } %>
+                            <?= $block->getBlockHtml('formkey') ?>
+                            <div class="subscription-box">
+                                <div class="product-monthly-box">                            
+                                    <select class="product_duration_select">
+                                        <% for(var l=0; l < Object.keys(data.sub_duration).length; l++){ var dkey = Object.keys(data.sub_duration)[l] %>
+                                            <option value="<%- data.sub_duration[dkey].totalDays %>" data-label="<%- data.sub_duration[dkey].name %>"
+                                            data-formattedPrice="<%- data.sub_duration[dkey].formattedTotalPrice %>"
+                                            data-price="<%- data.sub_duration[dkey].totalPrice %>" data-durationid="<%- data.sub_duration[dkey].planId %>"                                        
+                                            data-subscriptionCharge="<%- data.sub_duration[dkey].subscriptionCharge %>"
+                                            data-conditionValue="<%- data.sub_duration[dkey].conditionValue %>"
+                                            data-productType="<%- data.product_type %>"
+                                                <% if(l == 0){%>selected<%}%>
+                                            >
+                                                <%- data.sub_duration[dkey].name %>
+                                            </option>
+                                        <% } %>
+                                    </select>
+                                </div>    
+                                <div class="product-subdetail-container" id="product_id_<%- data.products[i].entity_id %>">
+                                    <% for(var m=0; m < data.subscription_labels[i].length; m++){%>
+                                        <div class="subdetail">
+                                            <span class="subdetail_name"><%- data.subscription_labels[i][m].label %> - </span>                                    
+                                            <span class="subdetail_label"><%- data.subscription_labels[i][m].value %></span>
+                                        </div>  
+                                    <% } %>    
+                                </div>
+                            </div>
+                        <% } %>
+                    </label>
+                <% } %>
+            </div>
+        </div>
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "#product-options-wrapper": {
+                "Magento_Catalog/js/new-wrapper": {
+                    "actionUrl": "<?= $block->getUrl('quotation/index/getsubscriptionproducts') ?>",
+                    "labelUrl": "<?= $block->getUrl('quotation/index/getsubscriptionlabels') ?>",
+                    "addToCartUrl": "<?= $block->getUrl('solumeslbuying/index/addtocart') ?>",
+                    "cartUrl": "<?= $block->getUrl('checkout/cart') ?>",
+                    "basePriceFormat": <?= $viewModel->getBasePriceFormat() ?>,
+                    "productAttributeSetId": "<?= $_product->getAttributeSetId() ?>",
+                    "productSubCategory": "<?= $_product->getSolumSubCategory() ?>",
+                    "productType": "<?= $_product->getTypeId() ?>"
+                }
+            }
+        }
+    </script>
+    
+<?php endif;?>

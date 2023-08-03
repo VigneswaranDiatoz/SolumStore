@@ -1,0 +1,32 @@
+<?php 
+$viewModel = $block->getViewModel();
+list($ratingNo,$totalRating, $totalRatingPercent) = $viewModel->getRatingNumberData($block->getProduct());
+$reviewStarData = $viewModel->getRatingData($block->getProduct());
+?>
+<div class="review-list-title">
+    <h4 class="product-tabs-heading"><?= __("Reviews") ?></h4>
+    <?php if($totalRating):?>
+    <div class="rating-summary rating-items-wrapper">
+        <div class="rating-result">
+            <span style="width:<?=$totalRatingPercent.'%';?>"></span>
+        </div>        
+        <div class="rating-text"><span><?= $ratingNo ?> <?= __("out of 5") ?></span></div>
+    </div>
+    <div class="review-text"><?= $totalRating?> <?= __("total Reviews") ?></div>
+    <?php endif;?>
+</div>
+<?php if($totalRating):?>
+<div class="review-list-content">
+<ol>
+    <?php $i=5; foreach($reviewStarData as $starData): ?>
+    <li>
+        <span><?= $i;?> <?= __("star") ?></span>
+        <div class="rating_progress_wrapper">
+            <div class="rating_progress"><div class="rating_percent" style="width:<?=$starData;?>%"></div></div>
+        </div>
+        <span><?=$starData;?>%</span>
+    </li>   
+    <?php $i--; endforeach;?> 
+</ol>
+</div>
+<?php endif; ?>

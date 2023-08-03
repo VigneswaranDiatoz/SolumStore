@@ -1,0 +1,48 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpMassUpload
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$isPartner = $block->isSeller();
+$attributeSetCollection = $block->getAttributeSetCollection();
+$profiles = $block->getDataFlowProfiles();
+
+$viewModel = $block->getViewModel();
+?>
+<?php if ($isPartner == 1): ?>
+        <fieldset class="fieldset">
+            <?= $block->getBlockHtml('formkey') ?>
+            <?= $block->getBlockHtml('seller.formkey')?>
+            <?php if ($viewModel->checkPermission("Webkul_MpMassUpload::dataflow_profile") == 1): ?>
+            <legend class="legend">
+                <span><?= $block->escapeHtml(__("Profile Information")); ?></span>
+                <a href="<?= /* @noEscape */  $block->getUrl('mpmassupload/dataflow/profile/')?>" class="left">
+                    <button class="button wk-mp-btn primary-btn rounded line-height-15"
+                        title="<?= $block->escapeHtml(__('Add New Profile')) ?>"
+                        type="button"
+                        id="dataflow-profile-add-profile">
+                        <span><span><?= $block->escapeHtml(__('Add New Profile')) ?></span></span>
+                    </button>
+                </a>
+            </legend>
+            <?php endif; ?>
+            <?= $block->getChildHtml('mpmassupload_dataflow_profile');?>
+        </fieldset>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "dataflowprofile": {}
+            }
+        }
+    </script>
+<?php else: ?>
+    <h2 class="wk-mp-error-msg">
+        <?= $block->escapeHtml(__("To Become Seller Please Contact to Admin.")); ?>
+    </h2>
+<?php endif; ?>

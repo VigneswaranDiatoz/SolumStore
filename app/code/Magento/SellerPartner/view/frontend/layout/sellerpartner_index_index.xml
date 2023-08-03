@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<head>
+        <css src="Magento_SellerPartner::css/popup.css" />
+        <script src="Magento_SellerPartner::js/popup.js" />
+    </head>
+<body>
+<referenceContainer name="sidebar.additional" remove="true" />
+    <referenceContainer name="content">
+        <block class="Magento\SellerPartner\Block\Article"
+            name="articleData"
+                template="Magento_SellerPartner::form.phtml"  />
+    </referenceContainer>
+</body>
+</page>

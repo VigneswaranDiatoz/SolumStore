@@ -1,0 +1,29 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    #media_gallery_content {
+        .imageDesignContent();
+    }
+    .draggable-handle {
+        &:before {
+            content: "" !important;
+        }
+        width: 8px;
+        height: 14px;
+        line-height: 14px;
+        background: url(../fonts/draggable-handle-vertical.png)
+            no-repeat 0 0;
+        cursor: ns-resize;
+        color: #b2b0ad;
+    }
+}

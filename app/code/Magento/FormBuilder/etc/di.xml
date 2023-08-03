@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\FormBuilder\Api\FormBuilderInterface" type="Webkul\FormBuilder\Model\FormBuilder" />
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="formbuilder_forms_index_data_source" xsi:type="string">Webkul\FormBuilder\Model\ResourceModel\Form\Grid\Collection</item>
+                <item name="formbuilder_response_index_data_source" xsi:type="string">Webkul\FormBuilder\Model\ResourceModel\Response\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Webkul\FormBuilder\Model\ResourceModel\Form\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_form</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_Form_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">wk_Form_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\FormBuilder\Model\Resource\Form</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\FormBuilder\Model\ResourceModel\Response\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_form_response</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_Form_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">wk_Form_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\FormBuilder\Model\Resource\Response</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\FormBuilder\Ui\Component\Massaction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">formbuilder/forms/massupdate</item>
+                <item name="paramName" xsi:type="string">formstatus</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translatable="true">Change Status</item>
+                    <item name="message" xsi:type="string" translatable="true">Are you sure?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Webkul\FormBuilder\Api\Data\ResponseInterface" type="Webkul\FormBuilder\Model\Response"/>
+    <preference for="Webkul\FormBuilder\Api\Data\WysiwygImageInterface" type="Webkul\FormBuilder\Model\WysiwygImage"/>
+    <preference for="Webkul\FormBuilder\Api\SellerManagementInterface" type="Webkul\FormBuilder\Model\SellerManagement"/>
+    <type name="Magento\Customer\Controller\Ajax\Login">
+        <plugin name="Webkul_FormBuilder::after_ajax_login" type="Webkul\FormBuilder\Plugin\Customer\Ajax\Login" sortOrder="1"/>
+    </type>
+</config>

@@ -1,0 +1,42 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common =true) {
+    .page-layout-seller-2columns-left {
+        .wk_media_gallery_content_text {
+            font-weight: 400;
+            font-size  : 14px;
+            line-height: 19px;
+            color      : #8D8D8D;
+        }
+        #wk-product360view-tab {
+            position: relative;
+
+            .wk-image360-preview {
+                float   : unset !important;
+                position: absolute;
+                right   : 0;
+                top     : 0px;
+
+                button {
+                    .marketplaceProductPageButtonDisplay(#ffffff, #00203f);
+                    border: 2px solid #00203f;
+                }
+            }
+
+            #wk_media_gallery_content {
+                margin-top: 10px;
+            }
+        }
+    }
+}

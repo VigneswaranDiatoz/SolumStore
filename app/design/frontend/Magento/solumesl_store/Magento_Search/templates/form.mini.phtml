@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php
+/** @var $block \Magento\Framework\View\Element\Template */
+/** @var $escaper \Magento\Framework\Escaper */
+/** @var $configProvider \Magento\Search\ViewModel\ConfigProvider */
+$configProvider = $block->getData('configProvider');
+/** @var $helper \Magento\Search\Helper\Data */
+$helper = $configProvider->getSearchHelperData();
+$allowedSuggestion = $configProvider->isSuggestionsAllowed();
+$quickSearchUrl = $allowedSuggestion ? $escaper->escapeUrl($helper->getSuggestUrl()) : '';
+$viewModel = $block->getViewModel();
+$configPath = 'catalog/search/min_query_length';
+$minSearchLength = $viewModel->getSystemConfig($configPath);
+$moduleHelper = $viewModel->getHelper();
+$quickAccessLinks = $moduleHelper->jsonDecode($viewModel->getQuickAccessLinks(), true);
+$searchCategories = $viewModel->getSearchCategory();
+$categoryQuery = $viewModel->getCatFromUrl();
+$searchCategoryLabel = $viewModel->getSearchCategoryLabel();
+$searchHistory = $viewModel->getSearchHistory();
+?>
+<div class="block block-search">
+    <div class="block block-title"><strong><?=$escaper->escapeHtml(__('Search'))?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch" id="search_mini_form" action="<?=$escaper->escapeUrl($helper->getResultUrl())?>" method="get">
+            <div class="field search" data-bind="scope: 'searchsection'">
+                <div class="control">
+                    <input id="search"
+                        class="action input-text"
+                        type="text"
+                        name="<?=$escaper->escapeHtmlAttr($helper->getQueryParamName())?>"
+                        value="<?=/* @noEscape */$helper->getEscapedQueryText()?>"
+                        placeholder="<?=$escaper->escapeHtmlAttr(__('Search for products and categories.'))?>"
+                        maxlength="<?=$escaper->escapeHtmlAttr($helper->getMaxQueryLength())?>"
+                        role="combobox"
+                        aria-haspopup="false"
+                        aria-autocomplete="both"
+                        autocomplete="off"
+                        aria-expanded="false" />
+                        <div class="searchBox-clearWrapper">
+                           <span class="searchBox-clear clearSearchBox"><i class="fa fa-times-circle"></i>X</span>
+                        </div>
+                    <div class="search-dropdown" id="dropdown">
+                        <div class="search-dropdown-wrapper">
+                            <div class="popular-product-container" id="popular-product-container">
+                            </div>
+                            <div class="case-study-container" id="case-study-container">
+                            </div>
+                            <?php if ($searchHistory) {?>
+                            <div class="history-container">
+                                <h3>History</h3>
+                                <div class="history-wrapper wk-scrollbar">
+                                    <?php foreach ($searchHistory as $history) {?>
+                                            <div class='history'>
+                                                <span class="text"><a href="<?=$block->escapeUrl($block->getUrl() . 'catalogsearch/result/?q=' . $history['query_text']);?>"><?=$history['query_text'];?></a></span>
+                                            </div>
+                                    <?php }?>
+                                </div>
+                            </div>
+                            <?php }?>
+                        </div>
+                        <?=!empty($quickAccessLinks) ? '<h3>Quick Access</h3>' : '';?>
+                        <div class="quick-access-container">
+                            <?php
+if ($quickAccessLinks) {
+    foreach ($quickAccessLinks as $links) {
+        ?>
+                                <a href="<?=$block->escapeUrl($links['link'])?>" <?php if ($links['target']) {?> target="_blank" <?php }?>>
+                                    <span><?=$block->escapeHtml($links['label'])?></span>
+                                </a>
+                            <?php
+}
+}
+?>
+                        </div>
+                    </div>
+                </div>
+                <div class="search_category">
+                    <label class="dropdown">
+                        <div class="dd-button" id="search_category_select"><?=$searchCategoryLabel;?></div>
+                        <ul class="dd-menu" id="search_category_menu">
+                            <li data-value="" data-name="<?=__('All Categories')?>">
+                                <?=__('All Categories')?>
+                            </li>
+                            <?php
+if (!empty($searchCategories)):
+    foreach ($searchCategories as $searchCategory): ?>
+	                                    <li data-value="<?=$searchCategory['value'];?>" data-name="<?=$searchCategory['label'];?>">
+	                                        <?=$searchCategory['label'];?>
+	                                    </li>
+	                                <?php endforeach;
+endif;?>
+                        </ul>
+                    </label>
+                    <input type="text" name="cat" value="<?=$categoryQuery ?? '';?>" id="search_category" style="display:none">
+                </div>
+                <div class="search_submit">
+                    <button type="submit" title="<?=$escaper->escapeHtml(__('Search'))?>" class="action submit" aria-label="Search">
+                        <span><?=$escaper->escapeHtml(__('Search'))?></span>
+                    </button>
+                </div>
+            </div>
+            <div class="actions">
+                <button type="button" class="action button">
+                    <span></span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!--search min query size warning popup ---->
+<div class="search-modal" id="search-notification-modal" >
+   <?= __('Minimum search query length is '.$minSearchLength.' !'); ?>
+</div>
+                       
+<script type="text/x-magento-init">
+    {
+        "*":{
+            "Webkul_SolumeslStoreTheme/js/searchsection":{
+                "controller": "<?=$block->getBaseUrl() . 'solumesltheme/index/searchsuggestion';?>",
+                "min_search_query":"<?= $minSearchLength ; ?>"
+            }
+        }
+    }
+</script>

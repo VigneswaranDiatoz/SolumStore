@@ -1,0 +1,174 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Generic.Files.LineLength
+// phpcs:disable Magento2.Templates.ThisInTemplate.FoundHelper
+?>
+<?php
+/**
+ * Ship to multiple address template
+ *
+ * @var $block \Magento\Multishipping\Block\Checkout\Addresses
+ */
+?>
+<form id="checkout_multishipping_form"
+      data-mage-init='{
+          "multiShipping": {"itemsQty": <?= /* @noEscape */ (int)$block->getCheckout()->getQuote()->getItemsSummaryQty() ?>},
+          "cartUpdate": {
+               "validationURL": "<?= $block->escapeUrl($block->getUrl('multishipping/checkout/checkItems')) ?>",
+               "eventName": "updateMulticartItemQty"
+          }}'
+      action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+      method="post"
+      class="multicheckout address form">
+    <div class="title">
+        <h1><?=/* @noEscape */  __("Ship to Multiple Address")?></h1>
+        <strong><?= $block->escapeHtml(__('Please select a shipping address for applicable items.')) ?></strong>
+    </div>
+    <input type="hidden" name="continue" value="0" id="can_continue_flag"/>
+    <input type="hidden" name="new_address" value="0" id="add_new_address_flag"/>
+    <div class="table-wrapper">
+        <table class="items data table" id="multiship-addresses-table">
+            <caption class="table-caption">
+                <?= $block->escapeHtml(__('Please select a shipping address for applicable items.')) ?>
+            </caption>
+            <thead>
+            <tr>
+                <th class="col product" scope="col"><?= $block->escapeHtml(__('Product')) ?></th>
+                <th class="col qty" scope="col"><?= $block->escapeHtml(__('Quantity')) ?></th>
+                <th class="col address" scope="col"><?= $block->escapeHtml(__('Deliver to')) ?></th>
+                <th class="col actions" scope="col">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($block->getItems() as $_index => $_item): ?>
+                <?php if ($_item->getQuoteItem()): ?>
+                    <tr>
+                        <td class="col product" data-th="<?= $block->escapeHtml(__('Product')) ?>">
+                            <?= $block->getItemHtml($_item->getQuoteItem()) ?>
+                        </td>
+                        <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')) ?>">
+                            <div class="field qty">
+                                <label for="ship-<?= $block->escapeHtml($_index) ?>-<?= $block->escapeHtml($_item->getQuoteItemId()) ?>-qty"
+                                       class="label">
+                                    <span><?= $block->escapeHtml(__('Qty')) ?></span>
+                                </label>
+                                <div class="control solumesl_qty_label">
+                                    <input type="number"
+                                           data-multiship-item-id="<?= $block->escapeHtml($_item->getSku()) ?>"
+                                           id="ship-<?= $block->escapeHtml($_index) ?>-<?= $block->escapeHtml($_item->getQuoteItemId()) ?>-qty"
+                                           name="ship[<?= $block->escapeHtml($_index) ?>][<?= $block->escapeHtml($_item->getQuoteItemId()) ?>][qty]"
+                                           value="<?= $block->escapeHtml($_item->getQty()) ?>"
+                                           size="2"
+                                           min="0"
+                                           class="input-text qty"
+                                           data-validate="{number: true, required:true, 'validate-greater-than-zero':true}"
+                                           autocomplete="off"
+                                    />
+                                    <span class="solumesl_qty_buttons_pairs">
+                                        <button type="button"  class="solumesl_product_qty_button solumesl_product_qty_inc increaseQty" 
+                                            id="<?= /* @escapeNotVerified */ $block->escapeHtml($_index) ?>-<?= /* @escapeNotVerified */ $_item->getQuoteItemId() ?>-upt">
+                                        </button>
+                                        <button type="button"  class="solumesl_product_qty_button solumesl_product_qty_dec decreaseQty"  
+                                            id="<?= /* @escapeNotVerified */ $block->escapeHtml($_index) ?>-<?= /* @escapeNotVerified */ $_item->getQuoteItemId() ?>-dec">
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col address" data-th="<?= $block->escapeHtml(__('Send To')) ?>">
+                            <?php if ($_item->getProduct()->getIsVirtual()): ?>
+                                <div class="applicable">
+                                    <?= $block->escapeHtml(__('A shipping selection is not applicable.')) ?>
+                                </div>
+                            <?php else: ?>
+                                <div class="field address">
+                                    <label for="ship_<?= $block->escapeHtml($_index) ?>_<?= $block->escapeHtml($_item->getQuoteItemId()) ?>_address"
+                                           class="label">
+                                        <span><?= $block->escapeHtml(__('Send To')) ?></span>
+                                    </label>
+                                    <div class="control">
+                                        <?= $block->getAddressesHtmlSelect($_item, $_index) ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </td>
+                        <td class="col actions solumesl_multishipping_action" data-th="<?= $block->escapeHtml(__('Actions')) ?>">
+                            <a href="#"
+                               title="<?= $block->escapeHtml(__('Remove Item')) ?>"
+                               data-post='<?= /* @noEscape */
+                                $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+                                   ->getPostData($block->getItemDeleteUrl($_item))
+                                ?>'
+                               class="action delete"
+                               data-multiship-item-remove="">
+                                <span><?= $block->escapeHtml(__('Remove item')) ?></span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit"
+                    title="<?= $block->escapeHtml(__('Go to Shipping Information')) ?>"
+                    class="action primary continue<?= $block->isContinueDisabled() ? ' disabled' : '' ?>"
+                    data-role="can-continue"
+                    data-flag="1"
+                <?php if ($block->isContinueDisabled()): ?>
+                    disabled="disabled"
+                <?php endif; ?>>
+                <span><?= $block->escapeHtml(__('Proceed to Shipping Information')) ?></span>
+            </button>
+        </div>
+        <div class="secondary">
+            <button type="submit"
+                    data-multiship-item-update=""
+                    class="action update"
+                    data-role="can-continue"
+                    data-flag="0">
+                <span><?= $block->escapeHtml(__('Update')) ?></span>
+            </button>
+            <button type="button"
+                    title="<?= $block->escapeHtml(__('Add New Address')) ?>"
+                    class="action add"
+                    data-role="add-new-address">
+                <span><?= $block->escapeHtml(__('Add New Address')) ?></span>
+            </button>
+            <a href="<?= $block->escapeUrl($block->getBackUrl()) ?>"
+               class="action back">
+                <span><?= $block->escapeHtml(__('Back to Cart')) ?></span>
+            </a>
+        </div>
+    </div>
+</form>
+<script>
+    require([
+                'jquery'
+            ], function($){
+                $(document).ready(function(){
+                    // for the increment decrement qty value
+                    $("body").find('.solumesl_product_qty_button').on("click",function(){ 
+                        var $this = $(this);
+                        var id = $(this).attr('id');
+                        var ctrl = ($(this).attr('id').replace('-upt','')).replace('-dec','');          
+                        var currentQty = $("#ship-"+ctrl+"-qty").val();
+                        if($this.hasClass('increaseQty')){
+                            var newAdd = parseInt(currentQty)+parseInt(1);
+                             $("#ship-"+ctrl+"-qty").val(newAdd);
+                        }else{
+                             if(currentQty>=1){
+                                var newAdd = parseInt(currentQty)-parseInt(1);
+                                $("#ship-"+ctrl+"-qty").val(newAdd); 
+                             }
+                        }
+                    });
+                })
+            })
+</script>

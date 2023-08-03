@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<div class="checkout-success solumesl-checkout-success-order">
+    <?php if ($block->getOrderIds()) : ?>
+        <img src="<?= $block->escapeUrl($this->getViewFileUrl('Magento_Checkout::images/illustration.svg'));?>" alt="success page image">
+        <h1><?= $block->escapeHtml(__("Your order is confirmed!"))?></h1>
+        <p><?= $block->escapeHtml(__('For successfully order items, you\'ll receive a confirmation email including '.
+                'order numbers, tracking information and more details.')) ?></p>
+        <?php if ($orderIds = $block->getOrderIds()) : ?>            
+            <div class="orders-succeed">
+            <ul class="orders-list">
+            <?php foreach ($orderIds as $orderId => $incrementId) : ?>
+                <li class="shipping-list">
+                    <div class="solumesl-success-order-id">
+                        <?= $block->escapeHtml(__("Your Order Id is"))?>
+                        <a class="order-number" href="<?= $block->escapeUrl($block->getViewOrderUrl($orderId)); ?>">
+                            <strong>#<?= $block->escapeHtml($incrementId); ?></strong>
+                        </a>
+                    </div>
+                <?php $shippingAddress = $block->getCheckoutData()->getOrderShippingAddress($orderId); ?>
+                    <div class="shipping-item">
+                        <?php if ($shippingAddress) : ?>
+                        <span class="shipping-label"><?= $block->escapeHtml(__('Ship to:')); ?></span>
+                        <span class="shipping-address">
+                            <?= $block->escapeHtml(
+                                $block->getCheckoutData()->formatOrderShippingAddress($shippingAddress)
+                            ); ?>
+                        </span>
+                        <?php else : ?>
+                            <span class="shipping-address">
+                                <?= $block->escapeHtml(__('No shipping required.')); ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+            </ul>
+            </div>
+        <?php endif; ?>        
+    <?php endif; ?>
+
+    <?= $block->getChildHtml() ?>
+
+    <div class="actions-toolbar solumesl-success-order-actions-toolbar">
+        <div class="primary">
+            <a class="action continue solumesl-success-continue-button secondary-btn rounded"
+               href="<?= $block->escapeUrl($block->getContinueUrl()) ?>"><span><?= $block->escapeHtml(__('Continue Shopping')) ?></span></a>
+        </div>
+    </div>
+</div>

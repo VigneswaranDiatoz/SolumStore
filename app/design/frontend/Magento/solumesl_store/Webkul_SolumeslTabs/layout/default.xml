@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul_SolumeslTabs default layout.
+ * @category  Webkul
+ * @package   Webkul_SolumeslTabs
+ * @author    Webkul
+ *  @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_SolumeslTabs::css/icon.css"/>
+    </head>
+    <body>
+        <referenceContainer name="layout2_seller_account_before_review">
+            <block class="Webkul\Marketplace\Block\Account\Navigation" name="layout2_solumesl_tabs_navigation" after="layout2_seller_communication_list" template="Webkul_SolumeslTabs::/layout2/account/navigation.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslAcl\ViewModel\VendorAcl</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

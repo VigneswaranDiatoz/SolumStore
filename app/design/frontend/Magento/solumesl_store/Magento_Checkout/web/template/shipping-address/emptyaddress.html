@@ -1,0 +1,12 @@
+<div class="emptyaddress-wrapper">
+    <div class="address-icon">
+        <img data-bind="attr: { src: require.toUrl('Magento_Checkout/images/address.svg') }" />
+    </div>
+    <div class="address-text">
+        <h4>No Address Yet</h4>
+        <p>Please add your first shipping address for shopping</p>
+        <!-- Address form pop up -->           
+        <button class="secondary-btn action-show-popup" click="showFormPopUp"
+        visible="!isNewAddressAdded()">Add Address</button>
+    </div>
+</div>

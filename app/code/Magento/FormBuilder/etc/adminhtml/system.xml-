@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="formbuilder" translate="label"  sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Form Builder</label>
+            <tab>webkul</tab>
+            <resource>Webkul_FormBuilder::config</resource>
+            <group id="general_settings" translate="label"  sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Form Builder</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="emailEnable" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Send Mail to Admin</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="adminName" translate="label" sortOrder="3" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Admin Name </label>
+                    <validate>required-entry</validate>
+                    <comment>It will be used in formBuilder emails.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="emailEnable">1</field>
+                    </depends>
+                </field>
+                <field id="sendingEmail" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Admin Email From</label>
+                    <validate>required-entry validate-email</validate>
+                    <comment>It will be used to email from and it is required.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="emailEnable">1</field>
+                    </depends>
+                </field>
+                <field id="adminEmail" translate="label" sortOrder="4" type="text" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Admin Email To</label>
+                    <validate>required-entry validate-email</validate>
+                    <comment>It will be used in email to and it is required.</comment>
+                    <depends>
+                        <field id="enable">1</field>
+                        <field id="emailEnable">1</field>
+                    </depends>
+                </field>
+                <field id="enableRecaptcha" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Recaptcha</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="siteKey" translate="label" type="obscure"  sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Recaptcha Site Key</label>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enableRecaptcha">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="secretKey" translate="label" type="obscure"  sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Recaptcha Secret Key</label>
+                    <comment>Get the Site Key and secret Key from Google https://www.google.com/recaptcha/admin </comment>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="enableRecaptcha">1</field>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <!-- <field id="maximagesize" translate="label" type="text"  sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Image Maximum Size</label>
+                    <comment> Please set the upload_max_filesize then configure value will be work.  Image size should be in MB (Enter the value except MB string).</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field> -->
+			</group>
+        </section>
+    </system>
+</config>

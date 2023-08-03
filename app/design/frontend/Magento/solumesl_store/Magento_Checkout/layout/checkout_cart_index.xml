@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="checkout_cart_item_renderers"/>
+    <body>
+        <referenceBlock name="checkout.cart.summary.title" remove="true"/>    
+        <referenceContainer name="cart.summary">
+            <block class="Magento\Checkout\Block\Cart\Totals" name="checkout.cart.solumesl.totals" template="Magento_Checkout::solumesl/cart/totals.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="block-totals" xsi:type="array">
+                                    <item name="subtotal" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/subtotal</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="title" xsi:type="string" translate="true">Subtotal</item>
+                                            <item name="template" xsi:type="string">Magento_Checkout/cart/totals/subtotal</item>
+                                        </item>
+                                    </item>
+                                    <item name="children" xsi:type="array">null</item>
+                            </item>
+                                
+                        </item>
+                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer> 
+        <move element="checkout.cart.solumesl.totals" destination="cart.summary" before="shipping"/>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">cart</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="label" xsi:type="string">Cart</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <move element="breadcrumbs" destination="main.content" before="-"/>
+    </body>
+</page>

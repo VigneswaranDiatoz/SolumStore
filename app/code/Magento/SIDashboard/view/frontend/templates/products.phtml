@@ -1,0 +1,60 @@
+<a href="<?= $block->getUrl('sidashboard/index/insert'); ?>" style="background-color: #1979c3;padding: 6px 9px 6px 9px;border-radius: 5px;color: white;">Create Product</a>
+<table class="view-table">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product SKU</th>
+            <th>Product Price</th>
+            <th>Product Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        // var_dump($block->getCustomerId());
+        $userId=$block->getCustomerId();
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $productCollection = $objectManager->create('\Magento\Catalog\Model\ResourceModel\Product\Collection');
+        $productCollection->addAttributeToSelect('*'); // You can specify the attributes you want to load
+        // $productCollection->addFieldToFilter('created_by','28');
+
+        foreach ($productCollection as $product) {
+            if($product->getCreatedBy() == $userId){
+                // Get product details
+                $productId = $product->getId();
+                $productName = $product->getName();
+                $productSku = $product->getSku();
+                $productPrice = $product->getPrice();
+                $productImageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_large')->getUrl(); // Adjust the image size as needed
+
+                // Display product details in the table
+                ?>
+                <tr>
+                    <td><?= $productName ?></td>
+                    <td><?= $productSku ?></td>
+                    <td><?= $productPrice ?></td>
+                    <td><img src="<?= $productImageUrl ?>" alt="<?= $productName ?>" width="50" height="100"></td>
+                    <td><a href="<?php echo $this->getUrl('sidashboard/index/edit', ['id' => $productId]); ?>">Edit</a></td>
+                </tr>
+        <?php }} ?>
+    </tbody>
+</table>
+
+<style>
+.view-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.view-table th,
+.view-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.view-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+</style>

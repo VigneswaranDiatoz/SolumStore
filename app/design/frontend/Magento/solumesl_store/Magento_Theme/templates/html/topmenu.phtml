@@ -1,0 +1,178 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit);
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$column1Title = $helper->getSupportTitle('column1');
+$column1Links = $helper->jsonDecode($helper->getSupportLinks('column1'),true);
+
+$column2Title = $helper->getSupportTitle('column2');
+$column2Links = $helper->jsonDecode($helper->getSupportLinks('column2'),true);
+
+$column3Title = $helper->getSupportTitle('column3');
+$column3Links = $helper->jsonDecode($helper->getSupportLinks('column3'),true);
+
+$contactSalesLink = $helper->getModuleConfig('solumesl_theme/search/contactsales_url');
+
+// menu configuration data
+$solutionMenuCategory = $viewModel->getSolutionCategory();
+$solutionMenuTarget = $helper->getModuleConfig('solumesl_theme/navigation/solution_nav_target');
+
+$businessMenuAttributes = $viewModel->getYourBusinessAttributes();
+$businessMenuTarget = $helper->getModuleConfig('solumesl_theme/navigation/business_nav_target');
+?>
+ 
+<?= /* @noEscape */ $_menuHtml?>
+<li class="level0 category-item level-top">
+    <a class="level-top">
+        <span><?= __('Solution'); ?></span>
+    </a>
+    <ul class="level0 submenu ui-menu">
+        <div class="nav-subsection">
+            <div class="nav-subcatsection">
+                <div class="subcat-leftpart support-container">
+                    <p><?= __('Solution');?></p>
+                    <div class="support-wrapper">
+                        <div class="column">                            
+                            <?php if(!empty($solutionMenuCategory)):
+                                foreach($solutionMenuCategory as $menu):?>
+                            <li class="level2 ui-menu-item">
+                                <a href="<?= $block->escapeUrl($block->getUrl($menu['url'])) ?>" <?php if($solutionMenuTarget){?> target="_blank" <?php }?>
+                                   class="ui-menu-item-wrapper">
+                                    <span><?= $block->escapeHtml($menu['label']); ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach; endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="subcat-rightpart">
+                    <?= $this->getLayout()->createBlock(\Webkul\SolumeslStoreTheme\Block\Theme\Html\SuccessStories::class)->toHtml(); ?>
+                </div>
+            </div>
+            <div class="nav-socialsection">
+                <?= $this->getLayout()->createBlock("Webkul\SolumeslSocialLinks\Block\Widget\SocialLinks")->setSocialboxPaddingLeft(50)->setSeparatorAfterSelect('1')->setAlignmentSelect("right")->toHtml(); ?>
+                
+                <div class="contact_link">
+                    <a href="<?= $block->escapeUrl($block->getUrl($contactSalesLink));?>" target="_blank" rel="noopener">
+                    <?= __('Contact Sales'); ?>
+                    </a>
+                </div>
+            </div>            
+        </div>
+    </ul>
+</li>
+<li class="level0 category-item level-top">
+    <a class="level-top">
+        <span><?= __('Your Business'); ?></span>
+    </a>
+    <ul class="level0 submenu ui-menu">
+        <div class="nav-subsection">
+            <div class="nav-subcatsection">
+                <div class="subcat-leftpart support-container">
+                    <p><?= __('Your Business');?></p>
+                    <div class="support-wrapper">
+                        <div class="column">
+                            <?php if(!empty($businessMenuAttributes)):
+                                foreach($businessMenuAttributes as $attribute):?>
+                            <li class="level2 ui-menu-item">
+                                <a href="<?= $block->escapeUrl($block->getUrl().$attribute['url']) ?>" <?php if($businessMenuTarget){?> target="_blank" <?php }?>
+                                class="ui-menu-item-wrapper">
+                                    <span><?= $block->escapeHtml($attribute['label']); ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach; endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="subcat-rightpart">
+                    <?= $this->getLayout()->createBlock(\Webkul\SolumeslStoreTheme\Block\Theme\Html\SuccessStories::class)->toHtml(); ?>
+                </div>
+            </div>
+            <div class="nav-socialsection">
+                <?= $this->getLayout()->createBlock("Webkul\SolumeslSocialLinks\Block\Widget\SocialLinks")->setSocialboxPaddingLeft(50)->setSeparatorAfterSelect('1')->setAlignmentSelect("right")->toHtml(); ?> 
+                <div class="contact_link">
+                    <a href="<?= $block->escapeUrl($block->getUrl($contactSalesLink));?>" target="_blank" rel="noopener">
+                    <?= __('Contact Sales'); ?>
+                    </a>
+                </div>
+            </div>            
+        </div>
+    </ul>
+</li>
+<li class="level0 category-item level-top">
+    <a class="level-top">
+        <span><?= __('Support'); ?></span>
+    </a>
+    <ul class="level0 submenu ui-menu">
+        <div class="nav-subsection">
+            <div class="nav-subcatsection">
+                <div class="subcat-leftpart support-container">
+                    <p><?= __('Support');?></p>
+                    <div class="support-wrapper">
+                        <div class="column">
+                            <div><span class="head"><?= __($column1Title);?></span></div>
+                            <?php if($column1Links):
+                                foreach($column1Links as $links):?>
+                            <li class="level2 ui-menu-item">
+                                <a href="<?= $block->escapeUrl($block->getUrl($links['link'])) ?>" <?php if($links['target']){?> target="_blank" <?php }?>
+                                class="ui-menu-item-wrapper">
+                                    <span><?= $block->escapeHtml($links['label']); ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach; endif; ?>
+                        </div>
+                        <div class="column">
+                            <div><span class="head"><?= __($column2Title);?></span></div>
+                            <?php if($column2Links):
+                                foreach($column2Links as $links):?>
+                            <li class="level2 ui-menu-item">
+                                <a href="<?= $block->escapeUrl($block->getUrl($links['link'])) ?>" <?php if($links['target']){?> target="_blank" <?php }?>
+                                class="ui-menu-item-wrapper">
+                                    <span><?= $block->escapeHtml($links['label']); ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach; endif; ?>
+                        </div>
+                        <div class="column">
+                            <div><span class="head"><?= $column3Title;?></span></div>
+                            <?php if($column3Links):
+                                foreach($column3Links as $links):?>
+                            <li class="level2 ui-menu-item">
+                                <a href="<?= $block->escapeUrl($block->getUrl($links['link'])) ?>" <?php if($links['target']){?> target="_blank" <?php }?>
+                                class="ui-menu-item-wrapper">
+                                    <span><?= $block->escapeHtml($links['label']); ?></span>
+                                </a>
+                            </li>
+                            <?php endforeach; endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="subcat-rightpart">
+                    <?= $this->getLayout()->createBlock(\Webkul\SolumeslStoreTheme\Block\Theme\Html\SuccessStories::class)->toHtml(); ?>
+                </div>
+            </div>
+            <div class="nav-socialsection">
+                <?= $this->getLayout()->createBlock("Webkul\SolumeslSocialLinks\Block\Widget\SocialLinks")->setSocialboxPaddingLeft(50)->setSeparatorAfterSelect('1')->setAlignmentSelect("right")->toHtml(); ?> 
+                <div class="contact_link">
+                    <a href="<?= $block->escapeUrl($block->getUrl($contactSalesLink));?>" target="_blank" rel="noopener">
+                    <?= __('Contact Sales'); ?>
+                    </a>
+                </div>
+            </div>            
+        </div>
+    </ul>
+</li>
+<?= $block->getChildHtml() ?>
+        

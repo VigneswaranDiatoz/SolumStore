@@ -1,0 +1,50 @@
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<!-- ko if: (isVisible()) -->
+<div class="shipping-information solumesl-payment-opc-shipping-information">
+    <!-- ko if: (!isStorePickup()) -->
+    <div class="ship-to"  data-bind="mageInit: {'collapsible':{'openedState': '_active'}}">
+        <div class="shipping-information-title">
+            <span data-bind="i18n: 'Shipment Address'"></span>
+            <button class="action action-edit" data-bind="click: back">
+                <span data-bind="i18n: 'edit'"></span>
+            </button>
+        </div>
+        <div class="shipping-information-content">
+            <!-- ko foreach: getRegion('ship-to') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+    </div>
+    <!--/ko-->
+    <div class="ship-via"  data-bind="mageInit: {'collapsible':{'openedState': '_active'}}">
+        <div class="shipping-information-title">
+            <span data-bind="i18n: 'Shipment Method'"></span>
+            <button class="action action-edit" data-bind="click: backToShippingMethod">
+                <span data-bind="i18n: 'edit'"></span>
+            </button>
+        </div>
+        <div class="shipping-information-content">
+            <span class="value" data-bind="text: getShippingMethodTitle()"></span>
+        </div>
+    </div>
+</div>
+<!--/ko-->
+ <!-- ko if: (isVisiblePaymentButton()) -->
+ <div class="shipping-information solumesl-payment-opc-shipping-information">
+    <div class="solumesl-opc-checkout-success-button">
+       <div class="actions-toolbar-trigger" id="continue-to-checkout-trigger-wrapper">
+           <div class="primary">
+               <button type="button" id="continue-to-checkout-trigger" class="button action continue primary" data-bind="click: goToCheckout">
+                   <span><!-- ko i18n: 'Place Order'--><!-- /ko --></span>
+               </button>
+           </div>
+       </div>
+    </div>
+</div>
+<!-- /ko -->

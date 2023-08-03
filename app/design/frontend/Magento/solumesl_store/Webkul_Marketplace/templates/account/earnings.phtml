@@ -1,0 +1,111 @@
+<?php
+$paramData = $block->getParmasDetail();
+$periodlist = $block->getPeriodValues();
+$filter = $paramData['period'] ?? '';
+$filterDateFrom = $paramData['from'] ?? '';
+$filterDateTo = $paramData['to'] ?? '';
+list($dataset, $labels)= $block->getDatasets();
+?>
+<form action="<?= $escaper->escapeUrl($block
+->getUrl('marketplace/account/earning', ["_secure" => $block->getRequest()->isSecure()])) ?>" 
+enctype="multipart/form-data" method="get" data-role="form-earning-validate" data-mage-init='{"validation":{}}'>
+    <div class="wk-mp-design">
+        <fieldset class="fieldset info wk-mp-fieldset">
+            <div data-mage-init='{"formButtonAction": {}}' class="wk-mp-page-title legend" id="wk-mp-earning-form">
+                <span><?= /* @noEscape */ __('Earnings') ?></span>
+                <button class="button wk-mp-btn primary-btn rounded line-height-15" title="<?= /* @noEscape */ __('Show Report') ?>" 
+                type="submit" id="save-btn">
+                    <span><span><?= /* @noEscape */ __('Show Report') ?></span></span>
+                </button>
+            </div>
+            <div class="wk-mp-earning-fields">
+                <span class="field required">
+                    <select name="period" id="period">
+                            <?php foreach ($periodlist as $period): ?>
+                                <option value="<?= /* @noEscape */ $period['value']?>" 
+                                <?php if ($filter == $period['value']) { echo 'selected="selected"'; }?>>
+                                <?= /* @noEscape */ $period['label']?></option>
+                            <?php endforeach; ?>
+                    </select>
+                </span>
+                <div class="wk-mp-earning-fields">
+                    <span class="field wk-mp-time-duraion">
+                        <label class="label"><?= $escaper->escapeHtml(__('From')) ?></label>
+                        &nbsp;&nbsp;
+                        <input type="text" name="from" id="earning-from-date" 
+                        class="input-text" value="<?= $escaper->escapeHtml($filterDateFrom)?>" />
+                    </span>
+                    <span class="field wk-mp-time-duraion">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="label"><?= $escaper->escapeHtml(__('To')) ?></label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="to" id="earning-to-date" 
+                        class="input-text" value="<?= $escaper->escapeHtml($filterDateTo)?>" />
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>
+<div id="container" style="width: 100%; float:right">
+    <canvas id="canvas"></canvas>
+</div>
+<script>
+    require([
+        "jquery",
+        'Webkul_Marketplace/js/earning/Chart.bundle',
+        'Webkul_Marketplace/js/earning/utils'
+    ], function ($) {
+        var MONTHS = [];
+        var color = Chart.helpers.color;
+        var barChartData = {
+            labels: <?= /* @noEscape */ $labels; ?>,
+            datasets: <?= /* @noEscape */ $dataset; ?>
+
+        };
+        $(document).ready(function() {
+            var ctx = document.getElementById('canvas').getContext('2d');
+            Chart.defaults.font.size = 16;
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels : {
+                                usePointStyle : true,
+                                font: {
+                                    size: 15
+                                }
+                            },
+                            align : 'end'
+                        }
+                    },
+                    scales : {
+                        x : {                            
+                            grid : {
+                                borderWidth : 2,
+                                lineWidth : 0
+                            }
+                        },
+                        y : {                            
+                            grid : {
+                                borderWidth : 2,
+                                lineWidth : 0
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    })
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Webkul_Marketplace/js/earning/date-range": {}
+        }
+    }
+</script>

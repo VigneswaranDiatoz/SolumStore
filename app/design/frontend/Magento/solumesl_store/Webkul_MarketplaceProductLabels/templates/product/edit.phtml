@@ -1,0 +1,86 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceProductLabels
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+    $checkBoxValue =$block->getProductLabelId();
+    $position = [
+        \Webkul\MarketplaceProductLabels\Model\Label::POSITION_TOP_LEFT =>__('Top-Left'),
+        \Webkul\MarketplaceProductLabels\Model\Label::POSITION_TOP_RIGHT =>__('Top-Right'),
+        \Webkul\MarketplaceProductLabels\Model\Label::POSITION_BOTTOM_LEFT => __('Bottom-Left'),
+        \Webkul\MarketplaceProductLabels\Model\Label::POSITION_BOTTOM_RIGHT => __('Bottom-Right')
+    ];
+    ?>
+<div class="wk-mp-product-container">
+    <br>    
+    <i class="container-hide-show close">
+        <label class="label"><?= $escaper->escapeHtml(__('Product Label')) ?></label>
+    </i>
+    <hr>
+    <div class="wk-mp-new-prod-fields _hide">
+        <div class="wk-mp-product-label-grid">
+            <table  class="data-grid mpproduct-data-grid" border="1">
+                <thead>
+                    <caption class="admin__control-support-text"><?= /* @noEscape */ __('Select Product Label Image') ?></caption>
+                    <tr>
+                        <th class="data-grid-th"><?= /* @noEscape */ __('Select Label') ?></th>
+                        <th class="data-grid-th"><?= /* @noEscape */ __('Thumbnail') ?></th>
+                        <th class="data-grid-th"><?= /* @noEscape */ __('Title') ?></th>
+                        <th class="data-grid-th"><?= /* @noEscape */ __('Position') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($block->getLabelList() as $label) {
+                        if ($label['status']) {
+                            if ($checkBoxValue==$label['id']) {
+                                $checked = 'checked';
+                            } else {
+                                $checked ='';
+                            }?>
+                            <tr class="data-row">
+                                <td>
+                                    <input type="radio" name="product[product_label_id]" 
+                                    value=<?= /* @noEscape */ $label['id']; ?> <?= /* @noEscape */ $checked; ?>>
+                                </td>
+                                <td>
+                                    <img src='<?= /* @noEscape */
+                                    $block->getMediaUrl($label['image_name']);?>' alt="image-icon" width="60" height="60">
+                                </td>
+                                <td>
+                                    <label><?= /* @noEscape */ $label['label_name']; ?></label>
+                                </td>
+                                <td>
+                                        <?php foreach ($position as $var => $data) {
+                                            if ($var == $label['position']) {
+                                                /* @noEscape */ echo __($data);
+                                            }
+                                        }?>
+                                </td>
+                            </tr> 
+                        <?php }
+                    } ?>
+                    <tr class="data-row">
+                        <td>
+                            <input type="radio" name="product[product_label_id]" value="0"/>
+                        </td>
+                        <td>
+                            <label><?= /* @noEscape */ __('No Selection') ; ?></label>
+                        </td>
+                        <td>
+                            <label><?= /* @noEscape */ __('No Selection') ; ?></label>
+                        </td>
+                        <td>
+                            <label><?= /* @noEscape */ __('No Selection') ; ?></label>
+                        </td>                        
+                    </tr>        
+                </tbody> 
+            </table>
+        </div>
+    </div>
+</div>

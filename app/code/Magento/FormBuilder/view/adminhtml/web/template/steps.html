@@ -1,0 +1,30 @@
+<!--
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_FormBuilder
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+-->
+<div class="steps">
+    <!--ko foreach: { data: getSteps(), as: 'data'} -->
+    <div title="Double Click to edit" data-bind="class : data.current() ? 'wk-step ' + data.id +' current' : 'wk-step ' + data.id" click="() => {$parent.showCurrentstep(data, event)}">
+        <input type="text" class="admin__control-text" data-bind="value: data.stepName  ??'Step '+ data.id, attr: {name: 'steps['+data.id+']'}" ></input>
+        <button type="button" class="action-remove" title="Remove Option" data-action="remove" click="() => {$parent.deleteCurrentStep(data, event)}">
+        </button>
+    </div>
+	<!-- /ko -->
+    <div class="actions" click="() => {addNewStep()}">
+        <button class="action-secondary action-add" type="button" id="add_step">
+            <span data-bind="i18n: 'Add Step'"></span>
+        </button>
+    </div>
+</div>
+<div class="fb-editors">
+    <!--ko foreach: { data: getSteps(), as: 'data'} -->
+    <div data-bind="attr: {id:'wk-fb-editor' + data.id}, class : data.current() ? 'wk-fb-editor ' + data.id +' current' : 'wk-fb-editor ' + data.id"></div>
+	<!-- /ko -->
+</div>

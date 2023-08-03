@@ -1,0 +1,41 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+/** @var $block \Webkul\Marketplace\Block\Account\Dashboard */
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+?>
+<legend class="legend wk-mp-legend">
+    <span><?=/* @noEscape */__("Dashboard") ?></span>
+</legend>
+<div class="wk-mp-dashboard-container">
+    <div class="wk-mp-total-display-box">
+        <div class="wk-mp-total-display-box-sec">
+            <h3><?=/* @noEscape */$block->getAllLeadsCount() ?></h3>
+            <span><?=/* @noEscape */__("Total Lead") ?></span>
+        </div>
+        <div class="wk-mp-total-display-box-sec">
+            <h3><?=/* @noEscape */$block->getAllQuotesCount() ?></h3>
+            <span><?=/* @noEscape */__("Total Quote") ?></span>
+        </div>
+        <div class="wk-mp-total-display-box-sec">
+            <h3><?=/* @noEscape */$block
+            ->getCurrencyWithFormat($block->convertToCurrentCurrency($block->getTotalSellerSale())); ?></h3>
+            <span><?=/* @noEscape */__("Total Revenue") ?></span>
+        </div>
+        <div class="wk-mp-total-display-box-sec">
+            <h3><?=/* @noEscape */$block
+            ->getCustomerCount(); ?></h3>
+            <span><?=/* @noEscape */__("Total Customer") ?></span>
+        </div>
+    </div>
+    <?=/* @noEscape */ $block->getChildHtml()?>
+</div>

@@ -1,0 +1,49 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_SolumeslTabs
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$_helper = $objectManager->create(\Webkul\Marketplace\Helper\Data::class);
+$isPartner= $_helper->isSeller();
+$magentoCurrentUrl = $block->getCurrentUrl();
+$isSellerGroup = $_helper->isSellerGroupModuleInstalled();
+$viewModel = $block->getViewModel();
+
+?>
+<?php
+if ($isPartner) { ?>
+    <?php if ($viewModel->checkPermission("Webkul_SolumeslTabs::materials") > -1 && (($isSellerGroup && $_helper->isAllowedAction('solumesltabs/materials')) || !$isSellerGroup)) { ?>
+    <li class="wk-mp-item-materials  level-0 <?= /* @noEscape */
+    strpos($magentoCurrentUrl, 'solumesltabs/materials')? "current active":"";?>">
+        <a href="<?= /* @noEscape */ $block->getUrl('solumesltabs/materials', ['_secure' => $block
+        ->getRequest()->isSecure()]); ?>">
+           <span> <?= /* @noEscape */ __('Materials') ?> </span>
+        </a>
+    </li>
+    <?php } ?>
+    <?php if ($viewModel->checkPermission("Webkul_SolumeslTabs::tutorials") > -1 && (($isSellerGroup && $_helper->isAllowedAction('solumesltabs/tutorials')) || !$isSellerGroup)) { ?>
+    <li class="wk-mp-item-tutorials  level-0 <?= /* @noEscape */
+    strpos($magentoCurrentUrl, 'solumesltabs/tutorials')? "current active":"";?>">
+        <a href="<?= /* @noEscape */ $block->getUrl('solumesltabs/tutorials', ['_secure' => $block
+        ->getRequest()->isSecure()]); ?>">
+           <span> <?= /* @noEscape */ __('Tutorials') ?> </span>
+        </a>
+    </li>
+    <?php } ?>
+    <?php if ($viewModel->checkPermission("Webkul_SolumeslTabs::faq") > -1 && (($isSellerGroup && $_helper->isAllowedAction('solumesltabs/faq')) || !$isSellerGroup)) { ?>
+    <li class="wk-mp-item-faq level-0 <?= /* @noEscape */
+    strpos($magentoCurrentUrl, 'solumesltabs/faq')? "current active":"";?>">
+        <a href="<?= /* @noEscape */ $block->getUrl('solumesltabs/faq', ['_secure' => $block
+        ->getRequest()->isSecure()]); ?>">
+           <span> <?= /* @noEscape */ __('FAQs') ?> </span>
+        </a>
+    </li>
+    <?php } ?>    
+<?php } ?>
+

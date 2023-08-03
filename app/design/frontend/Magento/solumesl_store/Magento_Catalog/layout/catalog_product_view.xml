@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>        
+        <move element="breadcrumbs" destination="product.info.main" before="-"/> 
+        <referenceContainer name="product.info.stock.sku" remove="true"/>                 
+        <referenceContainer name="product.info.extrahint" remove="true"/>                 
+        <!-- <referenceBlock name="product.info.overview" remove="true"/>                  -->
+        <referenceBlock name="marketplace_sellerprofile22" remove="true"/>                 
+        <!-- <referenceBlock name="catalog_product_view_addfavouriteseller" remove="true"/> -->
+        <!-- <referenceBlock name="product.info.addtocart.additional" remove="true"/> -->
+        <move element="product.info.review" destination="product.info.main" after="product.info.price"/>
+        <move element="product.info.overview" destination="product.info.main" after="product.info.review"/>
+        <referenceBlock name="catalog.product.related" remove="true"/>
+        <move element="related.product.addto" destination="component_tab"/>
+        <referenceBlock name="product.info.addtocart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_SolumeslStoreTheme::product/view/addtocart.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\LeadToQuote\ViewModel\Helper</argument>
+            </arguments>
+            <block class="Webkul\Marketplace\Block\Sellerblock" name="seller.contact.btn.simple" template="Magento_Catalog::seller_contact_btn.phtml"/>
+            <block class="Magento\Catalog\Block\Product\View" name="product.subscription.attributes.simple" template="Webkul_LeadToQuote::subscription_attributes.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_SolumeslStoreTheme::product/view/addtocart.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\LeadToQuote\ViewModel\Helper</argument>
+            </arguments>
+            <block class="Webkul\Marketplace\Block\Sellerblock" name="seller.contact.btn.config" template="Magento_Catalog::seller_contact_btn.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.bundle">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_SolumeslStoreTheme::product/view/addtocart.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\LeadToQuote\ViewModel\Helper</argument>
+            </arguments>
+            <block class="Webkul\Marketplace\Block\Sellerblock" name="seller.contact.btn.bundle" template="Magento_Catalog::seller_contact_btn.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.details"> 
+            <referenceBlock name="product.attributes">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Specification</argument>
+                    <argument name="class" xsi:type="string">specification</argument>
+                    <argument name="sort_order" xsi:type="string">20</argument>
+                </arguments>
+            </referenceBlock>               
+            <referenceBlock name="product.info.description">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Overview</argument>
+                    <argument name="class" xsi:type="string">overview</argument>
+                    <argument name="sort_order" xsi:type="string">10</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="faq.tab">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">FAQ</argument>
+                    <argument name="class" xsi:type="string">faq</argument>
+                    <argument name="sort_order" xsi:type="string">30</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="study.tab">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Case Study</argument>
+                    <argument name="class" xsi:type="string">case-study</argument>
+                    <argument name="sort_order" xsi:type="string">40</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="tutorials.tab">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Tutorials</argument>
+                    <argument name="class" xsi:type="string">tutorials</argument>
+                    <argument name="sort_order" xsi:type="string">50</argument>
+                </arguments>
+            </referenceBlock>
+            <referenceBlock name="reviews.tab">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Reviews</argument>
+                    <argument name="class" xsi:type="string">reviews</argument>
+                    <argument name="sort_order" xsi:type="string">60</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\View" name="review.info.list"/>
+            </referenceBlock>
+            <referenceBlock name="materials.tab">
+                <arguments>
+                    <argument name="title" translate="true" xsi:type="string">Materials</argument>
+                    <argument name="class" xsi:type="string">materials</argument>
+                    <argument name="sort_order" xsi:type="string">70</argument>
+                </arguments>
+            </referenceBlock>
+            <block class="Magento\Catalog\Block\Product\ProductList\Related" name="component_tab" template="Magento_Catalog::product/list/items.phtml" group="detailed_info" >
+               <arguments>
+                   <argument name="type" xsi:type="string">related</argument>
+                   <argument translate="true" name="title" xsi:type="string">Component</argument>
+                   <argument name="sort_order" xsi:type="string">80</argument>
+                   <argument name="view_model" xsi:type="object">Magento\Catalog\ViewModel\Product\Listing\PreparePostData</argument>
+               </arguments>
+           </block>
+        </referenceBlock>   
+        <referenceBlock name="review.info.list">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Catalog::product/view/review_list.phtml</argument>
+            </action>
+            <arguments>
+                <argument name="view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.review.form">
+            <arguments>
+                <argument name="general_view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.subscription.attributes.simple">
+            <arguments>
+                <argument name="leadtoquote_view_model" xsi:type="object">Webkul\LeadToQuote\ViewModel\Helper</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

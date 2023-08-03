@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="wk_form" resource="default" engine="innodb" comment="wk_form Table">
+        <column xsi:type="int" name="entity_id" padding="6" unsigned="true" nullable="false" identity="true" comment="entity_id ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Form Name"/>
+        <column xsi:type="varchar" name="url_key"  nullable="true" default="" comment="url_key"/>
+        <column xsi:type="varchar" name="success_url" nullable="true" comment="ISBN No"/>
+        <column xsi:type="int" name="status"/>
+        <column xsi:type="text" name="forms_fields" nullable="true" comment="Form fields"/>
+        <column xsi:type="varchar" name="submit_button" nullable="true" comment="Submit Button"/>
+        <column xsi:type="varchar" name="step1_label" nullable="true" comment="Step 1 Label"/>
+        <column xsi:type="varchar" name="login_label" nullable="true" comment="Login Label"/>
+        <column xsi:type="varchar" name="create_label" nullable="true" comment="Create Label"/>
+        <column xsi:type="varchar" name="success_message" nullable="true" comment="Success Message"/>
+        <column xsi:type="int" name="recaptcha" nullable="true" comment="Recaptcha"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+        <table name="wk_form_response" resource="default" engine="innodb" comment="wk_form Table">
+        <column xsi:type="int" name="entity_id" padding="6" unsigned="true" nullable="false" identity="true" comment="entity_id ID"/>
+        <column xsi:type="int" name="form_id"  comment="Form ID"/>
+        <column xsi:type="int" name="user_id"  comment="User ID"/>
+        <column xsi:type="int" name="store_id"  comment="Store ID"/>
+        <column xsi:type="varchar" name="user_ip" length="255"  comment="User IP"/>
+        <column xsi:type="text" name="forms_response" nullable="true" comment="Form Response"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="wk_fb_wysiwyg_image" resource="default" engine="innodb" comment="Decription Image">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" padding="10" identity="true" comment="Entity Id"/>
+        <column xsi:type="int" name="user_id" unsigned="true" nullable="false" identity="false" padding="10" default="0" comment="I=User Id"/>
+        <column xsi:type="text" name="url" nullable="true" comment="Image Url"/>
+        <column xsi:type="text" name="name" nullable="true" comment="Name"/>
+        <column xsi:type="text" name="type" nullable="true" comment="Type"/>
+        <column xsi:type="text" name="file" nullable="true" comment="File"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+</schema>

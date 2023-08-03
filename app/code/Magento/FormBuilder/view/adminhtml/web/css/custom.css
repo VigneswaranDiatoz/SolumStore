@@ -1,0 +1,72 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+.container{
+ 
+    margin: 0 auto;
+}
+
+.wk-formbuilder ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.wk-formbuilder ul.tabs li{
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.wk-formbuilder ul.tabs li.current{
+    background: #ededed;
+    color: #222;
+}
+
+.wk-formbuilder .tab-content{
+    display: none;
+    background: #ededed;
+    padding: 15px;
+}
+
+.wk-formbuilder .tab-content.current{
+    display: inherit;
+}
+
+.clear-all-fields {
+	box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	background:linear-gradient(to bottom, #fc8d83 5%, #e4685d 100%);
+	background-color:#fc8d83;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	font-size: 1.6rem;
+	letter-spacing: .025em;
+	padding-bottom: 0.6875em;
+	padding-top: 0.6875em;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.clear-all-fields:hover {
+	background:linear-gradient(to bottom, #e4685d 5%, #fc8d83 100%);
+	background-color:#e4685d;
+}
+.clear-all-fields:active {
+	position:relative;
+	top:1px;
+}
+
+.fb-checkbox{
+    display: flex;
+}

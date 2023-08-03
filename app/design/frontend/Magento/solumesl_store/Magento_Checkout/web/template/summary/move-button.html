@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- ko if: (isVisibleShippingButton()) -->
+        <div class="actions-toolbar-trigger" id="continue-to-payment-trigger-wrapper">
+            <div class="primary">
+                <button type="button" id="continue-to-payment-trigger" class="button action continue primary" if="rates().length" data-bind="click: goToPayment">
+                    <span><!-- ko i18n: 'Proceed'--><!-- /ko --></span>
+                </button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- ko if: (isPaymentPageDisplay()) -->
+<!-- /ko -->

@@ -1,0 +1,164 @@
+Sign Up for Newsletter,소식지 가입하기
+Email,이메일
+Password,비밀번호
+Confirm Password,비밀번호 확인
+Select seller to contact for the solution,해결책을 문의할 판매자를 선택하세요
+This Data no longer exists.,해당 데이터는 더 이상 존재하지 않습니다.
+Update Form #%1,양식 #%1 업데이트하기
+Add Form,양식 추가하기
+Forms,양식
+A total of %1 record(s) have been deleted.,총 %1 기록들이 삭제되었습니다.
+A total of %1 record(s) have been updated.,총 %1 기록들이 업데이트되었습니다.
+Something went wrong while updating the Form Builder(s) status.,양식 빌더 상태 업데이트 중 오류가 발생했습니다.
+Create New Form,신규 양식 생성하기
+Form saved successfully.,양식 저장 완료.
+Something Went Wrong!!,오류가 발생했습니다!!
+Invalid Form Key,유효하지 않은 양식 키
+Update Data %1,데이터 %1 업데이트하기
+Add Data,데이터 추가하기
+All Responses,모든 응답
+Response of %1,%1 응답
+Response of %1 #%2,%1 #%2 응답
+Something went wrong.,오류가 발생했습니다.
+Invalid Form,유효하지 않은 양식
+Successfully created.,생성 완료.
+File has been successfully uploaded,파일 업로드 완료
+" ""%1"" File Type Not Allowed or image size exceeds ."," ""%1"" 파일 유형 사용 불가 또는 이미지 크기 초과."
+No Data,데이터 없음
+Enabled,활성화됨
+Disabled,비활성화됨
+Added new form=>,추가된 신규 양식=>
+Unknown template type,알려지지 않은 템플릿 유형
+Join to Solum Store,Solum Store 가입하기
+Sign In to Solum Store,Solum Store 가입하기
+Join Solum Store,Solum Store 가입하기
+Edit,편집
+View,조회
+Guest,게스트
+View (%1),(%1) 조회하기
+Back,이전
+Save & Continue edit,저장/계속 편집
+Save Form,양식 저장하기
+Clear Fields,필드 초기화하기
+Form Creator,양식 크리에이터
+Form Information,양식 정보
+Title,제목
+Url Key,URL 키
+Success Url,성공 URL
+Step 1 Label,1 단계 라벨
+Login Label,로그인 라벨
+Create Label,라벨 생성하기
+Success Message,성공 메시지
+Thank you for submitting!,제출해 주셔서 감사합니다!
+Recaptcha,Recaptcha
+Enable,활성화
+Disable,비활성화
+Status,상태
+Delete,삭제
+Information,정보
+Submitted At,제출 시점
+IP Address,IP 주소
+Customer,고객
+Store,스토어
+Data,데이터
+View,조회
+No Data,데이터 없음
+Request Quote,견적 요청하기
+Join Us,가입하기
+stepName,stepName
+Choose option,옵션 선택하기
+Name,이름
+Click to add file,클릭하여 파일을 추가하세요
+Delete video,동영상 삭제하기
+Delete image,이미지 삭제하기
+Hidden,숨김
+Prev,이전
+Skip,건너뛰기
+Next,다음
+Submit,제출
+Thanks...!,감사합니다...!
+Others in your business area have interested in them,귀하 사업 영역의 다른 사람들이 관심을 보입니다
+* Required Fields,* 필수 필드
+Remember Me,기억해 주세요
+Forgot Your Password?,비밀번호를 잊으셨습니까?
+Continue,계속
+New to Solum?,Solum에 처음이십니까?
+Sign Up,가입하기
+Already registered?,이미 등록하셨습니까?
+Sign in,가입하기
+Address Information,주소 정보
+Address,주소
+Street Address %1,거리 주소 %1
+"Please select a region, state or province.","지역, 주 또는 지방을 선택하세요."
+Password Strength,비밀번호 보안 강도
+No Password,비밀번호 없음
+Company,회사
+Fax,팩스
+Phone Number,전화번호
+Facebook,Facebook
+Continue with Facebook,Facebook으로 진행하기
+Twitter,Twitter
+Continue with Twitter,Twitter로 진행하기
+Google,Google
+Continue with Google,Google로 진행하기
+Linkedin,Linkedin
+Continue with Linkedin,Linkedin으로 진행하기
+Instagram,Instagram
+Continue with Instagram,Instagram으로 진행하기
+OR,또는
+Text Field,텍스트 필드
+Default Field Name,기본 필드 명
+textarea,textarea
+Default Textarea,기본 Textarea
+Default Tinymce,기본 Tinymce
+Default Number,기본 번호
+Default Date,기본 날짜
+Default date Name,기본 날짜 명
+Default date,기본 날짜
+Default Select,기본 선택
+Default Radio,기본 라디오
+Default CheckBox,기본 체크박스
+Default Checkbox,기본 체크박스
+Default File,기본 파일
+"Supported File:- jpg, jpeg, pdf, doc, png","지원 파일:- jpg, jpeg, pdf, doc, png"
+Form does not have any fields.,양식에 필드가 포함되어 있지 않습니다.
+Form does not exist or can be disabled.,양식이 존재하지 않거나 비활성화될 수 있습니다.
+Browse Files...,파일 검색...
+Click here to browse images.,여기를 클릭하여 이미지를 검색하세요.
+Click to select image!,클릭하여 이미지를 선택하세요!
+Select Image,이미지 선택하기
+Add Step,단계 추가하기
+Response From Customer,고객 응답
+Please Enter the Form Name,양식 명을 입력하세요
+You haven't selected any items!,어떠한 품목도 선택하지 않았습니다!
+We could not detect a size.,크기를 감지할 수 없습니다.
+We don't recognize or support this file extension type.,본 파일 확장자 유형을 인식하거나 지원하지 않습니다.
+Image Detail,이미지 정보
+"Something went wrong, please try again later",오류가 발생했습니다. 나중에 다시 시도하세요
+Webkul,웹쿨
+Form Builder,양식 빌더
+General Settings,일반 설정
+Enable Form Builder,양식 빌더 활성화하기
+Send Mail to Admin,관리자에게 메일 전송하기
+Admin Name,관리자 명
+Admin Email From,관리자 이메일 발신
+Admin Email To,관리자 이메일 수신
+Enable Recaptcha,Recaptcha 활성화하기
+Recaptcha Site Key,Recaptcha 사이트 키
+Recaptcha Secret Key,Recaptcha 비밀 키
+Change Status,상태 변경하기
+Are you sure?,확실하십니까?
+Webkul Form Builder,웹쿨 양식 빌더
+Form Title,양식 명
+Form list,양식 목록
+ID,ID
+Name,이름
+Created at,생성 일시
+Updated at,업데이트 일시
+Delete items,품목 삭제하기
+Are you sure you want to delete selected Row(s)?,선택된 행을 삭제하시겠습니까?
+Form ID,양식 ID
+Form Name,양식 명
+Message Point,메시지 요점
+Submitted Date,제출일
+User Name,사용자 명

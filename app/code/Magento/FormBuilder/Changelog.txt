@@ -1,0 +1,30 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 4.0.2 --------------------------------------
+	
+	+ Compatible with Magento 2.4.x
+	- Bugs fixed
+-------------------------------- Version 4.0.1 --------------------------------------
+	
+	+ Compatible with Magento 2.4.x
+	- Minor Bugs fixed
+
+-------------------------------- Version 4.0.0 --------------------------------------
+	
+	+ Compatible with Magento 2.4.
+
+-------------------------------- Version 3.0.0 --------------------------------------
+
+	+ Compatible with Magento 2.3.x
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ Allow admin to create custom forms using drag and drop
+	+ Allow admin to show form at frontend using widget
+	+ Admin can see the all the response
+	+ Admin can enable google recaptcha v3 on the form 
+	+ Admin can see the response of particular form
+	+ Admin Will get the response's email

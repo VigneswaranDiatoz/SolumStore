@@ -1,0 +1,90 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+/** @var $block \Webkul\Marketplace\Block\Transaction\History */
+$mpHelper = $this->helper(\Webkul\Marketplace\Helper\Data::class);
+?>
+
+<form action="<?= $escaper->escapeUrl($block->getUrl('marketplace/withdrawal/request'));?>" method="post" class="wk-mp-transaction-form">
+    <?= $block->getBlockHtml('formkey')?>
+    <?= $block->getBlockHtml('seller.formkey')?>
+    <input type="hidden" name="is_requested" value="1" />
+    
+    <div class="wk-mp-tr-remain-btn-top">
+        <span class="solum-wk-mp-trans-text"><?=/* @noEscape */ __("Transactions")?></span>
+        <?php if ($block->getRemainTotal()*1) { ?>
+            <button type="submit" class="action-default action-primary">
+            <?= $escaper->escapeHtml(__('Make Withdrawal'))?>
+            </button>
+        <?php }?>
+    </div>
+
+</form>
+
+<div class="wk-mp-design">
+    <div class="wk-mp-tr-amount-wrapper">
+        <div class="wk-mp-tr-amount-total">
+            <div class="wk-mp-tr-amount-total-title">
+                <div class="wk-mp-tr-last-style-top">
+                    <?= $escaper->escapeHtml(__('Total Earning'))?>
+                </div>
+                <div class="wk-mp-tr-amount-style">
+                    <?= /* @noEscape */ $block->getFormatedPrice($block->getTotalSellerSale());?>
+                </div>
+            </div>
+            <hr>
+            <div class="wk-mp-tr-amount-total-desc">
+                <div>
+                    <div class="wk-mp-tr-last-style">
+                        <?= $escaper->escapeHtml(__('Total Sale'))?>
+                    </div>
+                    <div class="wk-mp-tr-amount-style">
+                        <?= /* @noEscape */ "+ ".$block->getFormatedPrice($block->getTotalSale());?>
+                    </div>                    
+                </div>
+                <div>
+                    <div class="wk-mp-tr-last-style">
+                        <?= $escaper->escapeHtml(__('Tax'))?>
+                    </div>
+                    <div class="wk-mp-tr-amount-style">
+                        <?= /* @noEscape */ "- ".$block->getFormatedPrice($block->getTotalTax());?>
+                    </div>                    
+                </div>
+                <div>
+                    <div class="wk-mp-tr-last-style">
+                        <?= $escaper->escapeHtml(__('Commission'))?>
+                    </div>
+                    <div class="wk-mp-tr-amount-style">
+                        <?= /* @noEscape */ "- ".$block->getFormatedPrice($block->getTotalCommission());?>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <?php if($mpHelper->isSellerUpdate()) {?>
+        <div class="wk-mp-tr-payout-total">
+            <div class="wk-mp-tr-last-style-top">
+                <?= $escaper->escapeHtml(__('Total Payout'))?>
+            </div>
+            <div class="wk-mp-tr-payout-style">
+                <?= /* @noEscape */ $block->getFormatedPrice($block->getTotalPayout());?>
+            </div>
+        </div>
+        <?php }?>
+        <div class="wk-mp-tr-remain-total" style="display:none">
+            <div class="wk-mp-tr-remain-title">
+                <div class="wk-mp-tr-txt-style wk-mp-tr-last-style-top"><?= $escaper
+                ->escapeHtml(__('Withdrawal'))?></div>
+                <div class="wk-mp-tr-amount-style">
+                    <?= /* @noEscape */ $block->getFormatedPrice($block->getRemainTotal());?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

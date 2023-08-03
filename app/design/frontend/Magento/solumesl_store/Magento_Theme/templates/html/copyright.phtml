@@ -1,0 +1,47 @@
+<?php
+$viewModel = $block->getViewModel();
+$helper = $viewModel->getHelper();
+$footerWeAccept = $viewModel->getFooterWeAccept();
+$copyrightLinks = $viewModel->getJsonHelper()->jsonDecode($viewModel->getCopyrightLinks(),true);
+// Below Copyright
+$bCopy_permission = $helper->getModuleConfig('solumesl_theme/footer_copyright/copyright_below');
+$bCopy_ContentText = $helper->getModuleConfig('solumesl_theme/footer_copyright/copyright_below_text');
+$bCopy_ContentLinkText = $helper->getModuleConfig('solumesl_theme/footer_copyright/copyright_below_link_text');
+$bCopy_ContentLink = $helper->getModuleConfig('solumesl_theme/footer_copyright/copyright_below_link');
+$bCopy_ContentLinkTarget = $helper->getModuleConfig('solumesl_theme/footer_copyright/copyright_below_link_target');
+?>
+<div class="copyright-wrapper">    
+    <div class="copyright">
+        <div class="left-panel">        
+            <ul class="copyright-links">
+                <?php if($copyrightLinks){
+                    foreach ($copyrightLinks as $links) {?>
+                    <li class="copyright-links-item">
+                        <a href="<?= $block->escapeUrl($links['link']) ?>" <?php if($links['target']){ ?> target="_blank" <?php } ?> rel="noopener">
+                            <?= $block->escapeHtml($links['label']) ?>
+                        </a>
+                    </li>                    
+                <?php } } ?>
+            </ul>
+        </div>
+        <div class="middle-panel">
+            <span><?php //echo  $block->escapeHtml($block->getCopyright()) ?></span>
+        </div>
+        <div class="right-panel">
+            <span><?= __('We accept'); ?></span>
+            <a href="#"><img src="<?= $block->escapeUrl($footerWeAccept) ?>" alt=""></a>             
+        </div>    
+    </div>
+    <?php if($bCopy_permission):?>
+    <div class="copyright">        
+        <div class="middle-panel">
+            <span><?= $block->escapeHtml(__($bCopy_ContentText)); ?>
+                <a href="<?= $block->escapeUrl($bCopy_ContentLink) ?? '#'; ?>" <?php if($bCopy_ContentLinkTarget){?> target="_blank" <?php } ?>>
+                    <?= $block->escapeHtml(__($bCopy_ContentLinkText)); ?>
+                </a>
+            </span>
+        </div>
+    </div>
+    <?php endif;?>
+</div>
+

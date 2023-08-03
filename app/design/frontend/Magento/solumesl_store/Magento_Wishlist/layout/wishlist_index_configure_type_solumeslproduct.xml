@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.review.form">
+            <arguments>
+                <argument name="general_view_model" xsi:type="object">Webkul\SolumeslStoreTheme\ViewModel\General</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="product.info.options.wrapper">
+            <block class="Webkul\SolumeslCustomProduct\Block\Product\BuyingFlow" name="product.info.addtocart.solumeslproduct" as="buyingflow-addtocart" template="Webkul_SolumeslCustomProduct::product/view/buyingflow.phtml">
+                <arguments>
+                    <argument 
+                        name="buying_view_model" 
+                        xsi:type="object">Webkul\SolumeslBuying\ViewModel\Helper</argument>
+                    <argument 
+                        name="customproduct_view_model" 
+                        xsi:type="object">Webkul\SolumeslCustomProduct\Helper\Data</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

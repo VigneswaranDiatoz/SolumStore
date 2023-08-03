@@ -1,0 +1,457 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+//Webkul\FormBuilder\Block\Widget\FormWidget Block File
+
+$formId = $block->getFormId(); // Getting from the widget.xml paramsmeter value
+$data   = $block->getFormInfoById($formId); // Getting the Widget block
+
+if (isset($data['forms_fields'])) {
+
+    $currentUrl   =  $block->getCurrentUrl();
+    $baseUrl      =  $block->getBaseUrl();
+    $returnUrl    =  str_replace($baseUrl, '', $currentUrl);
+    $fields  = ($block->jsonDecode($data['forms_fields']));
+    $tinyMiceFieldName = "";
+    $tinyMiceFieldRequired = "";
+}
+?>
+
+<link 
+rel='stylesheet' 
+href='<?= /* @noEscape */ $block->getViewFileUrl("Webkul_FormBuilder::css/input.css") ?>' />
+
+<?php if (isset($data['forms_fields']) && $block->getFormEnable()): ?>
+
+    <?php if (!empty($data && $data['status'])) { ?>
+        <?php if (!empty($fields)) {?>
+            <?php if (!empty($block->getTitle())) {?>
+<h3 class="wk-title"><?=  /* @escapeNotVerified */  $block->escapeHtml($block->getTitle()); ?></h3>
+<?php } ?>
+
+
+<form data-mage-init='{"validation": {}}' action="<?= /* @noEscape */  $block->getUrl('formbuilder/forms/save');  ?>"
+    enctype="multipart/form-data" class="form" id="wk-form-id" method="post" autocomplete="off">
+    <input type="hidden" name="formId" value="<?= /* @escapeNotVerified */  $block->escapeHtml($formId); ?>">
+    <input type="hidden" name="success_message" value="<?= $block->escapeHtml($data['success_message']); ?>">
+    <input type="hidden" name="success_url" value="<?= ($data['success_url']) ??  $returnUrl ?>">
+    <input type="hidden" name="recaptcha" value="<?= ($data['recaptcha']) ?? 0 ?>">
+    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+    <fieldset class="fieldset">
+            <?php if (isset($fields) && !empty($fields)) { ?>
+                <?php foreach ($fields as $field) { ?>
+                    <?php if (!empty($field->type) && $field->type=="text") { ?>
+        <div class="field <?=  $block->escapeHtml(!empty($field->name)); ?> <?= (!empty($field->required))
+                    ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                                ? $block->escapeHtml($field->label)
+                                : $block->escapeHtml(__("Text Field"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input 
+                    type="hidden" 
+                    name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                    value="<?= (!empty($field->label))
+                        ? /* @noEscape */ $field->label
+                        : __("Default Field Name") ; ?>
+                    ">
+                <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    placeholder="<?= /* @noEscape */ isset($field->placeholder) ? $field->placeholder : ''?>"
+                    id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                    title="<?=  /* @noEscape */ (!empty($field->label)
+                                    ? $field->label :  __("Default Field Name")); ?>"
+                    value="<?= /* @noEscape */  !empty($field->value) ? $field->value : ''?>"
+                    maxlength="<?= /* @noEscape */!empty($field->maxlength) ? $field->maxlength : ''?>"
+                    class="<?=/*@noEscape */ ($field->className ?? "");?>input-text form-control validate-no-html-tags
+                        <?=/* @noEscape */($field->subtype=="tel" ? "validate-number" : ""); ?>"
+                    type="<?=/* @noEscape */$field->subtype; ?>" <?= (!empty($field->required))
+                            ? 'data-validate="{required:true}" aria-required="true"' : ''?>>
+
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php }  ?>
+
+                    <?php if (isset($field->subtype) && $field->subtype=="textarea") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml(__("textarea"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input type="hidden" 
+                name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                value="<?= (!empty($field->label))
+                                ? /* @noEscape */ $field->label : __("Default Textarea") ; ?>">
+<textarea class="<?= /* @noEscape */ ($field->className ?? "");?> wk-textarea input-text validate-no-html-tags"
+                    name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    placeholder="<?= /* @noEscape */ !empty($field->placeholder) ? $field->placeholder : ''?>"
+                    cols="<?= /* @noEscape */ isset($field->maxlength) ? $field->maxlength : ''?>"
+                    maxlength="<?= /* @noEscape */ isset($field->maxlength) ? $field->maxlength : ''?>"
+                    rows="<?= /* @noEscape */ isset($field->rows) ? $field->rows : ''?>"
+                    id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                    title="<?=  /* @noEscape */ (!empty($field->label)
+                        ? $field->label :  __("Default Textarea")); ?>" <?= /* @noEscape */ (!empty($field->required))
+                        ? 'data-validate="{required:true}" aria-required="true"' : ''?>><?=
+                        /* @noEscape */ !empty($field->value) ? $field->value : ''?></textarea>
+
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+                    <?php if (isset($field->subtype) && $field->subtype=="tinymce") {
+                        $tinyMiceFieldName = $field->name;
+                        $maxlength = isset($field->maxlength) ? $field->maxlength : '';
+                        $tinyMiceFieldRequired = (!empty($field->required)) ? true : false;?>
+        <div class="wk-tiny field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml(__("Default Tinymce"));
+                        ?>
+                </span>
+            </label>
+            <div class="control wk-border-box-sizing">
+                <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                value="<?= (!empty($field->label))
+                            ? /* @noEscape */ $field->label : __("Default Tinymce") ; ?>">
+                
+            <textarea class="<?= /* @noEscape */ ($field->className ?? "");?> required-entry  
+            form-control  input-text textarea"
+                    name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    placeholder="<?= /* @noEscape */ !empty($field->placeholder) ? $field->placeholder : ''?>"
+                    id="<?= /* @noEscape */ $field->name ?>" title="<?=  /* @noEscape */ (!empty($field->label)
+                            ? $field->label :  __("Default Tinymce")); ?>">
+                            <?= /* @noEscape */ isset($field->value) && !empty($field->value) ? $field->value : ''?>
+                </textarea>
+            <script>
+                require([
+                    "jquery",
+                    "mage/translate",
+                    "mage/adminhtml/events",
+                    "mage/adminhtml/wysiwyg/tiny_mce/setup"
+                ], function (jQuery) {
+                    wysiwygcompany_description = new wysiwygSetup("<?= /* @noEscape */ $field->name ?>", {
+                        "width": "100%",
+                        "height": "200px",
+                        "plugins" : [{"name":"image"}],
+                        "tinymce4": {
+                                "toolbar":"formatselect | bold italic underline | "+
+                                "alignleft aligncenter alignright |" + 
+                                "bullist numlist |"+
+                                "link table charmap","plugins":"advlist "+
+                                "autolink lists link charmap media noneditable table contextmenu paste code help table",
+                       },
+                        files_browser_window_url: "<?= /* @noEscape */  $block->getWysiwygUrl();?>"
+                    });
+                    wysiwygcompany_description.setup("exact");
+                });
+
+            </script>
+
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+                    <?php if (isset($field->type) && $field->type=="number") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (isset($field->required) && !empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml(__("Default Number"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                value="<?= (!empty($field->label))
+                            ? /* @noEscape */ $field->label : __("Default Number") ; ?>">
+                <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    placeholder="<?= /* @noEscape */  isset($field->placeholder) ? $field->placeholder : ''?>"
+                    id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                    title="<?=  /* @noEscape */ (!empty($field->label)
+                        ? $field->label :  __("Default Field Name")); ?>"
+                    value="<?= /* @noEscape */ isset($field->value) ? $field->value : ''?>"
+                    min="<?= /* @noEscape */ isset($field->min) ? $field->min : ''?>"
+                    max="<?= /* @noEscape */ isset($field->max) ? $field->max : ''?>"
+                    step="<?= /* @noEscape */ isset($field->step) ? $field->step : ''?>" class="input-text"
+                    type="number" <?= /* @noEscape */ (!empty($field->required))
+                        ? /* @noEscape */ 'data-validate="{required:true}" aria-required="true'
+                        : ''?> class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+                    <?php if (isset($field->type) && $field->type=="date") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml(__("Default Date"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                value="<?= (!empty($field->label))
+                            ? /* @noEscape */ $field->label : __("Default date Name") ; ?>">
+                <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    placeholder="<?= /* @noEscape */ isset($field->placeholder) ? $field->placeholder : ''?>"
+                    id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                    title="<?= (!empty($field->label))
+                        ? /* @noEscape */  $field->label : __("Default date") ; ?>"
+                    value="<?= isset($field->value) ? /* @noEscape */  $field->value : ''?>"
+                    class="wk_dob form-control validate-no-html-tags" 
+                    type="text" <?= (isset($field->required) && !empty($field->required))
+                        ? /* @noEscape */  'data-validate="{required:true}" '
+                        : ''?> aria-required="true" class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+
+                    <?php if (isset($field->type) && $field->type=="select") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml(__("Default Select"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                value="<?= (!empty($field->label))
+                            ? /* @noEscape */ $field->label : __("Default Select") ; ?>">
+        <select class="form-control input-select" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                        <?= (!empty($field->required)) ? 'data-validate="{required:true}" ' : ''?>>
+                        <?php if (!empty($field->values)) { ?>
+                            <?php foreach ($field->values as $key => $value) { ?>
+            <option value="<?= /* @noEscape */ $value->value;?>" <?= (isset($value->selected) && $value->selected)
+                                    ? /* @noEscape */ 'selected="true"'
+                                    : ''?>
+                        id="<?= /* @noEscape */ $block->nameLabelValue($field, 'value').'-'.$key; ?>">
+                                <?= /* @noEscape */ $value->label;?>
+                    </option>
+                    <?php }?>
+                    <?php }?>
+                </select>
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+                    <?php if (isset($field->type) && $field->type=="radio-group") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                        ? $block->escapeHtml($field->label)
+                        : $block->escapeHtml(__("Default Radio"));
+                        ?>
+                </span>
+            </label>
+            <div class="radio-group">
+                <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>" 
+                value="<?= (!empty($field->label))
+                            ? /* @noEscape */ $field->label : __("Default Radio") ; ?>">
+
+                        <?php if (isset($field->values) && !empty($field->values)) { ?>
+                            <?php foreach ($field->values as $key => $value) { ?>
+                <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>"
+                    id="<?=  /* @noEscape */ $block->nameLabelValue($field, 'value').'-'.$key; ?>" 
+                                <?= (isset($field->required) && !empty($field->required))
+                                        ?  /* @noEscape */ 'data-validate="{required:true}" ' : ''?>
+                    value="<?=   /* @noEscape */ $value->value;?>" 
+                    type="radio" <?= (isset($value->selected) && $value->selected)
+                                        ?  /* @noEscape */ 'checked="checked"' : ''?>
+                    class="<?=  /* @noEscape */ ($field->className ?? "");?>">
+                <label for="<?= /* @noEscape */  $block->nameLabelValue($field, 'value').'-'.$key; ?>">
+                                <?=  $block->escapeHtml($value->label);?>
+                </label>
+                <?php }?>
+                <?php }?>
+
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+                    <?php if (isset($field->type) && $field->type=="checkbox-group") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                        ? $block->escapeHtml($field->label)
+                        : $block->escapeHtml(__("Default CheckBox"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input type="hidden" name="<?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?>"
+                    value="<?= (!empty($field->label)) ? /* @noEscape */ $field->label : __("Default Checkbox"); ?>">
+                        <?php if (isset($field->values) && !empty($field->values)) { ?>
+                            <?php foreach ($field->values as $key => $value) { ?>
+                <input name="<?= /* @noEscape */ $block->nameLabelValue($field, 'value'); ?>" 
+                id="<?= /** @escapeNotVerified */
+                                        $block->nameLabelValue($field, 'value').'-'./** @escapeNotVerified */ $key; ?>" 
+                                        <?= (isset($field->required) && !empty($field->required)) ?
+                                        /** @escapeNotVerified */ 'data-validate="{required:true}" ' : ''?>
+                    value="<?= $block->escapeHtml($value->value);?>" 
+                    type="checkbox" <?= (isset($value->selected) && $value->selected)
+                                        ? /** @escapeNotVerified */ 'checked="checked"'
+                                        : ''?>>
+                <label for="<?= /** @escapeNotVerified */
+                                $block->nameLabelValue($field, 'value').'-'. /** @escapeNotVerified */  $key; ?>">
+                                <?= $block->escapeHtml($value->label);?>
+                </label>
+                <?php }?>
+                <?php }?>
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+
+                    <?php if (isset($field->type) && $field->type=="file") { ?>
+        <div class="field <?= /* @noEscape */ $block->nameLabelValue($field, 'label'); ?> 
+                        <?= (!empty($field->required)) ? "required" : ''?>">
+            <label class="label" for="name">
+                <span>
+                        <?= (!empty($field->label))
+                            ? $block->escapeHtml($field->label)
+                            : $block->escapeHtml(__("Default File"));
+                        ?>
+                </span>
+            </label>
+            <div class="control">
+                <input type="hidden" name="<?= 'res[wk_file][label]';  ?>"
+                    value="<?= (!empty($field->label)) ? /* @noEscape */ $field->label : __("Default File") ; ?>">
+                <input type="file" value="" class="<?=  /* @noEscape */ ($field->className ?? "");?> input-file"
+                    name="<?= 'res[wk_file][value]';  ?>" <?= (isset($field->required) && !empty($field->required))
+                            ? 'data-validate="{required:true}" ' : ''?>>
+                <br>
+                        <?php if (!empty($field->description)) {?>
+                <label>
+                            <?= !empty($field->description) ?  $block->escapeHtml($field->description) : '' ?>
+                </label>
+                <?php } ?>
+
+            </div>
+            <b><?= /* @noEscape */ __("Supported File:- jpg, jpeg, pdf, doc, png"); ?></b>
+        </div>
+        <?php } ?>
+
+        <?php } ?>
+        <?php } ?>
+    </fieldset>
+    <!-- recaptcha -->
+            <?php if ($block->enableRecaptcha() && $block->checkRecaptcha($data['recaptcha'])) { ?>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?=  /* @noEscape */ $block->getSiteKey();?>"></script>
+    <?php } ?>
+
+    <!-- submit button -->
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" 
+            class="action submit primary" id="save-btn" title="<?= /* @noEscape */  (isset($data['submit_button'])
+                        ? /* @noEscape */  $data['submit_button']
+                        : /* @noEscape */  __('Submit')) ?>">
+                <span>
+                            <?= /* @noEscape */  (isset($data['submit_button'])
+                                ? /* @noEscape */  $data['submit_button']
+                                :/* @noEscape */ __('Submit')) ?>
+                </span>
+            </button>
+        </div>
+    </div>
+</form>
+
+        <?php } else { ?>
+<h3><?=  /* @escapeNotVerified */  $block->escapeHtml(__("Form does not have any fields.")); ?></h3>
+        <?php } ?>
+
+    <?php } else { ?>
+<h3><?=  /* @escapeNotVerified */  $block->escapeHtml(__("Form does not exist or can be disabled.")); ?></h3>
+    <?php } ?>
+
+<script type="text/x-magento-init">
+    {
+        "#wk-form-id" : {
+            "customFormRender": 
+                {
+                    "siteKey": "<?=  /* @noEscape */ $block->getSiteKey();?>",
+                    "tinyMiceFieldName": "<?=  /* @noEscape */ $tinyMiceFieldName?>",
+                    "tinyMiceFieldRequired": "<?=  /* @noEscape */ (bool)$tinyMiceFieldRequired?>",
+                    "recaptchaEnable":"<?= /* @noEscape */(bool)$block->enableRecaptcha();?>",
+                    "checkRecaptcha":"<?= /* @noEscape */ (bool)$block->checkRecaptcha($data['recaptcha']);?>",
+                    "maxlength":"<?= /* @noEscape */ isset($maxlength) ?  $maxlength : ""  ;?>"
+                }
+        }
+    }
+</script>
+<?php endif ?>

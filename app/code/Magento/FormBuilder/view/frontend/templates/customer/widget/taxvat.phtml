@@ -1,0 +1,22 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_FormBuilder
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+/** @var \Webkul\FormBuilder\Block\Customer\Widget\Taxvat $block */
+?>
+<div class="field taxvat<?= $block->isRequired() ? ' required' : ''; ?>">
+    <div class="control">
+        <input type="text" id="<?= $block->escapeHtmlAttr($block->getFieldId('taxvat')) ?>" name="<?= $block->escapeHtmlAttr($block->getFieldName('taxvat')) ?>" value="<?= $block->escapeHtmlAttr($block->getTaxvat()) ?>" 
+        title="<?= $block->escapeHtmlAttr($block->getStoreLabel('taxvat')) ?>"
+        placeholder=" " 
+        class="input-text <?= $block->escapeHtmlAttr($this->helper(\Magento\Customer\Helper\Address::class)->getAttributeValidationClass('taxvat')) ?>" <?= $block->isRequired() ? ' data-validate="{required:true}"' : '' ?>>
+        <span class="wk-material-label"><?= $block->getStoreLabel('taxvat') ?></span>
+    </div>
+</div>

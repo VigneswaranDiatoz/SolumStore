@@ -1,0 +1,120 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+//
+//  Common
+//  _____________________________________________
+& when (@media-common = true) {
+    // body {
+    //     &:not(.cms-index-index) {
+    //         #maincontent {
+    //             padding: 20px 20px 0 20px;
+    //         }
+    //     }
+    // }
+    .solumels-form-address-edit {
+        .legend {
+            span {
+                .headingLabelMixin;
+            }
+        }
+    }
+    select,
+    input:not([type="checkbox"], [type="radio"], [type="file"]) {
+        .fieldsInputCartForm;
+        background-color: @color-background;
+        &[multiple]{
+            height:auto !important;
+            padding:0px;
+            option{
+                padding:5px;
+            }
+        }
+    }
+    input[type="checkbox"] {
+        zoom: 1.5;
+        -moz-transform:  scale(1.33);
+        -moz-transform-origin: bottom left;
+    }
+    input[type="radio"] {
+        zoom: 1.5;
+        -moz-transform:  scale(1.22);
+        -moz-transform-origin: 0 10px;
+    }
+    label {
+        font-size: 16px;
+        line-height: 22px;
+    }
+    #solum_twiter,
+    #solum_linkedin,
+    #solum_youtube {
+        padding: 4px 25px 5px 10px;
+        background-image: url(../fonts/input_field.png) !important;
+        background-repeat: no-repeat !important;
+        background-position-x: 99.6% !important;
+        background-position-y: 3px !important;
+    }
+    .password-toggle,
+    .confirmation-toggle {
+        content: "";
+        width: 25px;
+        height: 18px;
+        display: inline-block;
+        z-index: 9;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: url(../fonts/visible-eye.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat !important;
+    }
+    .password-toggle-hidden,
+    .confirmation-toggle-hidden{
+        content: "";
+        width: 25px;
+        height: 18px;
+        display: inline-block;
+        z-index: 9;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: url(../fonts/eye-close.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat !important;
+    }
+    .solum_twitter-img {
+        padding: 4px 25px 5px 10px;
+        background-image: url(../fonts/twitter.png) !important;
+        background-repeat: no-repeat !important;
+        // background-position-x: 99.6% !important;
+        background-position-y: 3px !important;
+    }
+    .solum_youtube-img {
+        padding: 4px 25px 5px 10px;
+        background-image: url(../fonts/youtube.png) !important;
+        background-repeat: no-repeat !important;
+        // background-position-x: 99.6% !important;
+        background-position-y: 3px !important;
+    }
+    .customer-agreements-block{
+        label{
+            & > button {
+                padding: unset !important;
+            }
+        } 
+        span{
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 600;
+            color: #6F6E73 !important;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_SellerSubAccount
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$helper = $block->getLayout()->createBlock(
+    \Webkul\SellerSubAccount\Block\SubAccount::class
+)->_subAccHelper;
+$viewModel = $block->getViewModel();
+if ($viewModel->checkPermission("Webkul_SellerSubAccount::manage") > -1 && $helper->manageSubAccounts()) {
+    $marketplaceHelper = $block->getLayout()->createBlock(
+        \Webkul\SellerSubAccount\Block\SubAccount::class
+    )->_mpHelper;
+    $isPartner= $marketplaceHelper->isSeller();
+    $magentoCurrentUrl = $block->getCurrentUrl();
+    $isSellerGroup = $marketplaceHelper->isSellerGroupModuleInstalled();
+    if ($isPartner) {
+        if (($isSellerGroup &&
+        $marketplaceHelper->isAllowedAction('sellersubaccount/account/')) ||
+         !$isSellerGroup) { ?>
+            <li id="wk-mp-menu-sellersubaccount" 
+            class="wk-mp-menu-sellersubaccount level-0 
+            <?=strpos($magentoCurrentUrl, 'sellersubaccount/account/')? "current active":"";?>">
+                <a href="#" onclick="return false;" class="">
+                    <span><?= /* @noEscape */ __('User Management')?></span>
+                </a>
+                <div class="wk-mp-submenu">
+                    <strong class="wk-mp-submenu-title"><?= /* @noEscape */ __('User Management')?></strong>
+                    <a href="#" class="action-close _close" data-role="wk-mp-close-submenu"></a>
+                    <ul>
+                    <li data-ui-id="menu-webkul-marketplace-menu" class="item-menu parent level-1">
+                        <strong class="wk-mp-submenu-group-title">
+                            <span><?= /* @noEscape */ __('Menu')?></span>
+                        </strong>
+                        <div class="wk-mp-submenu">
+                            <ul>
+                                <li class="level-2">
+                                    <a href="<?=$block->escapeUrl($block->getUrl(
+                                        'sellersubaccount/account/manage',
+                                        ['_secure' => $block->getRequest()->isSecure()]
+                                    )); ?>"
+                                        class="<?=strpos($magentoCurrentUrl, 'sellersubaccount/account/')? "active":"";?>">
+                                        <span><?=$block->escapeHtml(__('All Users')); ?></span>
+                                    </a>
+                                </li>
+                                <li class="level-2">
+                                    <a href="<?= $escaper->escapeUrl($block->getUrl("solumacl/roles/index")); ?>">
+                                        <span><?= /* @noEscape */ __('Manage Roles') ?></span>
+                                    </a>
+                                </li>
+                                <li class="level-2">
+                                    <a href="<?= $escaper->escapeUrl($block->getUrl("solumacl/roles/new")); ?>">
+                                        <span><?= /* @noEscape */ __('Add New Role') ?></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+            </li>
+        <?php }
+    }
+} ?>

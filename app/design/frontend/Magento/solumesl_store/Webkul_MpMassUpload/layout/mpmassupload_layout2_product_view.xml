@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpMassUpload
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="seller-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_MpMassUpload::css/styles.css"/>
+    </head>
+    <body>
+        <referenceBlock name="seller.page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Marketplace Mass Upload</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="seller.content">
+            <block class="Webkul\SellerMessages\Block\CustomerTabs" name="marketplace_customer_tabs" template="Webkul_MpMassUpload::massUploadTabs.phtml" cacheable="false" group="customer_tab_info">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Webkul\SolumeslAcl\ViewModel\VendorAcl</argument>
+                </arguments>
+                <block class="Webkul\MpMassUpload\Block\View" name="massupload_view" template="Webkul_MpMassUpload::view.phtml" cacheable="false" group="customer_tab_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Profile Upload</argument>
+                        <argument name="sort_order" xsi:type="string">1</argument>
+                        <argument name="vendor_acl" xsi:type="string">Webkul_MpMassUpload::upload</argument>
+                        <argument name="is_write_only" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+                <block class="Webkul\MpMassUpload\Block\View" name="massupload_run_profile" template="Webkul_MpMassUpload::runProfile.phtml" cacheable="false" group="customer_tab_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Run Profile</argument>
+                        <argument name="sort_order" xsi:type="string">2</argument>
+                        <argument name="vendor_acl" xsi:type="string">Webkul_MpMassUpload::run</argument>
+                        <argument name="is_write_only" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+                <block class="Webkul\MpMassUpload\Block\Dataflow\Profile" name="mpmassupload_dataflow_profile_block" template="Webkul_MpMassUpload::account/dataflow_profile.phtml" cacheable="false" group="customer_tab_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Dataflow Profile</argument>
+                        <argument name="sort_order" xsi:type="string">3</argument>
+                        <argument name="vendor_acl" xsi:type="string">Webkul_MpMassUpload::dataflow_profile</argument>
+                        <argument name="view_model" xsi:type="object">Webkul\SolumeslAcl\ViewModel\VendorAcl</argument>
+                        <argument name="is_write_only" xsi:type="boolean">false</argument>
+                    </arguments>
+                    <uiComponent name="mpmassupload_dataflow_profile"/>
+                </block>
+                <block class="Webkul\MpMassUpload\Block\View" name="massupload_product_export" template="Webkul_MpMassUpload::account/export.phtml" cacheable="false" group="customer_tab_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Export Products</argument>
+                        <argument name="sort_order" xsi:type="string">4</argument>
+                        <argument name="vendor_acl" xsi:type="string">Webkul_MpMassUpload::export</argument>
+                        <argument name="is_write_only" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+                <block class="Webkul\MpMassUpload\Block\ProfileListing\ProfileList" name="massupload_profilelisting_profilelist" template="Webkul_MpMassUpload::account/profile_list.phtml" cacheable="false" group="customer_tab_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Profile Listing</argument>
+                        <argument name="sort_order" xsi:type="string">5</argument>
+                        <argument name="vendor_acl" xsi:type="string">Webkul_MpMassUpload::profileListing</argument>
+                        <argument name="is_write_only" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
+
