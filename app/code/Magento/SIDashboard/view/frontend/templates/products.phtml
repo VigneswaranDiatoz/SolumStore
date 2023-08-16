@@ -1,46 +1,67 @@
-<a href="<?= $block->getUrl('sidashboard/index/insert'); ?>" style="background-color: #1979c3;padding: 6px 9px 6px 9px;border-radius: 5px;color: white;">Create Product</a>
-<table class="view-table">
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Product SKU</th>
-            <th>Product Price</th>
-            <th>Product Image</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        // var_dump($block->getCustomerId());
-        $userId=$block->getCustomerId();
-        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-        $productCollection = $objectManager->create('\Magento\Catalog\Model\ResourceModel\Product\Collection');
-        $productCollection->addAttributeToSelect('*'); // You can specify the attributes you want to load
-        // $productCollection->addFieldToFilter('created_by','28');
-
-        foreach ($productCollection as $product) {
-            if($product->getCreatedBy() == $userId){
-                // Get product details
-                $productId = $product->getId();
-                $productName = $product->getName();
-                $productSku = $product->getSku();
-                $productPrice = $product->getPrice();
-                $productImageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_large')->getUrl(); // Adjust the image size as needed
-
-                // Display product details in the table
-                ?>
+<div class="page-main" style="width: 100%;">
+    <div class="block account-nav" style="width:20%;float:left">
+        <!-- <div class="title">
+            <strong><?= $block->escapeHtml(__('My Account')) ?></strong>
+        </div> -->
+        <div class="content">
+            <nav class="account-nav">
+                <ul class="nav items">
+                    <li><a href="<?= $block->getUrl('sidashboard/index/index') ?>" >My Account</a></li>
+                    <li><a href="<?= $block->getUrl('sidashboard/index/products') ?>"  style="color:black;">Products</a></li>
+                    <li><a href="<?= $block->getUrl('sipartnerrfq/index/index') ?>">Request For Quote</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="block block-dashboard-info" style="width:80%;float:left">
+        <a href="<?= $block->getUrl('sidashboard/index/insert'); ?>" style="background-color: #1979c3;padding: 6px 9px 6px 9px;border-radius: 5px;color: white;">Create Product</a>
+        <table class="view-table">
+            <thead>
                 <tr>
-                    <td><?= $productName ?></td>
-                    <td><?= $productSku ?></td>
-                    <td><?= $productPrice ?></td>
-                    <td><img src="<?= $productImageUrl ?>" alt="<?= $productName ?>" width="50" height="100"></td>
-                    <td><a href="<?php echo $this->getUrl('sidashboard/index/edit', ['id' => $productId]); ?>">Edit</a></td>
+                    <th>Product Name</th>
+                    <th>Product SKU</th>
+                    <th>Product Price</th>
+                    <th>Product Image</th>
+                    <th>Actions</th>
                 </tr>
-        <?php }} ?>
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                <?php
+                // var_dump($block->getCustomerId());
+                $userId=$block->getCustomerId();
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                $productCollection = $objectManager->create('\Magento\Catalog\Model\ResourceModel\Product\Collection');
+                $productCollection->addAttributeToSelect('*'); // You can specify the attributes you want to load
+                // $productCollection->addFieldToFilter('created_by','28');
+
+                foreach ($productCollection as $product) {
+                    if($product->getCreatedBy() == $userId){
+                        // Get product details
+                        $productId = $product->getId();
+                        $productName = $product->getName();
+                        $productSku = $product->getSku();
+                        $productPrice = $product->getPrice();
+                        $productImageUrl = $this->helper('Magento\Catalog\Helper\Image')->init($product, 'product_page_image_large')->getUrl(); // Adjust the image size as needed
+
+                        // Display product details in the table
+                        ?>
+                        <tr>
+                            <td><?= $productName ?></td>
+                            <td><?= $productSku ?></td>
+                            <td><?= $productPrice ?></td>
+                            <td><img src="<?= $productImageUrl ?>" alt="<?= $productName ?>" width="50" height="100"></td>
+                            <td><a href="<?php echo $this->getUrl('sidashboard/index/edit', ['id' => $productId]); ?>">Edit</a></td>
+                        </tr>
+                <?php }} ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <style>
+.columns{
+        display:flex;
+    }
 .view-table {
     width: 100%;
     border-collapse: collapse;

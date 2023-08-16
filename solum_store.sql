@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 04, 2023 at 05:24 AM
+-- Generation Time: Aug 16, 2023 at 11:44 AM
 -- Server version: 8.0.31
 -- PHP Version: 7.4.33
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
 
 INSERT INTO `admin_user` (`user_id`, `firstname`, `lastname`, `email`, `username`, `password`, `created`, `modified`, `logdate`, `lognum`, `reload_acl_flag`, `is_active`, `extra`, `rp_token`, `rp_token_created_at`, `interface_locale`, `failures_num`, `first_failure`, `lock_expires`) VALUES
 (1, 'Vigneswaran', 'S', 'vigneswaran.sekar@diatoz.com', 'admin', '3580da9b9ccf346fc8befe81658449d5c7104531381d208fc5bb61a604472207:DilgVnYAINySB54iDIQpMd03MCgimkeU:3_32_2_67108864', '2023-05-31 05:43:06', '2023-05-31 05:43:06', NULL, 0, 0, 1, NULL, NULL, NULL, 'en_US', 0, NULL, NULL),
-(2, 'Mageplaza', 'Family', 'hi@mageplaza.com', 'diatoz', 'a48a32333e70aeecca2360730c307937e448c6efed6908f6f5e390c4bb480f29:5osQsZvq6q195emykb9F611kSZfeGB2H:3_32_2_67108864', '2023-05-31 07:01:00', '2023-08-02 05:33:19', '2023-08-02 05:33:19', 104, 0, 1, '{\"configState\":{\"magento_general\":\"0\",\"admin_security\":\"1\"}}', NULL, NULL, 'en_US', 0, NULL, NULL);
+(2, 'Mageplaza', 'Family', 'hi@mageplaza.com', 'diatoz', 'a48a32333e70aeecca2360730c307937e448c6efed6908f6f5e390c4bb480f29:5osQsZvq6q195emykb9F611kSZfeGB2H:3_32_2_67108864', '2023-05-31 07:01:00', '2023-08-11 05:10:59', '2023-08-11 05:10:59', 109, 0, 1, '{\"configState\":{\"magento_general\":\"0\",\"admin_security\":\"1\"}}', NULL, NULL, 'en_US', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `admin_user_session` (
   PRIMARY KEY (`id`),
   KEY `ADMIN_USER_SESSION_SESSION_ID` (`session_id`),
   KEY `ADMIN_USER_SESSION_USER_ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3 COMMENT='Admin User sessions table';
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3 COMMENT='Admin User sessions table';
 
 --
 -- Dumping data for table `admin_user_session`
@@ -297,7 +297,12 @@ INSERT INTO `admin_user_session` (`id`, `session_id`, `user_id`, `status`, `crea
 (101, NULL, 2, 1, '2023-07-28 08:58:09', '2023-07-28 09:00:52', '::1'),
 (102, NULL, 2, 1, '2023-07-28 09:37:36', '2023-07-28 09:38:05', '::1'),
 (103, NULL, 2, 1, '2023-07-28 11:03:24', '2023-07-28 11:07:12', '::1'),
-(104, NULL, 2, 1, '2023-08-02 05:33:19', '2023-08-02 05:40:26', '::1');
+(104, NULL, 2, 1, '2023-08-02 05:33:19', '2023-08-02 05:40:26', '::1'),
+(105, NULL, 2, 1, '2023-08-07 09:43:44', '2023-08-07 09:44:26', '::1'),
+(106, NULL, 2, 1, '2023-08-10 07:05:23', '2023-08-10 07:32:26', '::1'),
+(107, NULL, 2, 1, '2023-08-10 10:16:07', '2023-08-10 10:16:07', '::1'),
+(108, NULL, 2, 1, '2023-08-10 12:09:29', '2023-08-10 12:19:18', '::1'),
+(109, NULL, 2, 1, '2023-08-11 05:10:59', '2023-08-11 05:18:53', '::1');
 
 -- --------------------------------------------------------
 
@@ -3221,7 +3226,7 @@ INSERT INTO `customer_entity` (`entity_id`, `website_id`, `email`, `group_id`, `
 (1, 1, 'vigneswaran.sekar@diatoz.com', 1, NULL, 1, '2023-05-31 10:04:05', '2023-07-17 09:56:11', 1, 0, 'Default Store View', NULL, 'vigneswaran', NULL, 'S', NULL, NULL, '00c2923cde630a467a9b002281c8af106c2dd62adff9dc32003357d9442087f0:NTSAp5QRheDcHjluZM6VaLIK5sVx4Iij:3_32_2_67108864', 'ToKbUAhEH43la6vc5vJycNQJJAKA5Nh3', '2023-05-31 10:04:07', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-07-17 09:56:11', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (21, 1, 'shruti.bilagi@diatoz.com', 1, NULL, 1, '2023-06-09 12:25:34', '2023-06-09 12:25:34', 1, 0, 'Default Store View', NULL, 'Shruti', NULL, 'S', NULL, NULL, '97f2460bb33a9648306c7d7c2e6bfab859e18c36d8d8fe18e5d8ff415f722f54:fkj2TqdHVGdJ7JlgtVAGOq0hlUB7O04s:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (23, 1, 'shruti@gmail.com', 4, NULL, 1, '2023-06-12 13:56:14', '2023-07-18 12:09:14', 1, 0, 'Default Store View', NULL, 'shruti', NULL, 'S', NULL, NULL, NULL, 'D9Eqi7KEGf6Jkm8LfOuMFhdMP8jO98qr', '2023-06-12 13:56:16', 0, 0, NULL, NULL, 2, 0, NULL, NULL, NULL, '', 'Diatoz', '', 'Diatoz contact Info', 'Bangalore', '', '', '', '', '23432', '4', '', '', ''),
-(28, 1, 'nishanth@solu-m.com', 4, NULL, 1, '2023-06-15 12:48:52', '2023-07-18 12:09:21', 1, 0, 'Default Store View', NULL, 'Diatoz', NULL, 'Diatoz', NULL, NULL, 'd92c46a1317425f4c0ae3398d1b4868cf24464254f85e30479159e58c2fdfa36:rLOHm68Jdj3Lwv7ai8quW4bClYFn15Vl:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-06-27 10:51:27', '1234567', 'Solum12', '12345678', 'Nishanth contact Info', 'Test address', 'test card', '87654321', 'test esl', 'yes', '1000', '5', 'Bangalore', 'test pos', ''),
+(28, 1, 'nishanth@solu-m.com', 4, NULL, 1, '2023-06-15 12:48:52', '2023-08-08 11:13:23', 1, 0, 'Default Store View', NULL, 'Diatoz', NULL, 'Diatoz', NULL, NULL, 'd92c46a1317425f4c0ae3398d1b4868cf24464254f85e30479159e58c2fdfa36:rLOHm68Jdj3Lwv7ai8quW4bClYFn15Vl:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-08-08 11:13:23', '1234567', 'Solum12', '12345678', 'Nishanth contact Info', 'Test address', 'test card', '87654321', 'test esl', 'yes', '1000', '5', 'Bangalore', 'test pos', ''),
 (36, 1, 'vigneswaran.sekar1@diatoz.com', 4, NULL, 1, '2023-07-28 09:37:09', '2023-07-28 09:38:00', 1, 0, 'Default Store View', NULL, 'Software', NULL, 'Software', NULL, NULL, 'c1d7c49a0693809d143557f1c7bf983ab301acd31512b1f2c3d934f2e42cf4f5:8s9imalCRHm9EJRluDIRNgxqU3zskjTl:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '', 'Software', '', '', '', '', '', '', '', '', '', '', '', ''),
 (37, 1, 'Shiva@solum.com', 4, NULL, 1, '2023-07-28 11:02:12', '2023-07-28 11:13:01', 1, 0, 'Default Store View', NULL, 'Solum', NULL, 'Solum', NULL, NULL, '95040d71abf58f01777c4cfeab3a4c29e7195983ec500fbd65b53501b15ab6bd:GApL5jwPHV830ym9MGUvUZRfi77gyUXh:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-07-28 11:13:01', '', 'Solum', '12345678', '', 'Test address', '', '', '', 'yes', '200', '4', 'Bangalore', '', ''),
 (38, 1, 'Vignesh@gmail.com', 1, NULL, 1, '2023-07-28 11:14:33', '2023-07-28 11:18:22', 1, 0, 'Default Store View', NULL, 'vignesh', NULL, 'S', NULL, NULL, 'e9e1f8e63ef0a61b7b85f845493ae5ac4789b607fecf50963efc4add34666e6a:HAMJW8ZVhaBFGATPEXUkeFeEpfmnF8cR:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-07-28 11:18:22', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -3530,17 +3535,17 @@ CREATE TABLE IF NOT EXISTS `customer_log` (
   `last_logout_at` timestamp NULL DEFAULT NULL COMMENT 'Last Logout Time',
   PRIMARY KEY (`log_id`),
   UNIQUE KEY `CUSTOMER_LOG_CUSTOMER_ID` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3 COMMENT='Customer Log Table';
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3 COMMENT='Customer Log Table';
 
 --
 -- Dumping data for table `customer_log`
 --
 
 INSERT INTO `customer_log` (`log_id`, `customer_id`, `last_login_at`, `last_logout_at`) VALUES
-(1, 1, '2023-07-17 09:38:55', '2023-07-17 09:56:10'),
+(1, 1, '2023-08-09 09:02:04', '2023-07-17 09:56:10'),
 (5, 21, '2023-06-09 12:26:07', NULL),
 (6, 22, '2023-06-09 14:05:08', NULL),
-(7, 28, '2023-08-02 05:23:08', '2023-06-27 10:51:25'),
+(7, 28, '2023-08-14 05:46:46', '2023-08-08 11:13:22'),
 (38, 37, '2023-07-28 11:05:02', '2023-07-28 11:13:00'),
 (40, 38, '2023-07-28 11:15:12', '2023-07-28 11:18:22');
 
@@ -3560,7 +3565,7 @@ CREATE TABLE IF NOT EXISTS `customer_visitor` (
   PRIMARY KEY (`visitor_id`),
   KEY `CUSTOMER_VISITOR_CUSTOMER_ID` (`customer_id`),
   KEY `CUSTOMER_VISITOR_LAST_VISIT_AT` (`last_visit_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3 COMMENT='Visitor Table';
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb3 COMMENT='Visitor Table';
 
 --
 -- Dumping data for table `customer_visitor`
@@ -3610,7 +3615,18 @@ INSERT INTO `customer_visitor` (`visitor_id`, `customer_id`, `session_id`, `crea
 (41, 28, NULL, '2023-07-31 07:28:56', '2023-07-31 07:29:00'),
 (42, 28, NULL, '2023-07-31 09:12:30', '2023-07-31 09:14:20'),
 (43, 28, NULL, '2023-07-31 12:06:44', '2023-07-31 12:06:46'),
-(44, 28, NULL, '2023-08-02 05:23:06', '2023-08-02 05:23:08');
+(44, 28, NULL, '2023-08-02 05:23:06', '2023-08-02 05:23:08'),
+(45, 28, NULL, '2023-08-08 10:49:51', '2023-08-08 10:49:49'),
+(46, 28, NULL, '2023-08-08 11:03:57', '2023-08-08 11:03:55'),
+(47, 28, NULL, '2023-08-08 11:13:24', '2023-08-08 11:13:22'),
+(48, 28, NULL, '2023-08-08 11:17:57', '2023-08-08 12:52:50'),
+(49, 1, NULL, '2023-08-09 09:02:01', '2023-08-09 09:56:48'),
+(50, 28, NULL, '2023-08-09 09:25:12', '2023-08-09 09:25:13'),
+(51, 28, NULL, '2023-08-09 11:15:51', '2023-08-09 11:15:52'),
+(52, 28, NULL, '2023-08-10 06:01:25', '2023-08-10 06:17:33'),
+(53, 28, NULL, '2023-08-11 11:46:03', '2023-08-11 11:46:08'),
+(54, 28, NULL, '2023-08-11 13:22:29', '2023-08-11 13:22:31'),
+(55, 28, NULL, '2023-08-14 05:46:45', '2023-08-14 05:46:46');
 
 -- --------------------------------------------------------
 
@@ -7333,7 +7349,7 @@ CREATE TABLE IF NOT EXISTS `indexer_state` (
 --
 
 INSERT INTO `indexer_state` (`state_id`, `indexer_id`, `status`, `updated`, `hash_config`) VALUES
-(1, 'design_config_grid', 'valid', '2023-08-02 05:12:23', '51a8b6cbfb9ccca7bfb85a2e5051aa2c'),
+(1, 'design_config_grid', 'valid', '2023-08-10 06:45:33', '51a8b6cbfb9ccca7bfb85a2e5051aa2c'),
 (2, 'customer_grid', 'valid', '2023-07-13 10:08:01', 'e08b29295d9f4256be154da6e20c512a'),
 (3, 'catalog_category_product', 'valid', '2023-07-13 10:08:01', 'e77c5ed358e0437ccc07af58e2a56bfe'),
 (4, 'catalog_product_category', 'valid', '2023-07-13 10:08:01', '9133418d2733b584d50bb14b9809e164'),
@@ -8172,6 +8188,38 @@ CREATE TABLE IF NOT EXISTS `product_alert_stock` (
   KEY `PRODUCT_ALERT_STOCK_WEBSITE_ID` (`website_id`),
   KEY `PRODUCT_ALERT_STOCK_STORE_ID` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Product Alert Stock';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_rfq`
+--
+
+DROP TABLE IF EXISTS `product_rfq`;
+CREATE TABLE IF NOT EXISTS `product_rfq` (
+  `entity_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `partner_id` int NOT NULL,
+  `product_id` int NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `no_of_stores` int NOT NULL,
+  `quantity_per_store` int NOT NULL,
+  `created_at` date NOT NULL,
+  `updated_at` date NOT NULL,
+  PRIMARY KEY (`entity_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `product_rfq`
+--
+
+INSERT INTO `product_rfq` (`entity_id`, `customer_id`, `partner_id`, `product_id`, `status`, `comment`, `no_of_stores`, `quantity_per_store`, `created_at`, `updated_at`) VALUES
+(1, 28, 0, 4, 'ew', '', 0, 123, '0000-00-00', '0000-00-00'),
+(2, 1, 0, 4, '', '', 100, 12, '0000-00-00', '0000-00-00'),
+(3, 1, 28, 5, 'Open', '', 21, 20, '0000-00-00', '0000-00-00'),
+(4, 1, 28, 5, 'Answered', 'test comment', 9, 10, '0000-00-00', '0000-00-00'),
+(5, 1, 0, 5, 'Shipped', 'Test comment', 222, 20, '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -11028,8 +11076,10 @@ CREATE TABLE IF NOT EXISTS `setup_module` (
 INSERT INTO `setup_module` (`module`, `schema_version`, `data_version`) VALUES
 ('CustomForm', '1.0.0', '1.0.0'),
 ('Magento_Adminmenu', '1.0.0', '1.0.0'),
+('Magento_AdminRFQ', '1.0.0', '1.0.0'),
 ('Magento_CustomForm', '1.0.0', '1.0.0'),
 ('Magento_SellerPartnerList', '1.0.0', '1.0.0'),
+('Magento_SIParterRFQ', '1.0.0', '1.0.0'),
 ('Magento_SIPartnerAdmin', '1.0.0', '1.0.0'),
 ('Magento_SIPartnerAdminmenu', '1.0.0', '1.0.0'),
 ('Magento_SIPartnerGrid', '1.0.0', '1.0.0');

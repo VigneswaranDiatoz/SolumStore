@@ -11,6 +11,9 @@
     // var_dump($block->getCustomer()->getId());die();
 
 if($block->getCustomer()->getGroupId() == "4"){
+    $redirectUrl = $this->getUrl('sidashboard/index'); // Replace with the actual route you want to redirect to
+    header("Location: $redirectUrl");
+    exit;
     $objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
     $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
     $connection = $resource->getConnection();

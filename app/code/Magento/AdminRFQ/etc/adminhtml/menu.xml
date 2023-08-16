@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+   <menu>
+       <add id="Magento_AdminRFQ::menu"
+           title="Request For Quote" translate="title" module="Magento_AdminRFQ"
+           sortOrder="10"
+           resource="Magento_AdminRFQ::menu"
+           />
+       <!-- START: new node -->  
+       <add id="Magento_AdminRFQ::submenu_mymodule"
+           title="RFQ List" translate="title" module="Magento_AdminRFQ"
+           sortOrder="20" parent="Magento_AdminRFQ::menu"
+           action="adminrfq/grid/index"
+           resource="Magento_AdminRFQ::submenu_mymodule"
+           />
+       <!-- END:   new node -->
+   </menu>
+</config>

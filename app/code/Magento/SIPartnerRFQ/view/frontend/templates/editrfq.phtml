@@ -1,0 +1,58 @@
+<?php 
+$rfq=$block->getRFQById()[0];
+?>
+<div class="page-main" style="width: 100%;">
+    <div class="block account-nav" style="width:20%;float:left">
+        <!-- <div class="title">
+            <strong><?= $block->escapeHtml(__('My Account')) ?></strong>
+        </div> -->
+        <div class="content">
+            <nav class="account-nav">
+                <ul class="nav items">
+                    <li><a href="<?= $block->getUrl('sidashboard/index/index') ?>" >My Account</a></li>
+                    <li><a href="<?= $block->getUrl('sidashboard/index/products') ?>" >Products</a></li>
+                    <li><a href="<?= $block->getUrl('sipartnerrfq/index/index') ?>"style="color:black;">Request For Quote</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="block block-dashboard-info" style="width:80%;float:left">
+            <h2>RFQ Details</h2>
+            <div style="float:left;width:20%;">
+                <p>Customer Name</p>
+                <p>No Of Stores</p>
+                <p>Quantity Per Store</p>
+                <p>Message</p>
+                <p>Status</p>
+            </div>
+            <div style="float:left;width:5%;">
+                <p>-</p>
+                <p>-</p>
+                <p>-</p>
+                <p>-</p>
+                <p>-</p>
+            </div>
+            <div style="float:left;width:20%;">
+                <p><?= $rfq["customer_id"]; ?></p>
+                <p><?= $rfq["no_of_stores"]; ?></p>
+                <p><?= $rfq["quantity_per_store"]; ?></p>
+                <p><?= $rfq["comment"]; ?></p>
+                <p><?= $rfq["status"]; ?></p>
+            </div>
+            <div style="float:left;width:20%;">
+                <form method="post" action="<?= $block->getUrl('sipartnerrfq/index/updaterfq'); ?>" enctype="multipart/form-data">
+                    <!-- <input type="text" id="product_name" name="product_name" required /><br> -->
+                    <label class="customer_rfq_label" for="product_price">Status</label>
+                    <input type="text" id="status" name="status" required />
+                    <input type="hidden" id="id" name="id" value="<?= $rfq["entity_id"]; ?>" />
+                    <button type="submit" style="width: 40%;float:left;margin-top: 10px;background-color: #00203f;color: white;">Update</button>
+                </form>
+            </div>
+    </div>
+</div>
+<style>
+.columns{
+        display:flex;
+    }
+</style>
+            
