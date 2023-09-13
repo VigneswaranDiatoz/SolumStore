@@ -1,0 +1,373 @@
+<html>
+<head>
+	<style>
+		input[type="select"]{
+			padding: 22px 8px;
+			margin: 6px 0px;
+			border-radius: 10px;
+			border: 2px solid #ccc;
+		}
+		.assignModal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 100px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+
+			/* Modal Content */
+			.assignModal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			}
+
+			/* The Close Button */
+			.closeAssignModal {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+			}
+
+			.closeAssignModal:hover,
+			.closeAssignModal:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+			}
+	.error {color:#FF0000;}
+	.chat-connection-ack{color: #26af26;}
+	.chat-message {border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;
+	}
+	#btnSend {background: #26af26;border: #26af26 1px solid;	border-radius: 4px;color: #FFF;display: block;margin: 15px 0px;padding: 10px 50px;cursor: pointer;
+	}
+	#chat-box {background: #fff8f8;border: 1px solid #ffdddd;border-radius: 4px;border-bottom-left-radius:0px;border-bottom-right-radius: 0px;min-height: 300px;padding: 10px;overflow: auto;
+	}
+	.chat-box-html{color: #09F;margin: 10px 0px;font-size:0.8em;}
+	.chat-box-message{color: #09F;padding: 5px 10px; background-color: #fff;border: 1px solid #ffdddd;border-radius:4px;display:inline-block;}
+	.chat-input{border: 1px solid #ffdddd;border-top: 0px;width: 100%;box-sizing: border-box;padding: 10px 8px;color: #191919;
+	}
+	.main-contact-list{width:25%;float:left}
+	.main-chat-box{width:75%;float:left}
+	.list-group-item{list-style-type: none;cursor:pointer	}
+	#cheader .uavatar {
+	    width: 50px;
+	    height: 50px;
+	    align-self: center;
+	    border-radius: 50%;
+	    border: 3px solid #808080c2;
+	    display: flex;
+	    justify-content: center;
+	    text-align: -webkit-auto;
+	}
+	.convo-right{
+		padding:1em .5em;
+		margin-left: calc(20%);
+		direction: rtl;
+		margin-bottom:5px;
+		display: flex;
+	}
+	.convo-left{
+		padding:1em .5em;
+		margin-bottom:5px;
+		display: flex;
+	}
+	.convo img{
+		max-width: calc(100%);
+	    border-radius: 100%;
+		max-height:calc(100%);
+	}
+		.convo .img {
+	    width: 50px;
+	    height: 50px;
+	    align-self: center;
+	    border-radius: 50%;
+	    border: 3px solid #808080c2;
+	    display: flex;
+	    justify-content: center;
+	    text-align: -webkit-auto;
+	}
+	.convo-left .img{
+		font-size: 30px;
+		font-weight: bold;
+		background-color: #5057a8;
+		color: white;
+	}
+
+	.convo-right .img{
+		font-size: 30px;
+		font-weight: bold;
+		background-color:#339bc3;
+		color: white;
+	}
+	.convo{
+		position: relative;
+		width: calc(80%);
+
+	}
+	.convo .adminMessage {
+	    max-width: calc(80%);
+	    border-radius: 15px;
+		overflow-wrap: break-word;
+	}
+	.convo-left .adminMessage {
+	    background: #a6a6af;
+	    margin-left: 10px;
+	     padding: 1em;
+	    color: white;
+	}
+	.convo-right .adminMessage {
+	    background: #2031ff;
+	    margin-right: 10px;
+	    padding: 1em;
+	    color: white;
+	}
+	small.status {
+    position: absolute;
+    bottom: 0;
+    font-style: italic;
+}
+.convo-left .status {
+    left: 5rem;
+	  
+	}
+	.convo-right .status {
+    right: 5rem;
+	  
+	}
+	div#nw_msg {
+		display: none;
+    position: absolute;
+    z-index: 10;
+    background: #00a1ff;
+    top: calc(79%);
+    right: 30px;
+    color: white;
+    padding: .5em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.badge-notification{
+	margin-left: 24px;
+	background-color: #c62a2a;
+	padding: 1px 4px 1px 4px;
+	border-radius: 7px;
+	color: white;
+}
+
+	</style>	
+	<script type="text/javascript">
+		
+		require(['jquery'], function($) {
+			$.ajax({
+				method: "GET",
+				url: "<?php  echo $block->getUrl('adminlivechat/grid/loadconversation'); ?>",
+				data: { q:'' },
+				})
+			.done(function( data ) {
+				$("#convo-list").html("");
+				var allCustomers=[];
+				for(var i=0;i<data.length;i++){
+					allCustomers.push({id:data[i].user_id,user_name:data[i].user_name})
+					console.log(allCustomers,"allCustomers1")
+					var unread=data[i].unread==0?'':'<span class="badge-notification float-right notif unread'+data[i].user_id+'">'+data[i].unread+'</span>'
+					$("#convo-list").append('<li class="list-group-item load-chat w-100" style="height: 30px;" data-thread-id="'+data[i].id+'" data-user-id="'+data[i].user_ids+'"><table class="" width="100%"><tr><td width="10%"><div class="uavatar"><span style="background-color: cadetblue; padding: 2px 7px 2px 7px;border-radius: 50%;margin-right:5px;margin-bottom:7px;color:white">'+data[i].user_name.charAt(0).toUpperCase()+'</span></div></td>	<td><span class="uname">'+data[i].user_name+'</span>'+unread+'</td></tr></table></li>');
+				}
+				var allCustomers=JSON.stringify(allCustomers)
+				localStorage.setItem("allChatCustomers",allCustomers)
+			//do your thing
+
+			});
+			$.ajax({
+				method: "GET",
+				url: "<?php  echo $block->getUrl('adminlivechat/grid/loadagents'); ?>",
+				data: { q:'' },
+				})
+			.done(function( data ) {
+				for(var i=0;i<data.length;i++){
+					var x = document.getElementById("agentList");
+					var option = document.createElement("option");
+					option.text = data[i].firstname+" "+data[i].lastname;
+					option.value = data[i].entity_id;
+					x.add(option);
+				}
+				var allCustomers=JSON.stringify(allCustomers)
+				localStorage.setItem("allChatCustomers",allCustomers)
+			//do your thing
+
+			});
+			var modal = document.getElementById("assignModal");
+			var span = document.getElementsByClassName("closeAssignModal")[0];
+			$('#openAssignModal').on("click",function(){
+				modal.style.display = "block";
+			})
+			$('#assignAgent').on("click",function(){
+				var selectedCustomerDetails=JSON.parse(localStorage.getItem("selectedChatCustomer"))
+				var agentId=$("#agentList option:selected").val()
+				console.log(selectedCustomerDetails,"selectedCustomerDetails")
+				cosole.log(agentId,"agentId") 
+				$.ajax({
+				method: "GET",
+				url: "<?php  echo $block->getUrl('adminlivechat/grid/assignagent'); ?>",
+				data: { threadId:selectedCustomerDetails.thread_id,agentId:agentId},
+				})
+				.done(function( data ) {
+					var allCustomers=JSON.stringify(allCustomers)
+					localStorage.setItem("allChatCustomers",allCustomers)
+				//do your thing
+
+				});
+			})
+			
+			function closeAssignModal(){
+				modal.style.display = "none";
+			}
+			function showMessage(messageHTML) {
+				$('#chat-box').append(messageHTML);
+			}
+
+			$(document).ready(function(){
+				var websocket = new WebSocket("ws://localhost:8090/php-socket.php"); 
+				websocket.onopen = function(event) { 
+					// showMessage("<div class='chat-connection-a	ck'>Connection is established!</div>");		
+				}
+				
+				websocket.onerror = function(event){
+					// showMessage("<div class='error'>Problem due to some Error</div>");
+				};
+				websocket.onclose = function(event){
+					// showMessage("<div class='chat-connection-ack'>Connection Closed</div>");
+				}; 
+				$(document).on('click', '.load-chat', function() {
+					
+					var threadId = $(this).data('thread-id');
+					var userId = $(this).data('user-id').split(",")[0];
+					var allCustomers=JSON.parse(localStorage.getItem("allChatCustomers"));
+					console.log(allCustomers,"allcustomers");
+					allCustomers.filter(function (e) {
+						console.log(e,"e")
+						if(e.id==userId){
+							localStorage.setItem("selectedChatCustomer",JSON.stringify({id:userId,user_name:e.username,thread_id:threadId}))
+						}
+					});
+					$('#chat-box').html('')
+					$.ajax({
+						method: "GET",
+						url: "<?php  echo $block->getUrl('adminlivechat/grid/loadchat'); ?>",
+						data: { threadId:threadId,userId:userId },
+						})
+					.done(function( data ) {
+						$(".unread"+userId).css("display","none");
+						// $("#convo-list").html("");
+						for(var i=0;i<data[0].length;i++){
+							var className = '<?php echo $block->getAdminId(); ?>' == data[0][i].user_id ? 'convo-right' : 'convo-left';
+							var userName = '<?php echo $block->getAdminId(); ?>' == data[0][i].user_id ? data[1][1].firstname+' '+data[1][1].lastname : data[1][0].firstname+' '+data[1][0].lastname;
+							$('#chat-box').append('<div class="convo '+className+'"><div class="img"><span>'+userName.charAt(0).toUpperCase()+'</span></div><div class="adminMessage">'+data[0][i].message+'</div><small class="status" data-id="1">'+userName+'</small></div>');
+							// $("#convo-list").append('<li class="list-group-item load-chat w-100" data-thread-id="'+data[i].id+'"><table class="" width="100%"><tr><td width="10%"><div class="uavatar"><img src="" alt="ew"></div></td>	<td><span class="uname">'+data[i].user_name+'</span><span class="badge badge-danger float-right notif">0</span></td></tr></table></li>');
+						}
+					});
+				});
+				websocket.onmessage = function(event) {
+					var Data = JSON.parse(event.data);
+					console.log(Data);
+					if(Data.chat_message){
+						var selectedCustomerDetails=JSON.parse(localStorage.getItem("selectedChatCustomer"))
+						if(Data.chat_user== selectedCustomerDetails.id){
+							var className = 'convo-left';
+							var userName = selectedCustomerDetails.user_name
+							$('#chat-box').append('<div class="convo '+className+'"><div class="img"><span>'+userName.charAt(0).toUpperCase()+'</span></div><div class="adminMessage">'+Data.chat_message+'</div><small class="status" data-id="1">'+userName+'</small></div>');
+
+							// showMessage("<div class='"+Data.chat_user+"'>"+Data.chat_message+"</div>")
+						} else {
+							$(".unread"+Data.chat_user)
+						}
+					}
+							
+					// $('#chat-box').append();
+					$('#chat-message').val('');
+				};
+				// $("#chat-user").change(function(){
+				// 	$('#chat-user').attr("type","hidden");		
+				// 	var messageJSON = {
+				// 		chat_user: $('#chat-user').val(),
+				// 		chat_message: $('#chat-message').val()
+				// 	};
+				// 	websocket.getData(JSON.stringify(messageJSON));
+				// });
+				$('#chat-user').attr("type","hidden");
+				$('#frmChat').on("submit",function(event){
+					event.preventDefault();
+					$('#chat-user').attr("type","hidden");
+					var selectedCustomerDetails=JSON.parse(localStorage.getItem("selectedChatCustomer"))		
+					var messageJSON = {
+						chat_user: $('#chat-user').val(),
+						to_user: selectedCustomerDetails.id,
+						chat_message: $('#chat-message').val()
+					};
+					websocket.send(JSON.stringify(messageJSON));
+					$.ajax({
+						method: "GET",
+						url: "<?php  echo $block->getUrl('adminlivechat/grid/savechat'); ?>",
+						data: { message:$('#chat-message').val(),userId:$('#chat-user').val(),thread:selectedCustomerDetails.thread_id},
+						})
+					.done(function( data ) {
+						
+					});
+				});
+			});
+		});
+
+
+	</script>
+	</head>
+	<body>
+		<div class="">
+			<div class="main-contact-list">
+				<div class="col-lg-12">
+					<div class="row">
+						<form action="" id="filter-contact" class=" w-100">
+							<div class="form-group" id="filter-row">
+								<!-- <input type="text" class="form-control" placeholder="Search user here" id="find_user"> -->
+								<div id="filtered-field" style="display: none">
+									
+								</div>
+							</div>
+						</form>
+					</div>
+
+				</div>
+				<ul class="list-group" style="margin-top:7px;" id="convo-list">
+				</ul>
+			</div>
+			<div class="main-chat-box">
+				<form name="frmChat" id="frmChat">
+					<div id="chat-box"></div>
+					<input type="text" name="chat-user" id="chat-user" style="display:none;" placeholder="Name" value="<?php echo $block->getAdminId(); ?>" class="chat-input" required />
+					<input type="text" name="chat-message" id="chat-message" placeholder="Message"  class="chat-input chat-message" required style="width:85%;float:left;"/> <input id="openAssignModal" style="width: 15%;float: left;border: 3px solid #fbe5e5;padding: 8px; border-radius: 3px;background-color: white;" type="button" value="Assign Agent">
+					<input type="submit" style="width:25%;"id="btnSend" name="send-chat-message" value="Send" >
+				</form>
+			</div>
+			<div id="assignModal" class="assignModal">
+				<!-- Modal content -->
+				<div class="assignModal-content">
+					<span class="closeAssignModal">&times;</span><br>
+					<label for="cars">Choose the agent to assign:</label>
+
+					<br><select name="agents" id="agentList">
+						<option value="0">Select Agent</option>
+					</select><br>
+					<input type="button" style="width:25%;" id="assignAgent" name="send-chat-message" value="Assign" >
+				</div>
+			</div>
+		</div>
+</body>
+</html>

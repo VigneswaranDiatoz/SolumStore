@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 16, 2023 at 11:44 AM
+-- Generation Time: Sep 13, 2023 at 11:37 AM
 -- Server version: 8.0.31
 -- PHP Version: 7.4.33
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `admin_passwords` (
   `last_updated` int UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Last Updated',
   PRIMARY KEY (`password_id`),
   KEY `ADMIN_PASSWORDS_USER_ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COMMENT='Admin Passwords';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COMMENT='Admin Passwords';
 
 --
 -- Dumping data for table `admin_passwords`
@@ -94,7 +94,12 @@ CREATE TABLE IF NOT EXISTS `admin_passwords` (
 
 INSERT INTO `admin_passwords` (`password_id`, `user_id`, `password_hash`, `expires`, `last_updated`) VALUES
 (1, 1, '3580da9b9ccf346fc8befe81658449d5c7104531381d208fc5bb61a604472207:DilgVnYAINySB54iDIQpMd03MCgimkeU:3_32_2_67108864', 0, 1685511786),
-(2, 2, 'a48a32333e70aeecca2360730c307937e448c6efed6908f6f5e390c4bb480f29:5osQsZvq6q195emykb9F611kSZfeGB2H:3_32_2_67108864', 0, 1685516460);
+(2, 2, 'a48a32333e70aeecca2360730c307937e448c6efed6908f6f5e390c4bb480f29:5osQsZvq6q195emykb9F611kSZfeGB2H:3_32_2_67108864', 0, 1685516460),
+(3, 2, 'af6d1dd1f01189d93d5c84adfe5eece2c745bb6bbcad50fed76cd8590cc33ed5:OqcQdMMWyYVrkG6ZJKAONL3NJRBEkfeO:3_32_2_67108864', 0, 1693297511),
+(4, 3, 'f5bb7cc50f8cb79a19c8d5eae7abbdaf1f9ad0cf1a2da21599c113112e34d4c6:usWNSHXLoRnbHPRhGTqnHkwLTkSucmRI:3_32_2_67108864', 0, 1693475543),
+(5, 4, 'c6a00ef4f80a2257c35a5e60608e648370858b775874ae9ab91fe7629b5a4826:h0zTclMFvra9No89ECe4vyqaXXLLyLW3:3_32_2_67108864', 0, 1693475657),
+(6, 3, '429fba42455b2340b7c3f49ad9c702fe5eb4c5d2f35582f0aa2f2bcaef8b8426:UVecsPZluqsnIpkmjwKngvqukb2GpWr4:3_32_2_67108864', 0, 1693475843),
+(7, 3, '5a829a97e4a8b8247bdb25e38e738c774639ed4ea07846af27ec4ca3bb79f7b6:UrT3sncTr1TBnRr7ozeEsjkfMqmxUo7P:3_32_2_67108864', 0, 1693475891);
 
 -- --------------------------------------------------------
 
@@ -146,15 +151,17 @@ CREATE TABLE IF NOT EXISTS `admin_user` (
   `lock_expires` timestamp NULL DEFAULT NULL COMMENT 'Expiration Lock Dates',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `ADMIN_USER_USERNAME` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COMMENT='Admin User Table';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COMMENT='Admin User Table';
 
 --
 -- Dumping data for table `admin_user`
 --
 
 INSERT INTO `admin_user` (`user_id`, `firstname`, `lastname`, `email`, `username`, `password`, `created`, `modified`, `logdate`, `lognum`, `reload_acl_flag`, `is_active`, `extra`, `rp_token`, `rp_token_created_at`, `interface_locale`, `failures_num`, `first_failure`, `lock_expires`) VALUES
-(1, 'Vigneswaran', 'S', 'vigneswaran.sekar@diatoz.com', 'admin', '3580da9b9ccf346fc8befe81658449d5c7104531381d208fc5bb61a604472207:DilgVnYAINySB54iDIQpMd03MCgimkeU:3_32_2_67108864', '2023-05-31 05:43:06', '2023-05-31 05:43:06', NULL, 0, 0, 1, NULL, NULL, NULL, 'en_US', 0, NULL, NULL),
-(2, 'Mageplaza', 'Family', 'hi@mageplaza.com', 'diatoz', 'a48a32333e70aeecca2360730c307937e448c6efed6908f6f5e390c4bb480f29:5osQsZvq6q195emykb9F611kSZfeGB2H:3_32_2_67108864', '2023-05-31 07:01:00', '2023-08-11 05:10:59', '2023-08-11 05:10:59', 109, 0, 1, '{\"configState\":{\"magento_general\":\"0\",\"admin_security\":\"1\"}}', NULL, NULL, 'en_US', 0, NULL, NULL);
+(1, 'Vigneswaran', 'S', 'vigneswaran.sekar@diatoz.com', 'admin', '3580da9b9ccf346fc8befe81658449d5c7104531381d208fc5bb61a604472207:DilgVnYAINySB54iDIQpMd03MCgimkeU:3_32_2_67108864', '2023-05-31 05:43:06', '2023-08-31 09:47:09', NULL, 0, 1, 1, 'null', NULL, NULL, 'en_US', 0, NULL, NULL),
+(2, 'Mageplaza', 'Family', 'hi@mageplaza.com', 'diatoz', 'af6d1dd1f01189d93d5c84adfe5eece2c745bb6bbcad50fed76cd8590cc33ed5:OqcQdMMWyYVrkG6ZJKAONL3NJRBEkfeO:3_32_2_67108864', '2023-05-31 07:01:00', '2023-09-13 10:36:28', '2023-09-13 10:36:28', 179, 0, 1, '{\"configState\":{\"magento_general\":\"0\",\"admin_security\":\"0\",\"system_security\":\"1\",\"system_cron\":\"0\",\"admin_usage\":\"0\"}}', NULL, NULL, 'en_US', 0, NULL, NULL),
+(3, 'Mageplaza', 'Family', 'hie@mageplaza.com', 'vignu', '5a829a97e4a8b8247bdb25e38e738c774639ed4ea07846af27ec4ca3bb79f7b6:UrT3sncTr1TBnRr7ozeEsjkfMqmxUo7P:3_32_2_67108864', '2023-08-31 09:52:23', '2023-08-31 10:03:51', '2023-08-31 10:03:51', 1, 0, 1, NULL, NULL, NULL, 'en_US', 0, NULL, NULL),
+(4, 'FirstName', 'LastName', 'email@example.com', 'username', 'c6a00ef4f80a2257c35a5e60608e648370858b775874ae9ab91fe7629b5a4826:h0zTclMFvra9No89ECe4vyqaXXLLyLW3:3_32_2_67108864', '2023-08-31 09:54:17', '2023-08-31 09:54:17', NULL, 0, 0, 1, NULL, NULL, NULL, 'en_US', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `admin_user_session` (
   PRIMARY KEY (`id`),
   KEY `ADMIN_USER_SESSION_SESSION_ID` (`session_id`),
   KEY `ADMIN_USER_SESSION_USER_ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb3 COMMENT='Admin User sessions table';
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8mb3 COMMENT='Admin User sessions table';
 
 --
 -- Dumping data for table `admin_user_session`
@@ -302,7 +309,78 @@ INSERT INTO `admin_user_session` (`id`, `session_id`, `user_id`, `status`, `crea
 (106, NULL, 2, 1, '2023-08-10 07:05:23', '2023-08-10 07:32:26', '::1'),
 (107, NULL, 2, 1, '2023-08-10 10:16:07', '2023-08-10 10:16:07', '::1'),
 (108, NULL, 2, 1, '2023-08-10 12:09:29', '2023-08-10 12:19:18', '::1'),
-(109, NULL, 2, 1, '2023-08-11 05:10:59', '2023-08-11 05:18:53', '::1');
+(109, NULL, 2, 1, '2023-08-11 05:10:59', '2023-08-11 05:18:53', '::1'),
+(110, NULL, 2, 1, '2023-08-16 11:58:49', '2023-08-16 11:58:49', '::1'),
+(111, NULL, 2, 2, '2023-08-17 06:25:37', '2023-08-17 06:30:03', '::1'),
+(112, NULL, 2, 1, '2023-08-17 06:30:03', '2023-08-17 06:33:47', '::1'),
+(113, NULL, 2, 1, '2023-08-17 10:00:47', '2023-08-17 10:23:00', '::1'),
+(114, NULL, 2, 1, '2023-08-17 11:05:38', '2023-08-17 11:07:34', '::1'),
+(115, NULL, 2, 1, '2023-08-18 11:25:50', '2023-08-18 11:25:50', '::1'),
+(116, NULL, 2, 1, '2023-08-18 11:59:42', '2023-08-18 12:36:45', '::1'),
+(117, NULL, 2, 1, '2023-08-22 04:03:56', '2023-08-22 04:03:56', '::1'),
+(118, NULL, 2, 1, '2023-08-22 05:02:17', '2023-08-22 05:02:17', '::1'),
+(119, NULL, 2, 1, '2023-08-23 10:19:27', '2023-08-23 10:19:27', '::1'),
+(120, NULL, 2, 1, '2023-08-23 10:47:34', '2023-08-23 10:57:32', '::1'),
+(121, NULL, 2, 1, '2023-08-24 05:19:26', '2023-08-24 06:34:44', '::1'),
+(122, NULL, 2, 1, '2023-08-24 06:50:37', '2023-08-24 06:56:18', '::1'),
+(123, NULL, 2, 1, '2023-08-24 07:38:45', '2023-08-24 07:41:47', '::1'),
+(124, NULL, 2, 1, '2023-08-24 08:00:05', '2023-08-24 08:04:10', '::1'),
+(125, NULL, 2, 1, '2023-08-24 08:29:42', '2023-08-24 08:55:39', '::1'),
+(126, NULL, 2, 1, '2023-08-24 10:55:37', '2023-08-24 11:30:56', '::1'),
+(127, NULL, 2, 1, '2023-08-24 11:50:44', '2023-08-24 12:16:30', '::1'),
+(128, NULL, 2, 1, '2023-08-24 12:42:09', '2023-08-24 12:51:26', '::1'),
+(129, NULL, 2, 1, '2023-08-25 07:23:20', '2023-08-25 07:23:20', '::1'),
+(130, NULL, 2, 1, '2023-08-25 08:42:30', '2023-08-25 08:53:36', '::1'),
+(131, NULL, 2, 1, '2023-08-25 09:15:53', '2023-08-25 09:24:59', '::1'),
+(132, NULL, 2, 1, '2023-08-25 09:41:12', '2023-08-25 09:41:12', '::1'),
+(133, NULL, 2, 1, '2023-08-25 09:59:44', '2023-08-25 10:19:32', '::1'),
+(134, NULL, 2, 1, '2023-08-28 04:10:12', '2023-08-28 05:09:25', '::1'),
+(135, NULL, 2, 1, '2023-08-28 06:20:46', '2023-08-28 06:38:54', '::1'),
+(136, NULL, 2, 1, '2023-08-28 06:57:04', '2023-08-28 07:46:43', '::1'),
+(137, NULL, 2, 1, '2023-08-28 08:12:38', '2023-08-28 09:01:35', '::1'),
+(138, NULL, 2, 1, '2023-08-28 09:41:24', '2023-08-28 10:14:20', '::1'),
+(139, NULL, 2, 1, '2023-08-28 11:41:35', '2023-08-28 11:45:23', '::1'),
+(140, NULL, 2, 1, '2023-08-28 12:24:35', '2023-08-28 13:12:01', '::1'),
+(141, NULL, 2, 1, '2023-08-29 04:27:39', '2023-08-29 05:47:25', '::1'),
+(142, NULL, 2, 1, '2023-08-29 06:11:21', '2023-08-29 07:05:47', '::1'),
+(143, NULL, 2, 1, '2023-08-29 08:23:46', '2023-08-29 08:34:36', '::1'),
+(144, NULL, 2, 1, '2023-08-29 09:17:52', '2023-08-29 09:34:27', '::1'),
+(145, NULL, 2, 1, '2023-08-29 09:59:22', '2023-08-29 10:39:30', '::1'),
+(146, NULL, 2, 1, '2023-08-29 10:59:38', '2023-08-29 10:59:38', '::1'),
+(147, NULL, 2, 1, '2023-08-29 11:50:11', '2023-08-29 11:52:41', '::1'),
+(148, NULL, 2, 1, '2023-08-29 12:42:29', '2023-08-29 12:49:26', '::1'),
+(149, NULL, 2, 1, '2023-08-29 13:22:11', '2023-08-29 13:22:11', '::1'),
+(150, NULL, 2, 1, '2023-08-29 14:01:39', '2023-08-29 14:37:55', '::1'),
+(151, NULL, 2, 1, '2023-08-29 15:11:36', '2023-08-29 15:36:00', '::1'),
+(152, NULL, 2, 1, '2023-08-31 04:45:41', '2023-08-31 05:01:43', '::1'),
+(153, NULL, 2, 1, '2023-08-31 05:17:47', '2023-08-31 05:28:51', '::1'),
+(154, NULL, 2, 1, '2023-08-31 06:10:12', '2023-08-31 06:22:37', '::1'),
+(155, NULL, 2, 1, '2023-08-31 06:51:25', '2023-08-31 06:53:23', '::1'),
+(156, NULL, 2, 1, '2023-08-31 08:42:24', '2023-08-31 09:01:34', '::1'),
+(157, NULL, 2, 2, '2023-08-31 09:42:17', '2023-08-31 09:48:31', '::1'),
+(158, NULL, 2, 0, '2023-08-31 09:48:31', '2023-08-31 09:56:39', '::1'),
+(159, NULL, 2, 0, '2023-08-31 09:56:52', '2023-08-31 10:03:31', '::1'),
+(160, NULL, 3, 0, '2023-08-31 10:03:51', '2023-08-31 10:10:41', '::1'),
+(161, NULL, 2, 0, '2023-08-31 10:10:58', '2023-08-31 10:23:00', '::1'),
+(162, NULL, 2, 1, '2023-08-31 10:23:21', '2023-08-31 10:23:21', '::1'),
+(163, NULL, 2, 1, '2023-08-31 10:44:02', '2023-08-31 10:49:10', '::1'),
+(164, NULL, 2, 1, '2023-09-01 06:17:11', '2023-09-01 06:18:10', '::1'),
+(165, NULL, 2, 1, '2023-09-01 06:43:55', '2023-09-01 06:46:37', '::1'),
+(166, NULL, 2, 1, '2023-09-01 09:49:52', '2023-09-01 09:51:48', '::1'),
+(167, NULL, 2, 1, '2023-09-01 10:07:28', '2023-09-01 10:07:28', '::1'),
+(168, NULL, 2, 1, '2023-09-01 10:33:53', '2023-09-01 10:47:33', '::1'),
+(169, NULL, 2, 1, '2023-09-01 11:06:11', '2023-09-01 11:06:11', '::1'),
+(170, NULL, 2, 1, '2023-09-01 11:41:25', '2023-09-01 11:51:38', '::1'),
+(171, NULL, 2, 1, '2023-09-01 12:09:31', '2023-09-01 12:25:54', '::1'),
+(172, NULL, 2, 1, '2023-09-04 05:07:44', '2023-09-04 05:15:30', '::1'),
+(173, NULL, 2, 1, '2023-09-08 05:13:52', '2023-09-08 05:37:41', '::1'),
+(174, NULL, 2, 1, '2023-09-08 06:53:34', '2023-09-08 06:54:10', '::1'),
+(175, NULL, 2, 1, '2023-09-12 10:52:15', '2023-09-12 11:11:52', '::1'),
+(176, NULL, 2, 1, '2023-09-12 11:29:05', '2023-09-12 12:06:31', '::1'),
+(177, NULL, 2, 1, '2023-09-13 05:59:00', '2023-09-13 05:59:00', '::1'),
+(178, NULL, 2, 1, '2023-09-13 06:25:33', '2023-09-13 06:38:12', '::1'),
+(179, NULL, 2, 1, '2023-09-13 09:36:05', '2023-09-13 09:47:02', '::1'),
+(180, NULL, 2, 1, '2023-09-13 10:36:28', '2023-09-13 10:36:28', '::1');
 
 -- --------------------------------------------------------
 
@@ -323,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `authorization_role` (
   PRIMARY KEY (`role_id`),
   KEY `AUTHORIZATION_ROLE_PARENT_ID_SORT_ORDER` (`parent_id`,`sort_order`),
   KEY `AUTHORIZATION_ROLE_TREE_LEVEL` (`tree_level`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COMMENT='Admin Role Table';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COMMENT='Admin Role Table';
 
 --
 -- Dumping data for table `authorization_role`
@@ -331,8 +409,9 @@ CREATE TABLE IF NOT EXISTS `authorization_role` (
 
 INSERT INTO `authorization_role` (`role_id`, `parent_id`, `tree_level`, `sort_order`, `role_type`, `user_id`, `user_type`, `role_name`) VALUES
 (1, 0, 1, 1, 'G', 0, '2', 'Administrators'),
-(2, 1, 2, 0, 'U', 1, '2', 'admin'),
-(3, 1, 2, 0, 'U', 2, '2', 'diatoz');
+(4, 1, 2, 0, 'U', 1, '2', 'Vigneswaran'),
+(5, 1, 2, 0, 'U', 2, '2', 'Mageplaza'),
+(6, 1, 2, 0, 'U', 3, '2', 'vignu');
 
 -- --------------------------------------------------------
 
@@ -350,14 +429,239 @@ CREATE TABLE IF NOT EXISTS `authorization_rule` (
   PRIMARY KEY (`rule_id`),
   KEY `AUTHORIZATION_RULE_RESOURCE_ID_ROLE_ID` (`resource_id`,`role_id`),
   KEY `AUTHORIZATION_RULE_ROLE_ID_RESOURCE_ID` (`role_id`,`resource_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COMMENT='Admin Rule Table';
+) ENGINE=InnoDB AUTO_INCREMENT=228 DEFAULT CHARSET=utf8mb3 COMMENT='Admin Rule Table';
 
 --
 -- Dumping data for table `authorization_rule`
 --
 
 INSERT INTO `authorization_rule` (`rule_id`, `role_id`, `resource_id`, `privileges`, `permission`) VALUES
-(1, 1, 'Magento_Backend::all', NULL, 'allow');
+(2, 1, 'Magento_Backend::all', NULL, 'allow'),
+(3, 1, 'Magento_Backend::admin', NULL, 'allow'),
+(4, 1, 'Magento_Backend::dashboard', NULL, 'allow'),
+(5, 1, 'Magento_Analytics::analytics', NULL, 'allow'),
+(6, 1, 'Magento_Analytics::analytics_api', NULL, 'allow'),
+(7, 1, 'Magento_Sales::sales', NULL, 'allow'),
+(8, 1, 'Magento_Sales::sales_operation', NULL, 'allow'),
+(9, 1, 'Magento_Sales::sales_order', NULL, 'allow'),
+(10, 1, 'Magento_Sales::actions', NULL, 'allow'),
+(11, 1, 'Magento_Sales::create', NULL, 'allow'),
+(12, 1, 'Magento_Sales::actions_view', NULL, 'allow'),
+(13, 1, 'Magento_Sales::email', NULL, 'allow'),
+(14, 1, 'Magento_Sales::reorder', NULL, 'allow'),
+(15, 1, 'Magento_Sales::actions_edit', NULL, 'allow'),
+(16, 1, 'Magento_Sales::cancel', NULL, 'allow'),
+(17, 1, 'Magento_Sales::review_payment', NULL, 'allow'),
+(18, 1, 'Magento_Sales::capture', NULL, 'allow'),
+(19, 1, 'Magento_Sales::invoice', NULL, 'allow'),
+(20, 1, 'Magento_Sales::creditmemo', NULL, 'allow'),
+(21, 1, 'Magento_Sales::hold', NULL, 'allow'),
+(22, 1, 'Magento_Sales::unhold', NULL, 'allow'),
+(23, 1, 'Magento_Sales::ship', NULL, 'allow'),
+(24, 1, 'Magento_Sales::comment', NULL, 'allow'),
+(25, 1, 'Magento_Sales::emails', NULL, 'allow'),
+(26, 1, 'Magento_Paypal::authorization', NULL, 'allow'),
+(27, 1, 'Magento_Sales::sales_invoice', NULL, 'allow'),
+(28, 1, 'Magento_Sales::shipment', NULL, 'allow'),
+(29, 1, 'Magento_Sales::sales_creditmemo', NULL, 'allow'),
+(30, 1, 'Magento_Paypal::billing_agreement', NULL, 'allow'),
+(31, 1, 'Magento_Paypal::billing_agreement_actions', NULL, 'allow'),
+(32, 1, 'Magento_Paypal::billing_agreement_actions_view', NULL, 'allow'),
+(33, 1, 'Magento_Paypal::actions_manage', NULL, 'allow'),
+(34, 1, 'Magento_Paypal::use', NULL, 'allow'),
+(35, 1, 'Magento_Sales::transactions', NULL, 'allow'),
+(36, 1, 'Magento_Sales::transactions_fetch', NULL, 'allow'),
+(37, 1, 'Magento_Catalog::catalog', NULL, 'allow'),
+(38, 1, 'Magento_Catalog::catalog_inventory', NULL, 'allow'),
+(39, 1, 'Magento_Catalog::products', NULL, 'allow'),
+(40, 1, 'Magento_Catalog::update_attributes', NULL, 'allow'),
+(41, 1, 'Magento_Catalog::edit_product_design', NULL, 'allow'),
+(42, 1, 'Magento_Catalog::categories', NULL, 'allow'),
+(43, 1, 'Magento_Catalog::edit_category_design', NULL, 'allow'),
+(44, 1, 'Magento_Customer::customer', NULL, 'allow'),
+(45, 1, 'Magento_Customer::manage', NULL, 'allow'),
+(46, 1, 'Magento_Customer::actions', NULL, 'allow'),
+(47, 1, 'Magento_Customer::delete', NULL, 'allow'),
+(48, 1, 'Magento_Customer::reset_password', NULL, 'allow'),
+(49, 1, 'Magento_Customer::invalidate_tokens', NULL, 'allow'),
+(50, 1, 'Magento_LoginAsCustomer::allow_shopping_assistance', NULL, 'allow'),
+(51, 1, 'Magento_Customer::online', NULL, 'allow'),
+(52, 1, 'Magento_Customer::group', NULL, 'allow'),
+(53, 1, 'Magento_LoginAsCustomer::login', NULL, 'allow'),
+(54, 1, 'Magento_LoginAsCustomerLog::login_log', NULL, 'allow'),
+(55, 1, 'Magento_Cart::cart', NULL, 'allow'),
+(56, 1, 'Magento_Cart::manage', NULL, 'allow'),
+(57, 1, 'Magento_Backend::myaccount', NULL, 'allow'),
+(58, 1, 'Magento_Backend::marketing', NULL, 'allow'),
+(59, 1, 'Magento_CatalogRule::promo', NULL, 'allow'),
+(60, 1, 'Magento_CatalogRule::promo_catalog', NULL, 'allow'),
+(61, 1, 'Magento_SalesRule::quote', NULL, 'allow'),
+(62, 1, 'Magento_Backend::marketing_communications', NULL, 'allow'),
+(63, 1, 'Magento_Email::template', NULL, 'allow'),
+(64, 1, 'Magento_Newsletter::template', NULL, 'allow'),
+(65, 1, 'Magento_Newsletter::queue', NULL, 'allow'),
+(66, 1, 'Magento_Newsletter::subscriber', NULL, 'allow'),
+(67, 1, 'Magento_Backend::marketing_seo', NULL, 'allow'),
+(68, 1, 'Magento_Search::search', NULL, 'allow'),
+(69, 1, 'Magento_Search::synonyms', NULL, 'allow'),
+(70, 1, 'Magento_UrlRewrite::urlrewrite', NULL, 'allow'),
+(71, 1, 'Magento_Sitemap::sitemap', NULL, 'allow'),
+(72, 1, 'Magento_Backend::marketing_user_content', NULL, 'allow'),
+(73, 1, 'Magento_Review::reviews_all', NULL, 'allow'),
+(74, 1, 'Magento_Review::pending', NULL, 'allow'),
+(75, 1, 'Magento_Backend::content', NULL, 'allow'),
+(76, 1, 'Magento_Backend::content_elements', NULL, 'allow'),
+(77, 1, 'Magento_Cms::page', NULL, 'allow'),
+(78, 1, 'Magento_Cms::save', NULL, 'allow'),
+(79, 1, 'Magento_Cms::save_design', NULL, 'allow'),
+(80, 1, 'Magento_Cms::page_delete', NULL, 'allow'),
+(81, 1, 'Magento_Cms::block', NULL, 'allow'),
+(82, 1, 'Magento_Widget::widget_instance', NULL, 'allow'),
+(83, 1, 'Magento_Cms::media_gallery', NULL, 'allow'),
+(84, 1, 'Magento_MediaGalleryUiApi::insert_assets', NULL, 'allow'),
+(85, 1, 'Magento_MediaGalleryUiApi::upload_assets', NULL, 'allow'),
+(86, 1, 'Magento_MediaGalleryUiApi::edit_assets', NULL, 'allow'),
+(87, 1, 'Magento_MediaGalleryUiApi::delete_assets', NULL, 'allow'),
+(88, 1, 'Magento_MediaGalleryUiApi::create_folder', NULL, 'allow'),
+(89, 1, 'Magento_MediaGalleryUiApi::delete_folder', NULL, 'allow'),
+(90, 1, 'Magento_Backend::design', NULL, 'allow'),
+(91, 1, 'Magento_Theme::theme', NULL, 'allow'),
+(92, 1, 'Magento_Backend::schedule', NULL, 'allow'),
+(93, 1, 'Magento_Backend::content_translation', NULL, 'allow'),
+(94, 1, 'Magento_Reports::report', NULL, 'allow'),
+(95, 1, 'Magento_Reports::report_marketing', NULL, 'allow'),
+(96, 1, 'Magento_Reports::shopcart', NULL, 'allow'),
+(97, 1, 'Magento_Reports::product', NULL, 'allow'),
+(98, 1, 'Magento_Reports::abandoned', NULL, 'allow'),
+(99, 1, 'Magento_Reports::report_search', NULL, 'allow'),
+(100, 1, 'Magento_Newsletter::problem', NULL, 'allow'),
+(101, 1, 'Magento_Reports::review', NULL, 'allow'),
+(102, 1, 'Magento_Reports::review_customer', NULL, 'allow'),
+(103, 1, 'Magento_Reports::review_product', NULL, 'allow'),
+(104, 1, 'Magento_Reports::salesroot', NULL, 'allow'),
+(105, 1, 'Magento_Reports::salesroot_sales', NULL, 'allow'),
+(106, 1, 'Magento_Reports::tax', NULL, 'allow'),
+(107, 1, 'Magento_Reports::invoiced', NULL, 'allow'),
+(108, 1, 'Magento_Reports::shipping', NULL, 'allow'),
+(109, 1, 'Magento_Reports::refunded', NULL, 'allow'),
+(110, 1, 'Magento_Reports::coupons', NULL, 'allow'),
+(111, 1, 'Magento_Paypal::paypal_settlement_reports', NULL, 'allow'),
+(112, 1, 'Magento_Paypal::paypal_settlement_reports_view', NULL, 'allow'),
+(113, 1, 'Magento_Paypal::fetch', NULL, 'allow'),
+(114, 1, 'Magento_Reports::customers', NULL, 'allow'),
+(115, 1, 'Magento_Reports::totals', NULL, 'allow'),
+(116, 1, 'Magento_Reports::customers_orders', NULL, 'allow'),
+(117, 1, 'Magento_Reports::accounts', NULL, 'allow'),
+(118, 1, 'Magento_Reports::report_products', NULL, 'allow'),
+(119, 1, 'Magento_Reports::viewed', NULL, 'allow'),
+(120, 1, 'Magento_Reports::bestsellers', NULL, 'allow'),
+(121, 1, 'Magento_Reports::lowstock', NULL, 'allow'),
+(122, 1, 'Magento_Reports::sold', NULL, 'allow'),
+(123, 1, 'Magento_Reports::downloads', NULL, 'allow'),
+(124, 1, 'Magento_Reports::statistics', NULL, 'allow'),
+(125, 1, 'Magento_Reports::statistics_refresh', NULL, 'allow'),
+(126, 1, 'Magento_Analytics::business_intelligence', NULL, 'allow'),
+(127, 1, 'Magento_Analytics::advanced_reporting', NULL, 'allow'),
+(128, 1, 'Magento_Analytics::bi_essentials', NULL, 'allow'),
+(129, 1, 'Magento_Backend::stores', NULL, 'allow'),
+(130, 1, 'Magento_Backend::stores_settings', NULL, 'allow'),
+(131, 1, 'Magento_Backend::store', NULL, 'allow'),
+(132, 1, 'Magento_Config::config', NULL, 'allow'),
+(133, 1, 'Magento_Contact::contact', NULL, 'allow'),
+(134, 1, 'Magento_Cms::config_cms', NULL, 'allow'),
+(135, 1, 'Magento_LoginAsCustomer::config_section', NULL, 'allow'),
+(136, 1, 'Magento_GoogleAnalytics::google', NULL, 'allow'),
+(137, 1, 'Magento_Downloadable::downloadable', NULL, 'allow'),
+(138, 1, 'Magento_Payment::payment_services', NULL, 'allow'),
+(139, 1, 'Magento_CatalogInventory::cataloginventory', NULL, 'allow'),
+(140, 1, 'Magento_Catalog::config_catalog', NULL, 'allow'),
+(141, 1, 'Magento_CatalogSearch::config_catalog_search', NULL, 'allow'),
+(142, 1, 'Magento_Payment::payment', NULL, 'allow'),
+(143, 1, 'Magento_Newsletter::newsletter', NULL, 'allow'),
+(144, 1, 'Magento_Shipping::config_shipping', NULL, 'allow'),
+(145, 1, 'Magento_Shipping::shipping_policy', NULL, 'allow'),
+(146, 1, 'Magento_Shipping::carriers', NULL, 'allow'),
+(147, 1, 'Magento_Multishipping::config_multishipping', NULL, 'allow'),
+(148, 1, 'Magento_Config::config_general', NULL, 'allow'),
+(149, 1, 'Magento_Config::web', NULL, 'allow'),
+(150, 1, 'Magento_Config::config_design', NULL, 'allow'),
+(151, 1, 'Magento_Customer::config_customer', NULL, 'allow'),
+(152, 1, 'Magento_Paypal::paypal', NULL, 'allow'),
+(153, 1, 'Magento_Tax::config_tax', NULL, 'allow'),
+(154, 1, 'Magento_Checkout::checkout', NULL, 'allow'),
+(155, 1, 'Magento_Sales::config_sales', NULL, 'allow'),
+(156, 1, 'Magento_Persistent::persistent', NULL, 'allow'),
+(157, 1, 'Magento_Sales::sales_email', NULL, 'allow'),
+(158, 1, 'Magento_Sales::sales_pdf', NULL, 'allow'),
+(159, 1, 'Magento_Reports::reports', NULL, 'allow'),
+(160, 1, 'Magento_Sitemap::config_sitemap', NULL, 'allow'),
+(161, 1, 'Magento_Wishlist::config_wishlist', NULL, 'allow'),
+(162, 1, 'Magento_Config::config_system', NULL, 'allow'),
+(163, 1, 'Magento_SalesRule::config_promo', NULL, 'allow'),
+(164, 1, 'Magento_Config::trans_email', NULL, 'allow'),
+(165, 1, 'Magento_Config::config_admin', NULL, 'allow'),
+(166, 1, 'Magento_Config::dev', NULL, 'allow'),
+(167, 1, 'Magento_Config::currency', NULL, 'allow'),
+(168, 1, 'Magento_Rss::rss', NULL, 'allow'),
+(169, 1, 'Magento_Config::sendfriend', NULL, 'allow'),
+(170, 1, 'Magento_Analytics::analytics_settings', NULL, 'allow'),
+(171, 1, 'Magento_NewRelicReporting::config_newrelicreporting', NULL, 'allow'),
+(172, 1, 'Magento_CheckoutAgreements::checkoutagreement', NULL, 'allow'),
+(173, 1, 'Magento_Sales::order_statuses', NULL, 'allow'),
+(174, 1, 'Magento_Tax::manage_tax', NULL, 'allow'),
+(175, 1, 'Magento_CurrencySymbol::system_currency', NULL, 'allow'),
+(176, 1, 'Magento_CurrencySymbol::currency_rates', NULL, 'allow'),
+(177, 1, 'Magento_CurrencySymbol::symbols', NULL, 'allow'),
+(178, 1, 'Magento_Backend::stores_attributes', NULL, 'allow'),
+(179, 1, 'Magento_Catalog::attributes_attributes', NULL, 'allow'),
+(180, 1, 'Magento_Catalog::sets', NULL, 'allow'),
+(181, 1, 'Magento_Review::ratings', NULL, 'allow'),
+(182, 1, 'Magento_Swatches::iframe', NULL, 'allow'),
+(183, 1, 'Magento_Backend::stores_other_settings', NULL, 'allow'),
+(184, 1, 'Magento_Backend::system', NULL, 'allow'),
+(185, 1, 'Magento_Backend::convert', NULL, 'allow'),
+(186, 1, 'Magento_ImportExport::import', NULL, 'allow'),
+(187, 1, 'Magento_ImportExport::export', NULL, 'allow'),
+(188, 1, 'Magento_TaxImportExport::import_export', NULL, 'allow'),
+(189, 1, 'Magento_ImportExport::history', NULL, 'allow'),
+(190, 1, 'Magento_Backend::extensions', NULL, 'allow'),
+(191, 1, 'Magento_Backend::local', NULL, 'allow'),
+(192, 1, 'Magento_Backend::custom', NULL, 'allow'),
+(193, 1, 'Magento_Integration::extensions', NULL, 'allow'),
+(194, 1, 'Magento_Integration::integrations', NULL, 'allow'),
+(195, 1, 'Magento_Backend::tools', NULL, 'allow'),
+(196, 1, 'Magento_Backend::cache', NULL, 'allow'),
+(197, 1, 'Magento_Backend::main_actions', NULL, 'allow'),
+(198, 1, 'Magento_Backend::flush_cache_storage', NULL, 'allow'),
+(199, 1, 'Magento_Backend::flush_magento_cache', NULL, 'allow'),
+(200, 1, 'Magento_Backend::mass_actions', NULL, 'allow'),
+(201, 1, 'Magento_Backend::toggling_cache_type', NULL, 'allow'),
+(202, 1, 'Magento_Backend::refresh_cache_type', NULL, 'allow'),
+(203, 1, 'Magento_Backend::additional_cache_management', NULL, 'allow'),
+(204, 1, 'Magento_Backend::flush_catalog_images', NULL, 'allow'),
+(205, 1, 'Magento_Backend::flush_js_css', NULL, 'allow'),
+(206, 1, 'Magento_Backend::flush_static_files', NULL, 'allow'),
+(207, 1, 'Magento_Backup::backup', NULL, 'allow'),
+(208, 1, 'Magento_Backup::rollback', NULL, 'allow'),
+(209, 1, 'Magento_Indexer::index', NULL, 'allow'),
+(210, 1, 'Magento_Indexer::changeMode', NULL, 'allow'),
+(211, 1, 'Magento_Indexer::invalidate', NULL, 'allow'),
+(212, 1, 'Magento_User::acl', NULL, 'allow'),
+(213, 1, 'Magento_User::acl_users', NULL, 'allow'),
+(214, 1, 'Magento_User::locks', NULL, 'allow'),
+(215, 1, 'Magento_User::acl_roles', NULL, 'allow'),
+(216, 1, 'Magento_Logging::magento_logging', NULL, 'allow'),
+(217, 1, 'Magento_Logging::magento_logging_events', NULL, 'allow'),
+(218, 1, 'Magento_Logging::system_magento_logging_bulk_operations', NULL, 'allow'),
+(219, 1, 'Magento_Backend::system_other_settings', NULL, 'allow'),
+(220, 1, 'Magento_AdminNotification::adminnotification', NULL, 'allow'),
+(221, 1, 'Magento_AdminNotification::show_toolbar', NULL, 'allow'),
+(222, 1, 'Magento_AdminNotification::show_list', NULL, 'allow'),
+(223, 1, 'Magento_AdminNotification::mark_as_read', NULL, 'allow'),
+(224, 1, 'Magento_AdminNotification::adminnotification_remove', NULL, 'allow'),
+(225, 1, 'Magento_Variable::variable', NULL, 'allow'),
+(226, 1, 'Magento_EncryptionKey::crypt_key', NULL, 'allow'),
+(227, 1, 'Magento_Backend::global_search', NULL, 'allow');
 
 -- --------------------------------------------------------
 
@@ -410,7 +714,8 @@ CREATE TABLE IF NOT EXISTS `captcha_log` (
 --
 
 INSERT INTO `captcha_log` (`type`, `value`, `count`, `updated_at`) VALUES
-('2', 'vigneswaran', 1, '2023-06-06 06:07:42');
+('2', 'vigneswaran', 1, '2023-06-06 06:07:42'),
+('2', 'vigneswaran.sekar@diatoz.com', 1, '2023-09-13 09:35:51');
 
 -- --------------------------------------------------------
 
@@ -552,6 +857,17 @@ CREATE TABLE IF NOT EXISTS `cataloginventory_stock_status_replica` (
   KEY `CATALOGINVENTORY_STOCK_STATUS_WEBSITE_ID` (`website_id`),
   KEY `CATALOGINVENTORY_STOCK_STATUS_STOCK_STATUS` (`stock_status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Cataloginventory Stock Status';
+
+--
+-- Dumping data for table `cataloginventory_stock_status_replica`
+--
+
+INSERT INTO `cataloginventory_stock_status_replica` (`product_id`, `website_id`, `stock_id`, `qty`, `stock_status`) VALUES
+(1, 0, 1, '100.0000', 1),
+(2, 0, 1, '110.0000', 1),
+(3, 0, 1, '200.0000', 1),
+(4, 0, 1, '100.0000', 1),
+(5, 0, 1, '223.0000', 1);
 
 -- --------------------------------------------------------
 
@@ -998,8 +1314,8 @@ CREATE TABLE IF NOT EXISTS `catalog_category_product_index_store1` (
   `store_id` smallint UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Store Id',
   `visibility` smallint UNSIGNED NOT NULL COMMENT 'Visibility',
   PRIMARY KEY (`category_id`,`product_id`,`store_id`),
-  KEY `IDX_4B965DC45C352D6E4C9DC0FF50B1FCF5` (`product_id`,`store_id`,`category_id`,`visibility`),
-  KEY `IDX_47AB760CD6A893ACEA69A9C2E0112C60` (`store_id`,`category_id`,`visibility`,`is_parent`,`position`)
+  KEY `CAT_CTGR_PRD_IDX_STORE1_PRD_ID_STORE_ID_CTGR_ID_VISIBILITY` (`product_id`,`store_id`,`category_id`,`visibility`),
+  KEY `IDX_216E521C8AD125E066D2B0BAB4A08412` (`store_id`,`category_id`,`visibility`,`is_parent`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Catalog Category Product Index Store1';
 
 --
@@ -1028,9 +1344,20 @@ CREATE TABLE IF NOT EXISTS `catalog_category_product_index_store1_replica` (
   `store_id` smallint UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Store Id',
   `visibility` smallint UNSIGNED NOT NULL COMMENT 'Visibility',
   PRIMARY KEY (`category_id`,`product_id`,`store_id`),
-  KEY `CAT_CTGR_PRD_IDX_STORE1_PRD_ID_STORE_ID_CTGR_ID_VISIBILITY` (`product_id`,`store_id`,`category_id`,`visibility`),
-  KEY `IDX_216E521C8AD125E066D2B0BAB4A08412` (`store_id`,`category_id`,`visibility`,`is_parent`,`position`)
+  KEY `IDX_4B965DC45C352D6E4C9DC0FF50B1FCF5` (`product_id`,`store_id`,`category_id`,`visibility`),
+  KEY `IDX_47AB760CD6A893ACEA69A9C2E0112C60` (`store_id`,`category_id`,`visibility`,`is_parent`,`position`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Catalog Category Product Index Store1 Replica';
+
+--
+-- Dumping data for table `catalog_category_product_index_store1_replica`
+--
+
+INSERT INTO `catalog_category_product_index_store1_replica` (`category_id`, `product_id`, `position`, `is_parent`, `store_id`, `visibility`) VALUES
+(2, 2, 0, 0, 1, 4),
+(2, 3, 0, 0, 1, 4),
+(2, 4, 0, 0, 1, 4),
+(2, 5, 0, 0, 1, 4),
+(2, 1, 0, 1, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -1857,6 +2184,17 @@ CREATE TABLE IF NOT EXISTS `catalog_product_index_eav_replica` (
   KEY `CATALOG_PRODUCT_INDEX_EAV_VALUE` (`value`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Catalog Product EAV Index Table';
 
+--
+-- Dumping data for table `catalog_product_index_eav_replica`
+--
+
+INSERT INTO `catalog_product_index_eav_replica` (`entity_id`, `attribute_id`, `store_id`, `value`, `source_id`) VALUES
+(1, 99, 1, 4, 1),
+(2, 99, 1, 4, 2),
+(3, 99, 1, 4, 3),
+(4, 99, 1, 4, 4),
+(5, 99, 1, 4, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -2316,6 +2654,37 @@ CREATE TABLE IF NOT EXISTS `catalog_product_index_price_replica` (
   KEY `CAT_PRD_IDX_PRICE_WS_ID_CSTR_GROUP_ID_MIN_PRICE` (`website_id`,`customer_group_id`,`min_price`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Catalog Product Price Index Table';
 
+--
+-- Dumping data for table `catalog_product_index_price_replica`
+--
+
+INSERT INTO `catalog_product_index_price_replica` (`entity_id`, `customer_group_id`, `website_id`, `tax_class_id`, `price`, `final_price`, `min_price`, `max_price`, `tier_price`) VALUES
+(1, 0, 1, 2, '2300.000000', '2300.000000', '2300.000000', '2300.000000', NULL),
+(1, 1, 1, 2, '2300.000000', '2300.000000', '2300.000000', '2300.000000', NULL),
+(1, 2, 1, 2, '2300.000000', '2300.000000', '2300.000000', '2300.000000', NULL),
+(1, 3, 1, 2, '2300.000000', '2300.000000', '2300.000000', '2300.000000', NULL),
+(1, 4, 1, 2, '2300.000000', '2300.000000', '2300.000000', '2300.000000', NULL),
+(2, 0, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(2, 1, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(2, 2, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(2, 3, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(2, 4, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(3, 0, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(3, 1, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(3, 2, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(3, 3, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(3, 4, 1, 2, '19.990000', '19.990000', '19.990000', '19.990000', NULL),
+(4, 0, 1, 2, '4500.000000', '4500.000000', '4500.000000', '4500.000000', NULL),
+(4, 1, 1, 2, '4500.000000', '4500.000000', '4500.000000', '4500.000000', NULL),
+(4, 2, 1, 2, '4500.000000', '4500.000000', '4500.000000', '4500.000000', NULL),
+(4, 3, 1, 2, '4500.000000', '4500.000000', '4500.000000', '4500.000000', NULL),
+(4, 4, 1, 2, '4500.000000', '4500.000000', '4500.000000', '4500.000000', NULL),
+(5, 0, 1, 2, '123.000000', '123.000000', '123.000000', '123.000000', NULL),
+(5, 1, 1, 2, '123.000000', '123.000000', '123.000000', '123.000000', NULL),
+(5, 2, 1, 2, '123.000000', '123.000000', '123.000000', '123.000000', NULL),
+(5, 3, 1, 2, '123.000000', '123.000000', '123.000000', '123.000000', NULL),
+(5, 4, 1, 2, '123.000000', '123.000000', '123.000000', '123.000000', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -2377,7 +2746,7 @@ CREATE TABLE IF NOT EXISTS `catalog_product_index_website` (
 --
 
 INSERT INTO `catalog_product_index_website` (`website_id`, `default_store_id`, `website_date`, `rate`) VALUES
-(1, 1, '2023-07-31', 1);
+(1, 1, '2023-08-31', 1);
 
 -- --------------------------------------------------------
 
@@ -2820,7 +3189,7 @@ CREATE TABLE IF NOT EXISTS `cms_page` (
   `meta_title` varchar(255) DEFAULT NULL COMMENT 'Page Meta Title',
   PRIMARY KEY (`page_id`),
   KEY `CMS_PAGE_IDENTIFIER` (`identifier`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COMMENT='CMS Page Table';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COMMENT='CMS Page Table';
 
 --
 -- Dumping data for table `cms_page`
@@ -2828,9 +3197,10 @@ CREATE TABLE IF NOT EXISTS `cms_page` (
 
 INSERT INTO `cms_page` (`page_id`, `title`, `page_layout`, `meta_keywords`, `meta_description`, `identifier`, `content_heading`, `content`, `creation_time`, `update_time`, `is_active`, `sort_order`, `layout_update_xml`, `custom_theme`, `custom_root_template`, `custom_layout_update_xml`, `layout_update_selected`, `custom_theme_from`, `custom_theme_to`, `meta_title`) VALUES
 (1, '404 Not Found', '2columns-right', 'Page keywords', 'Page description', 'no-route', 'Whoops, our bad...', '<dl>\r\n<dt>The page you requested was not found, and we have a fine guess why.</dt>\r\n<dd>\r\n<ul class=\"disc\">\r\n<li>If you typed the URL directly, please make sure the spelling is correct.</li>\r\n<li>If you clicked on a link to get here, the link is outdated.</li>\r\n</ul></dd>\r\n</dl>\r\n<dl>\r\n<dt>What can you do?</dt>\r\n<dd>Have no fear, help is near! There are many ways you can get back on track with Magento Store.</dd>\r\n<dd>\r\n<ul class=\"disc\">\r\n<li><a href=\"#\" onclick=\"history.go(-1); return false;\">Go back</a> to the previous page.</li>\r\n<li>Use the search bar at the top of the page to search for your products.</li>\r\n<li>Follow these links to get you back on track!<br /><a href=\"{{store url=\"\"}}\">Store Home</a> <span class=\"separator\">|</span> <a href=\"{{store url=\"customer/account\"}}\">My Account</a></li></ul></dd></dl>\r\n', '2023-05-31 05:42:54', '2023-05-31 05:42:54', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Home page', '1column', '', '', 'home', 'Home Page', '<p>CMS homepage content goes here.</p>\r\n<p>{{block class=\"Magento\\CustomForm\\Block\\CustomForm\" template=\"CustomForm::custom_form.phtml\"}}</p>\r\n<p>sa</p>', '2023-05-31 05:42:54', '2023-06-08 06:14:51', 1, 0, '<!--\n    <referenceContainer name=\"right\">\n        <referenceBlock name=\"catalog.compare.sidebar\" remove=\"true\" />\n    </referenceContainer>-->', '', '', NULL, NULL, NULL, NULL, ''),
+(2, 'Home page', '1column', '', '', 'home', 'Home Page', '<p>CMS homepage content goes here.</p>\n<p>{{block class=\"Magento\\CustomForm\\Block\\CustomForm\" template=\"CustomForm::custom_form.phtml\"}}</p>\n<p>sa</p>', '2023-05-31 05:42:54', '2023-09-08 05:07:48', 1, 0, '<!--\n    <referenceContainer name=\"right\">\n        <referenceBlock name=\"catalog.compare.sidebar\" remove=\"true\" />\n    </referenceContainer>-->', '', '', NULL, NULL, NULL, NULL, ''),
 (3, 'Enable Cookies', '1column', NULL, NULL, 'enable-cookies', 'What are Cookies?', '<div class=\"enable-cookies cms-content\">\r\n<p>\"Cookies\" are little pieces of data we send when you visit our store. Cookies help us get to know you better and personalize your experience. Plus they help protect you and other shoppers from fraud.</p>\r\n<p style=\"margin-bottom: 20px;\">Set your browser to accept cookies so you can buy items, save items, and receive customized recommendations. Here’s how:</p>\r\n<ul>\r\n<li><a href=\"https://support.google.com/accounts/answer/61416?hl=en\" target=\"_blank\">Google Chrome</a></li>\r\n<li><a href=\"http://windows.microsoft.com/en-us/internet-explorer/delete-manage-cookies\" target=\"_blank\">Internet Explorer</a></li>\r\n<li><a href=\"http://support.apple.com/kb/PH19214\" target=\"_blank\">Safari</a></li>\r\n<li><a href=\"https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences\" target=\"_blank\">Mozilla/Firefox</a></li>\r\n</ul>\r\n</div>', '2023-05-31 05:42:54', '2023-05-31 05:42:54', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'Privacy and Cookie Policy', '1column', NULL, NULL, 'privacy-policy-cookie-restriction-mode', 'Privacy and Cookie Policy', '<div class=\"privacy-policy cms-content\">\n    <div class=\"message info\">\n        <span>\n            Please replace this text with you Privacy Policy.\n            Please add any additional cookies your website uses below (e.g. Google Analytics).\n        </span>\n    </div>\n    <p>\n        This privacy policy sets out how this website (hereafter \"the Store\") uses and protects any information that\n        you give the Store while using this website. The Store is committed to ensuring that your privacy is protected.\n        Should we ask you to provide certain information by which you can be identified when using this website, then\n        you can be assured that it will only be used in accordance with this privacy statement. The Store may change\n        this policy from time to time by updating this page. You should check this page from time to time to ensure\n        that you are happy with any changes.\n    </p>\n    <h2>What we collect</h2>\n    <p>We may collect the following information:</p>\n    <ul>\n        <li>name</li>\n        <li>contact information including email address</li>\n        <li>demographic information such as postcode, preferences and interests</li>\n        <li>other information relevant to customer surveys and/or offers</li>\n    </ul>\n    <p>\n        For the exhaustive list of cookies we collect see the <a href=\"#list\">List of cookies we collect</a> section.\n    </p>\n    <h2>What we do with the information we gather</h2>\n    <p>\n        We require this information to understand your needs and provide you with a better service,\n        and in particular for the following reasons:\n    </p>\n    <ul>\n        <li>Internal record keeping.</li>\n        <li>We may use the information to improve our products and services.</li>\n        <li>\n            We may periodically send promotional emails about new products, special offers or other information which we\n            think you may find interesting using the email address which you have provided.\n        </li>\n        <li>\n            From time to time, we may also use your information to contact you for market research purposes.\n            We may contact you by email, phone, fax or mail. We may use the information to customise the website\n            according to your interests.\n        </li>\n    </ul>\n    <h2>Security</h2>\n    <p>\n        We are committed to ensuring that your information is secure. In order to prevent unauthorised access or\n        disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and\n        secure the information we collect online.\n    </p>\n    <h2>How we use cookies</h2>\n    <p>\n        A cookie is a small file which asks permission to be placed on your computer\'s hard drive.\n        Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit\n        a particular site. Cookies allow web applications to respond to you as an individual. The web application\n        can tailor its operations to your needs, likes and dislikes by gathering and remembering information about\n        your preferences.\n    </p>\n    <p>\n        We use traffic log cookies to identify which pages are being used. This helps us analyse data about web page\n        traffic and improve our website in order to tailor it to customer needs. We only use this information for\n        statistical analysis purposes and then the data is removed from the system.\n    </p>\n    <p>\n        Overall, cookies help us provide you with a better website, by enabling us to monitor which pages you find\n        useful and which you do not. A cookie in no way gives us access to your computer or any information about you,\n        other than the data you choose to share with us. You can choose to accept or decline cookies.\n        Most web browsers automatically accept cookies, but you can usually modify your browser setting\n        to decline cookies if you prefer. This may prevent you from taking full advantage of the website.\n    </p>\n    <h2>Links to other websites</h2>\n    <p>\n        Our website may contain links to other websites of interest. However, once you have used these links\n        to leave our site, you should note that we do not have any control over that other website.\n        Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst\n        visiting such sites and such sites are not governed by this privacy statement.\n        You should exercise caution and look at the privacy statement applicable to the website in question.\n    </p>\n    <h2>Controlling your personal information</h2>\n    <p>You may choose to restrict the collection or use of your personal information in the following ways:</p>\n    <ul>\n        <li>\n            whenever you are asked to fill in a form on the website, look for the box that you can click to indicate\n            that you do not want the information to be used by anybody for direct marketing purposes\n        </li>\n        <li>\n            if you have previously agreed to us using your personal information for direct marketing purposes,\n            you may change your mind at any time by letting us know using our Contact Us information\n        </li>\n    </ul>\n    <p>\n        We will not sell, distribute or lease your personal information to third parties unless we have your permission\n        or are required by law to do so. We may use your personal information to send you promotional information\n        about third parties which we think you may find interesting if you tell us that you wish this to happen.\n    </p>\n    <p>\n        You may request details of personal information which we hold about you under the Data Protection Act 1998.\n        A small fee will be payable. If you would like a copy of the information held on you please email us this\n        request using our Contact Us information.\n    </p>\n    <p>\n        If you believe that any information we are holding on you is incorrect or incomplete,\n        please write to or email us as soon as possible, at the above address.\n        We will promptly correct any information found to be incorrect.\n    </p>\n    <h2><a name=\"list\"></a>List of cookies we collect</h2>\n    <p>The table below lists the cookies we collect and what information they store.</p>\n    <table class=\"data-table data-table-definition-list\">\n        <thead>\n        <tr>\n            <th>Cookie Name</th>\n            <th>Cookie Description</th>\n        </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <th>FORM_KEY</th>\n                <td>Stores randomly generated key used to prevent forged requests.</td>\n            </tr>\n            <tr>\n                <th>PHPSESSID</th>\n                <td>Your session ID on the server.</td>\n            </tr>\n            <tr>\n                <th>GUEST-VIEW</th>\n                <td>Allows guests to view and edit their orders.</td>\n            </tr>\n            <tr>\n                <th>PERSISTENT_SHOPPING_CART</th>\n                <td>A link to information about your cart and viewing history, if you have asked for this.</td>\n            </tr>\n            <tr>\n                <th>STF</th>\n                <td>Information on products you have emailed to friends.</td>\n            </tr>\n            <tr>\n                <th>STORE</th>\n                <td>The store view or language you have selected.</td>\n            </tr>\n            <tr>\n                <th>USER_ALLOWED_SAVE_COOKIE</th>\n                <td>Indicates whether a customer allowed to use cookies.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-SESSID</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-STORAGE</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-STORAGE-SECTION-INVALIDATION</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-TIMEOUT</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>SECTION-DATA-IDS</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>PRIVATE_CONTENT_VERSION</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>X-MAGENTO-VARY</th>\n                <td>Facilitates caching of content on the server to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-TRANSLATION-FILE-VERSION</th>\n                <td>Facilitates translation of content to other languages.</td>\n            </tr>\n            <tr>\n                <th>MAGE-TRANSLATION-STORAGE</th>\n                <td>Facilitates translation of content to other languages.</td>\n            </tr>\n        </tbody>\n    </table>\n</div>', '2023-05-31 05:42:54', '2023-05-31 05:42:54', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(4, 'Privacy and Cookie Policy', '1column', NULL, NULL, 'privacy-policy-cookie-restriction-mode', 'Privacy and Cookie Policy', '<div class=\"privacy-policy cms-content\">\n    <div class=\"message info\">\n        <span>\n            Please replace this text with you Privacy Policy.\n            Please add any additional cookies your website uses below (e.g. Google Analytics).\n        </span>\n    </div>\n    <p>\n        This privacy policy sets out how this website (hereafter \"the Store\") uses and protects any information that\n        you give the Store while using this website. The Store is committed to ensuring that your privacy is protected.\n        Should we ask you to provide certain information by which you can be identified when using this website, then\n        you can be assured that it will only be used in accordance with this privacy statement. The Store may change\n        this policy from time to time by updating this page. You should check this page from time to time to ensure\n        that you are happy with any changes.\n    </p>\n    <h2>What we collect</h2>\n    <p>We may collect the following information:</p>\n    <ul>\n        <li>name</li>\n        <li>contact information including email address</li>\n        <li>demographic information such as postcode, preferences and interests</li>\n        <li>other information relevant to customer surveys and/or offers</li>\n    </ul>\n    <p>\n        For the exhaustive list of cookies we collect see the <a href=\"#list\">List of cookies we collect</a> section.\n    </p>\n    <h2>What we do with the information we gather</h2>\n    <p>\n        We require this information to understand your needs and provide you with a better service,\n        and in particular for the following reasons:\n    </p>\n    <ul>\n        <li>Internal record keeping.</li>\n        <li>We may use the information to improve our products and services.</li>\n        <li>\n            We may periodically send promotional emails about new products, special offers or other information which we\n            think you may find interesting using the email address which you have provided.\n        </li>\n        <li>\n            From time to time, we may also use your information to contact you for market research purposes.\n            We may contact you by email, phone, fax or mail. We may use the information to customise the website\n            according to your interests.\n        </li>\n    </ul>\n    <h2>Security</h2>\n    <p>\n        We are committed to ensuring that your information is secure. In order to prevent unauthorised access or\n        disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and\n        secure the information we collect online.\n    </p>\n    <h2>How we use cookies</h2>\n    <p>\n        A cookie is a small file which asks permission to be placed on your computer\'s hard drive.\n        Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit\n        a particular site. Cookies allow web applications to respond to you as an individual. The web application\n        can tailor its operations to your needs, likes and dislikes by gathering and remembering information about\n        your preferences.\n    </p>\n    <p>\n        We use traffic log cookies to identify which pages are being used. This helps us analyse data about web page\n        traffic and improve our website in order to tailor it to customer needs. We only use this information for\n        statistical analysis purposes and then the data is removed from the system.\n    </p>\n    <p>\n        Overall, cookies help us provide you with a better website, by enabling us to monitor which pages you find\n        useful and which you do not. A cookie in no way gives us access to your computer or any information about you,\n        other than the data you choose to share with us. You can choose to accept or decline cookies.\n        Most web browsers automatically accept cookies, but you can usually modify your browser setting\n        to decline cookies if you prefer. This may prevent you from taking full advantage of the website.\n    </p>\n    <h2>Links to other websites</h2>\n    <p>\n        Our website may contain links to other websites of interest. However, once you have used these links\n        to leave our site, you should note that we do not have any control over that other website.\n        Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst\n        visiting such sites and such sites are not governed by this privacy statement.\n        You should exercise caution and look at the privacy statement applicable to the website in question.\n    </p>\n    <h2>Controlling your personal information</h2>\n    <p>You may choose to restrict the collection or use of your personal information in the following ways:</p>\n    <ul>\n        <li>\n            whenever you are asked to fill in a form on the website, look for the box that you can click to indicate\n            that you do not want the information to be used by anybody for direct marketing purposes\n        </li>\n        <li>\n            if you have previously agreed to us using your personal information for direct marketing purposes,\n            you may change your mind at any time by letting us know using our Contact Us information\n        </li>\n    </ul>\n    <p>\n        We will not sell, distribute or lease your personal information to third parties unless we have your permission\n        or are required by law to do so. We may use your personal information to send you promotional information\n        about third parties which we think you may find interesting if you tell us that you wish this to happen.\n    </p>\n    <p>\n        You may request details of personal information which we hold about you under the Data Protection Act 1998.\n        A small fee will be payable. If you would like a copy of the information held on you please email us this\n        request using our Contact Us information.\n    </p>\n    <p>\n        If you believe that any information we are holding on you is incorrect or incomplete,\n        please write to or email us as soon as possible, at the above address.\n        We will promptly correct any information found to be incorrect.\n    </p>\n    <h2><a name=\"list\"></a>List of cookies we collect</h2>\n    <p>The table below lists the cookies we collect and what information they store.</p>\n    <table class=\"data-table data-table-definition-list\">\n        <thead>\n        <tr>\n            <th>Cookie Name</th>\n            <th>Cookie Description</th>\n        </tr>\n        </thead>\n        <tbody>\n            <tr>\n                <th>FORM_KEY</th>\n                <td>Stores randomly generated key used to prevent forged requests.</td>\n            </tr>\n            <tr>\n                <th>PHPSESSID</th>\n                <td>Your session ID on the server.</td>\n            </tr>\n            <tr>\n                <th>GUEST-VIEW</th>\n                <td>Allows guests to view and edit their orders.</td>\n            </tr>\n            <tr>\n                <th>PERSISTENT_SHOPPING_CART</th>\n                <td>A link to information about your cart and viewing history, if you have asked for this.</td>\n            </tr>\n            <tr>\n                <th>STF</th>\n                <td>Information on products you have emailed to friends.</td>\n            </tr>\n            <tr>\n                <th>STORE</th>\n                <td>The store view or language you have selected.</td>\n            </tr>\n            <tr>\n                <th>USER_ALLOWED_SAVE_COOKIE</th>\n                <td>Indicates whether a customer allowed to use cookies.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-SESSID</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-STORAGE</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-STORAGE-SECTION-INVALIDATION</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-CACHE-TIMEOUT</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>SECTION-DATA-IDS</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>PRIVATE_CONTENT_VERSION</th>\n                <td>Facilitates caching of content on the browser to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>X-MAGENTO-VARY</th>\n                <td>Facilitates caching of content on the server to make pages load faster.</td>\n            </tr>\n            <tr>\n                <th>MAGE-TRANSLATION-FILE-VERSION</th>\n                <td>Facilitates translation of content to other languages.</td>\n            </tr>\n            <tr>\n                <th>MAGE-TRANSLATION-STORAGE</th>\n                <td>Facilitates translation of content to other languages.</td>\n            </tr>\n        </tbody>\n    </table>\n</div>', '2023-05-31 05:42:54', '2023-05-31 05:42:54', 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Test Home', '1column', '', '', 'test-home', 'Home Page Test', '<h2 style=\"text-align: center;\"><strong>Welcome to solum store</strong></h2>\n<p>&nbsp;</p>\n<p><em><strong>Global Networking and Excellent Supply Chain Infrastructure</strong></em></p>\n<p><em>SOLUM has a strong global network and supply chain infrastructure, ensuring fast and reliable delivery of our Smart Street Lights to cities and municipalities around the world. Our team of experts is always available to provide support and assistance, ensuring that your Smart Street Light system is up and running smoothly, saving you time and money.</em></p>\n<p>&nbsp;</p>\n<p><strong>Premium Components and High Durability</strong></p>\n<p>SOLUM Smart Street Lights are designed to withstand the toughest outdoor conditions, with high-quality components such as Samsung SDI batteries, Samsung LED lights, a proprietary battery management system, and an IP65 rating. These components ensure long-lasting durability, minimal maintenance, and maximum reliability, even in harsh weather conditions.</p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"{{media url=&quot;wysiwyg/photo-1607345366928-199ea26cfe3e.jpg&quot;}}\" alt=\"\" width=\"163\" height=\"245\"></p>\n<p>Sample contents</p>\n<p><img style=\"float: right;\" src=\"{{media url=&quot;wysiwyg/thumbnail.png&quot;}}\" alt=\"\"></p>', '2023-09-08 05:35:52', '2023-09-08 05:40:25', 1, 0, NULL, '', '', NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -2854,7 +3224,8 @@ INSERT INTO `cms_page_store` (`page_id`, `store_id`) VALUES
 (1, 0),
 (2, 0),
 (3, 0),
-(4, 0);
+(4, 0),
+(5, 0);
 
 -- --------------------------------------------------------
 
@@ -2872,7 +3243,7 @@ CREATE TABLE IF NOT EXISTS `core_config_data` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Updated At',
   PRIMARY KEY (`config_id`),
   UNIQUE KEY `CORE_CONFIG_DATA_SCOPE_SCOPE_ID_PATH` (`scope`,`scope_id`,`path`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COMMENT='Config Data';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COMMENT='Config Data';
 
 --
 -- Dumping data for table `core_config_data`
@@ -2887,7 +3258,11 @@ INSERT INTO `core_config_data` (`config_id`, `scope`, `scope_id`, `path`, `value
 (6, 'default', 0, 'crontab/default/jobs/analytics_subscribe/schedule/cron_expr', '0 * * * *', '2023-05-31 05:43:02'),
 (7, 'default', 0, 'crontab/default/jobs/analytics_collect_data/schedule/cron_expr', '00 02 * * *', '2023-05-31 05:43:03'),
 (8, 'default', 0, 'admin/usage/enabled', '1', '2023-05-31 07:02:06'),
-(9, 'stores', 1, 'design/theme/theme_id', '3', '2023-05-31 09:08:06');
+(9, 'stores', 1, 'design/theme/theme_id', '3', '2023-05-31 09:08:06'),
+(10, 'default', 0, 'system/full_page_cache/varnish/access_list', 'localhost', '2023-08-31 05:25:43'),
+(11, 'default', 0, 'system/full_page_cache/varnish/backend_host', 'localhost', '2023-08-31 05:25:47'),
+(12, 'default', 0, 'system/full_page_cache/varnish/backend_port', '8080', '2023-08-31 05:25:47'),
+(13, 'default', 0, 'system/full_page_cache/varnish/grace_period', '300', '2023-08-31 05:25:47');
 
 -- --------------------------------------------------------
 
@@ -3224,9 +3599,10 @@ CREATE TABLE IF NOT EXISTS `customer_entity` (
 
 INSERT INTO `customer_entity` (`entity_id`, `website_id`, `email`, `group_id`, `increment_id`, `store_id`, `created_at`, `updated_at`, `is_active`, `disable_auto_group_change`, `created_in`, `prefix`, `firstname`, `middlename`, `lastname`, `suffix`, `dob`, `password_hash`, `rp_token`, `rp_token_created_at`, `default_billing`, `default_shipping`, `taxvat`, `confirmation`, `gender`, `failures_num`, `first_failure`, `lock_expires`, `session_cutoff`, `tax_id`, `business_name`, `phone_number`, `contact_info`, `address`, `credit_card_info`, `state_tax_id`, `esl`, `solum_partner`, `sales_size`, `credit_ratings`, `business_area`, `pos`, `docs`) VALUES
 (1, 1, 'vigneswaran.sekar@diatoz.com', 1, NULL, 1, '2023-05-31 10:04:05', '2023-07-17 09:56:11', 1, 0, 'Default Store View', NULL, 'vigneswaran', NULL, 'S', NULL, NULL, '00c2923cde630a467a9b002281c8af106c2dd62adff9dc32003357d9442087f0:NTSAp5QRheDcHjluZM6VaLIK5sVx4Iij:3_32_2_67108864', 'ToKbUAhEH43la6vc5vJycNQJJAKA5Nh3', '2023-05-31 10:04:07', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-07-17 09:56:11', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(2, 1, 'vignu@gmail.com', 1, NULL, 0, '2023-08-31 10:28:09', '2023-08-31 10:29:12', 1, 0, NULL, NULL, 'vignu', 'S', 'S', NULL, NULL, '00c2923cde630a467a9b002281c8af106c2dd62adff9dc32003357d9442087f0:NTSAp5QRheDcHjluZM6VaLIK5sVx4Iij:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (21, 1, 'shruti.bilagi@diatoz.com', 1, NULL, 1, '2023-06-09 12:25:34', '2023-06-09 12:25:34', 1, 0, 'Default Store View', NULL, 'Shruti', NULL, 'S', NULL, NULL, '97f2460bb33a9648306c7d7c2e6bfab859e18c36d8d8fe18e5d8ff415f722f54:fkj2TqdHVGdJ7JlgtVAGOq0hlUB7O04s:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
 (23, 1, 'shruti@gmail.com', 4, NULL, 1, '2023-06-12 13:56:14', '2023-07-18 12:09:14', 1, 0, 'Default Store View', NULL, 'shruti', NULL, 'S', NULL, NULL, NULL, 'D9Eqi7KEGf6Jkm8LfOuMFhdMP8jO98qr', '2023-06-12 13:56:16', 0, 0, NULL, NULL, 2, 0, NULL, NULL, NULL, '', 'Diatoz', '', 'Diatoz contact Info', 'Bangalore', '', '', '', '', '23432', '4', '', '', ''),
-(28, 1, 'nishanth@solu-m.com', 4, NULL, 1, '2023-06-15 12:48:52', '2023-08-08 11:13:23', 1, 0, 'Default Store View', NULL, 'Diatoz', NULL, 'Diatoz', NULL, NULL, 'd92c46a1317425f4c0ae3398d1b4868cf24464254f85e30479159e58c2fdfa36:rLOHm68Jdj3Lwv7ai8quW4bClYFn15Vl:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-08-08 11:13:23', '1234567', 'Solum12', '12345678', 'Nishanth contact Info', 'Test address', 'test card', '87654321', 'test esl', 'yes', '1000', '5', 'Bangalore', 'test pos', ''),
+(28, 1, 'nishanth@solu-m.com', 4, NULL, 1, '2023-06-15 12:48:52', '2023-08-29 12:40:39', 1, 0, 'Default Store View', NULL, 'Diatoz', NULL, 'Diatoz', NULL, NULL, 'd92c46a1317425f4c0ae3398d1b4868cf24464254f85e30479159e58c2fdfa36:rLOHm68Jdj3Lwv7ai8quW4bClYFn15Vl:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-08-29 12:40:39', '1234567', 'Solum12', '12345678', 'Nishanth contact Info', 'Test address', 'test card', '87654321', 'test esl', 'yes', '1000', '5', 'Bangalore', 'test pos', ''),
 (36, 1, 'vigneswaran.sekar1@diatoz.com', 4, NULL, 1, '2023-07-28 09:37:09', '2023-07-28 09:38:00', 1, 0, 'Default Store View', NULL, 'Software', NULL, 'Software', NULL, NULL, 'c1d7c49a0693809d143557f1c7bf983ab301acd31512b1f2c3d934f2e42cf4f5:8s9imalCRHm9EJRluDIRNgxqU3zskjTl:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, '', 'Software', '', '', '', '', '', '', '', '', '', '', '', ''),
 (37, 1, 'Shiva@solum.com', 4, NULL, 1, '2023-07-28 11:02:12', '2023-07-28 11:13:01', 1, 0, 'Default Store View', NULL, 'Solum', NULL, 'Solum', NULL, NULL, '95040d71abf58f01777c4cfeab3a4c29e7195983ec500fbd65b53501b15ab6bd:GApL5jwPHV830ym9MGUvUZRfi77gyUXh:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-07-28 11:13:01', '', 'Solum', '12345678', '', 'Test address', '', '', '', 'yes', '200', '4', 'Bangalore', '', ''),
 (38, 1, 'Vignesh@gmail.com', 1, NULL, 1, '2023-07-28 11:14:33', '2023-07-28 11:18:22', 1, 0, 'Default Store View', NULL, 'vignesh', NULL, 'S', NULL, NULL, 'e9e1f8e63ef0a61b7b85f845493ae5ac4789b607fecf50963efc4add34666e6a:HAMJW8ZVhaBFGATPEXUkeFeEpfmnF8cR:3_32_2_67108864', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, '2023-07-28 11:18:22', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -3535,17 +3911,17 @@ CREATE TABLE IF NOT EXISTS `customer_log` (
   `last_logout_at` timestamp NULL DEFAULT NULL COMMENT 'Last Logout Time',
   PRIMARY KEY (`log_id`),
   UNIQUE KEY `CUSTOMER_LOG_CUSTOMER_ID` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3 COMMENT='Customer Log Table';
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb3 COMMENT='Customer Log Table';
 
 --
 -- Dumping data for table `customer_log`
 --
 
 INSERT INTO `customer_log` (`log_id`, `customer_id`, `last_login_at`, `last_logout_at`) VALUES
-(1, 1, '2023-08-09 09:02:04', '2023-07-17 09:56:10'),
+(1, 1, '2023-08-31 05:21:38', '2023-07-17 09:56:10'),
 (5, 21, '2023-06-09 12:26:07', NULL),
 (6, 22, '2023-06-09 14:05:08', NULL),
-(7, 28, '2023-08-14 05:46:46', '2023-08-08 11:13:22'),
+(7, 28, '2023-09-04 05:13:51', '2023-08-29 12:40:37'),
 (38, 37, '2023-07-28 11:05:02', '2023-07-28 11:13:00'),
 (40, 38, '2023-07-28 11:15:12', '2023-07-28 11:18:22');
 
@@ -3565,7 +3941,7 @@ CREATE TABLE IF NOT EXISTS `customer_visitor` (
   PRIMARY KEY (`visitor_id`),
   KEY `CUSTOMER_VISITOR_CUSTOMER_ID` (`customer_id`),
   KEY `CUSTOMER_VISITOR_LAST_VISIT_AT` (`last_visit_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb3 COMMENT='Visitor Table';
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb3 COMMENT='Visitor Table';
 
 --
 -- Dumping data for table `customer_visitor`
@@ -3626,7 +4002,17 @@ INSERT INTO `customer_visitor` (`visitor_id`, `customer_id`, `session_id`, `crea
 (52, 28, NULL, '2023-08-10 06:01:25', '2023-08-10 06:17:33'),
 (53, 28, NULL, '2023-08-11 11:46:03', '2023-08-11 11:46:08'),
 (54, 28, NULL, '2023-08-11 13:22:29', '2023-08-11 13:22:31'),
-(55, 28, NULL, '2023-08-14 05:46:45', '2023-08-14 05:46:46');
+(55, 28, NULL, '2023-08-14 05:46:45', '2023-08-14 05:46:46'),
+(56, 28, NULL, '2023-08-23 11:16:23', '2023-08-23 11:16:22'),
+(57, 28, NULL, '2023-08-23 11:14:39', '2023-08-23 12:08:16'),
+(58, 28, NULL, '2023-08-28 09:03:19', '2023-08-28 09:03:24'),
+(59, 28, NULL, '2023-08-28 10:07:19', '2023-08-28 10:07:17'),
+(60, 28, NULL, '2023-08-28 10:17:55', '2023-08-28 10:17:54'),
+(61, 28, NULL, '2023-08-29 12:40:40', '2023-08-29 12:40:37'),
+(62, 28, NULL, '2023-08-29 12:41:17', '2023-08-29 12:41:18'),
+(63, 1, NULL, '2023-08-31 05:21:37', '2023-08-31 05:21:39'),
+(64, 28, NULL, '2023-09-04 05:11:41', '2023-09-04 05:11:46'),
+(65, 28, NULL, '2023-09-04 05:13:50', '2023-09-04 05:13:51');
 
 -- --------------------------------------------------------
 
@@ -7349,16 +7735,16 @@ CREATE TABLE IF NOT EXISTS `indexer_state` (
 --
 
 INSERT INTO `indexer_state` (`state_id`, `indexer_id`, `status`, `updated`, `hash_config`) VALUES
-(1, 'design_config_grid', 'valid', '2023-08-10 06:45:33', '51a8b6cbfb9ccca7bfb85a2e5051aa2c'),
-(2, 'customer_grid', 'valid', '2023-07-13 10:08:01', 'e08b29295d9f4256be154da6e20c512a'),
-(3, 'catalog_category_product', 'valid', '2023-07-13 10:08:01', 'e77c5ed358e0437ccc07af58e2a56bfe'),
-(4, 'catalog_product_category', 'valid', '2023-07-13 10:08:01', '9133418d2733b584d50bb14b9809e164'),
-(5, 'catalogrule_rule', 'valid', '2023-07-13 10:08:02', '188375ab6281170fe21b27c5692b6094'),
-(6, 'catalog_product_attribute', 'valid', '2023-07-13 10:08:03', '723c76d8b1f0752019ea938f9303e3a2'),
-(7, 'cataloginventory_stock', 'valid', '2023-07-13 10:08:03', '90c05d03117fc9619efedca04c6f4127'),
-(8, 'catalog_product_price', 'valid', '2023-07-13 10:08:04', '5b043e47362df5acfeac2dc00365c5e3'),
-(9, 'catalogrule_product', 'valid', '2023-07-13 10:08:02', '536710a00ced508597e6fef4c7713720'),
-(10, 'catalogsearch_fulltext', 'invalid', '2023-07-13 10:08:06', '134a08c065a70c3ff1d911e608e7fba3');
+(1, 'design_config_grid', 'valid', '2023-09-07 05:37:30', '51a8b6cbfb9ccca7bfb85a2e5051aa2c'),
+(2, 'customer_grid', 'valid', '2023-08-31 10:22:35', 'e08b29295d9f4256be154da6e20c512a'),
+(3, 'catalog_category_product', 'valid', '2023-08-31 10:22:35', 'e77c5ed358e0437ccc07af58e2a56bfe'),
+(4, 'catalog_product_category', 'valid', '2023-08-31 10:22:35', '9133418d2733b584d50bb14b9809e164'),
+(5, 'catalogrule_rule', 'valid', '2023-08-31 10:22:37', '188375ab6281170fe21b27c5692b6094'),
+(6, 'catalog_product_attribute', 'valid', '2023-08-31 10:22:37', '723c76d8b1f0752019ea938f9303e3a2'),
+(7, 'cataloginventory_stock', 'valid', '2023-08-31 10:22:38', '90c05d03117fc9619efedca04c6f4127'),
+(8, 'catalog_product_price', 'valid', '2023-08-31 10:22:38', '5b043e47362df5acfeac2dc00365c5e3'),
+(9, 'catalogrule_product', 'valid', '2023-08-31 10:22:37', '536710a00ced508597e6fef4c7713720'),
+(10, 'catalogsearch_fulltext', 'invalid', '2023-08-31 10:22:45', '134a08c065a70c3ff1d911e608e7fba3');
 
 -- --------------------------------------------------------
 
@@ -7590,6 +7976,37 @@ CREATE TABLE IF NOT EXISTS `media_gallery_keyword` (
   UNIQUE KEY `MEDIA_GALLERY_KEYWORD_KEYWORD` (`keyword`),
   KEY `MEDIA_GALLERY_KEYWORD_ID` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='Media Gallery Keyword';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `convo_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `message` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0=unread , 1= read',
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `convo_id`, `user_id`, `message`, `status`, `date_created`) VALUES
+(1, 1, 28, 'Helo Admin', 1, '2023-09-01 12:19:35'),
+(2, 1, 28, 'Hi', 1, '2023-08-31 06:15:20'),
+(3, 1, 28, 'Hi vig', 1, '2023-09-01 12:26:04'),
+(4, 1, 28, 'Hi again', 1, '2023-09-01 12:24:20'),
+(5, 1, 28, 'Hello', 1, '2023-09-01 12:26:04'),
+(6, 0, 0, '', 1, '2023-08-31 06:10:27'),
+(7, 1, 2, 'Hiii', 1, '2023-08-31 10:44:18'),
+(8, 1, 2, 'Hid', 1, '2023-09-01 11:42:48');
 
 -- --------------------------------------------------------
 
@@ -11075,6 +11492,7 @@ CREATE TABLE IF NOT EXISTS `setup_module` (
 
 INSERT INTO `setup_module` (`module`, `schema_version`, `data_version`) VALUES
 ('CustomForm', '1.0.0', '1.0.0'),
+('Magento_AdminLiveChat', '1.0.0', '1.0.0'),
 ('Magento_Adminmenu', '1.0.0', '1.0.0'),
 ('Magento_AdminRFQ', '1.0.0', '1.0.0'),
 ('Magento_CustomForm', '1.0.0', '1.0.0'),
@@ -11412,6 +11830,27 @@ CREATE TABLE IF NOT EXISTS `theme_file` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `thread`
+--
+
+DROP TABLE IF EXISTS `thread`;
+CREATE TABLE IF NOT EXISTS `thread` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_ids` text NOT NULL,
+  `assign_status` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `thread`
+--
+
+INSERT INTO `thread` (`id`, `user_ids`, `assign_status`) VALUES
+(1, '28,21', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `translation`
 --
 
@@ -11446,7 +11885,7 @@ CREATE TABLE IF NOT EXISTS `ui_bookmark` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Bookmark updated at',
   PRIMARY KEY (`bookmark_id`),
   KEY `UI_BOOKMARK_USER_ID_NAMESPACE_IDENTIFIER` (`user_id`,`namespace`,`identifier`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COMMENT='Bookmark';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COMMENT='Bookmark';
 
 --
 -- Dumping data for table `ui_bookmark`
@@ -11468,7 +11907,9 @@ INSERT INTO `ui_bookmark` (`bookmark_id`, `user_id`, `namespace`, `identifier`, 
 (13, 2, 'customer_online_grid', 'default', 1, 'Default View', '{\"views\":{\"default\":{\"label\":\"Default View\",\"index\":\"default\",\"editable\":false,\"data\":{\"filters\":{\"applied\":{\"placeholder\":true}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"columns\":{\"customer_id\":{\"visible\":true,\"sorting\":\"asc\"},\"firstname\":{\"visible\":true,\"sorting\":false},\"lastname\":{\"visible\":true,\"sorting\":false},\"email\":{\"visible\":true,\"sorting\":false},\"visitor_type\":{\"visible\":true,\"sorting\":false},\"last_visit_at\":{\"visible\":true,\"sorting\":false}},\"displayMode\":\"grid\",\"positions\":{\"customer_id\":0,\"firstname\":1,\"lastname\":2,\"email\":3,\"last_visit_at\":4,\"visitor_type\":5}},\"value\":\"Default View\"}}}', '2023-06-23 12:28:35', '2023-06-23 12:28:35'),
 (14, 2, 'customer_online_grid', 'current', 0, NULL, '{\"current\":{\"filters\":{\"applied\":{\"placeholder\":true}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"columns\":{\"customer_id\":{\"visible\":true,\"sorting\":\"asc\"},\"firstname\":{\"visible\":true,\"sorting\":false},\"lastname\":{\"visible\":true,\"sorting\":false},\"email\":{\"visible\":true,\"sorting\":false},\"visitor_type\":{\"visible\":true,\"sorting\":false},\"last_visit_at\":{\"visible\":true,\"sorting\":false}},\"displayMode\":\"grid\",\"positions\":{\"customer_id\":0,\"firstname\":1,\"lastname\":2,\"email\":3,\"last_visit_at\":4,\"visitor_type\":5}}}', '2023-06-23 12:28:37', '2023-06-23 12:28:37'),
 (15, 2, 'product_listing', 'default', 1, 'Default View', '{\"views\":{\"default\":{\"label\":\"Default View\",\"index\":\"default\",\"editable\":false,\"data\":{\"search\":{\"value\":\"\"},\"filters\":{\"applied\":{\"placeholder\":true}},\"columns\":{\"actions\":{\"visible\":true,\"sorting\":false},\"ids\":{\"visible\":true,\"sorting\":false},\"type_id\":{\"visible\":true,\"sorting\":false},\"attribute_set_id\":{\"visible\":true,\"sorting\":false},\"visibility\":{\"visible\":true,\"sorting\":false},\"status\":{\"visible\":true,\"sorting\":false},\"manufacturer\":{\"visible\":false,\"sorting\":false},\"color\":{\"visible\":false,\"sorting\":false},\"custom_design\":{\"visible\":false,\"sorting\":false},\"page_layout\":{\"visible\":false,\"sorting\":false},\"country_of_manufacture\":{\"visible\":false,\"sorting\":false},\"custom_layout\":{\"visible\":false,\"sorting\":false},\"gift_message_available\":{\"visible\":false,\"sorting\":false},\"tax_class_id\":{\"visible\":false,\"sorting\":false},\"entity_id\":{\"visible\":true,\"sorting\":\"asc\"},\"name\":{\"visible\":true,\"sorting\":false},\"sku\":{\"visible\":true,\"sorting\":false},\"price\":{\"visible\":true,\"sorting\":false},\"websites\":{\"visible\":true,\"sorting\":false},\"qty\":{\"visible\":true,\"sorting\":false},\"short_description\":{\"visible\":false,\"sorting\":false},\"special_price\":{\"visible\":false,\"sorting\":false},\"cost\":{\"visible\":false,\"sorting\":false},\"weight\":{\"visible\":false,\"sorting\":false},\"meta_title\":{\"visible\":false,\"sorting\":false},\"meta_keyword\":{\"visible\":false,\"sorting\":false},\"meta_description\":{\"visible\":false,\"sorting\":false},\"url_key\":{\"visible\":false,\"sorting\":false},\"msrp\":{\"visible\":false,\"sorting\":false},\"thumbnail\":{\"visible\":true,\"sorting\":false},\"special_from_date\":{\"visible\":false,\"sorting\":false},\"special_to_date\":{\"visible\":false,\"sorting\":false},\"news_from_date\":{\"visible\":false,\"sorting\":false},\"news_to_date\":{\"visible\":false,\"sorting\":false},\"custom_design_from\":{\"visible\":false,\"sorting\":false},\"custom_design_to\":{\"visible\":false,\"sorting\":false}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"displayMode\":\"grid\",\"positions\":{\"ids\":0,\"entity_id\":1,\"thumbnail\":2,\"name\":3,\"type_id\":4,\"attribute_set_id\":5,\"sku\":6,\"price\":7,\"qty\":8,\"visibility\":9,\"status\":10,\"websites\":11,\"short_description\":12,\"special_price\":13,\"special_from_date\":14,\"special_to_date\":15,\"cost\":16,\"weight\":17,\"manufacturer\":18,\"meta_title\":19,\"meta_keyword\":20,\"meta_description\":21,\"color\":22,\"news_from_date\":23,\"news_to_date\":24,\"custom_design\":25,\"custom_design_from\":26,\"custom_design_to\":27,\"page_layout\":28,\"country_of_manufacture\":29,\"custom_layout\":30,\"url_key\":31,\"msrp\":32,\"gift_message_available\":33,\"tax_class_id\":34,\"actions\":35}},\"value\":\"Default View\"}}}', '2023-07-14 11:27:59', '2023-07-14 11:28:00'),
-(16, 2, 'product_listing', 'current', 0, NULL, '{\"current\":{\"search\":{\"value\":\"\"},\"filters\":{\"applied\":{\"placeholder\":true}},\"columns\":{\"actions\":{\"visible\":true,\"sorting\":false},\"ids\":{\"visible\":true,\"sorting\":false},\"type_id\":{\"visible\":true,\"sorting\":false},\"attribute_set_id\":{\"visible\":true,\"sorting\":false},\"visibility\":{\"visible\":true,\"sorting\":false},\"status\":{\"visible\":true,\"sorting\":false},\"manufacturer\":{\"visible\":false,\"sorting\":false},\"color\":{\"visible\":false,\"sorting\":false},\"custom_design\":{\"visible\":false,\"sorting\":false},\"page_layout\":{\"visible\":false,\"sorting\":false},\"country_of_manufacture\":{\"visible\":false,\"sorting\":false},\"custom_layout\":{\"visible\":false,\"sorting\":false},\"gift_message_available\":{\"visible\":false,\"sorting\":false},\"tax_class_id\":{\"visible\":false,\"sorting\":false},\"entity_id\":{\"visible\":true,\"sorting\":\"asc\"},\"name\":{\"visible\":true,\"sorting\":false},\"sku\":{\"visible\":true,\"sorting\":false},\"price\":{\"visible\":true,\"sorting\":false},\"websites\":{\"visible\":true,\"sorting\":false},\"qty\":{\"visible\":true,\"sorting\":false},\"short_description\":{\"visible\":false,\"sorting\":false},\"special_price\":{\"visible\":false,\"sorting\":false},\"cost\":{\"visible\":false,\"sorting\":false},\"weight\":{\"visible\":false,\"sorting\":false},\"meta_title\":{\"visible\":false,\"sorting\":false},\"meta_keyword\":{\"visible\":false,\"sorting\":false},\"meta_description\":{\"visible\":false,\"sorting\":false},\"url_key\":{\"visible\":false,\"sorting\":false},\"msrp\":{\"visible\":false,\"sorting\":false},\"thumbnail\":{\"visible\":true,\"sorting\":false},\"special_from_date\":{\"visible\":false,\"sorting\":false},\"special_to_date\":{\"visible\":false,\"sorting\":false},\"news_from_date\":{\"visible\":false,\"sorting\":false},\"news_to_date\":{\"visible\":false,\"sorting\":false},\"custom_design_from\":{\"visible\":false,\"sorting\":false},\"custom_design_to\":{\"visible\":false,\"sorting\":false}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"displayMode\":\"grid\",\"positions\":{\"ids\":0,\"entity_id\":1,\"thumbnail\":2,\"name\":3,\"type_id\":4,\"attribute_set_id\":5,\"sku\":6,\"price\":7,\"qty\":8,\"visibility\":9,\"status\":10,\"websites\":11,\"short_description\":12,\"special_price\":13,\"special_from_date\":14,\"special_to_date\":15,\"cost\":16,\"weight\":17,\"manufacturer\":18,\"meta_title\":19,\"meta_keyword\":20,\"meta_description\":21,\"color\":22,\"news_from_date\":23,\"news_to_date\":24,\"custom_design\":25,\"custom_design_from\":26,\"custom_design_to\":27,\"page_layout\":28,\"country_of_manufacture\":29,\"custom_layout\":30,\"url_key\":31,\"msrp\":32,\"gift_message_available\":33,\"tax_class_id\":34,\"actions\":35}}}', '2023-07-14 11:28:00', '2023-07-14 11:28:00');
+(16, 2, 'product_listing', 'current', 0, NULL, '{\"current\":{\"search\":{\"value\":\"\"},\"filters\":{\"applied\":{\"placeholder\":true}},\"columns\":{\"actions\":{\"visible\":true,\"sorting\":false},\"ids\":{\"visible\":true,\"sorting\":false},\"type_id\":{\"visible\":true,\"sorting\":false},\"attribute_set_id\":{\"visible\":true,\"sorting\":false},\"visibility\":{\"visible\":true,\"sorting\":false},\"status\":{\"visible\":true,\"sorting\":false},\"manufacturer\":{\"visible\":false,\"sorting\":false},\"color\":{\"visible\":false,\"sorting\":false},\"custom_design\":{\"visible\":false,\"sorting\":false},\"page_layout\":{\"visible\":false,\"sorting\":false},\"country_of_manufacture\":{\"visible\":false,\"sorting\":false},\"custom_layout\":{\"visible\":false,\"sorting\":false},\"gift_message_available\":{\"visible\":false,\"sorting\":false},\"tax_class_id\":{\"visible\":false,\"sorting\":false},\"entity_id\":{\"visible\":true,\"sorting\":\"asc\"},\"name\":{\"visible\":true,\"sorting\":false},\"sku\":{\"visible\":true,\"sorting\":false},\"price\":{\"visible\":true,\"sorting\":false},\"websites\":{\"visible\":true,\"sorting\":false},\"qty\":{\"visible\":true,\"sorting\":false},\"short_description\":{\"visible\":false,\"sorting\":false},\"special_price\":{\"visible\":false,\"sorting\":false},\"cost\":{\"visible\":false,\"sorting\":false},\"weight\":{\"visible\":false,\"sorting\":false},\"meta_title\":{\"visible\":false,\"sorting\":false},\"meta_keyword\":{\"visible\":false,\"sorting\":false},\"meta_description\":{\"visible\":false,\"sorting\":false},\"url_key\":{\"visible\":false,\"sorting\":false},\"msrp\":{\"visible\":false,\"sorting\":false},\"thumbnail\":{\"visible\":true,\"sorting\":false},\"special_from_date\":{\"visible\":false,\"sorting\":false},\"special_to_date\":{\"visible\":false,\"sorting\":false},\"news_from_date\":{\"visible\":false,\"sorting\":false},\"news_to_date\":{\"visible\":false,\"sorting\":false},\"custom_design_from\":{\"visible\":false,\"sorting\":false},\"custom_design_to\":{\"visible\":false,\"sorting\":false}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"displayMode\":\"grid\",\"positions\":{\"ids\":0,\"entity_id\":1,\"thumbnail\":2,\"name\":3,\"type_id\":4,\"attribute_set_id\":5,\"sku\":6,\"price\":7,\"qty\":8,\"visibility\":9,\"status\":10,\"websites\":11,\"short_description\":12,\"special_price\":13,\"special_from_date\":14,\"special_to_date\":15,\"cost\":16,\"weight\":17,\"manufacturer\":18,\"meta_title\":19,\"meta_keyword\":20,\"meta_description\":21,\"color\":22,\"news_from_date\":23,\"news_to_date\":24,\"custom_design\":25,\"custom_design_from\":26,\"custom_design_to\":27,\"page_layout\":28,\"country_of_manufacture\":29,\"custom_layout\":30,\"url_key\":31,\"msrp\":32,\"gift_message_available\":33,\"tax_class_id\":34,\"actions\":35}}}', '2023-07-14 11:28:00', '2023-07-14 11:28:00'),
+(17, 2, 'design_theme_listing', 'default', 1, 'Default View', '{\"views\":{\"default\":{\"label\":\"Default View\",\"index\":\"default\",\"editable\":false,\"data\":{\"filters\":{\"applied\":{\"placeholder\":true}},\"columns\":{\"theme_id\":{\"visible\":false,\"sorting\":\"asc\"},\"theme_title\":{\"visible\":true,\"sorting\":false},\"parent_theme_title\":{\"visible\":true,\"sorting\":false},\"theme_path\":{\"visible\":true,\"sorting\":false},\"actions\":{\"visible\":true,\"sorting\":false}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"displayMode\":\"grid\",\"positions\":{\"theme_id\":0,\"theme_title\":1,\"parent_theme_title\":2,\"theme_path\":3,\"actions\":4}},\"value\":\"Default View\"}}}', '2023-08-31 10:49:16', '2023-08-31 10:49:16'),
+(18, 2, 'design_theme_listing', 'current', 0, NULL, '{\"current\":{\"filters\":{\"applied\":{\"placeholder\":true}},\"columns\":{\"theme_id\":{\"visible\":false,\"sorting\":\"asc\"},\"theme_title\":{\"visible\":true,\"sorting\":false},\"parent_theme_title\":{\"visible\":true,\"sorting\":false},\"theme_path\":{\"visible\":true,\"sorting\":false},\"actions\":{\"visible\":true,\"sorting\":false}},\"paging\":{\"pageSize\":20,\"current\":1,\"options\":{\"20\":{\"value\":20,\"label\":20},\"30\":{\"value\":30,\"label\":30},\"50\":{\"value\":50,\"label\":50},\"100\":{\"value\":100,\"label\":100},\"200\":{\"value\":200,\"label\":200}},\"value\":20},\"displayMode\":\"grid\",\"positions\":{\"theme_id\":0,\"theme_title\":1,\"parent_theme_title\":2,\"theme_path\":3,\"actions\":4}}}', '2023-08-31 10:49:18', '2023-08-31 10:49:18');
 
 -- --------------------------------------------------------
 
@@ -11493,7 +11934,7 @@ CREATE TABLE IF NOT EXISTS `url_rewrite` (
   KEY `URL_REWRITE_TARGET_PATH` (`target_path`),
   KEY `URL_REWRITE_STORE_ID_ENTITY_ID` (`store_id`,`entity_id`),
   KEY `URL_REWRITE_ENTITY_ID` (`entity_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COMMENT='Url Rewrites';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COMMENT='Url Rewrites';
 
 --
 -- Dumping data for table `url_rewrite`
@@ -11508,7 +11949,8 @@ INSERT INTO `url_rewrite` (`url_rewrite_id`, `entity_type`, `entity_id`, `reques
 (6, 'product', 2, 'sample-product.html', 'catalog/product/view/id/2', 0, 1, NULL, 1, NULL),
 (7, 'product', 3, 'sample-product123.html', 'catalog/product/view/id/3', 0, 1, NULL, 1, NULL),
 (8, 'product', 4, 'badminton-shoe.html', 'catalog/product/view/id/4', 0, 1, NULL, 1, NULL),
-(9, 'product', 5, 'dsf.html', 'catalog/product/view/id/5', 0, 1, NULL, 1, NULL);
+(9, 'product', 5, 'dsf.html', 'catalog/product/view/id/5', 0, 1, NULL, 1, NULL),
+(10, 'cms-page', 5, 'test-home', 'cms/page/view/page_id/5', 0, 1, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
